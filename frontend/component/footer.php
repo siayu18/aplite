@@ -17,5 +17,7 @@
             <a href=""><img src="../image/instagram.png" alt="Instagram" class="social-button"/></a>
         </div>
     </div>
+
+    <script src="../javascript/dashboard.js"></script>
 </body>
 </html>

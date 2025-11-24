@@ -38,6 +38,16 @@ a {
   width: 100%;
 }
 
+.header-container {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--dark-green);
+  height: 80px;
+  padding: 1rem;
+  color: white;
+  width: 100%;
+}
+
 .top-bar {
   display: flex;
   flex-direction: row;
@@ -127,6 +137,10 @@ a {
 .yellow-button:hover {
   background-color: var(--hover-light-yellow);
   padding: 1.2rem 1.7rem;
+}
+
+.content {
+  min-height: 660px;
 }
 
 .content-1 {
