@@ -1,0 +1,25 @@
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: -1rem;
+    top: 3rem;
+    background-color: white;
+    border-radius: 0.8rem 0 0 0.8rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    flex-direction: column;
+    width: 180px;
+}
+
+.dropdown-content a {
+    padding: 1rem;
+    color: var(--dark-green-font);
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background-color: var(--light-grey);
+}
+
+.dropdown-content.show {
+    display: flex;
+}
