@@ -13,7 +13,7 @@
 <body>
     <div class="col-12 col-s-12 header">
         <div class="top-bar">
-            <img src="../image/logo.png" alt="APLite Logo" class="logo" />
+            <img src="../../image/logo.png" alt="APLite Logo" class="logo" />
             <div class="menu">
                 <a class="menu-text" href="#">Home</a>
                 <a class="menu-text" href="#">Light Control</a>
@@ -23,8 +23,8 @@
                 <a class="menu-text" href="#">Report Issue</a>
                 <a class="menu-text" href="#">Announcements</a>
 
-                <a href="#"><img src="../image/profile.png" alt="Profile" class="menu-img" /></a>
-                <button id="more-button"><img src="../image/more.png" alt="More" class="menu-img" /></button>
+                <a href="#"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
+                <button id="more-button"><img src="../../image/more.png" alt="More" class="menu-img" /></button>
                 <div id="dropdown-menu" class="dropdown-content">
                     <a href="#">Home</a>
                     <a href="#">Light Control</a>
@@ -50,17 +50,17 @@
         </div>
         <div class="card-container">
             <a href=""><div class="card">
-                <img src="../image/light.png" alt="Light" class="card-img" />
+                <img src="../../image/light.png" alt="Light" class="card-img" />
                 <p class="card-title">Adjust Brightness</p>
                 <p class="card-description">Check into a classroom and adjust the brightness to suit your preference while saving energy.</p>
             </div>
             <a href=""><div class="card">
-                <img src="../image/quiz.png" alt="Quiz" class="card-img" />
+                <img src="../../image/quiz.png" alt="Quiz" class="card-img" />
                 <p class="card-title">Join Quizzes</p>
                 <p class="card-description">Complete quizzes related to sustainability and earn points while saving energy.</p>
             </div></a>
             <a href=""><div class="card">
-                <img src="../image/article.png" alt="article" class="card-img" />
+                <img src="../../image/article.png" alt="article" class="card-img" />
                 <p class="card-title">Read Articles</p>
                 <p class="card-description">Read articles related to sustainability to earn extra points to gain awareness.</p>
             </div></a>
@@ -79,12 +79,12 @@
     <div class="col-12 col-s-12 footer fade-in">
         <span class="footer-text">© 2025 APLITE - Asia Pacific University. Building a sustainable future together.</span>
         <div>
-            <a href=""><img src="../image/facebook.png" alt="Facebook" class="social-button"/></a>
-            <a href=""><img src="../image/instagram.png" alt="Instagram" class="social-button"/></a>
+            <a href=""><img src="../../image/facebook.png" alt="Facebook" class="social-button"/></a>
+            <a href=""><img src="../../image/instagram.png" alt="Instagram" class="social-button"/></a>
         </div>
     </div>
 
-    <script src="../scripts/dashboard.js"></script>
-    <script src="../scripts/animation.js"></script>
+    <script src="../../scripts/dashboard.js"></script>
+    <script src="../../scripts/animation.js"></script>
 </body>
 </html>
