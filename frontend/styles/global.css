@@ -82,6 +82,11 @@ a {
   transform: translateY(-0.2rem);
 }
 
+.menu-text {
+  display: inline;
+  text-align: center;
+}
+
 #more-button {
   display: none;
 }
@@ -175,6 +180,7 @@ a {
 .card-container {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
   margin-top: 1.5rem;
@@ -325,7 +331,7 @@ a {
   width: 100%;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
   /* For mobile: */
   .col-s-1 {
     width: 8.33%;

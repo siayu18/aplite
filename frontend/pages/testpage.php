@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include '../component/stuHeader.php'; ?>
+    <?php include '../component/staffHeader.php'; ?>
     <div class="content">
         
     </div>

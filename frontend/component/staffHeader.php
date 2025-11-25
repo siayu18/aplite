@@ -18,22 +18,20 @@
         <div class="top-bar">
             <img src="../image/logo.png" alt="APLite Logo" class="logo" />
             <div class="menu">
-                <a class="menu-text" href="#">Light Control</a>
-                <a class="menu-text" href="#">Quizzes</a>
-                <a class="menu-text" href="#">Articles</a>
-                <a class="menu-text" href="#">Rewards</a>
-                <a class="menu-text" href="#">Report Issue</a>
-                <a class="menu-text" href="#">Announcements</a>
+                <a class="menu-text" href="#">Home</a>
+                <a class="menu-text" href="#">Manage Quizzes</a>
+                <a class="menu-text" href="#">Generate Report</a>
+                <a class="menu-text" href="#">Manage Articles</a>
+                <a class="menu-text" href="#">Broken Light Report</a>
 
                 <a href="#"><img src="../image/profile.png" alt="Profile" class="menu-img" /></a>
                 <button id="more-button"><img src="../image/more.png" alt="More" class="menu-img" /></button>
                 <div id="dropdown-menu" class="dropdown-content">
-                    <a href="#">Light Control</a>
-                    <a href="#">Quizzes</a>
-                    <a href="#">Articles</a>
-                    <a href="#">Rewards</a>
-                    <a href="#">Report Issue</a>
-                    <a href="#">Announcements</a>
+                    <a href="#">Home</a>
+                    <a href="#">Manage Quizzes</a>
+                    <a href="#">Generate Report</a>
+                    <a href="#">Manage Articles</a>
+                    <a href="#">Light Report</a>
                 </div>
             </div>
         </div>
