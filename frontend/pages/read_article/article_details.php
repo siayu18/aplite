@@ -26,7 +26,7 @@
             <div class="article-container">
                 <img src="../../image/test_image.png" alt="Article Image" class="article-img" />
                 <div class="article-details">
-                    <div class="article-title">The Impact of LED Lighting on Campus Energy Consumption</div>
+                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
                     <div class="metadata">
                         <div class="green-description">By Dr. Sarah Green | Published on 2025-01-05</div>
                         <div class="points-container">
@@ -42,7 +42,7 @@
                     <div class="claim-container">
                         <img src="../../image/big_badge.svg" alt="Points Badge" class="" />
                         <div class="text-group">
-                            <span class="article-title">Great job reading this article!</span>
+                            <span class="medium-green-title">Great job reading this article!</span>
                             <span class="green-description">Claim your 30 points for expanding your sustainability knowledge.</span>
                         </div>
                         <button class="green-button">Claim 30 Points</button>

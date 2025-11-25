@@ -24,17 +24,17 @@
                 <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
                 <div class="info-container">
                     <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge" class="" />
+                        <img src="../../image/badge.png" alt="Points Badge"/>
                         <span class="points-text">30 pts</span>
                     </div>
-                    <div class="article-title">The Impact of LED Lighting on Campus Energy Consumption</div>
+                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
                     <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" class="" />
-                        <span class="icon-text">Dr. Sarah Green</span>
+                        <img src="../../image/people_head.png" alt="Author" />
+                        <span>Dr. Sarah Green</span>
                     </div>
                     <div Aclass="icon-text">
-                        <img src="../../image/calendar" alt="Calendar" class="" />
-                        <span class="icon-text">2025-01-05</span>
+                        <img src="../../image/calendar.svg" alt="calendar.svg" />
+                        <span>2025-01-05</span>
                     </div>
                     <button class="green-button">Read Article ></button>
                 </div>
@@ -43,17 +43,17 @@
                 <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
                 <div class="info-container">
                     <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge" class="" />
+                        <img src="../../image/badge.png" alt="Points Badge" />
                         <span class="points-text">30 pts</span>
                     </div>
-                    <div class="article-title">The Impact of LED Lighting on Campus Energy Consumption</div>
+                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
                     <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" class="" />
-                        <span class="icon-text">Dr. Sarah Green</span>
+                        <img src="../../image/people_head.png" alt="Author" />
+                        <span>Dr. Sarah Green</span>
                     </div>
                     <div class="icon-text">
-                        <img src="../../image/calendar" alt="Calendar" class="" />
-                        <span class="icon-text">2025-01-05</span>
+                        <img src="../../image/calendar.svg" alt="calendar.svg" />
+                        <span>2025-01-05</span>
                     </div>
                     <button class="green-button">Read Article ></button>
                 </div>
@@ -62,17 +62,17 @@
                 <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
                 <div class="info-container">
                     <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge" class="" />
+                        <img src="../../image/badge.png" alt="Points Badge" />
                         <span class="points-text">30 pts</span>
                     </div>
-                    <div class="article-title">The Impact of LED Lighting on Campus Energy Consumption</div>
+                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
                     <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" class="" />
-                        <span class="icon-text">Dr. Sarah Green</span>
+                        <img src="../../image/people_head.png" alt="Author" />
+                        <span>Dr. Sarah Green</span>
                     </div>
                     <div class="icon-text">
-                        <img src="../../image/calendar" alt="Calendar" class="" />
-                        <span class="icon-text">2025-01-05</span>
+                        <img src="../../image/calendar.svg" alt="calendar.svg" />
+                        <span>2025-01-05</span>
                     </div>
                     <button class="green-button">Read Article ></button>
                 </div>
