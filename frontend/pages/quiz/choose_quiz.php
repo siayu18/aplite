@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
     <link rel="stylesheet" href="../../styles/quiz.css">
-    <title>Read Articles</title>
+    <title>Take Quiz</title>
 </head>
 <body>
     <?php include '../../component/stuHeader.php'; ?>

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
     <link rel="stylesheet" href="../../styles/announcement.css">
-    <title>Read Articles</title>
+    <title>Announcements</title>
 </head>
 <body>
     <?php include '../../component/stuHeader.php'; ?>
