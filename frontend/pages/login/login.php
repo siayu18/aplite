@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APLite Login</title>
+    <style>
+        .wrapper {
+
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <form action="">
+            <h1>Login</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Username" required>
+            </div>
+             <div class="input-box">
+                <input type="password" placeholder="Password" required>
+            </div>
+            <div class="remember-forgot">
+               <label><input type="checkout">Remember me</label> 
+               <a href="#">Forgot password?</a>
+            </div>
+            button
+        </form>
+    </div>
+</body>
+</html>
