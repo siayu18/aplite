@@ -15,14 +15,13 @@
             <span class="small-heading">We are happy to have you back in APLite</span>
         </div>
         <form action="#">
-            <div class="input-box">
-                <input type="text" required>
-                <label for="">Username</label>
-            </div>
-
-            <div class="input-box">
-                <input type="password" required>
-                <label for="">Password</label>
+            <div class="input-area">
+                <div class="input-box">
+                    <input type="text" placeholder="Username" required>
+                </div>
+                <div class="input-box">
+                    <input type="password" placeholder="Password" required>
+                </div>
             </div>
 
             <div class="remember">

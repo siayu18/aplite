@@ -1,10 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* html, body {
+    height: 100%;
+} */
+
 .big-heading {
     color: #000;
     font-size: 4rem;
     font-style: normal;
     font-weight: 700;
     word-wrap: break-word;
-    /* line-height: 4.75rem; 118.75% */
+    line-height: 4.75rem; 
 }
 
 .small-heading {
@@ -14,7 +24,7 @@
     font-weight: 400;
     margin: 0;
     padding: 0;
-    /* line-height: 1.5rem; 100% */
+    line-height: 1.5rem; 
 }
 
 .title-intro {
@@ -28,21 +38,33 @@
 
 .wrapper {
     display: flex;
-    padding: 3.375rem 2.625rem;
-    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    padding: 0.625rem 1.0625rem;
     align-items: flex-start;
-    gap: 2.8125rem;
-    align-self: stretch;
+    gap: 0.625rem;
+    background: linear-gradient(270deg, #2A4120 0%, #4E793C 100%);
 }
 
-.input-box{
-    border: #000;
-    border-radius: 1.5rem;
-    position: relative;
-    margin: 1.5rem;
-    width: fit-content;
+.input-box input{
+    font-size: 1.5rem;
+    border: 0.5rem solid #000;
+    /* outline: none; */
+    /* border-bottom: 0.1rem solid #000;  */
 }
 
-.input-box label{
+.input-box input::placeholder {
+    font-size: 1rem;
+}
 
+.input-area {
+    /* height:10rem;
+    width:100%; */
+    /* box-sizing: content-box; */
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: start;
+    /* flex-wrap: wrap; */
 }
