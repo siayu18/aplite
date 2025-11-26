@@ -38,3 +38,82 @@
 .green-button:hover {
     background-color: var(--hover-light-green-font);
 }
+
+.big-green-button {
+    color: white;
+    background-color: var(--light-green-font);
+    padding: 1.0rem 1.3rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 540;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    width: fit-content;
+}
+
+.big-green-button:hover {
+    background-color: var(--hover-light-green-font);
+}
+
+.red-button {
+    color: white;
+    background-color: var(--red);
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 540;
+    transition: background-color 0.3s ease;
+}
+
+.red-button:hover {
+    background-color: var(--hover-red);
+}
+
+.white-button {
+  background-color: white;
+  outline: 0.1rem solid var(--border-green);
+  outline-offset: -0.1rem;
+  color: var(--dark-green-font);
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 540;
+  transition: background-color 0.3s ease;
+}
+
+.white-button:hover {
+    background-color: var(--light-grey);
+}
+
+.yellow-button {
+  background-color: var(--light-yellow);
+  color: var(--dark-green-font);
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-top: 2%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.yellow-button:hover {
+  background-color: var(--hover-light-yellow);
+  padding: 1.2rem 1.7rem;
+}
+
+.white-area {
+    min-height: 100px;
+    background-color: white;
+    outline: 0.1rem solid var(--border-green);
+    outline-offset: -0.1rem;
+    color: var(--dark-green-font);
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    font-family: Roboto, "san-serif";
+}
