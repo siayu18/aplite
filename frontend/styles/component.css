@@ -23,3 +23,18 @@
 .dropdown-content.show {
     display: flex;
 }
+
+.green-button {
+    color: white;
+    background-color: var(--light-green-font);
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 540;
+    transition: background-color 0.3s ease;
+}
+
+.green-button:hover {
+    background-color: var(--hover-light-green-font);
+}

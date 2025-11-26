@@ -5,9 +5,11 @@
   --dark-green: #2a4120;
   --light-green: #8edc6e;
   --lightest-green: #c3daa5;
+  --transparent-green: #F0F7E9;
   --border-green: #b0ce88;
   --dark-green-font: #043915;
   --light-green-font: #4c763b;
+  --hover-light-green-font: #6aa84f;
   --yellow: #fffc66;
   --light-yellow: #fffd8f;
   --hover-light-yellow: #edeb89;
@@ -145,7 +147,16 @@ a {
 }
 
 .content {
+  display: flex;
+  flex-direction: column;
   min-height: 660px;
+  padding: 2rem 1rem;
+  gap: 1.5rem;
+  background-image: linear-gradient(
+    to bottom,
+    var(--lightest-green),
+    white
+  );
 }
 
 .content-1 {
@@ -171,54 +182,16 @@ a {
   font-weight: bold;
 }
 
+.medium-green-title {
+    color: var(--dark-green-font);
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
 .green-description {
   color: var(--light-green-font);
   font-size: 0.9rem;
   line-height: 1.5rem;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  margin-top: 1.5rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  border: 0.1rem solid var(--border-green);
-  border-radius: 0.8rem;
-  padding: 1.5rem;
-  width: 250px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.card:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  transform: translateY(-0.5rem);
-}
-
-.card-title {
-  color: var(--dark-green-font);
-  font-size: 1.1rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-}
-
-.card-description {
-  color: var(--light-green-font);
-  font-size: 0.85rem;
-  line-height: 1.2rem;
-}
-
-.card-img {
-  height: auto;
-  width: 3.5rem;
 }
 
 .content-2 {
@@ -280,6 +253,51 @@ a {
 .fade-in.show {
   opacity: 1; /* visible when 'show' class is added */
   transform: translateY(0);
+}
+
+.icon-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--light-green-font);
+    font-size: 0.9rem;
+    font-weight: 350;
+}
+
+.interactive-icon-text {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--light-green-font);
+    font-size: 0.9rem;
+    font-weight: 350;
+    transition: all 0.3s ease;
+}
+
+.interactive-icon-text:hover {
+    scale: 1.1;
+    font-weight: bold;
+}
+
+.points-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--light-yellow);
+    border-radius: 1rem;
+    padding: 0.5rem 0.6rem;
+    width: 100px;
+    height: 35px;
+}
+
+.points-text {
+    color: var(--light-green-font);
+    font-size: 0.8rem;
+    font-weight: 450;
 }
 
 /* For tablet and desktop: */
