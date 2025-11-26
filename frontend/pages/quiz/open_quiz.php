@@ -12,32 +12,29 @@
     <title>Take Quiz</title>
 </head>
 <body>
-    <?php include '../../component/stuHeader.php'; ?>
+    <?php include '../../component/stu_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">
-                <a href="">
+                <a href="choose_quiz.php">
                     <div class="interactive-icon-text">
                         <img src="../../image/back.svg" alt="Back" class="icon-img" />
                         <span class="icon-text">Back to Quizzes</span>
                     </div>
                 </a>
             </div>
-            <div class="quiz-container">
+            <form method="POST" action="open_quiz.php" class="inner-container">
                 <div class="quiz-text">
                     <div class="medium-green-title">Energy Conservation Basics</div>
-                    <div class="green-description">Question 1 of 4</div>
+                    <div class="green-description">Question 2 of 4</div>
                 </div>
 
                 <div class="dark-green-description">What percentage of energy can be saved by turning off unused lights?</div>
 
                 <textarea class="white-area" placeholder="Enter your answer..."></textarea>
 
-                <div class="button-group">
-                     <button class="white-button">Previous</button>
-                      <button class="green-button">Next</button>
-                </div>
-            </div>
+                <button class="green-button">Next</button>
+            </form>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>

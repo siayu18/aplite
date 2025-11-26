@@ -12,7 +12,7 @@
     <title>Manage Quizzes</title>
 </head>
 <body>
-    <?php include '../../component/stuHeader.php'; ?>
+    <?php include '../../component/staff_header.php'; ?>
     <div class=" col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Manage Quizzes</span>
@@ -41,7 +41,7 @@
                     <img src="../../image/green_badge.svg" alt="Badge" />
                     <span>Need 3 Corrects For Points</span>
                 </div>
-                <div class="near-button">
+                <div class="near-button-column">
                     <button class="green-button">Edit Quiz</button>
                     <button class="red-button">Delete Quiz</button>
                 </div>
@@ -64,7 +64,7 @@
                     <img src="../../image/green_badge.svg" alt="Badge" />
                     <span>Need 3 Corrects For Points</span>
                 </div>
-                <div class="near-button">
+                <div class="near-button-column">
                     <button class="green-button">Edit Quiz</button>
                     <button class="red-button">Delete Quiz</button>
                 </div>
@@ -87,7 +87,7 @@
                     <img src="../../image/green_badge.svg" alt="Badge" />
                     <span>Need 3 Corrects For Points</span>
                 </div>
-                <div class="near-button">
+                <div class="near-button-column">
                     <button class="green-button">Edit Quiz</button>
                     <button class="red-button">Delete Quiz</button>
                 </div>

@@ -9,36 +9,37 @@
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
     <link rel="stylesheet" href="../../styles/quiz.css">
-    <title>Take Quiz</title>
+    <title>Edit Announcement</title>
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/admin_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">
-                <a href="choose_quiz.php">
+                <a href="manage_announcement.php">
                     <div class="interactive-icon-text">
                         <img src="../../image/back.svg" alt="Back" class="icon-img" />
-                        <span class="icon-text">Back to Quizzes</span>
+                        <span class="icon-text">Back to Manage Announcements</span>
                     </div>
                 </a>
             </div>
-            <form method="POST" action="mcq_quiz.php" class="inner-container">
-                <div class="quiz-text">
-                    <div class="medium-green-title">Energy Conservation Basics</div>
-                    <div class="green-description">Question 1 of 4</div>
+            <form method="POST" action="edit_announcement.php" class="inner-container">
+                <div class="medium-green-title">Edit Announcement</div>
+
+                <div class="label-field">
+                    <label class="green-description">Title</label>
+                    <input type="text" placeholder="Enter title..."></input>
                 </div>
 
-                <div class="dark-green-description">What percentage of energy can be saved by turning off unused lights?</div>
-
-                <div class="selection-group">
-                    <button class="answer-button">10%</button>
-                    <button class="answer-button">25%</button>
-                    <button class="answer-button">50%</button>
-                    <button class="answer-button">75%</button>
+                <div class="label-field">
+                    <label class="green-description">Content</label>
+                    <textarea class="white-area" placeholder="Enter title..."></textarea>
                 </div>
-                
-                <button type="submit" class="green-button">Next</button>
+
+                <div class="right-button-group">
+                    <a href="manage_announcement.php" class="white-button">Cancel</a>
+                    <button class="green-button">Update Announcement</button>
+                </div>
             </form>
         </div>
     </div>

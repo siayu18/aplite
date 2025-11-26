@@ -25,7 +25,7 @@
                 <a class="menu-text" href="#">Generate Report</a>
 
                 <a href="#"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
-                <button id="more-button"><img src="../image/more.png" alt="More" class="menu-img" /></button>
+                <button id="more-button"><img src="../../image/more.png" alt="More" class="menu-img" /></button>
                 <div id="dropdown-menu" class="dropdown-content">
                     <a href="#">Home</a>
                     <a href="#">Manage Users</a>
