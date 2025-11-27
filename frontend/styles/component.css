@@ -181,3 +181,19 @@ input[type="text"]:hover {
 input[type="text"]:focus {
     outline-color: var(--dark-green);
 }
+
+input[type="file"]::file-selector-button {
+    color: white;
+    background-color: var(--light-green-font);
+    padding: 0.8rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 540;
+    max-width: 20rem;
+    transition: background-color 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background-color: var(--hover-light-green-font);
+}

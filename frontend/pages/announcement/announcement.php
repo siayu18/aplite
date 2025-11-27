@@ -13,7 +13,7 @@
 </head>
 <body>
     <?php include '../../component/stu_header.php'; ?>
-    <div class=" col-12 col-s-12 content fade-in">
+    <div class="col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Announcements</span>
             <span class="green-description">Stay updated with the latest news!</span>

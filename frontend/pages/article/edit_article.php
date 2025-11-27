@@ -8,8 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
-    <link rel="stylesheet" href="../../styles/quiz.css">
-    <title>Edit Announcement</title>
+    <link rel="stylesheet" href="../../styles/article.css">
+    <title>Edit Article</title>
 </head>
 
 <body>
@@ -17,19 +17,29 @@
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">
-                <a href="manage_announcement.php">
+                <a href="manage_article.php">
                     <div class="interactive-icon-text">
                         <img src="../../image/back.svg" alt="Back" class="icon-img" />
-                        <span class="icon-text">Back to Manage Announcements</span>
+                        <span class="icon-text">Back to Manage Articles</span>
                     </div>
                 </a>
             </div>
-            <form method="POST" action="edit_announcement.php" class="inner-container">
-                <div class="medium-green-title">Edit Announcement</div>
+            <form method="POST" action="edit_article.php" class="inner-container">
+                <div class="medium-green-title">Edit Article</div>
 
                 <div class="label-field">
                     <label class="green-description">Title</label>
                     <input type="text" placeholder="Enter title..." />
+                </div>
+
+                <div class="label-field">
+                    <label class="green-description">Points Awarded</label>
+                    <input type="text" placeholder="Enter Points..." />
+                </div>
+
+                <div class="label-field">
+                    <label class="green-description">Image</label>
+                    <input type="file"></input>
                 </div>
 
                 <div class="label-field">
@@ -38,8 +48,8 @@
                 </div>
 
                 <div class="right-button-group">
-                    <a href="manage_announcement.php" class="white-button">Cancel</a>
-                    <button class="green-button">Update Announcement</button>
+                    <a href="manage_article.php" class="white-button">Cancel</a>
+                    <button class="green-button">Update Article</button>
                 </div>
             </form>
         </div>
