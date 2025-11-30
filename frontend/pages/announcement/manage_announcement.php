@@ -25,7 +25,7 @@
 
         <div class="container">
             <div class="card">
-                <div class="date-and-buttons">
+                <div class="between-stretch">
                     <div class="icon-text">
                         <img src="../../image/calendar.svg" alt="Calendar" />
                         <span>2025-10-17</span>
@@ -44,7 +44,7 @@
             </div>
 
             <div class="card">
-                <div class="date-and-buttons">
+                <div class="between-stretch">
                     <div class="icon-text">
                         <img src="../../image/calendar.svg" alt="Calendar" />
                         <span>2025-10-17</span>

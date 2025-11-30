@@ -237,13 +237,13 @@ a {
 }
 
 .fade-in {
-  opacity: 0; /* start hidden */
-  transform: translateY(20px); /* optional: slight movement */
-  transition: opacity 1s ease-out, transform 1s ease-out;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .fade-in.show {
-  opacity: 1; /* visible when 'show' class is added */
+  opacity: 1;
   transform: translateY(0);
 }
 
@@ -337,8 +337,25 @@ a {
 .field-group {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
   gap: 1rem;
+  width: 100%;
+}
+
+.field-group .label-field {
+  flex: 1;
+}
+
+.field-group input {
+  width: 100%;
+}
+
+.between-stretch {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: stretch;
+    height: 1.6rem;
+    align-items: center;
 }
 
 .inner-container {
@@ -352,12 +369,28 @@ a {
   border: 0.1rem solid var(--border-green);
   border-radius: 0.8rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.inner-container.new-question {
+  animation: slideIn 0.3s ease;
 }
 
 .label-field {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* For tablet and desktop: */

@@ -1,3 +1,8 @@
+button {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
@@ -185,15 +190,47 @@ input[type="text"]:focus {
 input[type="file"]::file-selector-button {
     color: white;
     background-color: var(--light-green-font);
-    padding: 0.8rem 1rem;
+    padding: 0.6rem 1rem;
     border: none;
     border-radius: 0.5rem;
     font-size: 0.9rem;
     font-weight: 540;
-    max-width: 20rem;
     transition: background-color 0.3s ease;
 }
 
 input[type="file"]::file-selector-button:hover {
     background-color: var(--hover-light-green-font);
+}
+
+select {
+    background-color: white;
+    outline: 0.1rem solid var(--border-green);
+    outline-offset: -0.1rem;
+    color: var(--dark-green-font);
+    border: none;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    font-family: Roboto, "san-serif";
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 16px;
+    transition: ouline-color 0.3s ease;
+}
+
+select:hover {
+    outline-color: var(--light-green-font);
+}
+
+select:focus {
+    outline-color: var(--dark-green);
+}
+
+select option {
+  background-color: white;
+  color: var(--dark-green-font);
+  border-color: var(--dark-green);
 }
