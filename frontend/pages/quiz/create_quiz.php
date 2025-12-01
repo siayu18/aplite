@@ -14,7 +14,7 @@
 
 <body>
     <?php include '../../component/staff_header.php'; ?>
-    <div class=" col-12 col-s-12 content-mid fade-in">
+    <div class="col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">
                 <a href="manage_quiz.php">
@@ -44,10 +44,10 @@
                 </div>
 
                 <div class="right-button-group" style="margin: 1rem 0;">
-                    <button class="green-button" id="add-question-btn">+ Add Question</button>
+                    <button type="button" class="green-button" id="add-question-btn">+ Add Question</button>
                 </div>
 
-                <div class="inner-container">
+                <div class="inner-container question-container">
                     <div class="between-stretch">
                         <div class="medium-green-title">Question 1</div>
                         <button type="button" class="red-border-button delete-question">
@@ -57,7 +57,7 @@
 
                     <div class="label-field">
                         <label class="green-description">Question Type</label>
-                        <select class="dropdown" name="questionType">
+                        <select class="dropdown question-type" name="questionType1">
                             <option value="mcq">MCQ Question</option>
                             <option value="open">Open-Ended Question</option>
                         </select>
@@ -65,35 +65,40 @@
 
                     <div class="label-field">
                         <label class="green-description">Question Text</label>
-                        <input type="text" placeholder="Enter Text..." />
+                        <input type="text" placeholder="Enter Text..." name="questionText1"/>
                     </div>
 
-                    <div class="label-field">
+                    <div class="label-field mcq-section">
                         <label class="green-description">Choices</label>
                         <div class="near-button-column">
                             <div class="near-button-row">
                                 <input type="radio" name="question1" value="choice1">
-                                <input type="text" placeholder="Enter Choice..." />
+                                <input type="text" placeholder="Enter Choice..." name="choice1_1" />
                             </div>
                             <div class="near-button-row">
                                 <input type="radio" name="question1" value="choice2">
-                                <input type="text" placeholder="Enter Choice..." />
+                                <input type="text" placeholder="Enter Choice..." name="choice2_1"/>
                             </div>
                             <div class="near-button-row">
                                 <input type="radio" name="question1" value="choice3">
-                                <input type="text" placeholder="Enter Choice..." />
+                                <input type="text" placeholder="Enter Choice..." name="choice3_1"/>
                             </div>
                             <div class="near-button-row">
                                 <input type="radio" name="question1" value="choice4">
-                                <input type="text" placeholder="Enter Choice..." />
+                                <input type="text" placeholder="Enter Choice..." name="choice4_1"/>
                             </div>
                         </div>
+                    </div>
+
+                    <div class="label-field open-ended-section" style="display: none;">
+                        <label class="green-description">Correct Answer</label>
+                        <input type="text" placeholder="Enter Correct Answer..." name="correctAnswer1" />
                     </div>
                 </div>
 
                 <div class="right-button-group" style="margin-top: 1rem;">
                     <a href="manage_quiz.php" class="white-button">Cancel</a>
-                    <button class="green-button">Update Quiz</button>
+                    <button type="submit" class="green-button">Create Quiz</button>
                 </div>
             </form>
         </div>
