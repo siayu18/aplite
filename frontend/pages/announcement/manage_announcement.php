@@ -1,3 +1,26 @@
+<?php
+include('../../../backend/conn.php');
+include('../../../backend/fetch_data.php');
+
+// Handle Delete
+if (isset($_GET['delete'])) {
+    $id = mysqli_real_escape_string($con, $_GET['delete']);
+
+    $sql = "DELETE FROM announcement WHERE announcementID = '$id'";
+
+    if (mysqli_query($con, $sql)) {
+        echo '<script>alert("Announcement deleted successfully!");
+              window.location.href="manage_announcement.php";</script>';
+        exit();
+    } else {
+        die('Error deleting: ' . mysqli_error($con));
+    }
+}
+
+// Fetch data
+$announcements = getData('announcement');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,47 +43,40 @@
         </div>
 
         <div class="wrap-middle">
-            <div class="big-green-button">+ Create Announcement</div>
+            <a href="create_announcement.php" class="big-green-button">+ Create Announcement</a>
         </div>
 
-        <div class="container">
-            <div class="card">
-                <div class="between-stretch">
-                    <div class="icon-text">
-                        <img src="../../image/calendar.svg" alt="Calendar" />
-                        <span>2025-10-17</span>
-                    </div>
-                    <div class="near-button-row">
-                        <button class="border-button">
-                            <img src="../../image/edit.svg" alt="Edit" />
-                        </button>
-                        <button class="red-border-button">
-                            <img src="../../image/delete.svg" alt="Delete" />
-                        </button>
-                    </div>
-                </div>
-                <div class="medium-green-title">APLITE Challenge Update: Top 10 Revealed!</div>
-                <div class="green-description">Congratulations to our top performers this month! The competition is heating up. Keep participating in quizzes, reading articles, and practicing energy-saving habits to climb the leaderboard. Special prizes await the top 3 students at the end of the semester!</div>
-            </div>
 
-            <div class="card">
-                <div class="between-stretch">
-                    <div class="icon-text">
-                        <img src="../../image/calendar.svg" alt="Calendar" />
-                        <span>2025-10-17</span>
-                    </div>
-                    <div class="near-button-row">
-                        <button class="border-button">
-                            <img src="../../image/edit.svg" alt="Edit" />
-                        </button>
-                        <button class="red-border-button">
-                            <img src="../../image/delete.svg" alt="Delete" />
-                        </button>
-                    </div>
+        <div class="container">
+            <?php if (empty($announcements)): ?>
+                <div class="mid-text-group">
+                    <span class="medium-green-title">No announcements available!</span>
+                    <span class="green-description">Sorry, but currently there is no announcement available!</span>
                 </div>
-                <div class="medium-green-title">APLITE Challenge Update: Top 10 Revealed!</div>
-                <div class="green-description">Congratulations to our top performers this month! The competition is heating up. Keep participating in quizzes, reading articles, and practicing energy-saving habits to climb the leaderboard. Special prizes await the top 3 students at the end of the semester!</div>
-            </div>
+            <?php else: ?>
+                <?php foreach ($announcements as $announcement): ?>
+                    <div class="card">
+                        <div class="between-stretch">
+                            <div class="icon-text">
+                                <img src="../../image/calendar.svg" alt="Calendar" />
+                                <span><?= htmlspecialchars($announcement['date']) ?></span>
+                            </div>
+                            <div class="near-button-row">
+                                <a href="edit_announcement.php?edit=<?= $announcement['announcementID'] ?>"
+                                class="border-button">
+                                    <img src="../../image/edit.svg" alt="Edit" />
+                                </a>
+                                <a href="manage_announcement.php?delete=<?= $announcement['announcementID'] ?>"
+                                class="red-border-button">
+                                    <img src="../../image/delete.svg" alt="Delete" />
+                                </a>
+                            </div>
+                        </div>
+                        <div class="medium-green-title"><?= htmlspecialchars($announcement['title']) ?></div>
+                        <div class="green-description"><?= htmlspecialchars($announcement['content']) ?></div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>

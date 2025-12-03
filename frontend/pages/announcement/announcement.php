@@ -1,3 +1,9 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+$announcements = getData("announcement");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,23 +26,23 @@
         </div>
 
         <div class="container">
-            <div class="card">
-                 <div class="icon-text">
-                    <img src="../../image/calendar.svg" alt="Calendar" />
-                    <span>2025-10-18</span>
+            <?php if (empty($announcements)): ?>
+                <div class="mid-text-group">
+                    <span class="medium-green-title">No announcements available!</span>
+                    <span class="green-description">Sorry, but currently there is no announcement available!</span>
                 </div>
-                <div class="medium-green-title">New Sustainability Workshop Next Week</div>
-                <div class="green-description">Join us for an interactive workshop on sustainable living practices. Learn practical tips for reducing your carbon footprint both on and off campus. Date: January 25, 2025. Time: 2:00 PM - 4:00 PM. Venue: Main Auditorium. Register now to earn 20 bonus points!</div>
-            </div>
-
-            <div class="card">
-                 <div class="icon-text">
-                    <img src="../../image/calendar.svg" alt="Calendar" />
-                    <span>2025-10-17</span>
-                </div>
-                <div class="medium-green-title">APLITE Challenge Update: Top 10 Revealed!</div>
-                <div class="green-description">Congratulations to our top performers this month! The competition is heating up. Keep participating in quizzes, reading articles, and practicing energy-saving habits to climb the leaderboard. Special prizes await the top 3 students at the end of the semester!</div>
-            </div>
+            <?php else: ?>
+                <?php foreach ($announcements as $announcement): ?>
+                    <div class="card">
+                        <div class="icon-text">
+                            <img src="../../image/calendar.svg" alt="Calendar" />
+                            <span><?= htmlspecialchars($announcement['date']) ?></span>
+                        </div>
+                        <div class="medium-green-title"><?= htmlspecialchars($announcement['title']) ?></div>
+                        <div class="green-description"><?= htmlspecialchars($announcement['content']) ?></div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>

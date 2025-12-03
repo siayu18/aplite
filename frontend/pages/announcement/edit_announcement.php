@@ -1,3 +1,36 @@
+<?php
+include('../../../backend/conn.php');
+include('../../../backend/fetch_data.php');
+
+$id = intval($_GET['edit']);
+
+// Fetch data
+$announcement = getDataByID('announcement', 'announcementID', $id);
+if (!$announcement) {
+    die('Announcement not found.');
+}
+
+// Handle update
+if (isset($_POST['submitBtn'])) {
+    $title = mysqli_real_escape_string($con, $_POST['title']);
+    $content = mysqli_real_escape_string($con, $_POST['content']);
+
+    $sql = "UPDATE announcement SET title='$title', content='$content' WHERE announcementID='$id'";
+    if (!mysqli_query($con, $sql)) {
+        die('Error: ' . mysqli_error($con));
+    } else {
+        echo '<script>
+                alert("Announcement Updated!");
+                window.location.href = "manage_announcement.php";
+              </script>';
+        exit();
+    }
+}
+
+mysqli_close($con);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,22 +57,22 @@
                     </div>
                 </a>
             </div>
-            <form method="POST" action="edit_announcement.php" class="inner-container">
+            <form method="POST" action="edit_announcement.php?edit=<?= $id ?>" class="inner-container">
                 <div class="medium-green-title">Edit Announcement</div>
 
                 <div class="label-field">
                     <label class="green-description">Title</label>
-                    <input type="text" placeholder="Enter title..." />
+                    <input type="text" placeholder="Enter title..." name="title" value="<?= htmlspecialchars($announcement['title']) ?>">
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Content</label>
-                    <textarea class="white-area" placeholder="Enter title..."></textarea>
+                    <textarea class="white-area" placeholder="Enter content..." name="content"><?= htmlspecialchars($announcement['content']) ?></textarea>
                 </div>
 
                 <div class="right-button-group">
                     <a href="manage_announcement.php" class="white-button">Cancel</a>
-                    <button class="green-button">Update Announcement</button>
+                    <button type="submit" class="green-button" name="submitBtn">Update Announcement</button>
                 </div>
             </form>
         </div>

@@ -1,3 +1,25 @@
+<?php 
+if (isset($_POST['submitBtn'])) {
+    include ('../../../backend/conn.php');
+
+    $id = uniqid();
+    $current_date = date("Y-m-d");
+
+    $sql="INSERT INTO announcement (announcementID, title, content, date) VALUES
+    ('$id','$_POST[title]','$_POST[content]',
+    '$current_date')";
+
+    if (!mysqli_query($con,$sql)) {
+        die('Error: ' . mysqli_error($con));
+    } else {
+        echo '<script>alert("Announcement Created!");
+        window.location.href = "manage_announcement.php";
+        </script>';
+    }
+     mysqli_close($con);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,17 +50,17 @@
 
                 <div class="label-field">
                     <label class="green-description">Title</label>
-                    <input type="text" placeholder="Enter title..."></input>
+                    <input type="text" placeholder="Enter title..." name="title" required></input>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Content</label>
-                    <textarea class="white-area" placeholder="Enter title..."></textarea>
+                    <textarea class="white-area" placeholder="Enter content..." name="content" required></textarea>
                 </div>
 
                 <div class="right-button-group">
                     <a href="manage_announcement.php" class="white-button">Cancel</a>
-                    <button class="green-button">Create Announcement</button>
+                    <button type="submit" class="green-button" name="submitBtn">Create Announcement</button>
                 </div>
             </form>
         </div>
