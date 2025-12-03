@@ -12,7 +12,7 @@
     <title>Read Articles</title>
 </head>
 <body>
-    <?php include '../../component/stuHeader.php'; ?>
+    <?php include '../../component/stu_header.php'; ?>
     <div class=" col-12 col-s-12 content fade-in">
         <div class="main-container">
             <div class="back-wrapper">

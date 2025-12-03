@@ -12,7 +12,7 @@
     <title>Manage Articles</title>
 </head>
 <body>
-    <?php include '../../component/stuHeader.php'; ?>
+    <?php include '../../component/staff_header.php'; ?>
     <div class=" col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Manage Articles</span>
@@ -40,7 +40,7 @@
                         <img src="../../image/calendar.svg" alt="calendar.svg" />
                         <span>2025-01-05</span>
                     </div>
-                    <div class="near-button">
+                    <div class="near-button-column">
                         <button class="green-button">Edit Article</button>
                         <button class="red-button">Delete Article</button>
                     </div>
@@ -63,7 +63,7 @@
                         <img src="../../image/calendar.svg" alt="calendar.svg" />
                         <span>2025-01-05</span>
                     </div>
-                    <div class="near-button">
+                    <div class="near-button-column">
                         <button class="green-button">Edit Article</button>
                         <button class="red-button">Delete Article</button>
                     </div>
@@ -86,7 +86,7 @@
                         <img src="../../image/calendar.svg" alt="calendar.svg" />
                         <span>2025-01-05</span>
                     </div>
-                    <div class="near-button">
+                    <div class="near-button-column">
                         <button class="green-button">Edit Article</button>
                         <button class="red-button">Delete Article</button>
                     </div>

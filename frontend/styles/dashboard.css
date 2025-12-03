@@ -12,6 +12,21 @@
   width: 100%;
 }
 
+.white-title {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.yellow-description {
+  color: var(--yellow);
+  font-size: 1rem;
+  font-weight: 350;
+  line-height: 1.5rem;
+  margin-top: 1%;
+  text-align: center;
+  max-width: 25rem;
+}
+
 .middle-content {
   flex: 1;
   display: flex;
@@ -87,4 +102,11 @@
 .card-img {
   height: auto;
   width: 3.5rem;
+}
+
+@media only screen and (max-width: 767px) {
+  .middle-content {
+    margin: 0 auto;
+    max-width: 80vw;
+  }
 }
