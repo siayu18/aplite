@@ -1,7 +1,7 @@
 <?php
 include("conn.php");
 
-// Fetch contacts based on search
+// Fetch data from table
 function getData($table_name) {
     global $con;
 
@@ -14,6 +14,7 @@ function getData($table_name) {
     return $data;
 }
 
+// Fetch specific data from table
 function getDataByID($table_name, $attribute_name, $id) {
     global $con;
 
@@ -22,6 +23,7 @@ function getDataByID($table_name, $attribute_name, $id) {
     return mysqli_fetch_assoc($result);;
 }
 
+// Fetch data from table with 1 foreign key
 function getDataWithJoin($table_name, $target_table_name, $attribute_id, $target_attribute) {
     global $con;
 
