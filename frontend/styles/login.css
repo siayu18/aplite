@@ -1,69 +1,56 @@
-* {
-    width: inherit;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-div {
+.wrapper {
     display: flex;
-}
-
-html, body {
-    background: linear-gradient(270deg, #2A4120 0%, #4E793C 100%);
-}
-
-h1,
-h2,
-textarea{
-    font: inherit;
-}
-
-form {
+    flex-direction: column;
     width: 100%;
-    height: 100%;
 }
 
+@media (min-width: 768px) {
+    .wrapper {
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .login-bg {
+        min-height: auto;
+    }
+
+    .container {
+        min-height: 100vh;
+        padding: clamp(1rem, 5vw, 7rem) clamp(2rem, 8vw, 5rem)
+    }
+}
+.container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    padding: clamp(2rem, 10vw, 12rem) clamp(2rem, 8vw, 5rem);
+    justify-content: center;
+    min-height: auto;
+}
 .big-heading {
-    color: #FFFFFF;
+    color: black;
     font-size: 4rem;
     font-style: normal;
     font-weight: 700;
-    word-wrap: break-word;
     line-height: 4.75rem; 
 }
 
 .small-heading {
-    color: #FFFFFF;
+    color: grey;
     font-size: 1.5rem;
     font-style: normal;
     font-weight:200;
-    margin: 0;
-    padding: 0;
-    text-wrap:inherit;
 }
 
 .title-intro {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.1rem;
-    align-self: stretch;
-    width: 100%;
 }
-
-.wrapper {
-    padding: 0.625rem 1.0625rem;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    width: 100%;
-}
-
 
 .input-box input{
+    min-width: 70%;
     font-size: 1rem;
-    border: 0.1rem solid #EAEAEA;
+    border: 0.1rem solid black;
     align-self: stretch;
     border-radius: 1.5rem;
     background-color: transparent;
@@ -72,34 +59,24 @@ form {
 
 .input-box input::placeholder {
     font-size: 1rem;
-    color: #D6E6C2;
+    color: gray;
     text-align: left;
 }
 
-.input-box input::after {
-    border-color: #CADEB1;
-}
-
 .input-area {
-    width: 100%;
+    display: flex;
     gap: 1rem;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
     margin: 0rem 0rem 3rem 0rem;
-}
-
-.left-contents {
-    flex-direction: column;
-    padding: 6rem 5rem;
-    height: 100%;
-    gap: 2.5rem;
+    max-width: 100%;
 }
 
 .remember {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: flex-start;
+    gap: 1rem;
 } 
 
 [type="checkbox"] {
@@ -114,6 +91,7 @@ form {
 
 .remember span {
     color: #D9D9D9;
+    font-size: 1rem;
 }
 
 button[type="submit"] {
@@ -122,10 +100,12 @@ button[type="submit"] {
     padding: 0.75rem 2.5rem;
     width: 10rem;
     height: 3rem;
-    color: #2A7B9B;
+    color: #4C763B;
     cursor: pointer;
-    border-bottom: 2px solid #2A7B9B;
-    border-right: 2px solid #2A7B9B;
+    /* border-bottom: 2px solid #2A7B9B;
+    border-right: 2px solid #2A7B9B; */
+    border-bottom: 2px solid #4C763B;
+    border-right: 2px solid #4C763B;
     border-top: 2px solid white;
     border-left: 2px solid white;
     transition-duration: 2s;
@@ -142,26 +122,37 @@ button[type="submit"]:hover {
         rgba(237, 221, 83, 0.2) 15px 15px;
 }
 
-.right-contents {
-    padding: 0.625rem 1rem;
-    flex-flow: column wrap;
+.login-bg {
+    flex: 1;
+    background-image: url(../image/apu-background.jpg);
+    background-size: cover;
+    background-position: center;
+    min-width: 50vw;
+    min-height: 50vh;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
     justify-content: center;
-    align-items: center;
-    border-radius: 2rem;
-    background: #FFF;
-    box-shadow: 0 0 18.5px 10px #F90 inset;
-    min-height: 40em;
-    width: 100%;
-    margin: 1rem 0;
+    padding: 3rem 1rem;
 }
 
-
-@media only screen and (max-width: 767px) {
-    .wrapper {
-        flex-direction: column;
-    }
-
-    html body {
-        font-size: 16px;
-    }
+.login-bg .bg-text {
+    color: white;
+    position: absolute;
+    max-width: 80%;
+    bottom: 3rem;
+    left: 3rem;
 }
+
+.login-bg .bg-text h2 {
+    font-size: clamp(2.5rem, 4vw, 4rem);
+    margin: 0;
+    font-weight: 700;
+}
+
+.login-bg .bg-text p {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-top: 0.75rem;
+    font-weight: 200;
+}
+
