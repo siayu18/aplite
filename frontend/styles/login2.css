@@ -1,27 +1,51 @@
-* {
-    width: inherit;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-div {
-    display: flex;
-}
-
-html, body {
+body {
+    accent-color: var(--dark-green);
     background: linear-gradient(270deg, #2A4120 0%, #4E793C 100%);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-h1,
-h2,
-textarea{
-    font: inherit;
+h1, h2, p, span {
+    margin-block: 0;
 }
 
-form {
+input,
+button,
+textarea {
+    font: inherit
+}
+
+.right-contents {
+    border-radius: 2rem;
+    background: #FFF;
+    box-shadow: 0 0 18.5px 10px #F90 inset;
+    max-width: 100%;
+    min-height: 80vh;
+}
+
+.wrapper {
+    padding: 2rem;
+    border-radius: 1rem;
+    display: grid;
+    gap: 3rem;
+    min-height: fit-content;
+    grid-template-rows: auto auto;
+    place-items: center;
+    @media (width > 40rem) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr;
+    }
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 3em;
+    margin: 0 auto;
     width: 100%;
-    height: 100%;
 }
 
 .big-heading {
@@ -29,7 +53,6 @@ form {
     font-size: 4rem;
     font-style: normal;
     font-weight: 700;
-    word-wrap: break-word;
     line-height: 4.75rem; 
 }
 
@@ -38,30 +61,17 @@ form {
     font-size: 1.5rem;
     font-style: normal;
     font-weight:200;
-    margin: 0;
-    padding: 0;
-    text-wrap:inherit;
 }
 
 .title-intro {
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.1rem;
-    align-self: stretch;
-    width: 100%;
 }
-
-.wrapper {
-    padding: 0.625rem 1.0625rem;
-    align-items: center;
-    justify-content: center;
-    gap: 0.625rem;
-    width: 100%;
-}
-
 
 .input-box input{
+    /* display: flex;
+    flex-direction: row; */
+    min-width: 70%;
     font-size: 1rem;
     border: 0.1rem solid #EAEAEA;
     align-self: stretch;
@@ -76,30 +86,20 @@ form {
     text-align: left;
 }
 
-.input-box input::after {
-    border-color: #CADEB1;
-}
-
 .input-area {
-    width: 100%;
+    display: flex;
     gap: 1rem;
     flex-direction: column;
-    justify-content: space-between;
-    align-items: start;
     margin: 0rem 0rem 3rem 0rem;
-}
-
-.left-contents {
-    flex-direction: column;
-    padding: 6rem 5rem;
-    height: 100%;
-    gap: 2.5rem;
+    max-width: 100%;
 }
 
 .remember {
+    display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 0.75rem;
+    justify-content: flex-start;
+    gap: 1rem;
 } 
 
 [type="checkbox"] {
@@ -114,6 +114,7 @@ form {
 
 .remember span {
     color: #D9D9D9;
+    font-size: 1rem;
 }
 
 button[type="submit"] {
@@ -140,28 +141,4 @@ button[type="submit"]:hover {
     border-right: 2px solid #57C785;
     box-shadow: rgba(237, 221, 83,0.4) 5px 5px, rgba(237, 221, 83, 0.3) 10px 10px,
         rgba(237, 221, 83, 0.2) 15px 15px;
-}
-
-.right-contents {
-    padding: 0.625rem 1rem;
-    flex-flow: column wrap;
-    justify-content: center;
-    align-items: center;
-    border-radius: 2rem;
-    background: #FFF;
-    box-shadow: 0 0 18.5px 10px #F90 inset;
-    min-height: 40em;
-    width: 100%;
-    margin: 1rem 0;
-}
-
-
-@media only screen and (max-width: 767px) {
-    .wrapper {
-        flex-direction: column;
-    }
-
-    html body {
-        font-size: 16px;
-    }
 }
