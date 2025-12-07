@@ -1,0 +1,82 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+   display: flex; 
+   flex-direction: column;
+   min-width: 100%;
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        padding: 1rem 1.5rem;
+    }
+}
+
+.icon-text {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.icon-text span {
+    color: --transparent-green;
+}
+
+.icon-text img {
+    color: white;
+}
+
+.main-contents {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.settings-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.avatar-card {
+    display: flex;
+    flex-direction: row;
+    outline: 2px solid green;
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60vw;
+    flex-wrap: wrap;
+}
+
+.avatar-img {
+    width: clamp(3.5rem, 10vw, 6rem);
+    object-fit: cover;
+    height: auto;
+    flex-shrink: 0;
+}
+
+.avatar-card-title {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    width: fit-content;
+    height: fit-content;
+}
+
+.avatar-title-btn {
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+    justify-content: center;
+    gap: 1vh;
+}

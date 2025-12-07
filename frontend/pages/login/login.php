@@ -10,6 +10,13 @@
 </head>
 <body>
     <div class="wrapper">
+        <div class="login-bg">
+            <div class="bg-text">
+                <h2>Building a sustainable future</h2>
+                <p>saving energy with a few clicks</p>
+            </div>
+        </div>
+
         <div class="container">
             <div class="title-intro">
                 <span class="big-heading">Hello, Welcome Back</span>
@@ -26,18 +33,15 @@
                     </div>
 
                     <div class="remember">
-                        <input type="checkbox">
+                        <label class="checkbox-container">
+                            <input class="custom-checkbox" type="checkbox">
+                            <span class="checkmark"></span>
+                        </label>
                         <span>Remember Me</span>
                     </div>
                 </div>
                 <div><button type="submit"><span class="gradient-text">Sign In</span></button></div>
             </form>
-        </div>
-        <div class="login-bg">
-            <div class="bg-text">
-                <h2>Building a sustainable future</h2>
-                <p>saving energy with a few clicks</p>
-            </div>
         </div>
     </div>
 </body>
