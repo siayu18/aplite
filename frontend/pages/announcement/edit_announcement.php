@@ -2,10 +2,10 @@
 include('../../../backend/conn.php');
 include('../../../backend/fetch_data.php');
 
-$id = intval($_GET['edit']);
+$announcementID = intval($_GET['edit']);
 
 // Fetch data
-$announcement = getDataByID('announcement', 'announcementID', $id);
+$announcement = getDataByID('announcement', 'announcementID', $announcementID);
 if (!$announcement) {
     die('Announcement not found.');
 }
@@ -15,7 +15,7 @@ if (isset($_POST['submitBtn'])) {
     $title = mysqli_real_escape_string($con, $_POST['title']);
     $content = mysqli_real_escape_string($con, $_POST['content']);
 
-    $sql = "UPDATE announcement SET title='$title', content='$content' WHERE announcementID='$id'";
+    $sql = "UPDATE announcement SET title='$title', content='$content' WHERE announcementID='$announcementID'";
     if (!mysqli_query($con, $sql)) {
         die('Error: ' . mysqli_error($con));
     } else {

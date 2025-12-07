@@ -1,3 +1,9 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+$articles = getDataWithJoin("article", "user", "staffID", "userID");
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,78 +26,41 @@
         </div>
 
         <div class="wrap-middle">
-            <div class="big-green-button">+ Create Article</div>
+            <a href="create_article.php" class="big-green-button">+ Create Article</a>
         </div>
 
         <div class="card-container">
-            <div class="card">
-                <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
-                <div class="info-container">
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
-                    </div>
-                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
-                    <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" />
-                        <span>Dr. Sarah Green</span>
-                    </div>
-                    <div Aclass="icon-text">
-                        <img src="../../image/calendar.svg" alt="calendar.svg" />
-                        <span>2025-01-05</span>
-                    </div>
-                    <div class="near-button-column">
-                        <button class="green-button">Edit Article</button>
-                        <button class="red-button">Delete Article</button>
-                    </div>
+            <?php if (empty($articles)): ?>
+                <div class="mid-text-group">
+                    <span class="medium-green-title">No articles available!</span>
+                    <span class="green-description">Sorry, but currently there is no article available!</span>
                 </div>
-            </div>
-
-            <div class="card">
-                <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
-                <div class="info-container">
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
+            <?php else: ?>
+                <?php foreach ($articles as $article): ?>
+                    <div class="card">
+                        <img src="data:image/jpeg;base64,<?= base64_encode($article['image']) ?>" alt="Article Image" class="card-img" />
+                        <div class="info-container">
+                            <div class="points-container">
+                                <img src="../../image/badge.png" alt="Points Badge"/>
+                                <span class="points-text"><?= htmlspecialchars($article['pointsAwarded']) ?> pts</span>
+                            </div>
+                            <div class="medium-green-title"><?= htmlspecialchars($article['title']) ?></div>
+                            <div class="icon-text">
+                                <img src="../../image/people_head.png" alt="Author" />
+                                <span><?= htmlspecialchars($article['name']) ?></span>
+                            </div>
+                            <div class="icon-text">
+                                <img src="../../image/calendar.svg" alt="calendar.svg" />
+                                <span><?= htmlspecialchars($article['date']) ?></span>
+                            </div>
+                            <div class="near-button-column">
+                                <button class="green-button">Edit Article</button>
+                                <button class="red-button">Delete Article</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
-                    <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" />
-                        <span>Dr. Sarah Green</span>
-                    </div>
-                    <div Aclass="icon-text">
-                        <img src="../../image/calendar.svg" alt="calendar.svg" />
-                        <span>2025-01-05</span>
-                    </div>
-                    <div class="near-button-column">
-                        <button class="green-button">Edit Article</button>
-                        <button class="red-button">Delete Article</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
-                <div class="info-container">
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
-                    </div>
-                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
-                    <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" />
-                        <span>Dr. Sarah Green</span>
-                    </div>
-                    <div Aclass="icon-text">
-                        <img src="../../image/calendar.svg" alt="calendar.svg" />
-                        <span>2025-01-05</span>
-                    </div>
-                    <div class="near-button-column">
-                        <button class="green-button">Edit Article</button>
-                        <button class="red-button">Delete Article</button>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>

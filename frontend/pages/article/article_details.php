@@ -1,3 +1,19 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+
+if (!isset($_GET['id'])) {
+    die('Article ID not specified.');
+}
+
+// Fetch data
+$articleID = $_GET['id'];
+$article = getDataByIDWithJoin('article', 'user', 'staffID', 'userID', 'articleID', $articleID);
+if (!$article) {
+    die('Article not found.');
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,28 +40,24 @@
                 </a>
             </div>
             <div class="article-container">
-                <img src="../../image/test_image.png" alt="Article Image" class="article-img" />
+                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']) ?>" alt="Article Image" class="article-img" />
                 <div class="article-details">
-                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
+                    <div class="medium-green-title"><?= htmlspecialchars($article['title']) ?></div>
                     <div class="metadata">
-                        <div class="green-description">By Dr. Sarah Green | Published on 2025-01-05</div>
+                        <div class="green-description">By <?= htmlspecialchars($article['name']) ?> | Published on <?= htmlspecialchars($article['date']) ?></div>
                         <div class="points-container">
                             <img src="../../image/badge.png" alt="Points Badge" class="" />
-                            <span class="points-text">30 pts</span>
+                            <span class="points-text"><?= htmlspecialchars($article['pointsAwarded']) ?> pts</span>
                         </div>
                     </div>
-                    <p class="article-content">
-                        Efficient energy management has become a major priority for educational institutions as they work toward reducing operating costs and promoting environmental sustainability. One of the most effective strategies campuses have adopted is the transition from traditional lighting systems—such as fluorescent and incandescent bulbs—to Light Emitting Diode (LED) technology. The shift to LED lighting has significantly influenced energy consumption patterns across universities, colleges, and schools.
-                        LED lighting is widely known for its superior energy efficiency. Compared to conventional lighting, LEDs consume up to 50–80% less electricity, depending on the fixture and application. This reduction is especially impactful on large campuses where lighting accounts for a major share of energy use, including classrooms, lecture halls, laboratories, hallways, sports facilities, and outdoor spaces.
-                        LED bulbs have a significantly longer lifespan, often lasting 25,000–50,000 hours compared to the 1,000–10,000 hours offered by incandescent or fluorescent lights. This longevity means fewer replacements, reducing both maintenance labor and material costs. For campuses with extensive lighting networks, the savings are substantial.
-                    </p>
+                    <p class="article-content"><?= htmlspecialchars($article['content']) ?></p>
                     <div class="claim-container">
-                        <img src="../../image/big_badge.svg" alt="Points Badge" class="" />
+                        <img src="../../image/big_badge.svg" alt="Points Badge" />
                         <div class="text-group">
                             <span class="medium-green-title">Great job reading this article!</span>
-                            <span class="green-description">Claim your 30 points for expanding your sustainability knowledge.</span>
+                            <span class="green-description">Claim your <?= htmlspecialchars($article['pointsAwarded']) ?> points for expanding your sustainability knowledge.</span>
                         </div>
-                        <button class="green-button">Claim 30 Points</button>
+                        <button class="green-button">Claim <?= htmlspecialchars($article['pointsAwarded']) ?> Points</button>
                     </div>
                 </div>
             </div>
