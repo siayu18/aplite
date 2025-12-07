@@ -2,7 +2,11 @@
 include('../../../backend/conn.php');
 include('../../../backend/fetch_data.php');
 
-$announcementID = intval($_GET['edit']);
+if (!isset($_GET['edit'])) {
+    die('Announcement ID not specified.');
+}
+
+$announcementID = mysqli_real_escape_string($con, $_GET['edit']);
 
 // Fetch data
 $announcement = getDataByID('announcement', 'announcementID', $announcementID);
@@ -57,7 +61,7 @@ mysqli_close($con);
                     </div>
                 </a>
             </div>
-            <form method="POST" action="edit_announcement.php?edit=<?= $id ?>" class="inner-container">
+            <form method="POST" action="edit_announcement.php?edit=<?= $announcementID ?>" class="inner-container">
                 <div class="medium-green-title">Edit Announcement</div>
 
                 <div class="label-field">

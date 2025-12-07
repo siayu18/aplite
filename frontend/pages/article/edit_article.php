@@ -1,3 +1,46 @@
+<?php
+include('../../../backend/conn.php');
+include('../../../backend/fetch_data.php');
+
+if (!isset($_GET['edit'])) {
+    die('Article ID not specified.');
+}
+
+$articleID = mysqli_real_escape_string($con, $_GET['edit']);
+
+// Fetch data
+$article = getDataByIDWithJoin('article', 'user', 'staffID', 'userID', 'articleID', $articleID);
+if (!$article) {
+    die('Article not found.');
+}
+
+// Handle update
+if (isset($_POST['submitBtn'])) {
+    $title = mysqli_real_escape_string($con, $_POST['title']);
+    $points = mysqli_real_escape_string($con, $_POST['points']);
+    $content = mysqli_real_escape_string($con, $_POST['content']);
+
+    $imageData = null;
+    if (!empty($_FILES['image']['tmp_name'])) {
+        $imageData = mysqli_real_escape_string($con, file_get_contents($_FILES['image']['tmp_name']));
+    }
+
+    if (!ctype_digit($points)) {
+        $message = "Points must be an integer.";
+    } else {
+        $sql = "UPDATE article SET title='$title', content='$content', pointsAwarded='$points', image='$imageData' WHERE articleID='$articleID'";
+
+        if (!mysqli_query($con, $sql)) {
+            die("Error: " . mysqli_error($con));
+        } else {
+            echo '<script>alert("Article Edited!");
+            window.location.href="manage_article.php";</script>';
+        }
+    }
+    mysqli_close($con);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,32 +67,32 @@
                     </div>
                 </a>
             </div>
-            <form method="POST" action="edit_article.php" class="inner-container">
+            <form method="POST" enctype="multipart/form-data" action="edit_article.php?edit=<?= $articleID ?>" class="inner-container">
                 <div class="medium-green-title">Edit Article</div>
 
                 <div class="label-field">
                     <label class="green-description">Title</label>
-                    <input type="text" placeholder="Enter title..." />
+                    <input type="text" placeholder="Enter title..." name="title" value="<?= htmlspecialchars($article['title']) ?>" required/>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Points Awarded</label>
-                    <input type="text" placeholder="Enter Points..." />
+                    <input type="text" placeholder="Enter Points..." name="points" value="<?= htmlspecialchars($article['pointsAwarded']) ?>" required/>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Image</label>
-                    <input type="file"></input>
+                    <input type="file" name="image" required></input>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Content</label>
-                    <textarea class="white-area" placeholder="Enter title..."></textarea>
+                    <textarea class="white-area" placeholder="Enter content..." name="content" required><?= htmlspecialchars($article['content']) ?></textarea>
                 </div>
 
                 <div class="right-button-group">
                     <a href="manage_article.php" class="white-button">Cancel</a>
-                    <button class="green-button">Update Article</button>
+                    <button type="submit" name="submitBtn" class="green-button">Update Article</button>
                 </div>
             </form>
         </div>

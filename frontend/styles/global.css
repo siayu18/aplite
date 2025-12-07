@@ -371,6 +371,15 @@ a {
   animation: slideIn 0.3s ease;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
 .label-field {
   display: flex;
   flex-direction: column;
@@ -488,7 +497,7 @@ a {
   width: 100%;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   /* For mobile: */
   .col-s-1 {
     width: 8.33%;

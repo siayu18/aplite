@@ -2,6 +2,7 @@
 include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 $articles = getDataWithJoin("article", "user", "staffID", "userID");
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>

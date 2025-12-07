@@ -1,7 +1,25 @@
 <?php
 include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
+
+// Handle Delete
+if (isset($_GET['delete'])) {
+    $id = mysqli_real_escape_string($con, $_GET['delete']);
+
+    $sql = "DELETE FROM article WHERE articleID = '$id'";
+
+    if (mysqli_query($con, $sql)) {
+        echo '<script>alert("Article deleted successfully!");
+              window.location.href="manage_article.php";</script>';
+        exit();
+    } else {
+        die('Error deleting: ' . mysqli_error($con));
+    }
+}
+
+// Fetch Data
 $articles = getDataWithJoin("article", "user", "staffID", "userID");
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -54,8 +72,8 @@ $articles = getDataWithJoin("article", "user", "staffID", "userID");
                                 <span><?= htmlspecialchars($article['date']) ?></span>
                             </div>
                             <div class="near-button-column">
-                                <button class="green-button">Edit Article</button>
-                                <button class="red-button">Delete Article</button>
+                                <a href="edit_article.php?edit=<?= $article['articleID'] ?>" class="green-button">Edit Article</a>
+                                <a href="manage_article.php?delete=<?= $article['articleID'] ?>" class="red-button">Delete Article</a>
                             </div>
                         </div>
                     </div>

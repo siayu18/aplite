@@ -12,6 +12,7 @@ $article = getDataByIDWithJoin('article', 'user', 'staffID', 'userID', 'articleI
 if (!$article) {
     die('Article not found.');
 }
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>

@@ -19,6 +19,7 @@ if (isset($_GET['delete'])) {
 
 // Fetch data
 $announcements = getData('announcement');
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
