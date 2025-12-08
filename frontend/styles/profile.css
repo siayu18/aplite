@@ -1,3 +1,9 @@
+:root {
+    --padding-medium: 3rem 2rem;
+    /* --border-style: 2px solid grey; */
+    --border-style: 1px solid var(--darkest-green);
+    --border-radius-style: 2rem;
+}
 *,
 *::before,
 *::after {
@@ -9,59 +15,74 @@
 .wrapper {
    display: flex; 
    flex-direction: column;
-   min-width: 100%;
+   min-height: 100vh;
+   margin: 3rem;
+   gap: 2rem;
 }
 
-@media (min-width: 768px) {
-    .wrapper {
-        padding: 1rem 1.5rem;
+@media (max-width: 768px) {
+    .additional-info-column {
+        order: -1;
+    }
+
+    .main-contents {
+        flex: 0;
     }
 }
 
-.icon-text {
+.icon-text-me {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    color: white;
-}
-
-.icon-text span {
-    color: --transparent-green;
-}
-
-.icon-text img {
-    color: white;
+    gap: 1rem;
 }
 
 .main-contents {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    justify-content:space-evenly;
+    gap: 2rem;
+    flex: 1;
 }
 
 .settings-column {
     display: flex;
     flex-direction: column;
+    flex: 2;
+    gap: 2rem;
+}
+
+.additional-info-column {
+    display: flex;
+    flex-direction: column;
     flex: 1;
+    height: max-content;
+    border: var(--border-style);
+    border-radius: var(--border-radius-style);
+    padding: var(--padding-medium);
+    gap: 2rem;
 }
 
 .avatar-card {
     display: flex;
     flex-direction: row;
-    outline: 2px solid green;
-    border-radius: 2rem;
-    padding: 0.5rem 1rem;
-    justify-content: flex-start;
+    border: var(--border-style);
+    border-radius: var(--border-radius-style);
+    padding: var(--padding-medium);
+    justify-content:flex-start;
+    gap: 2rem;
     align-items: center;
-    width: 60vw;
     flex-wrap: wrap;
 }
 
 .avatar-img {
-    width: clamp(3.5rem, 10vw, 6rem);
-    object-fit: cover;
+    width: clamp(5rem, 10vw, 6rem);
     height: auto;
+    object-fit: cover;
+    object-position: center;
     flex-shrink: 0;
+    overflow: hidden;
 }
 
 .avatar-card-title {
@@ -73,10 +94,117 @@
     height: fit-content;
 }
 
+.avatar-card-title h1 {
+    color: var(--darkest-green);
+}
+
+.avatar-card-title p {
+    color: var(--dark-green);
+}
+
 .avatar-title-btn {
     display: flex;
     flex-direction: column;
     flex-shrink: 1;
     justify-content: center;
-    gap: 1vh;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.profile-details-card {
+    display: flex;
+    flex-direction: column;
+    border: var(--border-style);
+    border-radius: var(--border-radius-style);
+    padding: var(--padding-medium);
+    gap: 1rem;
+    flex: 1;
+}
+
+.profile-details-card form {
+    flex: 1;
+    flex-direction: column;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-evenly;
+}
+
+.btn-group {
+    display: flex;
+    flex-direction: row; 
+    gap: 0.5rem;
+}
+
+.big-green-button {
+    color: white;
+    background-color: var(--light-green-font);
+    padding: 1.0rem 1.3rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 540;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    flex: 1;
+}
+
+.big-red-button {
+    color: white;
+    background-color: var(--red);
+    padding: 1.0rem 1.3rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    font-weight: 540;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    flex: 1;
+}
+
+.big-red-button:hover {
+    background-color: var(--hover-red);
+}
+
+input[type="text"], input[type="password"] {
+    background-color: white;
+    outline: 0.1rem solid var(--border-green);
+    outline-offset: -0.1rem;
+    color: var(--dark-green-font);
+    border: none;
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+    font-family: Roboto, "san-serif";
+    transition: ouline-color 0.3s ease;
+}
+
+input[type="text"]:hover, input[type="password"]:hover {
+    outline-color: var(--light-green-font);
+}
+
+input[type="text"]:focus, input[type="password"]:focus {
+    outline-color: var(--dark-green);
+}
+
+.detail-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.detail-group span {
+    font: 800;
+}
+
+.additional-info-column h1{
+    margin-bottom: 0.5rem;
+}
+
+.results {
+    font-weight: 600;
 }

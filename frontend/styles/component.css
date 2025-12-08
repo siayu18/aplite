@@ -125,7 +125,8 @@ button {
 }
 
 .red-border-button:hover {
-    background-color: var(--light-grey);
+    /* background-color: var(--light-grey); */
+    background-color: lightgoldenrodyellow;
 }
 
 .yellow-button {
@@ -167,7 +168,7 @@ button {
     outline-color: var(--dark-green);
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
     background-color: white;
     outline: 0.1rem solid var(--border-green);
     outline-offset: -0.1rem;
@@ -179,11 +180,11 @@ input[type="text"] {
     transition: ouline-color 0.3s ease;
 }
 
-input[type="text"]:hover {
+input[type="text"]:hover, input[type="password"]:hover {
     outline-color: var(--light-green-font);
 }
 
-input[type="text"]:focus {
+input[type="text"]:focus, input[type="password"]:focus {
     outline-color: var(--dark-green);
 }
 

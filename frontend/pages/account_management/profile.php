@@ -15,18 +15,18 @@
     <?php include '../../component/stu_header.php'; ?>
     <div class="wrapper">
        <div class="profile-header">
-            <h1>Profile Settings</h1>
-            <p>Manage your account information and preferences</p>
+            <h1 class="green-title">Profile Settings</h1>
+            <p class="green-description">Manage your account information and preferences</p>
        </div> 
        <div class="main-contents">
            <div class="settings-column">
                 <div class="avatar-card">
-                    <img src="../../image/Profile-1.svg" alt="Profile Picture" class="avatar-img">
+                    <img src="../../image/Profile-2.svg" alt="Profile Picture" class="avatar-img">
 
                     <div class="avatar-title-btn">
                         <div class="avatar-card-title">
-                            <h1>Change Avatar</h1>
-                            <p>Select a profile picture</p>
+                            <h1 class="green-title">Change Avatar</h1>
+                            <p class="dark-green-description">Select a profile picture</p>
                         </div>
 
                         <button class="green-button">
@@ -36,8 +36,8 @@
                 </div>
 
                 <div class="profile-details-card">
+                        <h1 class="green-title">Personal Information</h1>
                     <form>
-                        <h1>Personal Information</h1>
                         <div class="form-group">
                             <label>Username</label>
                             <input type="text" placeholder="enter username" required>
@@ -50,32 +50,32 @@
                             <label>Password</label>
                             <input type="password" placeholder="enter password" required>
                         </div>
-                        <div class="btn-group">
-                            <button class="green-button"><span>Save Changes</span></button>
-                            <button class="red-button"><span>Discard</span></button>
-                        </div>
                     </form>
+                </div>
+                <div class="btn-group">
+                    <button class="big-green-button"><span>Save Changes</span></button>
+                    <button class="big-red-button"><span>Discard</span></button>
                 </div>
            </div>
            <div class="additional-info-column">
-               <h1>Account Overview</h1>
+               <h1 class="green-title">Account Overview</h1>
                <div class="detail-group">
-                    <span>Last login</span>
-                    <span>Today</span>
+                    <span class="dark-green-description">Last login</span>
+                    <span class="results">Today</span>
                </div>
                <div class="detail-group">
-                    <span>Streak</span>
-                    <span>48 Days</span>
+                    <span class="dark-green-description">Streak</span>
+                    <span class="results">48 Days</span>
                </div>
                <div class="detail-group">
-                    <span>Points</span>
-                    <span>454 pts</span>
+                    <span class="dark-green-description">Points</span>
+                    <span class="results">454 pts</span>
                </div>
-                <button class="red-button">
-                    <span class="icon-text">
+                <button class="red-border-button">
+                    <div class="icon-text-me">
                         <img src="../../image/sign-out.svg" alt="sign-out">
                         <span>Sign Out</span>
-                    </span>
+                    </div>
                 </button>
            </div>
        </div>
