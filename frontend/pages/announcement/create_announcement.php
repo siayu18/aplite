@@ -4,10 +4,11 @@ if (isset($_POST['submitBtn'])) {
 
     $id = uniqid();
     $current_date = date("Y-m-d");
+    $title = mysqli_real_escape_string($con, $_POST['title']);
+    $content = mysqli_real_escape_string($con, $_POST['content']);
 
-    $sql="INSERT INTO announcement (announcementID, title, content, date) VALUES
-    ('$id','$_POST[title]','$_POST[content]',
-    '$current_date')";
+    $sql = "INSERT INTO announcement (announcementID, title, content, date) 
+            VALUES ('$id','$title','$content','$current_date')";
 
     if (!mysqli_query($con,$sql)) {
         die('Error: ' . mysqli_error($con));
@@ -16,7 +17,7 @@ if (isset($_POST['submitBtn'])) {
         window.location.href = "manage_announcement.php";
         </script>';
     }
-     mysqli_close($con);
+    mysqli_close($con);
 }
 ?>
 

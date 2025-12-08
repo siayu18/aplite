@@ -1,3 +1,10 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+$articles = getDataWithJoin("article", "user", "staffID", "userID");
+mysqli_close($con);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,63 +27,34 @@
         </div>
 
         <div class="card-container">
-            <div class="card">
-                <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
-                <div class="info-container">
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
-                    </div>
-                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
-                    <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" />
-                        <span>Dr. Sarah Green</span>
-                    </div>
-                    <div Aclass="icon-text">
-                        <img src="../../image/calendar.svg" alt="calendar.svg" />
-                        <span>2025-01-05</span>
-                    </div>
-                    <button class="green-button">Read Article ></button>
+            <?php if (empty($articles)): ?>
+                <div class="mid-text-group">
+                    <span class="medium-green-title">No articles available!</span>
+                    <span class="green-description">Sorry, but currently there is no article available!</span>
                 </div>
-            </div>
-            <div class="card">
-                <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
-                <div class="info-container">
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge" />
-                        <span class="points-text">30 pts</span>
+            <?php else: ?>
+                <?php foreach ($articles as $article): ?>
+                    <div class="card">
+                        <img src="data:image/jpeg;base64,<?= base64_encode($article['image']) ?>" alt="Article Image" class="card-img" />
+                        <div class="info-container">
+                            <div class="points-container">
+                                <img src="../../image/badge.png" alt="Points Badge"/>
+                                <span class="points-text"><?= htmlspecialchars($article['pointsAwarded']) ?> pts</span>
+                            </div>
+                            <div class="medium-green-title"><?= htmlspecialchars($article['title']) ?></div>
+                            <div class="icon-text">
+                                <img src="../../image/people_head.png" alt="Author" />
+                                <span><?= htmlspecialchars($article['name']) ?></span>
+                            </div>
+                            <div class="icon-text">
+                                <img src="../../image/calendar.svg" alt="calendar.svg" />
+                                <span><?= htmlspecialchars($article['date']) ?></span>
+                            </div>
+                            <a href="article_details.php?id=<?= $article['articleID'] ?>" class="green-button">Read Article ></a>
+                        </div>
                     </div>
-                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
-                    <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" />
-                        <span>Dr. Sarah Green</span>
-                    </div>
-                    <div class="icon-text">
-                        <img src="../../image/calendar.svg" alt="calendar.svg" />
-                        <span>2025-01-05</span>
-                    </div>
-                    <button class="green-button">Read Article ></button>
-                </div>
-            </div>
-            <div class="card">
-                <img src="../../image/test_image.png" alt="Article Image" class="card-img" />
-                <div class="info-container">
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge" />
-                        <span class="points-text">30 pts</span>
-                    </div>
-                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
-                    <div class="icon-text">
-                        <img src="../../image/people_head.png" alt="Author" />
-                        <span>Dr. Sarah Green</span>
-                    </div>
-                    <div class="icon-text">
-                        <img src="../../image/calendar.svg" alt="calendar.svg" />
-                        <span>2025-01-05</span>
-                    </div>
-                    <button class="green-button">Read Article ></button>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>

@@ -387,6 +387,15 @@ a {
   animation: slideIn 0.3s ease;
 }
 
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
 .label-field {
   display: flex;
   flex-direction: column;
@@ -435,6 +444,13 @@ a {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.error-message {
+    border-radius: 5px;
+    font-weight: 500;
+    color: #ff0000;
+    text-align: right;
 }
 
 @keyframes slideIn {
@@ -497,7 +513,7 @@ a {
   width: 100%;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
   /* For mobile: */
   .col-s-1 {
     width: 8.33%;

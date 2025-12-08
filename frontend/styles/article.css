@@ -1,13 +1,3 @@
-.card-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
-}
-
 .card {
   display: flex;
   flex-direction: column;
@@ -16,13 +6,7 @@
   border: 0.1rem solid var(--border-green);
   border-radius: 0.8rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  max-width: 350px;
-}
-
-.card:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  transform: translateY(-0.5rem);
+  width: 350px;
 }
 
 .card-title {
@@ -116,7 +100,7 @@
     border-radius: 0.8rem;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .card-container {
         flex-direction: column;
     }

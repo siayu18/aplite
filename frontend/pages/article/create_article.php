@@ -1,3 +1,39 @@
+<?php
+$message = '';
+
+if (isset($_POST['submitBtn'])) {
+    include('../../../backend/conn.php');
+    
+    $articleID = uniqid();
+    $staffID = "3";
+    $title = mysqli_real_escape_string($con, $_POST['title']);
+    $points = mysqli_real_escape_string($con, $_POST['points']);
+    $content = mysqli_real_escape_string($con, $_POST['content']);
+    $current_date = date("Y-m-d");
+
+    $imageData = null;
+    if (!empty($_FILES['image']['tmp_name'])) {
+        $imageData = mysqli_real_escape_string($con, file_get_contents($_FILES['image']['tmp_name']));
+    }
+
+    if (!ctype_digit($points)) {
+        $message = "Points must be an integer.";
+    } else {
+        $sql = "INSERT INTO article (articleID, staffID, title, pointsAwarded, date, image, content)
+                VALUES ('$articleID','$staffID','$title','$points','$current_date','$imageData','$content')";
+
+        if (!mysqli_query($con, $sql)) {
+            die("Error: " . mysqli_error($con));
+        } else {
+            echo '<script>alert("Article Created!");
+            window.location.href="manage_article.php";</script>';
+        }
+    }
+    mysqli_close($con);
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +45,7 @@
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
     <link rel="stylesheet" href="../../styles/article.css">
-    <title>Edit Article</title>
+    <title>Create Article</title>
 </head>
 
 <body>
@@ -24,33 +60,39 @@
                     </div>
                 </a>
             </div>
-            <form method="POST" action="create_article.php" class="inner-container">
+            <form method="POST" action="create_article.php" enctype="multipart/form-data" class="inner-container">
                 <div class="medium-green-title">Create Article</div>
 
                 <div class="label-field">
                     <label class="green-description">Title</label>
-                    <input type="text" placeholder="Enter title..." />
+                    <input type="text" placeholder="Enter title..." name="title" required/>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Points Awarded</label>
-                    <input type="text" placeholder="Enter Points..." />
+                    <input type="text" placeholder="Enter Points..." name="points" required/>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Image</label>
-                    <input type="file"></input>
+                    <input type="file" name="image" required></input>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Content</label>
-                    <textarea class="white-area" placeholder="Enter title..."></textarea>
+                    <textarea class="white-area" placeholder="Enter content..." name="content" required></textarea>
                 </div>
 
                 <div class="right-button-group">
                     <a href="manage_article.php" class="white-button">Cancel</a>
-                    <button class="green-button">Create Article</button>
+                    <button type="submit" class="green-button" name="submitBtn">Create Article</button>
                 </div>
+
+                <?php if (!empty($message)): ?>
+                    <div class="error-message">
+                        <?php echo $message; ?>
+                    </div>
+                <?php endif; ?>
             </form>
         </div>
     </div>
