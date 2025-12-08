@@ -169,6 +169,13 @@ a {
   line-height: 1.5rem;
 }
 
+.green-description-bold {
+  color: var(--light-green-font);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: bold;
+}
+
 .green-description-between {
   display: flex;
   flex-direction: row;
