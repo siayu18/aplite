@@ -12,6 +12,35 @@ $article = getDataByIDWithJoin('article', 'user', 'staffID', 'userID', 'articleI
 if (!$article) {
     die('Article not found.');
 }
+
+// Article Claim Points Logic
+$current_user = getDataByID("user", "userID", "3");
+$currentID = $current_user["userID"];
+if (!$current_user) {
+    die("User Not Found");
+}
+
+if (isset($_GET['claim'])) {
+    $user_article = getDataBy2ID("userArticle", "userID", "articleID", $currentID, $articleID);
+
+    if ($user_article) {
+        // Overlay
+        echo "<script>window.claimStatus = 'already';</script>";
+    } else {
+        // Update userArticle table
+        $sql_insert = "INSERT INTO userArticle (userID, articleID) VALUES ('$currentID', '$articleID')";
+        mysqli_query($con, $sql_insert);
+
+        // Update user points
+        $points = $article['pointsAwarded'];
+        $sql_update = "UPDATE user SET points = points + $points WHERE userID='$currentID'";
+        mysqli_query($con, $sql_update);
+
+        // Overlay
+        echo "<script>window.claimStatus='success';</script>";
+    }
+}
+
 mysqli_close($con);
 ?>
 
@@ -33,7 +62,7 @@ mysqli_close($con);
     <div class=" col-12 col-s-12 content fade-in">
         <div class="main-container">
             <div class="back-wrapper">
-                <a href="">
+                <a href="choose_article.php">
                     <div class="interactive-icon-text">
                         <img src="../../image/back.svg" alt="Back" class="icon-img" />
                         <span class="icon-text">Back to Articles</span>
@@ -58,14 +87,26 @@ mysqli_close($con);
                             <span class="medium-green-title">Great job reading this article!</span>
                             <span class="green-description">Claim your <?= htmlspecialchars($article['pointsAwarded']) ?> points for expanding your sustainability knowledge.</span>
                         </div>
-                        <button class="green-button">Claim <?= htmlspecialchars($article['pointsAwarded']) ?> Points</button>
+                        <a href="article_details.php?id=<?= $articleID ?>&claim=true" class="green-button" name="claim">Claim <?= htmlspecialchars($article['pointsAwarded']) ?> Points</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="overlay"></div>
+    <div class="modal">
+        <img src="" alt="Error" class="modal-img">
+        <div class="text-group">
+            <span class="medium-green-title">Error: Try Again</span>
+            <span class="green-description"> Oops, Error has Occured!</span>
+        </div>
+        <a href="article_details.php?id=<?= $articleID ?>" class="green-button">Back</a>
+    </div>
+
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

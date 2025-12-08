@@ -25,8 +25,7 @@ if (isset($_POST['submitBtn'])) {
         if (!mysqli_query($con, $sql)) {
             die("Error: " . mysqli_error($con));
         } else {
-            echo '<script>alert("Article Created!");
-            window.location.href="manage_article.php";</script>';
+            echo "<script>window.success = true;</script>";
         }
     }
     mysqli_close($con);
@@ -96,8 +95,20 @@ if (isset($_POST['submitBtn'])) {
             </form>
         </div>
     </div>
+
+    <div class="overlay"></div>
+    <div class="modal">
+        <img src="../../image/verify.svg" alt="Verify" class="modal-img">
+        <div class="text-group">
+            <span class="medium-green-title">Successfully Created!</span>
+            <span class="green-description">You have successfully created the article</span>
+        </div>
+        <a href="manage_article.php" class="green-button">Back</a>
+    </div>
+
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

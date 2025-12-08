@@ -8,12 +8,10 @@ if (isset($_GET['delete'])) {
 
     $sql = "DELETE FROM article WHERE articleID = '$id'";
 
-    if (mysqli_query($con, $sql)) {
-        echo '<script>alert("Article deleted successfully!");
-              window.location.href="manage_article.php";</script>';
-        exit();
-    } else {
+    if (!mysqli_query($con, $sql)) {
         die('Error deleting: ' . mysqli_error($con));
+    } else {
+        echo "<script>window.success = true;</script>";
     }
 }
 
@@ -81,6 +79,17 @@ mysqli_close($con);
             <?php endif; ?>
         </div>
     </div>
+
+    <div class="overlay"></div>
+    <div class="modal">
+        <img src="../../image/verify.svg" alt="Verify" class="modal-img">
+        <div class="text-group">
+            <span class="medium-green-title">Successfully Deleted!</span>
+            <span class="green-description">You have successfully deleted the article</span>
+        </div>
+        <a href="manage_article.php" class="green-button">Back</a>
+    </div>
+
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
