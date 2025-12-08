@@ -170,6 +170,13 @@ a {
   line-height: 1.5rem;
 }
 
+.green-description-bold {
+  color: var(--light-green-font);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: bold;
+}
+
 .green-description-between {
   display: flex;
   flex-direction: row;
@@ -365,6 +372,15 @@ a {
   border-radius: 0.8rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  margin-top: 1.5rem;
 }
 
 .inner-container.new-question {
