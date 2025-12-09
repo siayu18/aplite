@@ -86,6 +86,16 @@
   transform: translateY(-0.5rem);
 }
 
+.transparent-card {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0.15);
+  border: 0.05rem solid white;
+  border-radius: 0.8rem;
+  padding: 1.5rem;
+  width: 250px;
+}
+
 .card-title {
   color: var(--dark-green-font);
   font-size: 1.1rem;
@@ -103,6 +113,7 @@
   height: auto;
   width: 3.5rem;
 }
+
 
 @media only screen and (max-width: 767px) {
   .middle-content {
