@@ -14,7 +14,7 @@
 <body>
     <?php include '../../component/stu_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
-        <div class="card">
+        <div class="card" style="margin: 0 1rem;">
             <img src="../../image/wrong.svg" alt="Wrong" class="card-img">
             <div class="text-group">
                 <span class="medium-green-title">Keep Trying!</span>
@@ -38,7 +38,7 @@
             <button class="green-button">Back To Quizzes</button>
         </div>
 
-        <div class="card">
+        <div class="card" style="margin: 0 1rem;">
             <img src="../../image/challenge.svg" alt="Challenge" class="card-img">
             <div class="text-group">
                 <span class="medium-green-title">Congratulation!</span>

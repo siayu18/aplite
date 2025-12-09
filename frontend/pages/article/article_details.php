@@ -27,8 +27,11 @@ if (isset($_GET['claim'])) {
         // Overlay
         echo "<script>window.claimStatus = 'already';</script>";
     } else {
+        $user_articleID = uniqid();
+        $current_date = date("Y-m-d");
+
         // Update userArticle table
-        $sql_insert = "INSERT INTO userArticle (userID, articleID) VALUES ('$currentID', '$articleID')";
+        $sql_insert = "INSERT INTO userArticle (userArticleID, userID, articleID, date) VALUES ('$user_articleID', '$currentID', '$articleID', ''$current_date')";
         mysqli_query($con, $sql_insert);
 
         // Update user points
