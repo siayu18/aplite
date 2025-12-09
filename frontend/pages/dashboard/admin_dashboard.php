@@ -1,3 +1,17 @@
+<?php
+include("../../../backend/conn.php");
+
+// For leaderboard
+$sql = "SELECT * FROM user ORDER BY points DESC LIMIT 10";
+$result = mysqli_query($con, $sql);
+$users = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $users[] = $row;
+}
+
+mysqli_close($con);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,9 +87,11 @@
     <div class="col-12 col-s-12 content-2 fade-in">
         <span class="green-title">Leaderboard</span>
         <div class="leaderboard-container">
-            <p class="no1">#1 Name 100 Points</p>
-            <p class="no2">#2 Name 100 Points</p>
-            <p class="no3">#3 Name 100 Points</p>
+            <?php $rank = 1;
+            foreach ($users as $user):?>
+                <p>#<?= $rank ?> <?= htmlspecialchars($user['name']) ?> - <?= htmlspecialchars($user['points']) ?> Points</p>
+            <?php $rank++;
+            endforeach; ?>
         </div>
     </div>
 

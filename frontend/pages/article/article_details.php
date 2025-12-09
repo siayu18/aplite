@@ -31,7 +31,7 @@ if (isset($_GET['claim'])) {
         $current_date = date("Y-m-d");
 
         // Update userArticle table
-        $sql_insert = "INSERT INTO userArticle (userArticleID, userID, articleID, date) VALUES ('$user_articleID', '$currentID', '$articleID', ''$current_date')";
+        $sql_insert = "INSERT INTO userArticle (userArticleID, userID, articleID, date) VALUES ('$user_articleID', '$currentID', '$articleID', '$current_date')";
         mysqli_query($con, $sql_insert);
 
         // Update user points
