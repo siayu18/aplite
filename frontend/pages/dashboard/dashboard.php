@@ -77,13 +77,7 @@
         </div>
     </div>
 
-    <div class="col-12 col-s-12 footer fade-in">
-        <span class="footer-text">© 2025 APLITE - Asia Pacific University. Building a sustainable future together.</span>
-        <div>
-            <a href=""><img src="../../image/facebook.png" alt="Facebook" class="social-button"/></a>
-            <a href=""><img src="../../image/instagram.png" alt="Instagram" class="social-button"/></a>
-        </div>
-    </div>
+    <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/dashboard.js"></script>
     <script src="../../scripts/animation.js"></script>

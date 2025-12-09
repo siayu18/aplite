@@ -14,52 +14,54 @@
 <body>
     <?php include '../../component/stu_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
-        <div class="card" style="margin: 0 1rem;">
-            <img src="../../image/wrong.svg" alt="Wrong" class="card-img">
-            <div class="text-group">
-                <span class="medium-green-title">Keep Trying!</span>
-                <span class="green-description">You can retake this quiz to improve your score.</span>
+        <div class="card-container">
+            <div class="card" style="margin: 0 1rem;">
+                <img src="../../image/wrong.svg" alt="Wrong" class="card-img">
+                <div class="text-group">
+                    <span class="medium-green-title">Keep Trying!</span>
+                    <span class="green-description">You can retake this quiz to improve your score.</span>
+                </div>
+                <div class="summary">
+                    <div class="green-description-between">
+                        <span>Score:</span>
+                        <span>1 / 4</span>
+                    </div>
+                    <div class="green-description-between">
+                        <span>Required to Pass:</span>
+                        <span>3</span>
+                    </div>
+                    <div class="thin-line"></div>
+                    <div class="dark-green-description-between">
+                        <span>Points Earned:</span>
+                        <span>0</span>
+                    </div>
+                </div>
+                <button class="green-button">Back To Quizzes</button>
             </div>
-            <div class="summary">
-                <div class="green-description-between">
-                    <span>Score:</span>
-                    <span>1 / 4</span>
-                </div>
-                <div class="green-description-between">
-                    <span>Required to Pass:</span>
-                    <span>3</span>
-                </div>
-                <div class="thin-line"></div>
-                <div class="dark-green-description-between">
-                    <span>Points Earned:</span>
-                    <span>0</span>
-                </div>
-            </div>
-            <button class="green-button">Back To Quizzes</button>
-        </div>
 
-        <div class="card" style="margin: 0 1rem;">
-            <img src="../../image/challenge.svg" alt="Challenge" class="card-img">
-            <div class="text-group">
-                <span class="medium-green-title">Congratulation!</span>
-                <span class="green-description">You passed the quiz, you've done an excellent job!</span>
-            </div>
-            <div class="summary">
-                <div class="green-description-between">
-                    <span>Score:</span>
-                    <span>3 / 4</span>
+            <!-- <div class="card" style="margin: 0 1rem;">
+                <img src="../../image/challenge.svg" alt="Challenge" class="card-img">
+                <div class="text-group">
+                    <span class="medium-green-title">Congratulation!</span>
+                    <span class="green-description">You passed the quiz, you've done an excellent job!</span>
                 </div>
-                <div class="green-description-between">
-                    <span>Required to Pass:</span>
-                    <span>3</span>
+                <div class="summary">
+                    <div class="green-description-between">
+                        <span>Score:</span>
+                        <span>3 / 4</span>
+                    </div>
+                    <div class="green-description-between">
+                        <span>Required to Pass:</span>
+                        <span>3</span>
+                    </div>
+                    <div class="thin-line"></div>
+                    <div class="dark-green-description-between">
+                        <span>Points Earned:</span>
+                        <span>50</span>
+                    </div>
                 </div>
-                <div class="thin-line"></div>
-                <div class="dark-green-description-between">
-                    <span>Points Earned:</span>
-                    <span>50</span>
-                </div>
-            </div>
-            <button class="green-button">Back To Quizzes</button>
+                <button class="green-button">Back To Quizzes</button>
+            </div> -->
         </div>
     </div>
 
