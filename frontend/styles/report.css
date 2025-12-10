@@ -1,0 +1,47 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 1rem;
+    margin: 0 auto;
+}
+
+.card-img {
+    height: 6rem;
+    width: auto;
+}
+
+.upload-icon{
+    height: 3rem;
+    width: auto;
+    opacity: 0.6;
+}
+
+.report-note{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: var(--transparent-green);
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--border-green);
+    width: 0;
+    min-width: 100%;
+    box-sizing: border-box;
+    text-align: justify;
+}
+
+.upload-label{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    width: 100%;
+    min-height: 180px;
+    background-color: var(--transparent-green);
+    border: 0.1rem solid var(--border-green);
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
