@@ -126,7 +126,7 @@ a {
   flex-direction: column;
   justify-content: center;
   min-height: auto;
-  padding: 2rem 0;
+  padding: 2rem 1rem;
   gap: 1.5rem;
   background-image: linear-gradient(
     to bottom,

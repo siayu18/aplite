@@ -106,8 +106,8 @@
     align-items: center;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 768px) {
     .control-panel-container{
-        min-width: 320px;
+        min-width: fit-content;
     }
 }
