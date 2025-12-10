@@ -61,7 +61,7 @@
 
                 <div class="class-details">
                     <span class="green-description-bold">Tip:</span>
-                    <span class="green-description">
+                    <span class="green-description" style="text-align: justify;">
                         Lower brightness levels save more energy and earn you more points! 
                         Adjust to a comfortable level that's not too bright.
                     </span>
