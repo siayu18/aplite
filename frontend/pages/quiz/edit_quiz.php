@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Sixtyfour&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
-    <link rel="stylesheet" href="../../styles/article.css">
+    <link rel="stylesheet" href="../../styles/quiz.css">
     <title>Edit Quiz</title>
 </head>
 
@@ -24,7 +24,7 @@
                     </div>
                 </a>
             </div>
-            <form method="POST" action="edit_quiz.php" class="inner-container">
+            <form method="POST" action="edit_quiz.php" class="inside-container">
                 <div class="medium-green-title" id="title">Edit Quiz</div>
 
                 <div class="label-field">
@@ -47,7 +47,7 @@
                     <button type="button" class="green-button" id="add-question-btn">+ Add Question</button>
                 </div>
 
-                <div class="inner-container question-container">
+                <div class="inside-container question-container">
                     <div class="between-stretch">
                         <div class="medium-green-title">Question 1</div>
                         <button type="button" class="red-border-button delete-question">

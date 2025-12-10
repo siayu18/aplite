@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let questionCount = document.querySelectorAll('.inner-container .medium-green-title:not(#title)').length;    
+    let questionCount = document.querySelectorAll('.inside-container .medium-green-title:not(#title)').length;    
     // Add Question functionality
     document.querySelector('.green-button').addEventListener('click', function(e) {
         e.preventDefault();
@@ -11,13 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     function addNewQuestion() {
         // Get current count of actual questions (excluding the one with id="title")
-        const currentQuestionCount = document.querySelectorAll('.inner-container .medium-green-title:not(#title)').length;
+        const currentQuestionCount = document.querySelectorAll('.inside-container .medium-green-title:not(#title)').length;
         questionCount = currentQuestionCount + 1;
         
-        const addQuestionButton = document.querySelector('.green-button');
-        
         const newQuestion = document.createElement('div');
-        newQuestion.className = 'inner-container question-container new-question';
+        newQuestion.className = 'inside-container question-container new-question';
         newQuestion.innerHTML = `
             <div class="between-stretch">
                 <div class="medium-green-title">Question ${questionCount}</div>
@@ -98,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function handleQuestionTypeChange(selectElement) {
-        const questionContainer = selectElement.closest('.inner-container');
+        const questionContainer = selectElement.closest('.inside-container');
         const mcqSection = questionContainer.querySelector('.mcq-section');
         const openEndedSection = questionContainer.querySelector('.open-ended-section');
         
@@ -112,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function deleteQuestion(deleteButton) {
-        const questionContainer = deleteButton.closest('.inner-container');        
+        const questionContainer = deleteButton.closest('.inside-container');        
         
         questionContainer.style.opacity = '0';
         questionContainer.style.transform = 'translateX(-100%)';
@@ -125,11 +123,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function renumberQuestions() {
-        const questions = document.querySelectorAll('.inner-container .medium-green-title:not(#title)');
+        const questions = document.querySelectorAll('.inside-container .medium-green-title:not(#title)');
         questions.forEach((title, index) => {
             title.textContent = `Question ${index + 1}`;
             // Also update the radio button names and other question-specific attributes
-            updateQuestionAttributes(title.closest('.inner-container'), index + 1);
+            updateQuestionAttributes(title.closest('.inside-container'), index + 1);
         });
         questionCount = questions.length;
     }

@@ -23,6 +23,7 @@ mysqli_close($con);
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
     <link rel="stylesheet" href="../../styles/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>APLite</title>
 </head>
 <body>
@@ -30,55 +31,56 @@ mysqli_close($con);
         <div class="top-bar">
             <img src="../../image/logo.png" alt="APLite Logo" class="logo" />
             <div class="menu">
-                <a class="menu-text" href="#">Home</a>
-                <a class="menu-text" href="#">Light Control</a>
-                <a class="menu-text" href="#">Quizzes</a>
-                <a class="menu-text" href="#">Articles</a>
-                <a class="menu-text" href="#">Rewards</a>
-                <a class="menu-text" href="#">Report Issue</a>
-                <a class="menu-text" href="#">Announcements</a>
+                <a class="menu-text" href="../dashboard/dashboard.php">Home</a>
+                <a class="menu-text" href="#">Manage Users</a>
+                <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
+                <a class="menu-text" href="#">Manage Rewards</a>
+                <a class="menu-text" href="#">Generate Report</a>
 
                 <a href="#"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
                 <button id="more-button"><img src="../../image/more.png" alt="More" class="menu-img" /></button>
                 <div id="dropdown-menu" class="dropdown-content">
-                    <a href="#">Home</a>
-                    <a href="#">Light Control</a>
-                    <a href="#">Quizzes</a>
-                    <a href="#">Articles</a>
-                    <a href="#">Rewards</a>
-                    <a href="#">Report Issue</a>
-                    <a href="#">Announcements</a>
+                    <a href="../dashboard/dashboard.php">Home</a>
+                    <a href="#">Manage Users</a>
+                    <a href="../announcement/manage_announcement.php">Manage Announcements</a>
+                    <a href="#">Manage Rewards</a>
+                    <a href="#">Generate Report</a>
                 </div>
             </div>
         </div>
         <div class="middle-content">
-            <span class="white-title">Save Light Energy, Earn Points!</span>
-            <span class="yellow-description">Join APU's sustainable energy initiative. Turn off unused lights, take quiz challenges to gain points, be in leaderboard and create a greener campus.</span>
-            <button class="yellow-button">Get Started ></button>
+            <span class="white-title">Welcome Back Admin, Sia Yu!</span>
+            <span class="yellow-description">This is the admin panel and you can below contain the analytical dashboard for you.</span>
+            <div class="card-container">
+                <div class="transparent-card">
+                    <div class="text-group">
+                        <span class="medium-white-title">3000</span>
+                        <span class="white-description">Total Users</span>
+                    </div>
+                </div>
+                 <div class="transparent-card">
+                    <div class="text-group">
+                        <span class="medium-white-title">50%</span>
+                        <span class="white-description">Average Light Brightness</span>
+                    </div>
+                </div>
+                 <div class="transparent-card">
+                    <div class="text-group">
+                        <span class="medium-white-title">100 Watt</span>
+                        <span class="white-description">Total Energy Saved</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="col-12 col-s-12 content-1 fade-in">
         <div class="text-group">
-            <span class="green-title">How APLITE Challenge Works</span>
-            <span class="green-description">Three simple ways to contribute to a sustainable campus, earn points and climb the leaderboard</span>
+            <span class="green-title">Analytical Graph</span>
+            <span class="green-description">View the average light brightness percentage in a bar chart view</span>
         </div>
-        <div class="card-container">
-            <a href=""><div class="card">
-                <img src="../../image/light.png" alt="Light" class="card-img" />
-                <p class="card-title">Adjust Brightness</p>
-                <p class="card-description">Check into a classroom and adjust the brightness to suit your preference while saving energy.</p>
-            </div>
-            <a href=""><div class="card">
-                <img src="../../image/quiz.png" alt="Quiz" class="card-img" />
-                <p class="card-title">Join Quizzes</p>
-                <p class="card-description">Complete quizzes related to sustainability and earn points while saving energy.</p>
-            </div></a>
-            <a href=""><div class="card">
-                <img src="../../image/article.png" alt="article" class="card-img" />
-                <p class="card-title">Read Articles</p>
-                <p class="card-description">Read articles related to sustainability to earn extra points to gain awareness.</p>
-            </div></a>
+        <div class="bar-chart">
+            <canvas id="myChart"></canvas>
         </div>
     </div>
 
@@ -97,5 +99,6 @@ mysqli_close($con);
 
     <script src="../../scripts/dashboard.js"></script>
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/chart.js"></script>
 </body>
 </html>

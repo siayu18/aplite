@@ -52,4 +52,12 @@ function getDataByIDWithJoin($table_name, $target_table_name, $table1_fk, $table
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_assoc($result);;
 }
+
+function getDataBy2ID($table_name, $key1, $key2, $id1, $id2) {
+    global $con;
+
+    $sql = "SELECT * FROM $table_name WHERE $key1 = '$id1' AND $key2 = '$id2' LIMIT 1";
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result);;
+}
 ?>

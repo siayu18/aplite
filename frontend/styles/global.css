@@ -126,8 +126,7 @@ a {
   flex-direction: column;
   justify-content: center;
   min-height: auto;
-  align-items: center;
-  padding: 2rem 1rem;
+  padding: 2rem 0;
   gap: 1.5rem;
   background-image: linear-gradient(
     to bottom,
@@ -201,6 +200,19 @@ a {
   color: var(--dark-green-font);
   font-size: 0.9rem;
   line-height: 1.5rem;
+}
+
+.medium-white-title {
+  color: white;
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  font-weight: bold
+}
+
+.white-description {
+  color: white;
+  font-size: 0.9rem;
+  line-height: 1rem;
 }
 
 .leaderboard-container {
@@ -336,6 +348,7 @@ a {
   flex-direction: row;
   gap: 0.5rem;
   justify-content: flex-end;
+  flex-wrap: wrap;
 }
 
 .field-group {
@@ -363,17 +376,15 @@ a {
 }
 
 .inner-container {
-  min-width: 500px;
-  width: 100%;
   display: flex;
   flex-direction: column;
+  min-width: 40rem;
   gap: 1rem;
   padding: 1.5rem;
   background-color: white;
   border: 0.1rem solid var(--border-green);
   border-radius: 0.8rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
 }
 
 .card-container {
@@ -382,19 +393,7 @@ a {
   flex-wrap: wrap;
   gap: 1.5rem;
   justify-content: center;
-  margin-top: 1.5rem;
-}
-
-.inner-container.new-question {
-  animation: slideIn 0.3s ease;
-}
-
-.card-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
+  align-items: center;
   margin-top: 1.5rem;
 }
 
@@ -426,7 +425,10 @@ a {
 }
 
 .modal {
-    position: fixed; /* This is the key change */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%) scale(0.9);
@@ -446,6 +448,11 @@ a {
     opacity: 1;
     visibility: visible;
     transform: translate(-50%, -50%) scale(1);
+}
+
+.modal-img {
+  height: 8rem;
+  width: auto;
 }
 
 .error-message {
@@ -578,13 +585,14 @@ a {
     cursor: pointer;
   }
 
+  .inner-container {
+    width: 100%;
+    min-width: 0;
+  }
+
   .footer {
     flex-direction: column;
     text-align: center;
     height: 6rem;
-  }
-
-  .inner-container {
-    min-width: 0;
   }
 }
