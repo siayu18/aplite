@@ -46,6 +46,22 @@ button {
     background-color: var(--hover-light-green-font);
 }
 
+.orange-button {
+    color: white;
+    background-color: var(--orange-button);
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 540;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.orange-button:hover {
+    background-color: var(--hover-orange-button);
+}
+
 .big-green-button {
     color: white;
     background-color: var(--light-green-font);

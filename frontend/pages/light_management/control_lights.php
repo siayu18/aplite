@@ -17,11 +17,9 @@
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="control-panel-container">
             <img src="../../image/lightbulb.svg" alt="lightbulb" class="card-img">
-            <div class="header-group">
-                <div class="text-group">
-                    <span class="medium-green-title">Light Control System</span>
-                    <span class="green-description">Select a classroom and check-in to control the lighting</span>
-                </div>
+            <div class="text-group">
+                <span class="medium-green-title">Light Control System</span>
+                <span class="green-description">Select a classroom and check-in to control the lighting</span>
             </div>
 
             <form method="POST" action="control_lights.php" class="content-group">
