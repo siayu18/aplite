@@ -2,6 +2,7 @@
 include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 $announcements = getData("announcement");
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>

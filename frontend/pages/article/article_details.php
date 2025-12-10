@@ -1,3 +1,52 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+
+if (!isset($_GET['id'])) {
+    die('Article ID not specified.');
+}
+
+// Fetch data
+$articleID = $_GET['id'];
+$article = getDataByIDWithJoin('article', 'user', 'staffID', 'userID', 'articleID', $articleID);
+if (!$article) {
+    die('Article not found.');
+}
+
+// Article Claim Points Logic
+$current_user = getDataByID("user", "userID", "3");
+$currentID = $current_user["userID"];
+if (!$current_user) {
+    die("User Not Found");
+}
+
+if (isset($_GET['claim'])) {
+    $user_article = getDataBy2ID("userArticle", "userID", "articleID", $currentID, $articleID);
+
+    if ($user_article) {
+        // Overlay
+        echo "<script>window.claimStatus = 'already';</script>";
+    } else {
+        $user_articleID = uniqid();
+        $current_date = date("Y-m-d");
+
+        // Update userArticle table
+        $sql_insert = "INSERT INTO userArticle (userArticleID, userID, articleID, date) VALUES ('$user_articleID', '$currentID', '$articleID', '$current_date')";
+        mysqli_query($con, $sql_insert);
+
+        // Update user points
+        $points = $article['pointsAwarded'];
+        $sql_update = "UPDATE user SET points = points + $points WHERE userID='$currentID'";
+        mysqli_query($con, $sql_update);
+
+        // Overlay
+        echo "<script>window.claimStatus='success';</script>";
+    }
+}
+
+mysqli_close($con);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,10 +62,10 @@
 </head>
 <body>
     <?php include '../../component/stu_header.php'; ?>
-    <div class=" col-12 col-s-12 content fade-in">
+    <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">
-                <a href="">
+                <a href="choose_article.php">
                     <div class="interactive-icon-text">
                         <img src="../../image/back.svg" alt="Back" class="icon-img" />
                         <span class="icon-text">Back to Articles</span>
@@ -24,35 +73,43 @@
                 </a>
             </div>
             <div class="article-container">
-                <img src="../../image/test_image.png" alt="Article Image" class="article-img" />
+                <img src="data:image/jpeg;base64,<?= base64_encode($article['image']) ?>" alt="Article Image" class="article-img" />
                 <div class="article-details">
-                    <div class="medium-green-title">The Impact of LED Lighting on Campus Energy Consumption</div>
+                    <div class="medium-green-title"><?= htmlspecialchars($article['title']) ?></div>
                     <div class="metadata">
-                        <div class="green-description">By Dr. Sarah Green | Published on 2025-01-05</div>
+                        <div class="green-description">By <?= htmlspecialchars($article['name']) ?> | Published on <?= htmlspecialchars($article['date']) ?></div>
                         <div class="points-container">
                             <img src="../../image/badge.png" alt="Points Badge" class="" />
-                            <span class="points-text">30 pts</span>
+                            <span class="points-text"><?= htmlspecialchars($article['pointsAwarded']) ?> pts</span>
                         </div>
                     </div>
-                    <p class="article-content">
-                        Efficient energy management has become a major priority for educational institutions as they work toward reducing operating costs and promoting environmental sustainability. One of the most effective strategies campuses have adopted is the transition from traditional lighting systems—such as fluorescent and incandescent bulbs—to Light Emitting Diode (LED) technology. The shift to LED lighting has significantly influenced energy consumption patterns across universities, colleges, and schools.
-                        LED lighting is widely known for its superior energy efficiency. Compared to conventional lighting, LEDs consume up to 50–80% less electricity, depending on the fixture and application. This reduction is especially impactful on large campuses where lighting accounts for a major share of energy use, including classrooms, lecture halls, laboratories, hallways, sports facilities, and outdoor spaces.
-                        LED bulbs have a significantly longer lifespan, often lasting 25,000–50,000 hours compared to the 1,000–10,000 hours offered by incandescent or fluorescent lights. This longevity means fewer replacements, reducing both maintenance labor and material costs. For campuses with extensive lighting networks, the savings are substantial.
-                    </p>
+                    <p class="article-content"><?= htmlspecialchars($article['content']) ?></p>
                     <div class="claim-container">
-                        <img src="../../image/big_badge.svg" alt="Points Badge" class="" />
+                        <img src="../../image/big_badge.svg" alt="Points Badge" />
                         <div class="text-group">
                             <span class="medium-green-title">Great job reading this article!</span>
-                            <span class="green-description">Claim your 30 points for expanding your sustainability knowledge.</span>
+                            <span class="green-description">Claim your <?= htmlspecialchars($article['pointsAwarded']) ?> points for expanding your sustainability knowledge.</span>
                         </div>
-                        <button class="green-button">Claim 30 Points</button>
+                        <a href="article_details.php?id=<?= $articleID ?>&claim=true" class="green-button" name="claim">Claim <?= htmlspecialchars($article['pointsAwarded']) ?> Points</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="overlay"></div>
+    <div class="modal">
+        <img src="" alt="Error" class="modal-img">
+        <div class="text-group">
+            <span class="medium-green-title">Error: Try Again</span>
+            <span class="green-description"> Oops, Error has Occured!</span>
+        </div>
+        <a href="article_details.php?id=<?= $articleID ?>" class="green-button">Back</a>
+    </div>
+
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

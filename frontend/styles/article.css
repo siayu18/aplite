@@ -1,13 +1,3 @@
-.card-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: center;
-  margin-top: 1.5rem;
-}
-
 .card {
   display: flex;
   flex-direction: column;
@@ -16,13 +6,7 @@
   border: 0.1rem solid var(--border-green);
   border-radius: 0.8rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  max-width: 350px;
-}
-
-.card:hover {
-  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
-  transform: translateY(-0.5rem);
+  width: 350px;
 }
 
 .card-title {
@@ -54,18 +38,20 @@
 .main-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     gap: 1rem;
-    padding: 2rem 1rem;
+    padding: 2rem 0;
+    width: 100%;
+    max-width: 700px;
     margin: 0 auto;
 }
 
 .article-container {
-    max-width: 600px;
-    width: 100%;
     display: flex;
     flex-direction: column;
+    flex-shrink: 1;
     gap: 1.5rem;
+    max-width: 45rem;
+    width: 100%;
     background-color: white;
     border: 0.1rem solid var(--border-green);
     border-radius: 0.8rem;
@@ -75,7 +61,6 @@
 .article-img {
     width: 100%;
     max-width: 100%;
-    height: 20rem;
     border-radius: 0.6rem 0.6rem 0 0;
 }
 
@@ -84,6 +69,7 @@
     font-size: 1rem;
     line-height: 1.5rem;
     text-align: justify;
+    word-wrap: break-word;
     padding: 0 0 2rem 0;
     border-bottom: 0.1rem solid var(--border-green);
 }
@@ -116,20 +102,16 @@
     border-radius: 0.8rem;
 }
 
-@media only screen and (max-width: 767px) {
-    .card-container {
-        flex-direction: column;
-    }
-
+@media only screen and (max-width: 768px) {
     .content {
         padding: 2rem 0;
     }
 
-    .main-container {
-        padding: 0.5rem;
-    }
-
     .article-container {
         max-width: 100%;
+    }
+
+    .card {
+        width: 300px;
     }
 }

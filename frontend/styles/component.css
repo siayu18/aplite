@@ -38,11 +38,28 @@ button {
     border-radius: 0.5rem;
     font-size: 0.9rem;
     font-weight: 540;
+    text-align: center;
     transition: background-color 0.3s ease;
 }
 
 .green-button:hover {
     background-color: var(--hover-light-green-font);
+}
+
+.orange-button {
+    color: white;
+    background-color: var(--orange-button);
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    font-weight: 540;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.orange-button:hover {
+    background-color: var(--hover-orange-button);
 }
 
 .big-green-button {
@@ -70,6 +87,7 @@ button {
     border-radius: 0.5rem;
     font-size: 0.9rem;
     font-weight: 540;
+    text-align: center;
     transition: background-color 0.3s ease;
 }
 
@@ -158,6 +176,7 @@ button {
     border-radius: 0.5rem;
     font-family: Roboto, "san-serif";
     transition: ouline-color 0.3s ease;
+    text-align: justify;
 }
 
 .white-area:hover {
@@ -186,6 +205,11 @@ input[type="text"]:hover, input[type="password"]:hover {
 
 input[type="text"]:focus, input[type="password"]:focus {
     outline-color: var(--dark-green);
+}
+
+.near-button-row input[type="text"] {
+    flex: 1;
+    width: 100%;
 }
 
 input[type="file"]::file-selector-button {

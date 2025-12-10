@@ -2,10 +2,14 @@
 include('../../../backend/conn.php');
 include('../../../backend/fetch_data.php');
 
-$id = intval($_GET['edit']);
+if (!isset($_GET['edit'])) {
+    die('Announcement ID not specified.');
+}
+
+$announcementID = mysqli_real_escape_string($con, $_GET['edit']);
 
 // Fetch data
-$announcement = getDataByID('announcement', 'announcementID', $id);
+$announcement = getDataByID('announcement', 'announcementID', $announcementID);
 if (!$announcement) {
     die('Announcement not found.');
 }
@@ -15,15 +19,11 @@ if (isset($_POST['submitBtn'])) {
     $title = mysqli_real_escape_string($con, $_POST['title']);
     $content = mysqli_real_escape_string($con, $_POST['content']);
 
-    $sql = "UPDATE announcement SET title='$title', content='$content' WHERE announcementID='$id'";
+    $sql = "UPDATE announcement SET title='$title', content='$content' WHERE announcementID='$announcementID'";
     if (!mysqli_query($con, $sql)) {
         die('Error: ' . mysqli_error($con));
     } else {
-        echo '<script>
-                alert("Announcement Updated!");
-                window.location.href = "manage_announcement.php";
-              </script>';
-        exit();
+        echo "<script>window.success = true;</script>";
     }
 }
 
@@ -57,7 +57,7 @@ mysqli_close($con);
                     </div>
                 </a>
             </div>
-            <form method="POST" action="edit_announcement.php?edit=<?= $id ?>" class="inner-container">
+            <form method="POST" action="edit_announcement.php?edit=<?= $announcementID ?>" class="inner-container">
                 <div class="medium-green-title">Edit Announcement</div>
 
                 <div class="label-field">
@@ -77,8 +77,20 @@ mysqli_close($con);
             </form>
         </div>
     </div>
+
+    <div class="overlay"></div>
+    <div class="modal">
+        <img src="../../image/verify.svg" alt="Verify" class="modal-img">
+        <div class="text-group">
+            <span class="medium-green-title">Successfully Edited!</span>
+            <span class="green-description">You have successfully edited the announcement</span>
+        </div>
+        <a href="manage_announcement.php" class="green-button">Back</a>
+    </div>
+
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const currentQuestionCount = document.querySelectorAll('.inner-container .medium-green-title:not(#title)').length;
         questionCount = currentQuestionCount + 1;
         
-        const addQuestionButton = document.querySelector('.green-button');
-        
         const newQuestion = document.createElement('div');
         newQuestion.className = 'inner-container question-container new-question';
         newQuestion.innerHTML = `
