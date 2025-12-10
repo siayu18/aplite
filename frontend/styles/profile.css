@@ -1,8 +1,8 @@
 :root {
     --padding-medium: 3rem 2rem;
-    /* --border-style: 2px solid grey; */
     --border-style: 1px solid var(--darkest-green);
     --border-radius-style: 2rem;
+    --padding-small: 0.75rem 1rem;
 }
 *,
 *::before,
@@ -30,11 +30,23 @@
     }
 }
 
-.icon-text-me {
+.icon-text {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
+}
+
+.icon-text-2 span {
+    font-size: 1rem;
+    color: black;
+
+}
+
+.icon-text-3 span {
+    font-size: 1rem;
+    color: white;
+
 }
 
 .main-contents {
@@ -207,4 +219,147 @@ input[type="text"]:focus, input[type="password"]:focus {
 
 .results {
     font-weight: 600;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    border-spacing: 0;
+}
+
+th, td {
+    border-right: none;
+}
+
+td {
+    padding: var(--padding-small);
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 1.2rem;
+}
+
+th {
+    text-align: left;
+    padding: var(--padding-small);
+    border-bottom: 2px solid #ccc ;
+    background: var(--dark-green);
+    color: var(--transparent-green);
+}
+
+tr:nth-child(even) {
+    background-color: var(--lightest-green);
+}
+
+tr:nth-child(odd) {
+    background: var(--transparent-green);
+}
+
+.icon-buttons {
+    width: 1.2rem;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.add-icon {
+    width: 1.5rem;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+.icon-name {
+    width: 2.5rem;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 2px solid var(--dark-green);
+}
+
+.icon-text-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.icon-text-3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.icon-text-2-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.border-button {
+  background-color: white;
+  outline: 0.1rem solid var(--border-green);
+  outline-offset: -0.1rem;
+  color: var(--dark-green-font);
+  border: none;
+  padding: 0.3rem 0.4rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 540;
+  transition: background-color 0.3s ease;
+}
+
+.border-button:hover {
+    background-color: var(--light-grey);
+}
+
+/* Left part */
+.search-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex: 0 1 1;
+    flex-wrap: wrap;
+    /* flex: 1; */
+}
+
+/* Right part */
+.add-user {
+    display: flex;
+    flex-direction: row;
+    flex: 0 1 1;
+    /* flex: 1; */
+}
+
+.add-user button {
+    padding: var(--padding-small) ;
+    font-size: 1rem;
+    flex: 0;
+    /* width: clamp(5rem, 15vw, 15rem); */
+}
+
+.top-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.search-bar input[type="text"] {
+    padding: 0.5rem 2rem;
+    border-radius: 0.75rem;
+    flex: 2;
+}
+
+.search-bar select {
+    padding: 0.5rem 2rem;
+    border-radius: 0.75rem;
+    flex: 1;
 }

@@ -72,7 +72,7 @@
                     <span class="results">454 pts</span>
                </div>
                 <button class="red-border-button">
-                    <div class="icon-text-me">
+                    <div class="icon-text">
                         <img src="../../image/sign-out.svg" alt="sign-out">
                         <span>Sign Out</span>
                     </div>
