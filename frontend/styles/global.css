@@ -125,6 +125,7 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   min-height: auto;
   padding: 2rem 1rem;
   gap: 1.5rem;
@@ -378,13 +379,17 @@ a {
 .inner-container {
   display: flex;
   flex-direction: column;
-  min-width: 40rem;
   gap: 1rem;
   padding: 1.5rem;
   background-color: white;
   border: 0.1rem solid var(--border-green);
   border-radius: 0.8rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.inner-container.new-question {
+  animation: slideIn 0.3s ease;
 }
 
 .card-container {
@@ -585,9 +590,8 @@ a {
     cursor: pointer;
   }
 
-  .inner-container {
-    width: 100%;
-    min-width: 0;
+  .field-group {
+    flex-direction: column;
   }
 
   .footer {

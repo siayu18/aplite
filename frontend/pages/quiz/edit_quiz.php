@@ -24,7 +24,7 @@
                     </div>
                 </a>
             </div>
-            <form method="POST" action="edit_quiz.php" class="inside-container">
+            <form method="POST" action="edit_quiz.php" class="inner-container">
                 <div class="medium-green-title" id="title">Edit Quiz</div>
 
                 <div class="label-field">
@@ -47,7 +47,7 @@
                     <button type="button" class="green-button" id="add-question-btn">+ Add Question</button>
                 </div>
 
-                <div class="inside-container question-container">
+                <div class="inner-container question-container">
                     <div class="between-stretch">
                         <div class="medium-green-title">Question 1</div>
                         <button type="button" class="red-border-button delete-question">
