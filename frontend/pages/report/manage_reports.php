@@ -9,26 +9,17 @@
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
     <link rel="stylesheet" href="../../styles/report.css">
-    <title>Reports</title>
+    <title>Manage Reports</title>
 </head>
 
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/admin_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="reports-page-container">
-            <div class="header-section">
                 <div class="header-text">
                     <span class="dark-green-description">Broken Light Reports</span>
-                    <span class="green-description">Report any malfunctioning lights<span>
+                    <span class="green-description">Track and manage reports of malfunctioning lights<span>
                 </div>
-
-                <div class="report-icon">
-                    <button type="submit" class="orange-button" name="submitBtn">
-                        <img src="../../image/add_icon.svg" alt="add" class="button-img">
-                        <span>Report Issue</span>
-                    </button>
-                </div>
-            </div>
 
             <div class="report-count">
                 <div class="report-count-card" style="background-color: var(--transparent-green); border: 0.1rem solid var(--border-green);">
