@@ -28,7 +28,7 @@
                 <div class="slider-container">
                     <label class="green-description">Current Brightness Level</label>
                     
-                    <span id="brightnessValue">70%</span>
+                    <span class="dark-green-description">70%</span>
                     
                     <input type="range" 
                         min="0" max="100" 

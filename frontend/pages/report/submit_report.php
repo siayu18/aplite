@@ -39,8 +39,7 @@
 
                 <div class="label-field">
                     <label class="green-description">Select Room</label>
-                    <select class="dropdown-classroom-choice" placeholder="Choose the room with broken lights..." 
-                    name="classroom" required></select>
+                    <select class="dropdown-classroom-choice" name="classroom" required></select>
                 </div>
 
                 <div class="label-field">
