@@ -68,27 +68,7 @@
                         <input type="text" placeholder="Enter Text..." name="questionText1"/>
                     </div>
 
-                    <div class="label-field mcq-section">
-                        <label class="green-description">Choices</label>
-                        <div class="near-button-column">
-                            <div class="near-button-row">
-                                <input type="radio" name="question1" value="choice1">
-                                <input type="text" placeholder="Enter Choice..." name="choice1_1" />
-                            </div>
-                            <div class="near-button-row">
-                                <input type="radio" name="question1" value="choice2">
-                                <input type="text" placeholder="Enter Choice..." name="choice2_1"/>
-                            </div>
-                            <div class="near-button-row">
-                                <input type="radio" name="question1" value="choice3">
-                                <input type="text" placeholder="Enter Choice..." name="choice3_1"/>
-                            </div>
-                            <div class="near-button-row">
-                                <input type="radio" name="question1" value="choice4">
-                                <input type="text" placeholder="Enter Choice..." name="choice4_1"/>
-                            </div>
-                        </div>
-                    </div>
+                    inter
 
                     <div class="label-field open-ended-section" style="display: none;">
                         <label class="green-description">Correct Answer</label>
