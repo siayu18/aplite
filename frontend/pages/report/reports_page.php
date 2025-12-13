@@ -82,7 +82,7 @@
 
             <div class="report-content">
                 <div class="report-content-card">
-                    <img src="../../image/flickering_light.webp" alt="lights-img" class="">
+                    <img src="../../image/flickering_light.webp" alt="lights-img">
                     <div class="report-text-group">
                         <div class="title-and-icon">
                             <span class="dark-green-description">Flickering light causing distraction</span>
