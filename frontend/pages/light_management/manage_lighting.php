@@ -1,3 +1,11 @@
+<?php
+
+if (isset($_POST['checkoutBtn'])) {
+    echo "<script>window.success = true;</script>";
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -66,15 +74,67 @@
                         Adjust to a comfortable level that's not too bright.
                     </span>
                 </div>
-                <button class="orange-button">
+                <button class="orange-button" type="submit" name="checkoutBtn">
                     <img src="../../image/check_out_icon.svg" alt="checkout" class="button-img">
                     <span>Check out Classroom<span>
                 </button>
             </form>
         </div>
     </div>
+
+    <div class="overlay"></div>
+    <div class="modal">
+        <img src="../../image/lightbulb.svg" alt="lightbulb" class="card-img">
+        <div class="text-group">
+            <span class="medium-green-title">Classroom A101</span>
+            <span class="green-description">
+                <img src="../../image/clock_icon.svg" alt="clock" class="clock-img">
+                Checked in at 9:45:24 PM
+            </span>
+        </div>
+        <div class="modal-body">
+            <div class="class-details">
+                <span class="dark-green-description" style="text-align: center;">Classroom A101</span>
+                <div class="green-description-between">
+                    <span>Check-in Time:</span>
+                    <span>9:45:24 AM</span>
+                </div>
+                <div class="green-description-between">
+                    <span>Check-out Time:</span>
+                    <span>9:45:39 AM</span>
+                </div>
+                <div class="thin-line"></div>
+                <div class="dark-green-description-between">
+                    <span>Duration:</span>
+                    <span>0m</span>
+                </div>
+            </div>
+
+            <div class="light-level-box">
+                <img src="../../image/light_icon_nobg.svg" alt="lightbulb" class="card2-img">
+                <span class="green-description">Average Brightness Level: 70%</span>
+                <div class="progress-container">
+                    <div class="progress-fill" style="width: 70%;"></div>
+                </div>
+                <span class="green-description">Energy Saved: 30%</span>
+            </div>
+
+            <div class="points-earn-box">
+                <img src="../../image/reward_badge.svg" alt="points" class="card2-img">
+                <span class="dark-green-description">Points Earned:</span>
+                <span class="dark-green-description">+15 points</span>
+            </div>
+
+            <div class="class-details">
+                <span class="green-description-bold" style="text-align: justify">Good effort! Try lowering brightness next time for more points!</span>
+            </div>
+        </div>
+
+        <a href="control_lights.php" class="green-button">Done</a>
+    </div>
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

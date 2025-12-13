@@ -3,12 +3,14 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.success) {
         document.querySelector(".overlay").classList.add("active");
         document.querySelector(".modal").classList.add("active");
+        document.body.classList.add("modal-open");
     }
 
     // Special Type: Article Claim Points Overlay
     if (window.claimStatus === 'success') {
         document.querySelector(".overlay").classList.add("active");
         document.querySelector(".modal").classList.add("active");
+        document.body.classList.add("modal-open");
         document.querySelector(".modal .modal-img").src = "../../image/verify.svg"
         document.querySelector(".modal .modal-img").alt = "Verify"
         document.querySelector(".modal .medium-green-title").innerText = "Points Claimed!";
@@ -17,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (window.claimStatus === 'already') {
         document.querySelector(".overlay").classList.add("active");
         document.querySelector(".modal").classList.add("active");
+        document.body.classList.add("modal-open");
         document.querySelector(".modal .modal-img").src = "../../image/wrong.svg"
         document.querySelector(".modal .modal-img").alt = "Failed"
         document.querySelector(".modal .medium-green-title").innerText = "Already Claimed!";

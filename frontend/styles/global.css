@@ -455,7 +455,24 @@ a {
     visibility: hidden;
     transition: all 0.3s ease;
     max-width: 500px;
+    max-height: 90vh;
     width: 90%;
+    overflow: hidden;
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;   /* critical for scrolling */
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+
+body.modal-open {
+    overflow: hidden;
 }
 
 .modal.active {
