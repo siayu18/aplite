@@ -17,6 +17,11 @@
     width: auto;
 }
 
+.card2-img {
+    height: 3.5rem;
+    width: auto;
+}
+
 .small-img{
     height: 1.5rem;
     width: auto;
@@ -103,6 +108,47 @@
     flex-direction: column;
     gap: 0.5rem;
     align-items: center;
+}
+
+.light-level-box{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: white;
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--border-green);
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.points-earn-box{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    background-color: var(--pending-orange-background);
+    padding: 1.2rem;
+    border-radius: 0.5rem;
+    border: 0.1rem solid var(--pending-orange-border);
+    flex-wrap: wrap;
+    text-align: center;
+    justify-content: center;
+}
+
+.progress-container {
+    background-color: #e6e8eb;
+    border-radius: 20px;
+    height: 13px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background-color: #5f9e52;
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.3s ease; 
 }
 
 @media only screen and (max-width: 768px) {
