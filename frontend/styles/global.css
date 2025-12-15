@@ -466,7 +466,7 @@ a {
     gap: 1.5rem;
     flex: 1;
     overflow-y: auto;
-    min-height: 0;   /* critical for scrolling */
+    min-height: 0;
     scrollbar-width: thin;
     scroll-behavior: smooth;
 }

@@ -93,5 +93,6 @@ mysqli_close($con);
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>
