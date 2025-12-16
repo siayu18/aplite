@@ -60,36 +60,14 @@ function getDataBy2ID($table_name, $key1, $key2, $id1, $id2) {
     return mysqli_fetch_assoc($result);;
 }
 
-function getReportsForStudent($studentID, $roomFilter = 'all', $statusFilter = 'all') {
+function getReportsForStudent($studentID) {
     global $con;
 
-    $conditions = [];
-    $conditions[] = "r.studentID = '$studentID'";
-
-    // STATUS FILTER
-    if ($statusFilter !== 'all') {
-        $conditions[] = "r.status = '$statusFilter'";
-    }
-
-    // ROOM FILTER
-    if ($roomFilter === 'classroom') {
-        // A–E + 01–09 + 01–20 (example: B0605)
-        $conditions[] = "cr.roomName REGEXP '^[A-E][0-9]{4}$'";
-    } 
-    elseif ($roomFilter === 'lecture') {
-        // Audi1–9 @ Level1–7
-        $conditions[] = "cr.roomName REGEXP '^Audi[1-9] @ Level[1-7]$'";
-    }
-
-    $whereSQL = implode(" AND ", $conditions);
-
-    $sql = "
-        SELECT r.*, u.name, cr.roomName
-        FROM brokenreport r
-        INNER JOIN user u ON r.studentID = u.userID
-        INNER JOIN room cr ON r.roomID = cr.roomID
-        WHERE $whereSQL
-    ";
+    $sql = "SELECT r.*, u.name, cr.roomName
+            FROM brokenreport r
+            INNER JOIN user u ON r.studentID = u.userID
+            INNER JOIN room cr ON r.roomID = cr.roomID
+            WHERE r.studentID = '$studentID'";
 
     $result = mysqli_query($con, $sql);
 

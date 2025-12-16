@@ -29,17 +29,17 @@
 
                 <div class="label-field">
                     <label class="green-description">Title</label>
-                    <input type="text" placeholder="Enter title..." />
+                    <input type="text" placeholder="Enter title..." required/>
                 </div>
 
                 <div class="field-group">
                     <div class="label-field">
                         <label class="green-description">Points Awarded</label>
-                        <input type="text" placeholder="Enter Points..." />
+                        <input type="text" placeholder="Enter Points..." required/>
                     </div>
                     <div class="label-field">
                         <label class="green-description">Correct For Points</label>
-                        <input type="text" placeholder="Enter Points..." />
+                        <input type="text" placeholder="Enter Points..." required/>
                     </div>
                 </div>
 
@@ -65,7 +65,7 @@
 
                     <div class="label-field">
                         <label class="green-description">Question Text</label>
-                        <input type="text" placeholder="Enter Text..." name="questionText1"/>
+                        <input type="text" placeholder="Enter Text..." name="questionText1" required/>
                     </div>
 
                     <div class="label-field mcq-section">

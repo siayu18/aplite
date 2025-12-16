@@ -4,10 +4,8 @@ include ('../../../backend/fetch_data.php');
 
 // TEMP: replace with $_SESSION later
 $studentID = 3;
-$roomFilter = $_GET['room'] ?? 'all';
-$statusFilter = $_GET['status'] ?? 'all';
 
-$reports = getReportsForStudent($studentID, $roomFilter, $statusFilter);
+$reports = getReportsForStudent($studentID);
 
 $totalCount = 0;
 $approvedCount = 0;
@@ -96,26 +94,26 @@ mysqli_close($con);
                 </div>
             </div>
 
-            <form method="GET" class="filterbar">
+            <div class="filterbar">
                 <div class="label-field">
                     <label class="green-description">Filter By Room</label>
                     <select class="dropdown-classroom-choice" name="room" onchange="this.form.submit()">
-                        <option value="all" <?= $roomFilter === 'all' ? 'selected' : '' ?>>All Rooms</option>
-                        <option value="classroom" <?= $roomFilter === 'classroom' ? 'selected' : '' ?>>Classrooms</option>
-                        <option value="lecture" <?= $roomFilter === 'lecture' ? 'selected' : '' ?>>Lecture Halls</option>
+                        <option value="all">All Rooms</option>
+                        <option value="classroom">Classrooms</option>
+                        <option value="lecture">Lecture Halls</option>
                     </select>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Fitler By Status</label>
                     <select class="dropdown-classroom-choice" name="status" onchange="this.form.submit()">
-                        <option value="all" <?= $statusFilter === 'all' ? 'selected' : '' ?>>All Status</option>
-                        <option value="approved" <?= $statusFilter === 'approved' ? 'selected' : '' ?>>Approved</option>
-                        <option value="pending" <?= $statusFilter === 'pending' ? 'selected' : '' ?>>Pending</option>
-                        <option value="rejected" <?= $statusFilter === 'rejected' ? 'selected' : '' ?>>Rejected</option>
+                        <option value="all">All Status</option>
+                        <option value="approved">Approved</option>
+                        <option value="pending">Pending</option>
+                        <option value="rejected">Rejected</option>
                     </select>
                 </div>
-            </form>
+            </div>
 
             <div class="report-content">
                 <?php if (empty($reports)): ?>
@@ -125,10 +123,9 @@ mysqli_close($con);
                     </div>
                 <?php else: ?>
                     <?php foreach ($reports as $report): ?>
-                        <div class="report-content-card">
+                        <div class="report-content-card" data-room="<?= $report['roomName'] ?>" data-status="<?= $report['status'] ?>">
                             <img src="data:image/jpeg;base64,<?= base64_encode($report['evidence']) ?>" class="report-img" />
                             <div class="report-text-group">
-
                                 <div class="title-and-icon">
                                     <span class="dark-green-description">
                                         <?= htmlspecialchars($report['title']) ?>
@@ -182,5 +179,6 @@ mysqli_close($con);
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/report_filter.js"></script>
 </body>
 </html>
