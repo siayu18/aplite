@@ -31,12 +31,26 @@ function getDataWithJoin($table_name, $target_table_name, $table1_fk, $table2_pk
 }
 
 // Fetch specific data from table
-function getDataByID($table_name, $table_pk, $id) {
+function getDataByID($table_name, $key, $id) {
     global $con;
 
-    $sql = "SELECT * FROM $table_name WHERE $table_pk = '$id' LIMIT 1";
+    $sql = "SELECT * FROM $table_name WHERE $key = '$id' LIMIT 1";
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_assoc($result);;
+}
+
+function getAllByID($table, $key, $id) {
+    global $con;
+
+    $sql = "SELECT * FROM $table WHERE $key = '$id'";
+    $result = mysqli_query($con, $sql);
+
+    $data = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+
+    return $data;
 }
 
 // Fetch specific data from table with Join

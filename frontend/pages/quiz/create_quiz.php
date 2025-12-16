@@ -3,7 +3,6 @@ include ('../../../backend/conn.php');
 $message = "";
 
 if(isset($_POST["submitBtn"])){
-    echo "<p>hi</p>";
     $quizID = uniqid();
     $title = $_POST["title"];
     $pointsAwarded = $_POST["pointsAwarded"];
