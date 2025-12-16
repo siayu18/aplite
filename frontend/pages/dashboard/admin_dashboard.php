@@ -69,14 +69,7 @@ mysqli_close($con);
     </div>
 
     <div class="col-12 col-s-12 content-2 fade-in">
-        <span class="green-title">Leaderboard</span>
-        <div class="leaderboard-container">
-            <?php $rank = 1;
-            foreach ($users as $user):?>
-                <p>#<?= $rank ?> <?= htmlspecialchars($user['name']) ?> - <?= htmlspecialchars($user['points']) ?> Points</p>
-            <?php $rank++;
-            endforeach; ?>
-        </div>
+        <?php include '../../component/leaderboard.php'; ?>
     </div>
 
     <?php include '../../component/footer.php'; ?>
