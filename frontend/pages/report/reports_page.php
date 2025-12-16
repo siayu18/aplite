@@ -179,6 +179,6 @@ mysqli_close($con);
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
-    <script src="../../scripts/report_filter.js"></script>
+    <script src="../../scripts/report.js"></script>
 </body>
 </html>
