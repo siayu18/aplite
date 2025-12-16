@@ -1,3 +1,21 @@
+<?php
+include("../../../backend/conn.php");
+
+$sql = "SELECT q.quizID, q.title, q.pointsAwarded, q.correctForPoints, COUNT(que.questionID) AS questionCount
+        FROM Quiz AS q
+        LEFT JOIN Question AS que ON q.quizID = que.quizID
+        GROUP BY q.quizID, q.title, q.pointsAwarded, q.correctForPoints
+        ORDER BY q.title ASC";
+$result = mysqli_query($con, $sql);
+
+$quizzes = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $quizzes[] = $row;
+}
+
+mysqli_close($con);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,65 +38,34 @@
         </div>
 
         <div class="card-container">
-            <div class="card">
-                <div class="quiz-points">
-                    <img src="../../image/article.png" alt="Quiz" />
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
+            <?php if (empty($quizzes)): ?>
+                <div class="mid-text-group">
+                    <span class="medium-green-title">No quizzes available!</span>
+                    <span class="green-description">Sorry, but currently there is no quiz available!</span>
+                </div>
+            <?php else: ?>
+                <?php foreach ($quizzes as $quiz): ?>
+                    <div class="card">
+                        <div class="quiz-points">
+                            <img src="../../image/article.png" alt="Quiz" />
+                            <div class="points-container">
+                                <img src="../../image/badge.png" alt="Points Badge"/>
+                                <span class="points-text"><?= htmlspecialchars($quiz['pointsAwarded']) ?> pts</span>
+                            </div>
+                        </div>
+                        <div class="medium-green-title"><?= htmlspecialchars($quiz['title']) ?></div>
+                        <div class="icon-text">
+                            <img src="../../image/green_book.svg" alt="Book" />
+                            <span><?= htmlspecialchars($quiz['questionCount']) ?> Questions</span>
+                        </div>
+                        <div class="icon-text">
+                            <img src="../../image/green_badge.svg" alt="Badge" />
+                            <span>Need <?= htmlspecialchars($quiz['correctForPoints']) ?> Corrects For Points</span>
+                        </div>
+                        <button class="green-button">Start Quiz ></button>
                     </div>
-                </div>
-                <div class="medium-green-title">Energy Conservation Basics</div>
-                <div class="icon-text">
-                    <img src="../../image/green_book.svg" alt="Book" />
-                    <span>5 Questions</span>
-                </div>
-                <div class="icon-text">
-                    <img src="../../image/green_badge.svg" alt="Badge" />
-                    <span>Need 3 Corrects For Points</span>
-                </div>
-                <button class="green-button">Start Quiz ></button>
-            </div>
-
-            <div class="card">
-                <div class="quiz-points">
-                    <img src="../../image/article.png" alt="Quiz" />
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
-                    </div>
-                </div>
-                <div class="medium-green-title">Energy Conservation Basics</div>
-                <div class="icon-text">
-                    <img src="../../image/green_book.svg" alt="Book" />
-                    <span>5 Questions</span>
-                </div>
-                <div class="icon-text">
-                    <img src="../../image/green_badge.svg" alt="Badge" />
-                    <span>Need 3 Corrects For Points</span>
-                </div>
-                <button class="green-button">Start Quiz ></button>
-            </div>
-
-            <div class="card">
-                <div class="quiz-points">
-                    <img src="../../image/article.png" alt="Quiz" />
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
-                    </div>
-                </div>
-                <div class="medium-green-title">Energy Conservation Basics</div>
-                <div class="icon-text">
-                    <img src="../../image/green_book.svg" alt="Book" />
-                    <span>5 Questions</span>
-                </div>
-                <div class="icon-text">
-                    <img src="../../image/green_badge.svg" alt="Badge" />
-                    <span>Need 3 Corrects For Points</span>
-                </div>
-                <button class="green-button">Start Quiz ></button>
-            </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>
