@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!/^[A-E]-0[0-9]-0[0-9]$/.test(cardRoom)) show = false;
                 } else if (roomValue === 'lecture') {
                     // Check if roomName matches lecture pattern (Audi)
-                    if (!/^Audi[1-9] @ Level[1-7]$/.test(cardRoom)) show = false;
+                    if (!/^Audi [1-9] @ Level [1-7]$/.test(cardRoom)) show = false;
                 }
             }
 
