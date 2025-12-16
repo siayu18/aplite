@@ -1,13 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
-    let questionCount = document.querySelectorAll('.inner-container .medium-green-title:not(#title)').length;    
-    // Add Question functionality
-    document.querySelector('.green-button').addEventListener('click', function(e) {
-        e.preventDefault();
-        addNewQuestion();
-    });
+    let questionCount = document.querySelectorAll('.inner-container .medium-green-title:not(#title)').length;
     
-    // Initialize event listeners for existing questions
-    initializeQuestionListeners();
+    // Add Question functionality
+    const addQuestionBtn = document.getElementById('add-question-btn');
+    if (addQuestionBtn) {
+        addQuestionBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            addNewQuestion();
+        });
+    }
     
     function addNewQuestion() {
         // Get current count of actual questions (excluding the one with id="title")
@@ -66,7 +67,8 @@ document.addEventListener('DOMContentLoaded', function() {
         `;
         
         // Insert the new question at the END of all questions (before the final button group)
-        const finalButtonGroup = document.querySelector('.right-button-group:last-of-type');
+        const allButtonGroups = document.querySelectorAll('.right-button-group');
+        const finalButtonGroup = allButtonGroups[allButtonGroups.length - 1];
         finalButtonGroup.parentNode.insertBefore(newQuestion, finalButtonGroup);
         
         // Initialize event listeners for the new question
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function handleQuestionTypeChange(selectElement) {
-        const questionContainer = selectElement.closest('.inner-container');
+        const questionContainer = selectElement.closest('.question-container');
         const mcqSection = questionContainer.querySelector('.mcq-section');
         const openEndedSection = questionContainer.querySelector('.open-ended-section');
         
@@ -110,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function deleteQuestion(deleteButton) {
-        const questionContainer = deleteButton.closest('.inner-container');        
+        const questionContainer = deleteButton.closest('.question-container');        
         
         questionContainer.style.opacity = '0';
         questionContainer.style.transform = 'translateX(-100%)';
@@ -127,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         questions.forEach((title, index) => {
             title.textContent = `Question ${index + 1}`;
             // Also update the radio button names and other question-specific attributes
-            updateQuestionAttributes(title.closest('.inner-container'), index + 1);
+            updateQuestionAttributes(title.closest('.question-container'), index + 1);
         });
         questionCount = questions.length;
     }
@@ -163,4 +165,6 @@ document.addEventListener('DOMContentLoaded', function() {
             correctAnswer.name = `correctAnswer${newNumber}`;
         }
     }
+
+    initializeQuestionListeners();
 });

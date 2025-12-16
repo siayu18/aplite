@@ -1,3 +1,35 @@
+<?php
+include ('../../../backend/conn.php');
+
+// Handle Delete
+if (isset($_GET['delete'])) {
+    $id = mysqli_real_escape_string($con, $_GET['delete']);
+
+    $sql = "DELETE FROM quiz WHERE quizID = '$id'";
+
+    if (!mysqli_query($con, $sql)) {
+        die('Error deleting: ' . mysqli_error($con));
+    } else {
+        echo "<script>window.success = true;</script>";
+    }
+}
+
+// Fetch Data
+$sql = "SELECT q.quizID, q.title, q.pointsAwarded, q.correctForPoints, COUNT(que.questionID) AS questionCount
+        FROM Quiz AS q
+        LEFT JOIN Question AS que ON q.quizID = que.quizID
+        GROUP BY q.quizID, q.title, q.pointsAwarded, q.correctForPoints
+        ORDER BY q.title ASC";
+$result = mysqli_query($con, $sql);
+
+$quizzes = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $quizzes[] = $row;
+}
+
+mysqli_close($con);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,82 +52,57 @@
         </div>
 
         <div class="wrap-middle">
-            <div class="big-green-button">+ Create Quiz</div>
+            <a href="create_quiz.php" class="big-green-button">+ Create Quiz</a>
         </div>
 
         <div class="card-container">
-            <div class="card">
-                <div class="quiz-points">
-                    <img src="../../image/article.png" alt="Quiz" />
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
+            <?php if (empty($quizzes)): ?>
+                <div class="mid-text-group">
+                    <span class="medium-green-title">No quizzes available!</span>
+                    <span class="green-description">Sorry, but currently there is no quiz available!</span>
+                </div>
+            <?php else: ?>
+                <?php foreach ($quizzes as $quiz): ?>
+                    <div class="card">
+                        <div class="quiz-points">
+                            <img src="../../image/article.png" alt="Quiz" />
+                            <div class="points-container">
+                                <img src="../../image/badge.png" alt="Points Badge"/>
+                                <span class="points-text"><?= htmlspecialchars($quiz['pointsAwarded']) ?> pts</span>
+                            </div>
+                        </div>
+                        <div class="medium-green-title"><?= htmlspecialchars($quiz['title']) ?></div>
+                        <div class="icon-text">
+                            <img src="../../image/green_book.svg" alt="Book" />
+                            <span><?= htmlspecialchars($quiz['questionCount']) ?> Questions</span>
+                        </div>
+                        <div class="icon-text">
+                            <img src="../../image/green_badge.svg" alt="Badge" />
+                            <span>Need <?= htmlspecialchars($quiz['correctForPoints']) ?> Corrects For Points</span>
+                        </div>
+                        <div class="near-button-column">
+                            <a href="" class="green-button">Edit Quiz</a>
+                            <a href="manage_quiz.php?delete=<?= $quiz['quizID'] ?>" class="red-button">Delete Quiz</a>
+                        </div>
                     </div>
-                </div>
-                <div class="medium-green-title">Energy Conservation Basics</div>
-                <div class="icon-text">
-                    <img src="../../image/green_book.svg" alt="Book" />
-                    <span>5 Questions</span>
-                </div>
-                <div class="icon-text">
-                    <img src="../../image/green_badge.svg" alt="Badge" />
-                    <span>Need 3 Corrects For Points</span>
-                </div>
-                <div class="near-button-column">
-                    <button class="green-button">Edit Quiz</button>
-                    <button class="red-button">Delete Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="quiz-points">
-                    <img src="../../image/article.png" alt="Quiz" />
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
-                    </div>
-                </div>
-                <div class="medium-green-title">Energy Conservation Basics</div>
-                <div class="icon-text">
-                    <img src="../../image/green_book.svg" alt="Book" />
-                    <span>5 Questions</span>
-                </div>
-                <div class="icon-text">
-                    <img src="../../image/green_badge.svg" alt="Badge" />
-                    <span>Need 3 Corrects For Points</span>
-                </div>
-                <div class="near-button-column">
-                    <button class="green-button">Edit Quiz</button>
-                    <button class="red-button">Delete Quiz</button>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="quiz-points">
-                    <img src="../../image/article.png" alt="Quiz" />
-                    <div class="points-container">
-                        <img src="../../image/badge.png" alt="Points Badge"/>
-                        <span class="points-text">30 pts</span>
-                    </div>
-                </div>
-                <div class="medium-green-title">Energy Conservation Basics</div>
-                <div class="icon-text">
-                    <img src="../../image/green_book.svg" alt="Book" />
-                    <span>5 Questions</span>
-                </div>
-                <div class="icon-text">
-                    <img src="../../image/green_badge.svg" alt="Badge" />
-                    <span>Need 3 Corrects For Points</span>
-                </div>
-                <div class="near-button-column">
-                    <button class="green-button">Edit Quiz</button>
-                    <button class="red-button">Delete Quiz</button>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
         </div>
     </div>
+
+    <div class="overlay"></div>
+    <div class="modal">
+        <img src="../../image/verify.svg" alt="Verify" class="modal-img">
+        <div class="text-group">
+            <span class="medium-green-title">Successfully Deleted!</span>
+            <span class="green-description">You have successfully deleted the quiz</span>
+        </div>
+        <a href="manage_quiz.php" class="green-button">Back</a>
+    </div>
+
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>
