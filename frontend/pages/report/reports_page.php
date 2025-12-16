@@ -4,8 +4,28 @@ include ('../../../backend/fetch_data.php');
 
 // TEMP: replace with $_SESSION later
 $studentID = 3;
+$roomFilter = $_GET['room'] ?? 'all';
+$statusFilter = $_GET['status'] ?? 'all';
 
-$reports = getReportsForStudent($studentID);
+$reports = getReportsForStudent($studentID, $roomFilter, $statusFilter);
+
+$totalCount = 0;
+$approvedCount = 0;
+$pendingCount = 0;
+$rejectedCount = 0;
+
+foreach ($reports as $report) {
+    $totalCount++;
+
+    if ($report['status'] === 'approved') {
+        $approvedCount++;
+    } elseif ($report['status'] === 'rejected') {
+        $rejectedCount++;
+    } else {
+        $pendingCount++; // default = pending
+    }
+}
+
 mysqli_close($con);
 ?>
 
@@ -48,7 +68,7 @@ mysqli_close($con);
                         <img src="../../image/warning_small.svg" alt="warn_small" class="report-card-img">
                         <span class="green-description">Total Reports</span>
                     </div>
-                    <span class="green-description">4</span>
+                    <span class="green-description"><?= $totalCount ?></span>
                 </div>
 
                 <div class="report-count-card" style="background-color: var(--pending-orange-background); border: 0.1rem solid var(--pending-orange-border);">
@@ -56,7 +76,7 @@ mysqli_close($con);
                         <img src="../../image/timer.svg" alt="timer" class="report-card-img">
                         <span class="orange-description">Pending</span>
                     </div>
-                    <span class="orange-description">1</span>
+                    <span class="orange-description"><?= $pendingCount ?></span>
                 </div>
 
                 <div class="report-count-card" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
@@ -64,7 +84,7 @@ mysqli_close($con);
                         <img src="../../image/tick.svg" alt="tick" class="report-card-img">
                         <span class="dark-green-description">Approved</span>
                     </div>
-                    <span class="dark-green-description">2</span>
+                    <span class="dark-green-description"><?= $approvedCount ?></span>
                 </div>
 
                 <div class="report-count-card" style="background-color: var(--rejected-red-background); border: 0.1rem solid var(--rejected-red-border);">
@@ -72,25 +92,30 @@ mysqli_close($con);
                         <img src="../../image/rejected.svg" alt="rejected" class="report-card-img">
                         <span class="red-description">Rejected</span>
                     </div>
-                    <span class="red-description">1</span>
+                    <span class="red-description"><?= $rejectedCount ?></span>
                 </div>
             </div>
 
-            <div class="filterbar">
+            <form method="GET" class="filterbar">
                 <div class="label-field">
                     <label class="green-description">Filter By Room</label>
-                    <select class="dropdown-classroom-choice" name="classroom">
-                        <option value="All Rooms">All Rooms</option>
+                    <select class="dropdown-classroom-choice" name="room" onchange="this.form.submit()">
+                        <option value="all" <?= $roomFilter === 'all' ? 'selected' : '' ?>>All Rooms</option>
+                        <option value="classroom" <?= $roomFilter === 'classroom' ? 'selected' : '' ?>>Classrooms</option>
+                        <option value="lecture" <?= $roomFilter === 'lecture' ? 'selected' : '' ?>>Lecture Halls</option>
                     </select>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Fitler By Status</label>
-                    <select class="dropdown-classroom-choice" name="status">
-                        <option value="Status">All Status</option>
+                    <select class="dropdown-classroom-choice" name="status" onchange="this.form.submit()">
+                        <option value="all" <?= $statusFilter === 'all' ? 'selected' : '' ?>>All Status</option>
+                        <option value="approved" <?= $statusFilter === 'approved' ? 'selected' : '' ?>>Approved</option>
+                        <option value="pending" <?= $statusFilter === 'pending' ? 'selected' : '' ?>>Pending</option>
+                        <option value="rejected" <?= $statusFilter === 'rejected' ? 'selected' : '' ?>>Rejected</option>
                     </select>
                 </div>
-            </div>
+            </form>
 
             <div class="report-content">
                 <?php if (empty($reports)): ?>

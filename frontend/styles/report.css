@@ -131,13 +131,14 @@
 }
 
 .report-desc {
-    display: -webkit-box;
+    display: flex;
     --webkit-line-clamp: 4;
     --webkit-box-orient: vertical;
     overflow: hidden;
     line-height: 1.3rem;
     height: 83.2px;
     text-align: justify;
+    flex-wrap: wrap;
 }
 
 .location-text{
