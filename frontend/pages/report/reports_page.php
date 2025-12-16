@@ -1,3 +1,15 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+
+// TEMP: replace with $_SESSION later
+$studentID = 3;
+
+$reports = getReportsForStudent($studentID);
+mysqli_close($con);
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,10 +35,10 @@
                 </div>
 
                 <div class="report-icon">
-                    <button type="submit" class="orange-button" name="submitBtn">
+                    <a href="submit_report.php" class="orange-button">
                         <img src="../../image/add_icon.svg" alt="add" class="button-img">
                         <span>Report Issue</span>
-                    </button>
+                    </a>
                 </div>
             </div>
 
@@ -81,125 +93,64 @@
             </div>
 
             <div class="report-content">
-                <div class="report-content-card">
-                    <img src="../../image/flickering_light.webp" alt="lights-img">
-                    <div class="report-text-group">
-                        <div class="title-and-icon">
-                            <span class="dark-green-description">Flickering light causing distraction</span>
-                            <div class="card-icon">
-                                <div class="card-icon-img" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
-                                    <img src="../../image/tick.svg" alt="tick" class="report-card-img">
+                <?php if (empty($reports)): ?>
+                    <div class="mid-text-group">
+                        <span class="medium-green-title">No reports submitted</span>
+                        <span class="green-description">You have not submitted any reports yet.</span>
+                    </div>
+                <?php else: ?>
+                    <?php foreach ($reports as $report): ?>
+                        <div class="report-content-card">
+                            <img src="data:image/jpeg;base64,<?= base64_encode($report['evidence']) ?>" class="report-img" />
+                            <div class="report-text-group">
+
+                                <div class="title-and-icon">
+                                    <span class="dark-green-description">
+                                        <?= htmlspecialchars($report['title']) ?>
+                                    </span>
+
+                                    <div class="
+                                        <?php
+                                            if ($report['status'] === 'approved') echo 'card-icon-img-apro';
+                                            elseif ($report['status'] === 'rejected') echo 'card-icon-img-rej';
+                                            else echo 'card-icon-img-pen';
+                                        ?>">
+                                        <img src="../../image/<?=
+                                            ($report['status'] === 'approved') ? 'tick.svg' :
+                                            (($report['status'] === 'rejected') ? 'rejected.svg' : 'timer.svg')
+                                        ?>" alt="status" class="report-card-img">
+                                    </div>
                                 </div>
+
+                                <div class="location-text">
+                                    <img src="../../image/location.svg" class="report-card-img">
+                                    <span class="green-description">
+                                        <?= htmlspecialchars($report['roomName']) ?>
+                                    </span>
+                                </div>
+
+                                <span class="green-description report-desc" >
+                                    <?= nl2br(htmlspecialchars($report['description'])) ?>
+                                </span>
+
+                                <div class="sender-info">
+                                    <span class="green-description">
+                                        By: <?= htmlspecialchars($report['name']) ?>
+                                    </span>
+                                    <span class="green-description">
+                                        <?= date("Y-m-d", strtotime($report['date'])) ?>
+                                    </span>
+                                </div>
+
+                                <a href="report_details.php?id=<?= $report['brID'] ?>"
+                                    class="green-button">
+                                        View Details
+                                </a>
                             </div>
                         </div>
-
-                        <div class="location-text">
-                            <img src="../../image/location.svg" alt="location" class="report-card-img">
-                            <span class="green-description">Lecture Hall LH2</span>
-                        </div>
-
-                        <span class="green-description" style="text-align: justify">One of the main lights keeps flickering during lectures. 
-                            It is very distracting and may be a safety hazard.
-                        </span>
-
-                        <div class="sender-info">
-                            <span class="green-description">By: John Smith</span>
-                            <span class="green-description">2025-01-18</span>
-                        </div>
-
-                        <button type="submit" class="green-button" name="viewDetails">View Details</button>
-                    </div>
-                </div>
-
-                <div class="report-content-card">
-                    <img src="../../image/flickering_light.webp" alt="lights-img" class="">
-                    <div class="report-text-group">
-                        <div class="title-and-icon">
-                            <span class="dark-green-description">Flickering light causing distraction</span>
-                            <div class="card-icon">
-                                <div class="card-icon-img" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
-                                    <img src="../../image/tick.svg" alt="tick" class="report-card-img">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="location-text">
-                            <img src="../../image/location.svg" alt="location" class="report-card-img">
-                            <span class="green-description">Lecture Hall LH2</span>
-                        </div>
-
-                        <span class="green-description" style="text-align: justify">One of the main lights keeps flickering during lectures. 
-                            It is very distracting and may be a safety hazard.
-                        </span>
-
-                        <div class="sender-info">
-                            <span class="green-description">By: John Smith</span>
-                            <span class="green-description">2025-01-18</span>
-                        </div>
-
-                        <button type="submit" class="green-button" name="viewDetails">View Details</button>
-                    </div>
-                </div>
-
-                <div class="report-content-card">
-                    <img src="../../image/flickering_light.webp" alt="lights-img" class="">
-                    <div class="report-text-group">
-                        <div class="title-and-icon">
-                            <span class="dark-green-description">Flickering light causing distraction</span>
-                            <div class="card-icon">
-                                <div class="card-icon-img" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
-                                    <img src="../../image/tick.svg" alt="tick" class="report-card-img">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="location-text">
-                            <img src="../../image/location.svg" alt="location" class="report-card-img">
-                            <span class="green-description">Lecture Hall LH2</span>
-                        </div>
-
-                        <span class="green-description" style="text-align: justify">One of the main lights keeps flickering during lectures. 
-                            It is very distracting and may be a safety hazard.
-                        </span>
-
-                        <div class="sender-info">
-                            <span class="green-description">By: John Smith</span>
-                            <span class="green-description">2025-01-18</span>
-                        </div>
-
-                        <button type="submit" class="green-button" name="viewDetails">View Details</button>
-                    </div>
-                </div>
-
-                <div class="report-content-card">
-                    <img src="../../image/flickering_light.webp" alt="lights-img" class="">
-                    <div class="report-text-group">
-                        <div class="title-and-icon">
-                            <span class="dark-green-description">Flickering light causing distraction</span>
-                            <div class="card-icon">
-                                <div class="card-icon-img" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
-                                    <img src="../../image/tick.svg" alt="tick" class="report-card-img">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="location-text">
-                            <img src="../../image/location.svg" alt="location" class="report-card-img">
-                            <span class="green-description">Lecture Hall LH2</span>
-                        </div>
-
-                        <span class="green-description" style="text-align: justify">One of the main lights keeps flickering during lectures. 
-                            It is very distracting and may be a safety hazard.
-                        </span>
-
-                        <div class="sender-info">
-                            <span class="green-description">By: John Smith</span>
-                            <span class="green-description">2025-01-18</span>
-                        </div>
-
-                        <button type="submit" class="green-button" name="viewDetails">View Details</button>
-                    </div>
-                </div>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+            </div>
             </div>
         </div>
     </div>
