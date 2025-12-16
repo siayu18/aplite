@@ -48,7 +48,11 @@ a {
 .header-container {
   display: flex;
   flex-direction: column;
-  background-color: var(--dark-green);
+   background-image: linear-gradient(
+    to bottom,
+    var(--dark-green),
+    var(--light-green-font)
+  );
   height: 5rem;
   padding: 1rem;
   color: white;
