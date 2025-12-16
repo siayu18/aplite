@@ -3,23 +3,36 @@ include ('../../../backend/conn.php');
 $message = "";
 
 if(isset($_POST["submitBtn"])){
+    echo "<p>hi</p>";
     $quizID = uniqid();
     $title = $_POST["title"];
     $pointsAwarded = $_POST["pointsAwarded"];
     $correctForPoints = $_POST["correctForPoints"];
+    $questionIndex = 1; // Index Because the structure is like 1,2,3, choice is 1_1, 2_1, 3_1, 4_1
+    $hasQuestion = false;
 
+    // Validation
     if (!ctype_digit($pointsAwarded) || !ctype_digit($correctForPoints) ) {
         $message = "Points must be an integer.";
-    } else {
+    }
+
+    while (isset($_POST["questionType$questionIndex"])) {
+        $hasQuestion = true;
+        break;
+    }
+
+    if (!$hasQuestion) {
+        $message = "You must add at least one question before creating the quiz.";
+    }
+
+    // Insert to DB
+    if (empty($message)) {
         $sql = "INSERT INTO Quiz (quizID, title, pointsAwarded, correctForPoints)
-                VALUES ('$quizID','$title','$pointsAwarded','$correctForPoints')";
+            VALUES ('$quizID','$title','$pointsAwarded','$correctForPoints')";
 
         if (!mysqli_query($con, $sql)) {
             die("Quiz insert failed: " . mysqli_error($conn));
         }
-
-        // Index Because the structure is like 1,2,3, choice is 1_1, 2_1, 3_1, 4_1
-        $questionIndex = 1;
 
         while (isset($_POST["questionType$questionIndex"])) {
             $questionID = uniqid();
@@ -94,17 +107,17 @@ if(isset($_POST["submitBtn"])){
 
                 <div class="label-field">
                     <label class="green-description">Title</label>
-                    <input type="text" placeholder="Enter title..." name="title" />
+                    <input type="text" placeholder="Enter title..." name="title" required/>
                 </div>
 
                 <div class="field-group">
                     <div class="label-field">
                         <label class="green-description">Points Awarded</label>
-                        <input type="text" placeholder="Enter Points..." name="pointsAwarded" />
+                        <input type="text" placeholder="Enter Points..." name="pointsAwarded" required/>
                     </div>
                     <div class="label-field">
                         <label class="green-description">Correct For Points</label>
-                        <input type="text" placeholder="Enter Points..." name="correctForPoints" />
+                        <input type="text" placeholder="Enter Points..." name="correctForPoints" required/>
                     </div>
                 </div>
 
@@ -122,7 +135,7 @@ if(isset($_POST["submitBtn"])){
 
                     <div class="label-field">
                         <label class="green-description">Question Type</label>
-                        <select class="dropdown question-type" name="questionType1">
+                        <select class="dropdown question-type" name="questionType1" >
                             <option value="mcq">MCQ Question</option>
                             <option value="open">Open-Ended Question</option>
                         </select>
@@ -130,34 +143,34 @@ if(isset($_POST["submitBtn"])){
 
                     <div class="label-field">
                         <label class="green-description">Question Text</label>
-                        <input type="text" placeholder="Enter Text..." name="questionText1"/>
+                        <input type="text" placeholder="Enter Text..." name="questionText1" required/>
                     </div>
 
                     <div class="label-field mcq-section">
                         <label class="green-description">Choices</label>
                         <div class="near-button-column">
                             <div class="near-button-row">
-                                <input type="radio" name="question1" value="choice1">
+                                <input type="radio" name="question1" value="choice1" >
                                 <input type="text" placeholder="Enter Choice..." name="choice1_1" />
                             </div>
                             <div class="near-button-row">
                                 <input type="radio" name="question1" value="choice2">
-                                <input type="text" placeholder="Enter Choice..." name="choice2_1"/>
+                                <input type="text" placeholder="Enter Choice..." name="choice2_1" />
                             </div>
                             <div class="near-button-row">
                                 <input type="radio" name="question1" value="choice3">
-                                <input type="text" placeholder="Enter Choice..." name="choice3_1"/>
+                                <input type="text" placeholder="Enter Choice..." name="choice3_1" />
                             </div>
                             <div class="near-button-row">
                                 <input type="radio" name="question1" value="choice4">
-                                <input type="text" placeholder="Enter Choice..." name="choice4_1"/>
+                                <input type="text" placeholder="Enter Choice..." name="choice4_1" />
                             </div>
                         </div>
                     </div>
 
                     <div class="label-field open-ended-section" style="display: none;">
                         <label class="green-description">Correct Answer</label>
-                        <input type="text" placeholder="Enter Correct Answer..." name="correctAnswer1" />
+                        <input type="text" placeholder="Enter Correct Answer..." name="correctAnswer1"/>
                     </div>
                 </div>
 

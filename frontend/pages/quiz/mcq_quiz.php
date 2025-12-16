@@ -1,3 +1,19 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+
+if (!isset($_GET['id'])) {
+    die('Article ID not specified.');
+}
+
+$quizID = $_GET['id'];
+$questions = getDataByID("question", "quizID", $quizID);
+
+if(!$questions) {
+    echo "<script>alert('No questions!'); window.href='choose_quiz.php'</script>";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

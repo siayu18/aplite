@@ -35,14 +35,14 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <div class="label-field">
                 <label class="green-description">Question Text</label>
-                <input type="text" placeholder="Enter Text..." name="questionText${questionCount}" />
+                <input type="text" placeholder="Enter Text..." name="questionText${questionCount} required" />
             </div>
             
             <div class="label-field mcq-section">
                 <label class="green-description">Choices</label>
                 <div class="near-button-column">
                     <div class="near-button-row">
-                        <input type="radio" name="question${questionCount}" value="choice1">
+                        <input type="radio" name="question${questionCount}" value="choice1" >
                         <input type="text" placeholder="Enter Choice..." name="choice1_${questionCount}" />
                     </div>
                     <div class="near-button-row">
@@ -101,13 +101,25 @@ document.addEventListener('DOMContentLoaded', function() {
         const questionContainer = selectElement.closest('.question-container');
         const mcqSection = questionContainer.querySelector('.mcq-section');
         const openEndedSection = questionContainer.querySelector('.open-ended-section');
-        
+        const mcqTexts = mcqSection ? mcqSection.querySelectorAll('input[type="text"]') : [];
+        const mcqRadios = mcqSection ? mcqSection.querySelectorAll('input[type="radio"]') : [];
+        const openInput = openEndedSection ? openEndedSection.querySelector('input') : null;
+
         if (selectElement.value === 'mcq') {
             if (mcqSection) mcqSection.style.display = 'flex';
             if (openEndedSection) openEndedSection.style.display = 'none';
+
+            mcqRadios.forEach(radio => radio.required = true);
+            mcqTexts.forEach(text => text.required = true);
+            if (openInput) openInput.required = false;
+
         } else if (selectElement.value === 'open') {
             if (mcqSection) mcqSection.style.display = 'none';
             if (openEndedSection) openEndedSection.style.display = 'flex';
+
+            mcqRadios.forEach(radio => radio.required = false);
+            mcqTexts.forEach(text => text.required = false);
+            if (openInput) openInput.required = true;
         }
     }
     

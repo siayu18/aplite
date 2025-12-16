@@ -30,23 +30,7 @@ mysqli_close($con);
     <div class="col-12 col-s-12 header">
         <div class="top-bar">
             <img src="../../image/logo.png" alt="APLite Logo" class="logo" />
-            <div class="menu">
-                <a class="menu-text" href="../dashboard/dashboard.php">Home</a>
-                <a class="menu-text" href="#">Manage Users</a>
-                <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
-                <a class="menu-text" href="#">Manage Rewards</a>
-                <a class="menu-text" href="#">Generate Report</a>
-
-                <a href="#"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
-                <button id="more-button"><img src="../../image/more.png" alt="More" class="menu-img" /></button>
-                <div id="dropdown-menu" class="dropdown-content">
-                    <a href="../dashboard/dashboard.php">Home</a>
-                    <a href="#">Manage Users</a>
-                    <a href="../announcement/manage_announcement.php">Manage Announcements</a>
-                    <a href="#">Manage Rewards</a>
-                    <a href="#">Generate Report</a>
-                </div>
-            </div>
+             <?php include("../../component/admin_menu.php") ?> 
         </div>
         <div class="middle-content">
             <span class="white-title">Welcome Back Admin, Sia Yu!</span>

@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../styles/global.css">
     <link rel="stylesheet" href="../styles/component.css">
 </head>
+
 <body>
     <div class="col-12 col-s-12 footer fade-in">
         <span class="footer-text">© 2025 APLITE - Asia Pacific University. Building a sustainable future together.</span>
