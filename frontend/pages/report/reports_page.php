@@ -97,7 +97,7 @@ mysqli_close($con);
             <div class="filterbar">
                 <div class="label-field">
                     <label class="green-description">Filter By Room</label>
-                    <select class="dropdown-classroom-choice" name="room" onchange="this.form.submit()">
+                    <select class="dropdown-classroom-choice" name="room">
                         <option value="all">All Rooms</option>
                         <option value="classroom">Classrooms</option>
                         <option value="lecture">Lecture Halls</option>
@@ -106,7 +106,7 @@ mysqli_close($con);
 
                 <div class="label-field">
                     <label class="green-description">Fitler By Status</label>
-                    <select class="dropdown-classroom-choice" name="status" onchange="this.form.submit()">
+                    <select class="dropdown-classroom-choice" name="status">
                         <option value="all">All Status</option>
                         <option value="approved">Approved</option>
                         <option value="pending">Pending</option>
@@ -179,6 +179,6 @@ mysqli_close($con);
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
-    <script src="../../scripts/report_filter.js"></script>
+    <script src="../../scripts/report.js"></script>
 </body>
 </html>
