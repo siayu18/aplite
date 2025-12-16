@@ -30,7 +30,7 @@ mysqli_close($con);
     <div class="col-12 col-s-12 header">
         <div class="top-bar">
             <img src="../../image/logo.png" alt="APLite Logo" class="logo" />
-             <?php include("../../component/staff_menu.php") ?> 
+            <?php include("../../component/staff_menu.php") ?> 
         </div>
         <div class="middle-content">
             <span class="white-title">Welcome Back Admin, Sia Yu!</span>
