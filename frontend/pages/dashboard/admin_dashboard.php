@@ -1,15 +1,38 @@
 <?php
 include("../../../backend/conn.php");
 
-// For leaderboard
-$sql = "SELECT * FROM user ORDER BY points DESC LIMIT 10";
-$result = mysqli_query($con, $sql);
-$users = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
-}
+// Total Users
+$userResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM user");
+$userCount = mysqli_fetch_assoc($userResult)['total'];
 
-mysqli_close($con);
+// Average Light Brightness
+$brightnessResult = mysqli_query($con, "SELECT ROUND(AVG(brightnessLevel), 0) AS avgBrightness FROM brightnesslog;");
+$brightnessCount = mysqli_fetch_assoc($brightnessResult)['avgBrightness'];
+
+// Total Energy Saved
+$energyResult = mysqli_query($con,
+"SELECT ROUND(SUM(r.bulbWattage * r.numberOfBulbs * (1 - b.brightnessLevel / 100)), 0) AS totalEnergySaved
+ FROM brightnesslog b
+ JOIN session s ON b.sessionID = s.sessionID
+ JOIN room r ON s.roomID = r.roomID");
+$energyCount = mysqli_fetch_assoc($energyResult)['totalEnergySaved'];
+
+// Graph Data
+$data = [];
+$labels = [];
+
+$sql = "SELECT DATE(timeStamp) AS date, ROUND(AVG(brightnessLevel), 0) AS avgBrightness
+        FROM brightnesslog
+        WHERE timeStamp >= CURDATE() - INTERVAL 4 DAY
+        GROUP BY DATE(timeStamp)
+        ORDER BY date ASC";
+
+$result = mysqli_query($con, $sql);
+
+while ($row = mysqli_fetch_assoc($result)) {
+    $labels[] = $row['date'];
+    $data[] = $row['avgBrightness'];
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +49,7 @@ mysqli_close($con);
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>APLite</title>
 </head>
+
 <body>
     <div class="col-12 col-s-12 header">
         <div class="top-bar">
@@ -38,19 +62,19 @@ mysqli_close($con);
             <div class="card-container">
                 <div class="transparent-card">
                     <div class="text-group">
-                        <span class="medium-white-title">3000</span>
+                        <span class="medium-white-title"><?= $userCount ? $userCount : 0 ?></span>
                         <span class="white-description">Total Users</span>
                     </div>
                 </div>
                  <div class="transparent-card">
                     <div class="text-group">
-                        <span class="medium-white-title">50%</span>
+                        <span class="medium-white-title"><?= $brightnessCount ? $brightnessCount : 0 ?>%</span>
                         <span class="white-description">Average Light Brightness</span>
                     </div>
                 </div>
                  <div class="transparent-card">
                     <div class="text-group">
-                        <span class="medium-white-title">100 Watt</span>
+                        <span class="medium-white-title"><?= $energyCount ? $energyCount : 0 ?> Watts</span>
                         <span class="white-description">Total Energy Saved</span>
                     </div>
                 </div>
@@ -73,6 +97,13 @@ mysqli_close($con);
     </div>
 
     <?php include '../../component/footer.php'; ?>
+
+    <script>
+        // Convert PHP arrays to Json then JavaScript arrays
+        // This is chart data for brightness to pass to chart.js
+        const xValues = <?= json_encode($labels) ?>;
+        const yValues = <?= json_encode($data) ?>
+    </script>
 
     <script src="../../scripts/dashboard.js"></script>
     <script src="../../scripts/animation.js"></script>

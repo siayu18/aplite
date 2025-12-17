@@ -1,15 +1,5 @@
 <?php
 include("../../../backend/conn.php");
-
-// For leaderboard
-$sql = "SELECT * FROM user ORDER BY points DESC LIMIT 10";
-$result = mysqli_query($con, $sql);
-$users = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
-}
-
-mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +24,7 @@ mysqli_close($con);
         <div class="middle-content">
             <span class="white-title">Save Light Energy, Earn Points!</span>
             <span class="yellow-description">Join APU's sustainable energy initiative. Turn off unused lights, take quiz challenges to gain points, be in leaderboard and create a greener campus.</span>
-            <button class="yellow-button">Get Started ></button>
+            <a href="../light_management/control_lights.php" class="yellow-button">Get Started ></a>
         </div>
     </div>
 
@@ -44,17 +34,17 @@ mysqli_close($con);
             <span class="green-description">Three simple ways to contribute to a sustainable campus, earn points and climb the leaderboard</span>
         </div>
         <div class="card-container">
-            <a href=""><div class="card">
+            <a href="../light_management/control_lights.php"><div class="card">
                 <img src="../../image/light.png" alt="Light" class="card-img" />
                 <p class="card-title">Adjust Brightness</p>
                 <p class="card-description">Check into a classroom and adjust the brightness to suit your preference while saving energy.</p>
             </div>
-            <a href=""><div class="card">
+            <a href="../quiz/choose_quiz.php"><div class="card">
                 <img src="../../image/quiz.png" alt="Quiz" class="card-img" />
                 <p class="card-title">Join Quizzes</p>
                 <p class="card-description">Complete quizzes related to sustainability and earn points while saving energy.</p>
             </div></a>
-            <a href=""><div class="card">
+            <a href="../article/choose_article.php"><div class="card">
                 <img src="../../image/article.png" alt="article" class="card-img" />
                 <p class="card-title">Read Articles</p>
                 <p class="card-description">Read articles related to sustainability to earn extra points to gain awareness.</p>

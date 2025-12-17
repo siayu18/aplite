@@ -1,15 +1,17 @@
 <?php
 include("../../../backend/conn.php");
 
-// For leaderboard
-$sql = "SELECT * FROM user ORDER BY points DESC LIMIT 10";
-$result = mysqli_query($con, $sql);
-$users = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
-}
+// Total Users
+$userResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM user");
+$userCount = mysqli_fetch_assoc($userResult)['total'];
 
-mysqli_close($con);
+// Total Quizzes
+$quizResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM quiz");
+$quizCount = mysqli_fetch_assoc($quizResult)['total'];
+
+// Total Reports
+$reportResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM brokenreport");
+$reportCount = mysqli_fetch_assoc($reportResult)['total'];
 ?>
 
 <!DOCTYPE html>
@@ -33,25 +35,25 @@ mysqli_close($con);
             <?php include("../../component/staff_menu.php") ?> 
         </div>
         <div class="middle-content">
-            <span class="white-title">Welcome Back Admin, Sia Yu!</span>
-            <span class="yellow-description">This is the admin panel and you can below contain the analytical dashboard for you.</span>
+            <span class="white-title">Welcome Back Staff, Sia Yu!</span>
+            <span class="yellow-description">This is the staff panel and you can below contain the special dashboard for you.</span>
             <div class="card-container">
                 <div class="transparent-card">
                     <div class="text-group">
-                        <span class="medium-white-title">3000</span>
+                        <span class="medium-white-title"><?= $userCount ? $userCount : 0 ?></span>
                         <span class="white-description">Total Users</span>
                     </div>
                 </div>
                  <div class="transparent-card">
                     <div class="text-group">
-                        <span class="medium-white-title">50%</span>
-                        <span class="white-description">Average Light Brightness</span>
+                        <span class="medium-white-title"><?= $quizCount ? $quizCount : 0 ?></span>
+                        <span class="white-description">Total Quizzes</span>
                     </div>
                 </div>
                  <div class="transparent-card">
                     <div class="text-group">
-                        <span class="medium-white-title">100 Watt</span>
-                        <span class="white-description">Total Energy Saved</span>
+                        <span class="medium-white-title"><?= $reportCount ? $reportCount : 0 ?></span>
+                        <span class="white-description">Total Reports</span>
                     </div>
                 </div>
             </div>
@@ -60,11 +62,25 @@ mysqli_close($con);
 
     <div class="col-12 col-s-12 content-1 fade-in">
         <div class="text-group">
-            <span class="green-title">Analytical Graph</span>
-            <span class="green-description">View the average light brightness percentage in a bar chart view</span>
+            <span class="green-title">Quick Access</span>
+            <span class="green-description">Access to pages quickly through this section.</span>
         </div>
-        <div class="bar-chart">
-            <canvas id="myChart"></canvas>
+        <div class="card-container">
+            <a href="../report/manage_reports.php"><div class="card">
+                <img src="../../image/light.png" alt="Light" class="card-img" />
+                <p class="card-title">Manage Light Report</p>
+                <p class="card-description">View and Manage Broken Light Reports (Approve / Reject)</p>
+            </div>
+            <a href="../quiz/manage_quiz.php"><div class="card">
+                <img src="../../image/quiz.png" alt="Quiz" class="card-img" />
+                <p class="card-title">Manage Quizzes</p>
+                <p class="card-description">Create, Update and Delete Quizzes.</p>
+            </div></a>
+            <a href="../article/manage_article.php"><div class="card">
+                <img src="../../image/article.png" alt="article" class="card-img" />
+                <p class="card-title">Manage Articles</p>
+                <p class="card-description">Create, Update and Delete Articles.</p>
+            </div></a>
         </div>
     </div>
 
@@ -76,6 +92,5 @@ mysqli_close($con);
 
     <script src="../../scripts/dashboard.js"></script>
     <script src="../../scripts/animation.js"></script>
-    <script src="../../scripts/chart.js"></script>
 </body>
 </html>
