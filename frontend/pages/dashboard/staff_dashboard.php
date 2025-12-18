@@ -31,7 +31,7 @@ $reportCount = mysqli_fetch_assoc($reportResult)['total'];
 <body>
     <div class="col-12 col-s-12 header">
         <div class="top-bar">
-            <img src="../../image/logo.png" alt="APLite Logo" class="logo" />
+            <img src="../../image/logo.svg" alt="APLite Logo" class="logo" />
             <?php include("../../component/staff_menu.php") ?> 
         </div>
         <div class="middle-content">
@@ -67,17 +67,17 @@ $reportCount = mysqli_fetch_assoc($reportResult)['total'];
         </div>
         <div class="card-container">
             <a href="../report/manage_reports.php"><div class="card">
-                <img src="../../image/light.png" alt="Light" class="card-img" />
+                <img src="../../image/light.svg" alt="Light" class="card-img" />
                 <p class="card-title">Manage Light Report</p>
                 <p class="card-description">View and Manage Broken Light Reports (Approve / Reject)</p>
             </div>
             <a href="../quiz/manage_quiz.php"><div class="card">
-                <img src="../../image/quiz.png" alt="Quiz" class="card-img" />
+                <img src="../../image/quiz.svg" alt="Quiz" class="card-img" />
                 <p class="card-title">Manage Quizzes</p>
                 <p class="card-description">Create, Update and Delete Quizzes.</p>
             </div></a>
             <a href="../article/manage_article.php"><div class="card">
-                <img src="../../image/article.png" alt="article" class="card-img" />
+                <img src="../../image/article.svg" alt="article" class="card-img" />
                 <p class="card-title">Manage Articles</p>
                 <p class="card-description">Create, Update and Delete Articles.</p>
             </div></a>

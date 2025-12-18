@@ -13,7 +13,7 @@
 </head>
 <body>
     <?php include '../../component/stu_header.php'; ?>
-    <div class="content" style="padding: 2rem;">
+    <div class="content fade-in" style="padding: 2rem;">
        <div class="profile-header">
             <h1 class="green-title">Profile Settings</h1>
             <p class="green-description">Manage your account information and preferences</p>
@@ -81,5 +81,7 @@
        </div>
     </div>
     <?php include '../../component/footer.php'; ?>
+
+    <script src="../../scripts/animation.js"></script>
 </body>
 </html>

@@ -24,8 +24,8 @@
         <a class="menu-text" href="#">Report Issue</a>
         <a class="menu-text" href="../announcement/announcement.php">Announcements</a>
 
-        <a href="#"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
-        <button id="more-button"><img src="../../image/more.png" alt="More" class="menu-img" /></button>
+        <a href="../account_management/profile.php"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
+        <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>
         <div id="dropdown-menu" class="dropdown-content">
             <a href="../dashboard/dashboard.php">Home</a>
             <a href="#">Light Control</a>

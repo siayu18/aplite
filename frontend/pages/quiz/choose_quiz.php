@@ -47,9 +47,9 @@ mysqli_close($con);
                 <?php foreach ($quizzes as $quiz): ?>
                     <div class="card">
                         <div class="quiz-points">
-                            <img src="../../image/article.png" alt="Quiz" />
+                            <img src="../../image/article.svg" alt="Quiz" />
                             <div class="points-container">
-                                <img src="../../image/badge.png" alt="Points Badge"/>
+                                <img src="../../image/badge.svg" alt="Points Badge"/>
                                 <span class="points-text"><?= htmlspecialchars($quiz['pointsAwarded']) ?> pts</span>
                             </div>
                         </div>

@@ -297,7 +297,7 @@ a {
 }
 
 .points-text {
-    color: var(--light-green-font);
+    color: var(--dark-green-font);
     font-size: 0.8rem;
     font-weight: 450;
 }

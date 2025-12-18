@@ -21,8 +21,8 @@
         <a class="menu-text" href="../article/manage_article.php">Manage Articles</a>
         <a class="menu-text" href="">Broken Light Report</a>
 
-        <a href="#"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
-        <button id="more-button"><img src="../../image/more.png" alt="More" class="menu-img" /></button>
+        <a href="../account_management/profile.php"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
+        <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>
         <div id="dropdown-menu" class="dropdown-content">
             <a href="../dashboard/staff_dashboard.php">Home</a>
             <a href="../quiz/manage_quiz.php">Manage Quizzes</a>

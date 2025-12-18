@@ -79,7 +79,7 @@ mysqli_close($con);
                     <div class="metadata">
                         <div class="green-description">By <?= htmlspecialchars($article['name']) ?> | Published on <?= htmlspecialchars($article['date']) ?></div>
                         <div class="points-container">
-                            <img src="../../image/badge.png" alt="Points Badge" class="" />
+                            <img src="../../image/badge.svg" alt="Points Badge" class="" />
                             <span class="points-text"><?= htmlspecialchars($article['pointsAwarded']) ?> pts</span>
                         </div>
                     </div>

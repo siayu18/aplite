@@ -53,7 +53,7 @@ while ($row = mysqli_fetch_assoc($result)) {
 <body>
     <div class="col-12 col-s-12 header">
         <div class="top-bar">
-            <img src="../../image/logo.png" alt="APLite Logo" class="logo" />
+            <img src="../../image/logo.svg" alt="APLite Logo" class="logo" />
             <?php include("../../component/admin_menu.php") ?> 
         </div>
         <div class="middle-content">

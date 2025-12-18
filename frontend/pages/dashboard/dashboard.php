@@ -18,7 +18,7 @@ include("../../../backend/conn.php");
 <body>
     <div class="col-12 col-s-12 header">
         <div class="top-bar">
-            <img src="../../image/logo.png" alt="APLite Logo" class="logo" />
+            <img src="../../image/logo.svg" alt="APLite Logo" class="logo" />
             <?php include("../../component/stu_menu.php") ?> 
         </div>
         <div class="middle-content">
@@ -35,17 +35,17 @@ include("../../../backend/conn.php");
         </div>
         <div class="card-container">
             <a href="../light_management/control_lights.php"><div class="card">
-                <img src="../../image/light.png" alt="Light" class="card-img" />
+                <img src="../../image/light.svg" alt="Light" class="card-img" />
                 <p class="card-title">Adjust Brightness</p>
                 <p class="card-description">Check into a classroom and adjust the brightness to suit your preference while saving energy.</p>
             </div>
             <a href="../quiz/choose_quiz.php"><div class="card">
-                <img src="../../image/quiz.png" alt="Quiz" class="card-img" />
+                <img src="../../image/quiz.svg" alt="Quiz" class="card-img" />
                 <p class="card-title">Join Quizzes</p>
                 <p class="card-description">Complete quizzes related to sustainability and earn points while saving energy.</p>
             </div></a>
             <a href="../article/choose_article.php"><div class="card">
-                <img src="../../image/article.png" alt="article" class="card-img" />
+                <img src="../../image/article.svg" alt="article" class="card-img" />
                 <p class="card-title">Read Articles</p>
                 <p class="card-description">Read articles related to sustainability to earn extra points to gain awareness.</p>
             </div></a>
