@@ -1,9 +1,10 @@
 :root {
     --padding-medium: 3rem 2rem;
-    --border-style: 1px solid var(--darkest-green);
+    --border-style: 0.1rem solid var(--border-green);
     --border-radius-style: 2rem;
     --padding-small: 0.75rem 1rem;
 }
+
 *,
 *::before,
 *::after {
@@ -74,6 +75,8 @@
     border-radius: var(--border-radius-style);
     padding: var(--padding-medium);
     gap: 2rem;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-card {
@@ -86,6 +89,8 @@
     gap: 2rem;
     align-items: center;
     flex-wrap: wrap;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .avatar-img {
@@ -137,6 +142,9 @@
     padding: var(--padding-medium);
     gap: 1rem;
     flex: 1;
+    background-color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: var(--dark-green-font);
 }
 
 .profile-details-card form {

@@ -18,6 +18,7 @@
         <a class="menu-text" href="../dashboard/admin_dashboard.php">Home</a>
         <a class="menu-text" href="#">Manage Users</a>
         <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
+        <a class="menu-text" href="#">Manage Redemptions</a>
         <a class="menu-text" href="#">Manage Rewards</a>
         <a class="menu-text" href="#">Generate Report</a>
 
@@ -27,6 +28,7 @@
             <a href="../dashboard/admin_dashboard.php">Home</a>
             <a href="#">Manage Users</a>
             <a href="../announcement/manage_announcement.php">Manage Announcements</a>
+            <a class="#" href="#">Manage Redemptions</a>
             <a href="#">Manage Rewards</a>
             <a href="#">Generate Report</a>
         </div>

@@ -19,6 +19,7 @@
         <a class="menu-text" href="#">Light Control</a>
         <a class="menu-text" href="../quiz/choose_quiz.php">Quizzes</a>
         <a class="menu-text" href="../article/choose_article.php">Articles</a>
+        <a class="menu-text" href="#">Redemptions</a>
         <a class="menu-text" href="#">Rewards</a>
         <a class="menu-text" href="#">Report Issue</a>
         <a class="menu-text" href="../announcement/announcement.php">Announcements</a>
@@ -30,6 +31,7 @@
             <a href="#">Light Control</a>
             <a href="../quiz/choose_quiz.php">Quizzes</a>
             <a href="../article/choose_article.php">Articles</a>
+            <a class="#" href="#">Redemptions</a>
             <a href="#">Rewards</a>
             <a href="#">Report Issue</a>
             <a href="../announcement/announcement.php">Announcements</a>

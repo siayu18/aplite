@@ -50,11 +50,21 @@
 .input-box input{
     min-width: 70%;
     font-size: 1rem;
-    border: 0.1rem solid black;
+    outline: none;
+    border: 0.1rem solid #3a5e2b3f;
     align-self: stretch;
     border-radius: 1.5rem;
     background-color: transparent;
     padding: 1rem 1.5rem;
+    transition: border-color 0.5s ease;
+}
+
+.input-box input:hover {
+    border-color: #4c763b80;
+}
+
+.input-box input:focus {
+    border-color: #4C763B;
 }
 
 .input-box input::placeholder {
