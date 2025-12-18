@@ -173,7 +173,6 @@ mysqli_close($con);
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
-            </div>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>

@@ -81,7 +81,8 @@ function getReportsForStudent($studentID) {
             FROM brokenreport r
             INNER JOIN user u ON r.studentID = u.userID
             INNER JOIN room cr ON r.roomID = cr.roomID
-            WHERE r.studentID = '$studentID'";
+            WHERE r.studentID = '$studentID'
+            ORDER BY r.date DESC";
 
     $result = mysqli_query($con, $sql);
 
@@ -104,6 +105,25 @@ function getReportByID($brID) {
 
     $result = mysqli_query($con, $sql);
     return mysqli_fetch_assoc($result);
+}
+
+function getAllReports() {
+    global $con;
+
+    $sql = "SELECT r.*, u.name, u.userID, cr.roomName
+            FROM brokenreport r
+            INNER JOIN user u ON r.studentID = u.userID
+            INNER JOIN room cr ON r.roomID = cr.roomID
+            ORDER BY r.date DESC";
+
+    $result = mysqli_query($con, $sql);
+
+    $data = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+
+    return $data;
 }
 
 
