@@ -1,3 +1,21 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+
+// Get brID from URL
+if (!isset($_GET['id'])) {
+    die('No report selected.');
+}
+
+$brID = $_GET['id'];
+$report = getReportByID($brID);
+
+if (!$report) {
+    die('Report not found.');
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,13 +47,24 @@
                 <img src="../../image/report.svg" alt="report" class="card-img">
                 <div class="text-group">
                     <span class="medium-green-title">Review Broken Light Report</span>
-                    <div class="status-report">
-                        <span class="orange-description">Pending</span>
+                    <div class="
+                        <?php
+                            if ($report['status'] === 'approved') echo 'status-report-apro';
+                            elseif ($report['status'] === 'rejected') echo 'status-report-rej';
+                            else echo 'status-report-pen';
+                        ?>">
+                        <?php
+                            $statusClass = '';
+                            if ($report['status'] === 'approved') $statusClass = 'green-description';
+                            elseif ($report['status'] === 'rejected') $statusClass = 'red-description';
+                            else $statusClass = 'orange-description';
+                        ?>
+                        <span class="<?= $statusClass ?>"><?= ucfirst($report['status']) ?></span>
                     </div>
                 </div>
 
                 <div class="image-container">
-                    <img src="../../image/flickering_light.webp" alt="lights-img" class="container_image">
+                    <img src="data:image/jpeg;base64,<?= base64_encode($report['evidence']) ?>" alt="lights-img" class="container_image">
                 </div>
 
                 <div class="report-info">
@@ -43,7 +72,7 @@
 
                     <div class="report-info-text">
                         <span class="green-description">Report Title</span>
-                        <span class="dark-green-description">Flickering light causing distraction</span>
+                        <span class="dark-green-description"><?= htmlspecialchars($report['title']) ?></span>
                     </div>
 
                     <div class="report-info-text">
@@ -51,14 +80,12 @@
                             <img src="../../image/location.svg" alt="location" class="report-card-img">
                             <span class="green-description">Location</span>
                         </div>
-                        <span class="dark-green-description">Lecture Hall LH2</span>
+                        <span class="dark-green-description"><?= htmlspecialchars($report['roomName']) ?></span>
                     </div>
 
                     <div class="report-info-text">
                         <span class="green-description">Description</span>
-                        <span class="dark-green-description">One of the main lights keeps flickering during lectures. 
-                            It is very distracting and may be a safety hazard.
-                        </span>
+                        <span class="dark-green-description"><?= nl2br(htmlspecialchars($report['description'])) ?></span>
                     </div>
 
                     <div class="thin-line"></div>
@@ -66,13 +93,13 @@
                     <div class="report-info-footer">
                         <div class="report-info-text">
                             <span class="green-description">Reported By</span>
-                            <span class="dark-green-description">John Smith</span>
-                            <span class="green-description">TP123457</span>
+                            <span class="dark-green-description"><?= htmlspecialchars($report['name']) ?></span>
+                            <span class="green-description"><?= htmlspecialchars($report['studentID']) ?></span>
                         </div>
 
                         <div class="report-info-text">
                             <span class="green-description">Date Submitted</span>
-                            <span class="dark-green-description">2025-01-19</span>
+                            <span class="dark-green-description"><?= date("Y-m-d", strtotime($report['date'])) ?></span>
                         </div>
                     </div>
                 </div>

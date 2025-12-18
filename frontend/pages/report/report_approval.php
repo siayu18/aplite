@@ -29,7 +29,7 @@
                 <img src="../../image/report.svg" alt="report" class="card-img">
                 <div class="text-group">
                     <span class="medium-green-title">Review Broken Light Report</span>
-                    <div class="status-report">
+                    <div class="status-report-pen">
                         <span class="orange-description">Pending</span>
                     </div>
                 </div>
@@ -77,23 +77,10 @@
                     </div>
                 </div>
 
-                <div class="response-container">
-                    <span class="dark-green-description">Your Response</span>
-
-                    <div class="response-text">
-                        <span class="green-description-bold" style="font-style: italic;">Admin Notes / Action Taken:</span>
-                        <span class="green-description">Provide details about the action to be taken or reason for rejection</span>
-                    </div>
-
-                    <textarea class="white-area" placeholder="e.g., Maintenance scheduled for tomorrow morning. Electrician has been contacted." 
-                    name="content" required></textarea>
-                </div>
-
                 <div class="report-info">
                     <span class="green-description-bold">Tip:</span>
                     <span class="green-description">
-                        When you approve a report, the maintenance team will be notified and the student will receive a confirmation. 
-                        If you reject a report, please provide a clear explanation so the student understands the decision.
+                        If you approve a report, a student will be rewarded 150 points. If you reject a report, nothing happens.
                     </span>
                 </div>
                 
