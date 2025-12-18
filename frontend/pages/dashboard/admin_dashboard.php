@@ -1,5 +1,11 @@
 <?php
+session_start();
 include("../../../backend/conn.php");
+
+if (!isset($_SESSION['logged_in']) || $_SESSION['logged_in'] !== true) {
+    header("Location: ../..frontend/pages/login.php");
+    exit;
+}
 
 // For leaderboard
 $sql = "SELECT * FROM user ORDER BY points DESC LIMIT 10";

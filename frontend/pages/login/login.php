@@ -22,14 +22,14 @@
                 <span class="big-heading">Hello, Welcome Back</span>
                 <span class="small-heading">We are happy to have you back in APLite</span>
             </div>
-            <form action="#">
+            <form method="POST" action="/backend/auth/login_process.php">
                 <div class="input-area">
                     <div class="input-box">
-                        <input type="text" placeholder="enter username" required>
+                        <input type="text" name="identifier" placeholder="enter username or email" required>
                     </div>
 
                     <div class="input-box">
-                        <input type="password" placeholder="enter password" required>
+                        <input type="password" name="password" placeholder="enter password" required>
                     </div>
 
                     <div class="remember">
