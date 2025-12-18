@@ -38,12 +38,16 @@ $question = $quiz['questions'][$currentIndex];
 
                 <div class="dark-green-description">What percentage of energy can be saved by turning off unused lights?</div>
 
-                <div class="selection-group">
-                    <button class="answer-button">10%</button>
-                    <button class="answer-button">25%</button>
-                    <button class="answer-button">50%</button>
-                    <button class="answer-button">75%</button>
-                </div>
+                <?php if ($question["questionType"] == "mcq") : ?>
+                    <div class="selection-group">
+                        <button class="answer-button">10%</button>
+                        <button class="answer-button">25%</button>
+                        <button class="answer-button">50%</button>
+                        <button class="answer-button">75%</button>
+                    </div>
+                <?php else: ?>
+                    <textarea class="white-area" placeholder="Enter your answer..."></textarea>
+                <?php endif ?>
                 
                 <button type="submit" class="green-button">Next</button>
             </form>

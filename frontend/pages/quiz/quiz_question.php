@@ -1,22 +1,50 @@
 <?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+
 session_start();
+
 $quiz = $_SESSION['quiz'];
 $currentIndex = $quiz['current'];
 $question = $quiz['questions'][$currentIndex];
-$totalQuestions = count(value: $quiz['questions']);
+$totalQuestions = count($quiz['questions']);
 $isLastQuestion = ($currentIndex == $totalQuestions - 1);
+$message = '';
+$choices = null;
+
+// if type is mcq then get choices
+if ($question['questionType'] == 'mcq') {
+    $choices = getAllByID("choice", "questionID", $question["questionID"]);
+}
 
 if (isset($_POST['submitBtn'])) {
     include('../../../backend/conn.php');
 
-    if ($quiz['current'] < count(value: $quiz['questions']) - 1) {
-        $quiz['current']++;
-        $_SESSION['quiz'] = $quiz;
-        header("Location: quiz_question.php");
-        exit;
-    } else if ($quiz['current'] == $totalQuestions - 1) {
-        header("Location: summary_quiz.php");
-        exit;
+    // get answer from user
+    $userAnswer = $_POST['answer'] ?? null;
+
+    // no empty answer
+    if ($userAnswer == null) {
+        $message = 'Answer cannot be empty';
+    }
+
+    if (empty($message)) {
+        // Save question answer into session
+        $_SESSION['quiz']['answers'][$currentIndex] = [
+            'questionID' => $question['questionID'],
+            'answer' => $userAnswer
+        ];
+
+        // Make sure it does not exceed the amount of questions
+        if ($quiz['current'] < $totalQuestions - 1) {
+            $quiz['current']++;
+            $_SESSION['quiz'] = $quiz;
+            header("Location: quiz_question.php");
+            exit;
+        } else if ($quiz['current'] == $totalQuestions - 1) {
+            header("Location: summary_quiz.php");
+            exit;
+        }
     }
 }
 ?>
@@ -54,14 +82,27 @@ if (isset($_POST['submitBtn'])) {
 
                 <div class="dark-green-description"><?= $question['questionText'] ?></div>
 
-                <div class="selection-group">
-                    <button class="answer-button">10%</button>
-                    <button class="answer-button">25%</button>
-                    <button class="answer-button">50%</button>
-                    <button class="answer-button">75%</button>
-                </div>
+                <?php if ($question["questionType"] == "mcq") : ?>
+                    <div class="selection-group">
+                        <?php foreach ($choices as $choice): ?>
+                            <label class="answer-button">
+                                <input type="radio" name="answer" value="<?= htmlspecialchars($choice["choiceText"]) ?>" required>
+                                    <?= htmlspecialchars($choice["choiceText"]) ?>
+                                </input>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
+                <?php else: ?>
+                    <textarea class="white-area" name="answer" placeholder="Enter your answer..."></textarea>
+                <?php endif ?>
                 
                 <button type="submit" name="submitBtn" class="green-button"><?= $isLastQuestion ? 'Finish' : 'Next' ?></button>
+
+                <?php if (!empty($message)): ?>
+                    <div class="error-message">
+                        <?php echo $message; ?>
+                    </div>
+                <?php endif; ?>
             </form>
         </div>
     </div>

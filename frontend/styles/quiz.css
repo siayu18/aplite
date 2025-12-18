@@ -57,12 +57,16 @@
   transition: background-color 0.3s ease;
 }
 
+.answer-button input[type="radio"] {
+    display: none;
+}
+
 .answer-button:hover {
   background-color: var(--light-grey);
   font-weight: bold;
 }
 
-.answer-button:focus {
+.answer-button:has(input[type="radio"]:checked) {
   background-color: var(--border-green);
   color: white;
   font-weight: bold;

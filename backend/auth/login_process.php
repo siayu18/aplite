@@ -47,9 +47,9 @@ switch ($user['role']) {
         header("Location: ../../frontend/pages/dashboard/admin_dashboard.php");
         break;
     case 'staff':
-        header("Location: ../..frontend/pages/dashboard/dashboard.php");
+        header("Location: ../..frontend/pages/dashboard/staff_dashboard.php");
         break;
-    defaut:
+    default:
         header("Location: ../..frontend/pages/dashboard/dashboard.php");
         break;
 }
