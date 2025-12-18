@@ -10,14 +10,14 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="login-bg">
+        <div class="login-bg fade-bg">
             <div class="bg-text">
                 <h2>Building a sustainable future</h2>
                 <p>saving energy with a few clicks</p>
             </div>
         </div>
 
-        <div class="container">
+        <div class="container fade-form">
             <div class="title-intro">
                 <span class="big-heading">Hello, Welcome Back</span>
                 <span class="small-heading">We are happy to have you back in APLite</span>

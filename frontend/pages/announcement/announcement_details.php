@@ -1,7 +1,18 @@
 <?php
 include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
-$announcements = getData("announcement");
+
+if (!isset($_GET['id'])) {
+    die('Announcement ID not specified.');
+}
+
+// Fetch data
+$announcementID = $_GET['id'];
+$announcement = getDataByID("announcement", "announcementID", $announcementID);
+if (!$announcement) {
+    die('Announcement not found.');
+}
+
 mysqli_close($con);
 ?>
 
@@ -21,29 +32,29 @@ mysqli_close($con);
 <body>
     <?php include '../../component/stu_header.php'; ?>
     <div class="col-12 col-s-12 content fade-in">
-        <div class="text-group">
-            <span class="green-title">Announcements</span>
-            <span class="green-description">Stay updated with the latest news!</span>
-        </div>
-
-        <div class="container">
-            <?php if (empty($announcements)): ?>
-                <div class="mid-text-group">
-                    <span class="medium-green-title">No announcements available!</span>
-                    <span class="green-description">Sorry, but currently there is no announcement available!</span>
-                </div>
-            <?php else: ?>
-                <?php foreach ($announcements as $announcement): ?>
-                    <div class="card">
-                        <div class="icon-text">
-                            <img src="../../image/calendar.svg" alt="Calendar" />
-                            <span><?= htmlspecialchars($announcement['date']) ?></span>
-                        </div>
-                        <div class="medium-green-title"><?= htmlspecialchars($announcement['title']) ?></div>
-                        <div class="green-description"><?= htmlspecialchars($announcement['content']) ?></div>
+        <div class="main-container">
+            <div class="back-wrapper">
+                <a href="announcement.php">
+                    <div class="interactive-icon-text">
+                        <img src="../../image/back.svg" alt="Back" class="icon-img" />
+                        <span class="icon-text">Back to Announcements</span>
                     </div>
-                <?php endforeach; ?>
-            <?php endif; ?>
+                </a>
+            </div>
+            <div class="inner-container">
+                <div class="icon-text">
+                    <img src="../../image/calendar.svg" alt="Calendar" />
+                    <span><?= htmlspecialchars($announcement['date']) ?></span>
+                </div>
+                <div class="announcement-title"><?= htmlspecialchars($announcement['title']) ?></div>
+                <div class="thin-line"></div>
+                <p class="green-description"><?= htmlspecialchars($announcement['content']) ?></p>
+                <div class="advice-card" style="margin-top: 1.5rem;">
+                    <span class="green-description-bold">Advice:</span>
+                    <span class="green-description">Please read the announcement carefully to avoid any missed information. Thank you for your attention.</span>
+                </div>
+
+            </div>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>
