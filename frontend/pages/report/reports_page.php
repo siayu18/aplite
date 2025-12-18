@@ -127,7 +127,7 @@ mysqli_close($con);
                             <img src="data:image/jpeg;base64,<?= base64_encode($report['evidence']) ?>" class="report-img" />
                             <div class="report-text-group">
                                 <div class="title-and-icon">
-                                    <span class="dark-green-description">
+                                    <span class="dark-green-description report-title">
                                         <?= htmlspecialchars($report['title']) ?>
                                     </span>
 

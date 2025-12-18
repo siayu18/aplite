@@ -141,6 +141,13 @@
     flex-wrap: wrap;
 }
 
+.report-title {
+    white-space: nowrap;      /* force single line */
+    overflow: hidden;
+    text-overflow: ellipsis;  /* shows ... */
+    width: 155px;
+}
+
 .location-text{
     display: flex;
     gap: 0.3rem;

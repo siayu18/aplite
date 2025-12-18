@@ -76,9 +76,9 @@
                     <img src="../../image/flickering_light.webp" alt="lights-img" class="">
                     <div class="report-text-group">
                         <div class="title-and-icon">
-                            <span class="dark-green-description">Flickering light causing distraction</span>
+                            <span class="dark-green-description report-title">Flickering light causing distraction</span>
                             <div class="card-icon">
-                                <div class="card-icon-img" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
+                                <div class="card-icon-img-apro" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
                                     <img src="../../image/tick.svg" alt="tick" class="report-card-img">
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                             <span class="green-description">Lecture Hall LH2</span>
                         </div>
 
-                        <span class="green-description" style="text-align: justify">One of the main lights keeps flickering during lectures. 
+                        <span class="green-description report-desc">One of the main lights keeps flickering during lectures. 
                             It is very distracting and may be a safety hazard.
                         </span>
 
