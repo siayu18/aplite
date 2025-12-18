@@ -45,7 +45,7 @@
   justify-content: center;
   padding: 3rem 1rem;
   gap: 1.5rem;
-  min-height: 500px;
+  min-height: 300px;
 }
 
 .content-2 {
@@ -139,7 +139,44 @@
 }
 
 .leaderboard-container p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
   margin: 0;
+}
+
+
+/* .leaderboard-container a {
+  text-align: center;
+  text-decoration: underline;
+  color: var(--light-green-font);
+  font-size: 1rem;
+} */
+
+.leaderboard-container .points {
+  margin-left: auto; /* make to the right*/
+}
+
+.rank1 {
+    font-weight: bold;
+    color: var(--pending-orange-border);
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.rank2 {
+    font-weight: bold;
+    color: silver;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.rank3 {
+    font-weight: bold;
+    color: chocolate;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
 }
 
 

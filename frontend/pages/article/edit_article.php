@@ -3,7 +3,7 @@ include('../../../backend/conn.php');
 include('../../../backend/fetch_data.php');
 
 if (!isset($_GET['edit'])) {
-    die('Article ID not specified.');
+    echo "<script>alert('Article ID not specified'); window.location.href='manage_article.php';</script>";
 }
 
 $articleID = mysqli_real_escape_string($con, $_GET['edit']);

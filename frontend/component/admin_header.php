@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    <script src="../../scripts/dashboard.js"></script>
+    <script src="../../scripts/menu.js"></script>
 </body>
 
 </html>

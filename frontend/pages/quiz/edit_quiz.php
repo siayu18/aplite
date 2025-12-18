@@ -3,7 +3,7 @@ include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 
 if (!isset($_GET['id'])) {
-    die('Quiz ID not specified.');
+    echo "<script>alert('Quiz ID not specified'); window.location.href='manage_quiz.php';</script>";
 }
 
 $quizID = $_GET['id'];

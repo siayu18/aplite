@@ -62,7 +62,7 @@ mysqli_close($con);
                             <img src="../../image/green_badge.svg" alt="Badge" />
                             <span>Need <?= htmlspecialchars($quiz['correctForPoints']) ?> Corrects For Points</span>
                         </div>
-                        <button class="green-button">Start Quiz ></button>
+                        <a href="take_quiz.php?id=<?= $quiz['quizID'] ?>" class="green-button">Start Quiz ></a>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>

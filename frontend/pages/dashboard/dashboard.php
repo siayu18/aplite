@@ -58,7 +58,7 @@ include("../../../backend/conn.php");
 
     <?php include '../../component/footer.php'; ?>
 
-    <script src="../../scripts/dashboard.js"></script>
+    <script src="../../scripts/menu.js"></script>
     <script src="../../scripts/animation.js"></script>
 </body>
 </html>

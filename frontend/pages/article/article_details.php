@@ -3,7 +3,7 @@ include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 
 if (!isset($_GET['id'])) {
-    die('Article ID not specified.');
+    echo "<script>alert('Article ID not specified'); window.location.href='choose_article.php';</script>";
 }
 
 // Fetch data

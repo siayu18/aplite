@@ -90,7 +90,7 @@ $reportCount = mysqli_fetch_assoc($reportResult)['total'];
 
     <?php include '../../component/footer.php'; ?>
 
-    <script src="../../scripts/dashboard.js"></script>
+    <script src="../../scripts/menu.js"></script>
     <script src="../../scripts/animation.js"></script>
 </body>
 </html>

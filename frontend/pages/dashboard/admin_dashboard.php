@@ -105,7 +105,7 @@ while ($row = mysqli_fetch_assoc($result)) {
         const yValues = <?= json_encode($data) ?>
     </script>
 
-    <script src="../../scripts/dashboard.js"></script>
+    <script src="../../scripts/menu.js"></script>
     <script src="../../scripts/animation.js"></script>
     <script src="../../scripts/chart.js"></script>
 </body>
