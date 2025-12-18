@@ -81,7 +81,7 @@ mysqli_close($con);
                             <span>Need <?= htmlspecialchars($quiz['correctForPoints']) ?> Corrects For Points</span>
                         </div>
                         <div class="near-button-column">
-                            <a href="" class="green-button">Edit Quiz</a>
+                            <a href="edit_quiz.php?id=<?= $quiz['quizID'] ?>" class="green-button">Edit Quiz</a>
                             <a href="manage_quiz.php?delete=<?= $quiz['quizID'] ?>" class="red-button">Delete Quiz</a>
                         </div>
                     </div>

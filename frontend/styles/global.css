@@ -497,6 +497,27 @@ body.modal-open {
     text-align: right;
 }
 
+.rank1 {
+    font-weight: bold;
+    color: var(--pending-orange-border);
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.rank2 {
+    font-weight: bold;
+    color: silver;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.rank3 {
+    font-weight: bold;
+    color: chocolate;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
 @keyframes slideIn {
   from {
     opacity: 0;
