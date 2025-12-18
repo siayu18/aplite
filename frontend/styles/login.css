@@ -4,20 +4,6 @@
     width: 100%;
 }
 
-@media (min-width: 768px) {
-    .wrapper {
-        flex-direction: row;
-        align-items: stretch;
-    }
-    .login-bg {
-        min-height: auto;
-    }
-
-    .container {
-        min-height: 100vh;
-        padding: clamp(1rem, 5vw, 7rem) clamp(2rem, 8vw, 5rem)
-    }
-}
 .container{
     flex: 1;
     display: flex;
@@ -27,16 +13,17 @@
     justify-content: center;
     min-height: auto;
 }
+
 .big-heading {
-    color: black;
-    font-size: 4rem;
+    color: var(--dark-green-font);
+    font-size: 3.8rem;
     font-style: normal;
     font-weight: 700;
     line-height: 4.75rem; 
 }
 
 .small-heading {
-    color: grey;
+    color: var(--light-green-font);
     font-size: 1.5rem;
     font-style: normal;
     font-weight:200;
@@ -45,16 +32,27 @@
 .title-intro {
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
 }
 
 .input-box input{
     min-width: 70%;
     font-size: 1rem;
-    border: 0.1rem solid black;
+    outline: none;
+    border: 0.1rem solid #3a5e2b3f;
     align-self: stretch;
     border-radius: 1.5rem;
     background-color: transparent;
     padding: 1rem 1.5rem;
+    transition: border-color 0.5s ease;
+}
+
+.input-box input:hover {
+    border-color: #4c763b80;
+}
+
+.input-box input:focus {
+    border-color: #4C763B;
 }
 
 .input-box input::placeholder {
@@ -241,3 +239,43 @@ button[type="submit"]:hover {
     font-weight: 200;
 }
 
+.fade-bg,
+.fade-form {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.fade-bg {
+    animation: fadeIn 1s ease forwards;
+}
+
+.fade-form {
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.4s; /* delay form */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (min-width: 768px) {
+    .wrapper {
+        flex-direction: row;
+        align-items: stretch;
+    }
+    .login-bg {
+        min-height: auto;
+    }
+
+    .container {
+        min-height: 100vh;
+        padding: clamp(1rem, 5vw, 7rem) clamp(2rem, 8vw, 5rem)
+    }
+}

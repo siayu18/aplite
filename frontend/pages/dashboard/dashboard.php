@@ -1,15 +1,5 @@
 <?php
 include("../../../backend/conn.php");
-
-// For leaderboard
-$sql = "SELECT * FROM user ORDER BY points DESC LIMIT 10";
-$result = mysqli_query($con, $sql);
-$users = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
-}
-
-mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -28,33 +18,13 @@ mysqli_close($con);
 <body>
     <div class="col-12 col-s-12 header">
         <div class="top-bar">
-            <img src="../../image/logo.png" alt="APLite Logo" class="logo" />
-            <div class="menu">
-                <a class="menu-text" href="#">Home</a>
-                <a class="menu-text" href="#">Light Control</a>
-                <a class="menu-text" href="#">Quizzes</a>
-                <a class="menu-text" href="#">Articles</a>
-                <a class="menu-text" href="#">Rewards</a>
-                <a class="menu-text" href="#">Report Issue</a>
-                <a class="menu-text" href="#">Announcements</a>
-
-                <a href="#"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
-                <button id="more-button"><img src="../../image/more.png" alt="More" class="menu-img" /></button>
-                <div id="dropdown-menu" class="dropdown-content">
-                    <a href="#">Home</a>
-                    <a href="#">Light Control</a>
-                    <a href="#">Quizzes</a>
-                    <a href="#">Articles</a>
-                    <a href="#">Rewards</a>
-                    <a href="#">Report Issue</a>
-                    <a href="#">Announcements</a>
-                </div>
-            </div>
+            <img src="../../image/logo.svg" alt="APLite Logo" class="logo" />
+            <?php include("../../component/stu_menu.php") ?> 
         </div>
         <div class="middle-content">
             <span class="white-title">Save Light Energy, Earn Points!</span>
             <span class="yellow-description">Join APU's sustainable energy initiative. Turn off unused lights, take quiz challenges to gain points, be in leaderboard and create a greener campus.</span>
-            <button class="yellow-button">Get Started ></button>
+            <a href="../light_management/control_lights.php" class="yellow-button">Get Started ></a>
         </div>
     </div>
 
@@ -64,18 +34,18 @@ mysqli_close($con);
             <span class="green-description">Three simple ways to contribute to a sustainable campus, earn points and climb the leaderboard</span>
         </div>
         <div class="card-container">
-            <a href=""><div class="card">
-                <img src="../../image/light.png" alt="Light" class="card-img" />
+            <a href="../light_management/control_lights.php"><div class="card">
+                <img src="../../image/light.svg" alt="Light" class="card-img" />
                 <p class="card-title">Adjust Brightness</p>
                 <p class="card-description">Check into a classroom and adjust the brightness to suit your preference while saving energy.</p>
             </div>
-            <a href=""><div class="card">
-                <img src="../../image/quiz.png" alt="Quiz" class="card-img" />
+            <a href="../quiz/choose_quiz.php"><div class="card">
+                <img src="../../image/quiz.svg" alt="Quiz" class="card-img" />
                 <p class="card-title">Join Quizzes</p>
                 <p class="card-description">Complete quizzes related to sustainability and earn points while saving energy.</p>
             </div></a>
-            <a href=""><div class="card">
-                <img src="../../image/article.png" alt="article" class="card-img" />
+            <a href="../article/choose_article.php"><div class="card">
+                <img src="../../image/article.svg" alt="article" class="card-img" />
                 <p class="card-title">Read Articles</p>
                 <p class="card-description">Read articles related to sustainability to earn extra points to gain awareness.</p>
             </div></a>
@@ -83,19 +53,12 @@ mysqli_close($con);
     </div>
 
     <div class="col-12 col-s-12 content-2 fade-in">
-        <span class="green-title">Leaderboard</span>
-        <div class="leaderboard-container">
-            <?php $rank = 1;
-            foreach ($users as $user):?>
-                <p>#<?= $rank ?> <?= htmlspecialchars($user['name']) ?> - <?= htmlspecialchars($user['points']) ?> Points</p>
-            <?php $rank++;
-            endforeach; ?>
-        </div>
+        <?php include '../../component/leaderboard.php'; ?>
     </div>
 
     <?php include '../../component/footer.php'; ?>
 
-    <script src="../../scripts/dashboard.js"></script>
+    <script src="../../scripts/menu.js"></script>
     <script src="../../scripts/animation.js"></script>
 </body>
 </html>

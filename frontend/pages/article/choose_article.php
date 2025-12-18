@@ -38,12 +38,12 @@ mysqli_close($con);
                         <img src="data:image/jpeg;base64,<?= base64_encode($article['image']) ?>" alt="Article Image" class="card-img" />
                         <div class="info-container">
                             <div class="points-container">
-                                <img src="../../image/badge.png" alt="Points Badge"/>
+                                <img src="../../image/badge.svg" alt="Points Badge"/>
                                 <span class="points-text"><?= htmlspecialchars($article['pointsAwarded']) ?> pts</span>
                             </div>
                             <div class="medium-green-title"><?= htmlspecialchars($article['title']) ?></div>
                             <div class="icon-text">
-                                <img src="../../image/people_head.png" alt="Author" />
+                                <img src="../../image/people_head.svg" alt="Author" />
                                 <span><?= htmlspecialchars($article['name']) ?></span>
                             </div>
                             <div class="icon-text">

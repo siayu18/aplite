@@ -54,10 +54,10 @@
                 </div>
 
                 <div class="label-field">
-                    <label class="green-description">Evidence (Optional)</label>
+                    <label class="green-description">Evidence (Required)</label>
                     <div class="upload-box-container">
     
-                        <input type="file" id="file-upload" name="report_image" accept="image/png, image/jpeg" hidden>
+                        <input type="file" id="file-upload" name="report_image" accept="image/png, image/jpeg" hidden required>
 
                         <label for="file-upload" class="upload-label">
                             <img src="../../image/upload.svg" alt="upload" class="upload-icon">                 

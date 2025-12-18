@@ -34,14 +34,14 @@ mysqli_close($con);
                 </div>
             <?php else: ?>
                 <?php foreach ($announcements as $announcement): ?>
-                    <div class="card">
+                    <a href="announcement_details.php?id=<?= htmlspecialchars($announcement['announcementID']) ?>" class="card">
                         <div class="icon-text">
                             <img src="../../image/calendar.svg" alt="Calendar" />
                             <span><?= htmlspecialchars($announcement['date']) ?></span>
                         </div>
-                        <div class="medium-green-title"><?= htmlspecialchars($announcement['title']) ?></div>
-                        <div class="green-description"><?= htmlspecialchars($announcement['content']) ?></div>
-                    </div>
+                        <span class="medium-green-title"><?= htmlspecialchars($announcement['title']) ?></span>
+                        <p class="green-description"><?= htmlspecialchars($announcement['content']) ?></p>
+                    </a>
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>

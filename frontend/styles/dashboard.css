@@ -45,6 +45,7 @@
   justify-content: center;
   padding: 3rem 1rem;
   gap: 1.5rem;
+  min-height: 300px;
 }
 
 .content-2 {
@@ -119,6 +120,63 @@
   min-height: 20rem;
   width: 100%;
   max-width: 50rem;
+}
+
+.leaderboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem 1.5rem;
+  border: 0.1rem solid var(--border-green);
+  border-radius: 0.8rem;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  font-size: 1.2rem;
+  font-weight: 550;
+}
+
+.leaderboard-container p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0;
+}
+
+
+/* .leaderboard-container a {
+  text-align: center;
+  text-decoration: underline;
+  color: var(--light-green-font);
+  font-size: 1rem;
+} */
+
+.leaderboard-container .points {
+  margin-left: auto; /* make to the right*/
+}
+
+.rank1 {
+    font-weight: bold;
+    color: var(--pending-orange-border);
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.rank2 {
+    font-weight: bold;
+    color: silver;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+}
+
+.rank3 {
+    font-weight: bold;
+    color: chocolate;
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
 }
 
 

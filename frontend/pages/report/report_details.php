@@ -15,6 +15,7 @@ if (!$report) {
 }
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,15 +27,15 @@ if (!$report) {
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
     <link rel="stylesheet" href="../../styles/report.css">
-    <title>Approve Reports</title>
+    <title>Report Details</title>
 </head>
 
 <body>
-    <?php include '../../component/admin_header.php'; ?>
+    <?php include '../../component/stu_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">
-                <a href="manage_reports.php">
+                <a href="reports_page.php">
                     <div class="interactive-icon-text">
                         <img src="../../image/back.svg" alt="Back" class="icon-img" />
                         <span class="icon-text">Back to Reports</span>
@@ -42,7 +43,7 @@ if (!$report) {
                 </a>
             </div>
 
-            <form method="POST" action="submit_report.php" enctype="multipart/form-data" class="inner-container">
+            <div class="inner-container">
                 <img src="../../image/report.svg" alt="report" class="card-img">
                 <div class="text-group">
                     <span class="medium-green-title">Review Broken Light Report</span>
@@ -102,30 +103,7 @@ if (!$report) {
                         </div>
                     </div>
                 </div>
-
-                <?php if ($report['status'] === 'pending'): ?>
-                    <div class="report-info">
-                        <span class="green-description-bold">Tip:</span>
-                        <span class="green-description">
-                            If you approve a report, a student will be rewarded 150 points. If you reject a report, nothing happens.
-                        </span>
-                    </div>
-                    
-                    <div class="thin-line"></div>
-
-                    <div class="right-button-group">
-                        <a href="manage_reports.php" class="white-button">Cancel</a>
-                        <button class="red-button">
-                            <img src="../../image/white_reject.svg" alt="reject" class="button-img">
-                            Reject Report
-                        </button>
-                        <button type="submit" class="green-button" name="submitBtn">
-                            <img src="../../image/approve_submit.svg" alt="approve" class="button-img">
-                            Approve Report
-                        </button>
-                    </div>
-                <?php endif; ?>
-            </form>
+            </div>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>

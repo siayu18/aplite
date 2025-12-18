@@ -3,6 +3,22 @@ session_start();
 $quiz = $_SESSION['quiz'];
 $currentIndex = $quiz['current'];
 $question = $quiz['questions'][$currentIndex];
+$totalQuestions = count(value: $quiz['questions']);
+$isLastQuestion = ($currentIndex == $totalQuestions - 1);
+
+if (isset($_POST['submitBtn'])) {
+    include('../../../backend/conn.php');
+
+    if ($quiz['current'] < count(value: $quiz['questions']) - 1) {
+        $quiz['current']++;
+        $_SESSION['quiz'] = $quiz;
+        header("Location: quiz_question.php");
+        exit;
+    } else if ($quiz['current'] == $totalQuestions - 1) {
+        header("Location: summary_quiz.php");
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -30,13 +46,13 @@ $question = $quiz['questions'][$currentIndex];
                     </div>
                 </a>
             </div>
-            <form method="POST" action="mcq_quiz.php" class="inner-container">
+            <form method="POST" action="quiz_question.php" class="inner-container">
                 <div class="quiz-text">
-                    <div class="medium-green-title">Energy Conservation Basics</div>
-                    <div class="green-description">Question 1 of 4</div>
+                    <div class="medium-green-title"><?= htmlspecialchars($quiz['title']) ?></div>
+                    <div class="green-description">Question <?= $currentIndex + 1 ?> of <?= $totalQuestions ?></div>
                 </div>
 
-                <div class="dark-green-description">What percentage of energy can be saved by turning off unused lights?</div>
+                <div class="dark-green-description"><?= $question['questionText'] ?></div>
 
                 <div class="selection-group">
                     <button class="answer-button">10%</button>
@@ -45,7 +61,7 @@ $question = $quiz['questions'][$currentIndex];
                     <button class="answer-button">75%</button>
                 </div>
                 
-                <button type="submit" class="green-button">Next</button>
+                <button type="submit" name="submitBtn" class="green-button"><?= $isLastQuestion ? 'Finish' : 'Next' ?></button>
             </form>
         </div>
     </div>

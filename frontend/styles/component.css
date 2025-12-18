@@ -143,7 +143,6 @@ button {
 }
 
 .red-border-button:hover {
-    /* background-color: var(--light-grey); */
     background-color: lightgoldenrodyellow;
 }
 

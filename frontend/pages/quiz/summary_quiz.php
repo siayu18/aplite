@@ -36,7 +36,7 @@
                         <span>0</span>
                     </div>
                 </div>
-                <button class="green-button">Back To Quizzes</button>
+                <a href="choose_quiz.php" class="green-button">Back To Quizzes</a>
             </div>
 
             <!-- <div class="card">
