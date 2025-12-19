@@ -53,7 +53,7 @@ mysqli_close($con);
                         <img src="../../image/warning_small.svg" alt="warn_small" class="report-card-img">
                         <span class="green-description">Total Reports</span>
                     </div>
-                    <span class="green-description">4</span>
+                    <span class="green-description"><?= $totalCount ?></span>
                 </div>
 
                 <div class="report-count-card" style="background-color: var(--pending-orange-background); border: 0.1rem solid var(--pending-orange-border);">
@@ -61,7 +61,7 @@ mysqli_close($con);
                         <img src="../../image/timer.svg" alt="timer" class="report-card-img">
                         <span class="orange-description">Pending</span>
                     </div>
-                    <span class="orange-description">1</span>
+                    <span class="orange-description"><?= $pendingCount ?></span>
                 </div>
 
                 <div class="report-count-card" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
@@ -69,7 +69,7 @@ mysqli_close($con);
                         <img src="../../image/tick.svg" alt="tick" class="report-card-img">
                         <span class="dark-green-description">Approved</span>
                     </div>
-                    <span class="dark-green-description">2</span>
+                    <span class="dark-green-description"><?= $approvedCount ?></span>
                 </div>
 
                 <div class="report-count-card" style="background-color: var(--rejected-red-background); border: 0.1rem solid var(--rejected-red-border);">
@@ -77,7 +77,7 @@ mysqli_close($con);
                         <img src="../../image/rejected.svg" alt="rejected" class="report-card-img">
                         <span class="red-description">Rejected</span>
                     </div>
-                    <span class="red-description">1</span>
+                    <span class="red-description"><?= $rejectedCount ?></span>
                 </div>
             </div>
 
