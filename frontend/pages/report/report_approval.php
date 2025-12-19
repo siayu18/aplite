@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $report = getReportByID($brID);
 
     if ($report && $report['status'] === 'pending') {
-        
+
         if (isset($_POST['approveBtn'])) {
             //Update report status
             $updateReport = "UPDATE brokenreport 
@@ -56,6 +56,8 @@ $report = getReportByID($brID);
 if (!$report) {
     die('Report not found.');
 }
+
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>

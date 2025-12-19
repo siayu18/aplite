@@ -13,6 +13,8 @@ $report = getReportByID($brID);
 if (!$report) {
     die('Report not found.');
 }
+
+mysqli_close($con);
 ?>
 
 
