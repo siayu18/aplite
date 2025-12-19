@@ -39,7 +39,7 @@
                 </button>
             </div>
         </div>
-       <div class="main-contents">
+       <div class="desktop-table">
            <table>
             <tr>
                 <th>User</th>
@@ -66,7 +66,7 @@
                                 <span>Edit</span>
                             </div>
                         </button>
-                        <button class="border-button">
+                        <button class="red-border-button">
                             <div class="icon-text-2">
                                 <img src="../../image/trash.svg" alt="Delete" class="icon-buttons">
                                 <span>Delete</span>
@@ -93,7 +93,7 @@
                                 <span>Edit</span>
                             </div>
                         </button>
-                        <button class="border-button">
+                        <button class="red-border-button">
                             <div class="icon-text-2">
                                 <img src="../../image/trash.svg" alt="Delete" class="icon-buttons">
                                 <span>Delete</span>
@@ -120,7 +120,7 @@
                                 <span>Edit</span>
                             </div>
                         </button>
-                        <button class="border-button">
+                        <button class="red-border-button">
                             <div class="icon-text-2">
                                 <img src="../../image/trash.svg" alt="Delete" class="icon-buttons">
                                 <span>Delete</span>
@@ -147,7 +147,7 @@
                                 <span>Edit</span>
                             </div>
                         </button>
-                        <button class="border-button">
+                        <button class="red-border-button">
                             <div class="icon-text-2">
                                 <img src="../../image/trash.svg" alt="Delete" class="icon-buttons">
                                 <span>Delete</span>
@@ -157,6 +157,37 @@
                 </td>
             </tr>
            </table>
+       </div>
+
+       <div class="mobile-list">
+            <table>
+            <tr>
+                <th>User</th>
+                <th>Actions</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="icon-text-2-left">
+                        <img src="../../image/profile-3.png" alt="Edit" class="icon-name">
+                        <span>Darren Wong</span>
+                    </div>
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <button class="border-button">
+                            <div class="icon-text-2">
+                                <img src="../../image/pencil.svg" alt="Edit" class="icon-buttons">
+                            </div>
+                        </button>
+                        <button class="red-border-button">
+                            <div class="icon-text-2">
+                                <img src="../../image/trash.svg" alt="Delete" class="icon-buttons">
+                            </div>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </table>
        </div>
 
        <div class="pagination">
