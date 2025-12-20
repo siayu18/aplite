@@ -1,5 +1,5 @@
 <?php
-session_start();
+require_once "../../../backend/auth/session_admin.php";
 include("../../../backend/conn.php");
 
 // Total Users
