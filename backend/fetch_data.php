@@ -126,6 +126,21 @@ function getAllReports() {
     return $data;
 }
 
+function isLecturerInRoom($roomID) {
+    global $con;
+
+    $sql = "SELECT s.sessionID
+            FROM session s
+            INNER JOIN user u ON s.studentID = u.userID
+            WHERE s.roomID = '$roomID'
+                AND s.checkOutTime IS NULL
+                AND u.role = 'lecturer'
+            LIMIT 1";
+
+    $result = mysqli_query($con, $sql);
+    return mysqli_num_rows($result) > 0;
+}
+
 
 
 ?>
