@@ -99,7 +99,7 @@
 }
 
 .report-img{
-    width: 257px;
+    width: 259px;
     height: 144px;
 }
 
@@ -288,12 +288,6 @@
     width: auto;
 }
 
-.upload-icon{
-    height: 3rem;
-    width: auto;
-    opacity: 0.6;
-}
-
 .orange-button{
     display: flex;             
     align-items: center;       
@@ -318,21 +312,6 @@
 .sender-info{
     display: flex;
     justify-content: space-between;
-}
-
-.upload-label{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.6rem;
-    width: 100%;
-    min-height: 180px;
-    background-color: var(--transparent-green);
-    border: 0.1rem solid var(--border-green);
-    border-radius: 0.8rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
 @media only screen and (max-width: 768px) {

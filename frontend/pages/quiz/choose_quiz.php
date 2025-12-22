@@ -2,19 +2,8 @@
 include("../../../backend/conn.php");
 include("../../../backend/fetch_data.php");
 
-$currentID = 3;
-
-$sql = "SELECT q.quizID, q.title, q.pointsAwarded, q.correctForPoints, COUNT(que.questionID) AS questionCount
-        FROM Quiz AS q
-        LEFT JOIN Question AS que ON q.quizID = que.quizID
-        GROUP BY q.quizID, q.title, q.pointsAwarded, q.correctForPoints
-        ORDER BY q.title ASC";
-$result = mysqli_query($con, $sql);
-
-$quizzes = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $quizzes[] = $row;
-}
+$currentID = 3; // Dummy data
+$quizzes = getAllQuizzes();
 ?>
 
 <!DOCTYPE html>

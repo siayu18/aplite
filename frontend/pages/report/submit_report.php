@@ -1,3 +1,37 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+
+$rooms = getData('room');
+
+if (isset($_POST['submitBtn'])) {
+    
+    $reportID = uniqid();
+    $studentID = 3;
+    $roomID = $_POST['classroom'];
+    $title = mysqli_real_escape_string($con, $_POST['report_title']);
+    $description = mysqli_real_escape_string($con, $_POST['description']);
+    $current_date = date("Y-m-d");
+    $status = "pending";
+
+    $imageData = null;
+    if (!empty($_FILES['report_image']['tmp_name'])) {
+        $imageData = mysqli_real_escape_string($con, file_get_contents($_FILES['report_image']['tmp_name']));
+    }
+
+    $sql = "INSERT INTO brokenreport(brID, roomID, studentID, title, description, evidence, date, status)
+            VALUES('$reportID', '$roomID', '$studentID', '$title', '$description', '$imageData', '$current_date', '$status')";
+
+    if (!mysqli_query($con, $sql)) {
+            die("Error: " . mysqli_error($con));
+        } else {
+            echo "<script>window.success = true;</script>";
+        }
+
+    mysqli_close($con);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,21 +59,24 @@
                 </a>
             </div>
 
-            <form method="POST" action="submit_report.php" enctype="multipart/form-data" class="inner-container">
+            <form method="POST" enctype="multipart/form-data" class="inner-container">
                 <img src="../../image/report.svg" alt="report" class="card-img">
                 <div class="text-group">
                     <span class="medium-green-title">Report Broken Light</span>
                     <span class="green-description">Help us maintain a well-lit and safe campus environment</span>
                 </div>
-                
-                <div class="label-field">
-                    <label class="green-description">Your Name</label>
-                    <input type="text" placeholder="Enter your full name" name="sender_name" required/>
-                </div>
 
                 <div class="label-field">
                     <label class="green-description">Select Room</label>
-                    <select class="dropdown-classroom-choice" name="classroom" required></select>
+                    <select class="dropdown-classroom-choice" name="classroom" required>
+                        <option value="" disabled selected>Select a room</option>
+
+                        <?php foreach ($rooms as $room): ?>
+                            <option value="<?= $room['roomID'] ?>">
+                                <?= htmlspecialchars($room['roomName']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <div class="label-field">
@@ -50,21 +87,12 @@
                 <div class="label-field">
                     <label class="green-description">Description</label>
                     <textarea class="white-area" placeholder="Describe the issue in detail. Include information such as: Which lights are affected? When did you notice the problem? How is it impacting the room usage?" 
-                    name="content" required></textarea>
+                    name="description" required></textarea>
                 </div>
 
                 <div class="label-field">
                     <label class="green-description">Evidence (Required)</label>
-                    <div class="upload-box-container">
-    
-                        <input type="file" id="file-upload" name="report_image" accept="image/png, image/jpeg" hidden required>
-
-                        <label for="file-upload" class="upload-label">
-                            <img src="../../image/upload.svg" alt="upload" class="upload-icon">                 
-                            <span class="dark-green-font">Click to upload image</span>
-                            <span class="green-description">PNG, JPG up to 10MB</span>
-                        </label>
-                    </div>
+                    <input type="file" id="file-upload" name="report_image" accept="image/png, image/jpeg" required>
                 </div>
 
                 <div class="report-note">
@@ -84,8 +112,18 @@
             </form>
         </div>
     </div>
+
+    <div class="overlay"></div>
+        <div class="modal">
+            <img src="../../image/tick.svg" alt="approved" class="card-img">
+            <div class="text-group">
+                <span class="medium-green-title">Report Submitted!</span>
+            </div>
+        <a href="reports_page.php" class="green-button">Done</a>
+    </div>
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

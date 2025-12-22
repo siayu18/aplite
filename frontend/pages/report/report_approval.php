@@ -7,12 +7,57 @@ if (!isset($_GET['id'])) {
     die('No report selected.');
 }
 
+$overlayType = null;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $brID = $_POST['brID'];
+    $report = getReportByID($brID);
+
+    if ($report && $report['status'] === 'pending') {
+
+        if (isset($_POST['approveBtn'])) {
+            //Update report status
+            $updateReport = "UPDATE brokenreport 
+                            SET status = 'approved' 
+                            WHERE brID = '$brID'";
+
+            mysqli_query($con, $updateReport);
+
+            //Add 150 points to user
+            $studentID = $report['studentID'];
+            $updatePoints = "UPDATE user 
+                            SET points = points + 150 
+                            WHERE userID = '$studentID'";
+
+            mysqli_query($con, $updatePoints);
+
+            $overlayType = 'approved';
+            echo "<script>window.success = true;</script>";
+        }
+
+        if (isset($_POST['rejectBtn'])) {
+
+            $updateReport = "UPDATE brokenreport 
+                            SET status = 'rejected' 
+                            WHERE brID = '$brID'";
+
+            mysqli_query($con, $updateReport);
+
+            $overlayType = 'rejected';
+            echo "<script>window.success = true;</script>";
+        }
+    }
+}
+
 $brID = $_GET['id'];
 $report = getReportByID($brID);
 
 if (!$report) {
     die('Report not found.');
 }
+
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -42,7 +87,8 @@ if (!$report) {
                 </a>
             </div>
 
-            <form method="POST" action="submit_report.php" enctype="multipart/form-data" class="inner-container">
+            <form method="POST" enctype="multipart/form-data" class="inner-container">
+                <input type="hidden" name="brID" value="<?= $report['brID'] ?>">
                 <img src="../../image/report.svg" alt="report" class="card-img">
                 <div class="text-group">
                     <span class="medium-green-title">Review Broken Light Report</span>
@@ -115,11 +161,11 @@ if (!$report) {
 
                     <div class="right-button-group">
                         <a href="manage_reports.php" class="white-button">Cancel</a>
-                        <button class="red-button">
+                        <button type="submit" class="red-button" name="rejectBtn">
                             <img src="../../image/white_reject.svg" alt="reject" class="button-img">
                             Reject Report
                         </button>
-                        <button type="submit" class="green-button" name="submitBtn">
+                        <button type="submit" class="green-button" name="approveBtn">
                             <img src="../../image/approve_submit.svg" alt="approve" class="button-img">
                             Approve Report
                         </button>
@@ -128,8 +174,30 @@ if (!$report) {
             </form>
         </div>
     </div>
+
+    <?php if ($overlayType): ?>
+        <div class="overlay"></div>
+
+        <div class="modal">
+            <?php if ($overlayType === 'approved'): ?>
+                <img src="../../image/tick.svg" alt="approved" class="card-img">
+                <div class="text-group">
+                    <span class="medium-green-title">Report Approved!</span>
+                </div>
+
+            <?php elseif ($overlayType === 'rejected'): ?>
+                <img src="../../image/rejected.svg" alt="rejected" class="card-img">
+                <div class="text-group">
+                    <span class="medium-green-title">Report Rejected!</span>
+                </div>
+            <?php endif; ?>
+            <a href="manage_reports.php" class="green-button">Done</a>
+        </div>
+    <?php endif; ?>
+
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

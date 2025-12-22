@@ -1,3 +1,32 @@
+<?php
+include ('../../../backend/conn.php');
+include ('../../../backend/fetch_data.php');
+
+$rooms = getData('room');
+
+if (isset($_POST['checkinBtn'])) {
+
+    $sessionID = uniqid();
+    $roomID = $_POST['classroom'];
+    $studentID = 3;
+
+    if (isLecturerInRoom($roomID)) {
+        echo "<script>window.success = true;</script>";
+    } else {
+        $sql = "INSERT INTO `session` (sessionID, studentID, roomID, checkInTime, checkOutTime, duration)
+                VALUES ('$sessionID', '$studentID', '$roomID', NOW(), NULL, NULL)";
+
+        if (mysqli_query($con, $sql)) {
+            header("Location: manage_lighting.php"); 
+            exit(); 
+        } else {
+            die(mysqli_error($con));
+        }
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,39 +51,39 @@
                 <span class="green-description">Select a classroom and check-in to control the lighting</span>
             </div>
 
-            <form method="POST" action="control_lights.php" class="content-group">
+            <form method="POST" class="content-group">
                 <div class="label-field">
                     <label class="green-description">Select Classroom</label>
-                    <select class="dropdown-classroom-choice" name="classroom" required></select>
+                    <select class="dropdown-classroom-choice" name="classroom" required>
+                        <option value="" disabled selected>Select a classroom</option>
+
+                        <?php foreach ($rooms as $room): ?>
+                            <option value="<?= $room['roomID'] ?>">
+                                <?= htmlspecialchars($room['roomName']) ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
-                <div class="class-details">
-                    <span class="medium-green-title">Room Details</span>
-                    <div class="detail-row">
-                        <span class="green-description-bold">Room:</span>
-                        <span class="green-description">Classroom A101</span>
-                    </div>
-
-                    <div class="detail-row">
-                        <span class="green-description-bold">Building:</span>
-                        <span class="green-description">Academic Building A</span>
-                    </div>
-
-                    <div class="detail-row">
-                        <span class="green-description-bold">Floor:</span>
-                        <span class="green-description">1</span>
-                    </div>
-                </div>
-
-                <button class="green-button">
+                <button type="submit" class="green-button" name="checkinBtn">
                     <img src="../../image/check_in_icon.svg" alt="checkin" class="button-img">
                     <span>Check into Classoom<span>
                 </button>
             </form>
         </div>
     </div>
+
+    <div class="overlay"></div>
+        <div class="modal">
+            <img src="../../image/rejected.svg" alt="approved" class="card-img">
+            <div class="text-group">
+                <span class="medium-green-title">Classroom is currently used by Lecturer!</span>
+            </div>
+        <a href="control_lights.php" class="green-button">Select Classroom Again</a>
+    </div>
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

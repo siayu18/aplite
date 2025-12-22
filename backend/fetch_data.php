@@ -126,6 +126,63 @@ function getAllReports() {
     return $data;
 }
 
+function isLecturerInRoom($roomID) {
+    global $con;
 
+    $sql = "SELECT s.sessionID
+            FROM session s
+            INNER JOIN user u ON s.studentID = u.userID
+            WHERE s.roomID = '$roomID'
+                AND s.checkOutTime IS NULL
+                AND u.role = 'lecturer'
+            LIMIT 1";
 
+    $result = mysqli_query($con, $sql);
+    return mysqli_num_rows($result) > 0;
+}
+
+function getActiveSessionByStudent($studentID) {
+    global $con;
+
+    $sql = "SELECT s.*, r.roomName
+            FROM `session` s
+            INNER JOIN room r ON s.roomID = r.roomID
+            WHERE s.studentID = '$studentID'
+                AND s.checkOutTime IS NULL
+            LIMIT 1";
+
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result);
+}
+
+function getAllQuizzes() {
+    global $con;
+
+    $sql = "SELECT q.quizID, q.title, q.pointsAwarded, q.correctForPoints, COUNT(que.questionID) AS questionCount
+            FROM Quiz AS q
+            LEFT JOIN Question AS que ON q.quizID = que.quizID
+            GROUP BY q.quizID, q.title, q.pointsAwarded, q.correctForPoints
+            ORDER BY q.title ASC";
+    $result = mysqli_query($con, $sql);
+
+    $data = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $data[] = $row;
+    }
+
+    return $data;
+}
+
+function getLeaderboardByPts($pts) {
+    global $con;
+
+    $sql = "SELECT * FROM user ORDER BY points DESC LIMIT $pts";
+    $result = mysqli_query($con, $sql);
+    $users = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $users[] = $row;
+    }
+
+    return $users;
+}
 ?>
