@@ -70,7 +70,6 @@ function injectAverageBrightness() {
     form.appendChild(pointsInput);
 }
 
-
 function calculatePoints(avgBrightness, totalSeconds) {
     let pointsPerUnit = 0;
 

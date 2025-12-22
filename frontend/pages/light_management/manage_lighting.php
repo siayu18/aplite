@@ -52,7 +52,7 @@ if (isset($_POST['checkoutBtn'])) {
         SET points = points + $pointsEarned
         WHERE userID = '$studentID'";
 
-    if (!mysqli_query($con, $sql2)){
+    if (!mysqli_query($con, $sql2)) {
         die(mysqli_error($con));
     }
 }
