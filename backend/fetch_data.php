@@ -141,6 +141,19 @@ function isLecturerInRoom($roomID) {
     return mysqli_num_rows($result) > 0;
 }
 
+function getActiveSessionByStudent($studentID) {
+    global $con;
+
+    $sql = "SELECT s.*, r.roomName
+            FROM `session` s
+            INNER JOIN room r ON s.roomID = r.roomID
+            WHERE s.studentID = '$studentID'
+                AND s.checkOutTime IS NULL
+            LIMIT 1";
+
+    $result = mysqli_query($con, $sql);
+    return mysqli_fetch_assoc($result);
+}
 
 
 ?>

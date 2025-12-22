@@ -9,13 +9,12 @@ if (isset($_POST['checkinBtn'])) {
     $sessionID = uniqid();
     $roomID = $_POST['classroom'];
     $studentID = 3;
-    $checkInTime = date('Y-m-d H:i:s');
 
     if (isLecturerInRoom($roomID)) {
         echo "<script>window.success = true;</script>";
     } else {
         $sql = "INSERT INTO `session` (sessionID, studentID, roomID, checkInTime, checkOutTime, duration)
-                VALUES ('$sessionID', '$studentID', '$roomID', '$checkInTime', NULL, NULL)";
+                VALUES ('$sessionID', '$studentID', '$roomID', NOW(), NULL, NULL)";
 
         if (mysqli_query($con, $sql)) {
             header("Location: manage_lighting.php"); 
