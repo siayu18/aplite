@@ -71,7 +71,7 @@ function getDataBy2ID($table_name, $key1, $key2, $id1, $id2) {
 
     $sql = "SELECT * FROM $table_name WHERE $key1 = '$id1' AND $key2 = '$id2' LIMIT 1";
     $result = mysqli_query($con, $sql);
-    return mysqli_fetch_assoc($result);;
+    return mysqli_fetch_assoc($result);
 }
 
 function getReportsForStudent($studentID) {

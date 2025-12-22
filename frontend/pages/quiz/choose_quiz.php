@@ -1,5 +1,8 @@
 <?php
 include("../../../backend/conn.php");
+include("../../../backend/fetch_data.php");
+
+$currentID = 3;
 
 $sql = "SELECT q.quizID, q.title, q.pointsAwarded, q.correctForPoints, COUNT(que.questionID) AS questionCount
         FROM Quiz AS q
@@ -12,8 +15,6 @@ $quizzes = [];
 while ($row = mysqli_fetch_assoc($result)) {
     $quizzes[] = $row;
 }
-
-mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +46,7 @@ mysqli_close($con);
                 </div>
             <?php else: ?>
                 <?php foreach ($quizzes as $quiz): ?>
+                    <?php $userQuiz = getDataBy2ID("userQuiz", "userID", "quizID", $currentID, $quiz['quizID']); ?>
                     <div class="card">
                         <div class="quiz-points">
                             <img src="../../image/article.svg" alt="Quiz" />
@@ -62,10 +64,26 @@ mysqli_close($con);
                             <img src="../../image/green_badge.svg" alt="Badge" />
                             <span>Need <?= htmlspecialchars($quiz['correctForPoints']) ?> Corrects For Points</span>
                         </div>
+                        <div class="icon-text">
+                            <img src="../../image/status.svg" alt="Badge" />
+                            <span>Status: 
+                            <?php if ($userQuiz): ?>
+                                <strong style="color: rgba(0, 184, 0, 1);"> Completed </strong>
+                            <?php else: ?>
+                                <strong style="color: red;"> Incomplete </strong>
+                            <?php endif; ?>
+                            </span>
+                        </div>
                         <a href="take_quiz.php?id=<?= $quiz['quizID'] ?>" class="green-button">Start Quiz ></a>
                     </div>
                 <?php endforeach; ?>
+                <?php mysqli_close($con); ?>
             <?php endif; ?>
+        </div>
+
+        <div class="transparent-card">
+            <span class="green-description-bold">Note:</span>
+            <span class="green-description">Points will not be awarded for quiz that is completed before.</span>
         </div>
     </div>
     <?php include '../../component/footer.php'; ?>

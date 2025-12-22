@@ -18,7 +18,10 @@ if (!$questions) {
 $_SESSION['quiz'] = [
     'quizID' => $quizID,
     'title' => $quiz['title'],
+    'correctForPoints' => $quiz['correctForPoints'],
+    'pointsAwarded' => $quiz['pointsAwarded'],
     'questions' => $questions,
+    'answers' => [],
     'current' => 0,
     'score' => 0
 ];

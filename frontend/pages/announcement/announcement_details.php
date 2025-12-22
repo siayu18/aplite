@@ -49,7 +49,7 @@ mysqli_close($con);
                 <div class="announcement-title"><?= htmlspecialchars($announcement['title']) ?></div>
                 <div class="thin-line"></div>
                 <p class="green-description"><?= htmlspecialchars($announcement['content']) ?></p>
-                <div class="advice-card" style="margin-top: 1.5rem;">
+                <div class="transparent-card" style="margin-top: 1.5rem;">
                     <span class="green-description-bold">Advice:</span>
                     <span class="green-description">Please read the announcement carefully to avoid any missed information. Thank you for your attention.</span>
                 </div>
