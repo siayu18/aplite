@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <div class="col-12 col-s-12 footer fade-in">
+    <div class="col-12 col-s-12 footer">
         <span class="footer-text">© 2025 APLITE - Asia Pacific University. Building a sustainable future together.</span>
         <div>
             <a href="https://www.facebook.com/teh.haojerh/"><img src="../../image/facebook.svg" alt="Facebook" class="social-button"/></a>

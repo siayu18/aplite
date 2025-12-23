@@ -54,7 +54,7 @@
     color: var(--dark-green-font);
 }
 
-.advice-card {
+.transparent-card {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

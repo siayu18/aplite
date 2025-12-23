@@ -207,6 +207,13 @@ a {
   font-size: 0.9rem;
 }
 
+.dark-green-description-bold {
+  color: var(--dark-green-font);
+  line-height: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 480;
+}
+
 .dark-green-description-between {
   display: flex;
   flex-direction: row;
@@ -281,6 +288,13 @@ a {
 .interactive-icon-text:hover {
     scale: 1.1;
     font-weight: bold;
+}
+
+.icon-text-clean {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .points-container {

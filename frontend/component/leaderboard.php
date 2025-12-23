@@ -1,14 +1,8 @@
 <?php
 include("../../../backend/conn.php");
+include("../../../backend/fetch_data.php");
 
-// For leaderboard
-$sql = "SELECT * FROM user ORDER BY points DESC LIMIT 10";
-$result = mysqli_query($con, $sql);
-$users = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $users[] = $row;
-}
-
+$users = getLeaderboardByPts(10);
 mysqli_close($con);
 ?>
 

@@ -3,12 +3,12 @@ if (isset($_POST['submitBtn'])) {
     include ('../../../backend/conn.php');
 
     $id = uniqid();
-    $current_date = date("Y-m-d");
+    $currentDate = date("Y-m-d");
     $title = mysqli_real_escape_string($con, $_POST['title']);
     $content = mysqli_real_escape_string($con, $_POST['content']);
 
     $sql = "INSERT INTO announcement (announcementID, title, content, date) 
-            VALUES ('$id','$title','$content','$current_date')";
+            VALUES ('$id','$title','$content','$currentDate')";
 
     if (!mysqli_query($con,$sql)) {
         die('Error: ' . mysqli_error($con));

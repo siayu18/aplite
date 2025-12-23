@@ -3,13 +3,17 @@ include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 
 session_start();
-
 $quiz = $_SESSION['quiz'];
+
+if (!$quiz) {
+    header("Location: choose_quiz.php");
+    exit;
+}
+
 $currentIndex = $quiz['current'];
 $question = $quiz['questions'][$currentIndex];
 $totalQuestions = count($quiz['questions']);
 $isLastQuestion = ($currentIndex == $totalQuestions - 1);
-$message = '';
 $choices = null;
 
 // if type is mcq then get choices
@@ -18,33 +22,22 @@ if ($question['questionType'] == 'mcq') {
 }
 
 if (isset($_POST['submitBtn'])) {
-    include('../../../backend/conn.php');
+    $userAnswer = $_POST['answer'];
 
-    // get answer from user
-    $userAnswer = $_POST['answer'] ?? null;
+    // Save question answer into session
+    $_SESSION['quiz']['answers'][$currentIndex] = [
+        'questionID' => $question['questionID'],
+        'answer' => $userAnswer
+    ];
 
-    // no empty answer
-    if ($userAnswer == null) {
-        $message = 'Answer cannot be empty';
-    }
-
-    if (empty($message)) {
-        // Save question answer into session
-        $_SESSION['quiz']['answers'][$currentIndex] = [
-            'questionID' => $question['questionID'],
-            'answer' => $userAnswer
-        ];
-
-        // Make sure it does not exceed the amount of questions
-        if ($quiz['current'] < $totalQuestions - 1) {
-            $quiz['current']++;
-            $_SESSION['quiz'] = $quiz;
-            header("Location: quiz_question.php");
-            exit;
-        } else if ($quiz['current'] == $totalQuestions - 1) {
-            header("Location: summary_quiz.php");
-            exit;
-        }
+    // Make sure it does not exceed the amount of questions
+    if ($currentIndex < $totalQuestions - 1) {
+        $_SESSION['quiz']['current']++;
+        header("Location: quiz_question.php");
+        exit;
+    } else {
+        header("Location: summary_quiz.php");
+        exit;
     }
 }
 ?>
@@ -80,7 +73,7 @@ if (isset($_POST['submitBtn'])) {
                     <div class="green-description">Question <?= $currentIndex + 1 ?> of <?= $totalQuestions ?></div>
                 </div>
 
-                <div class="dark-green-description"><?= $question['questionText'] ?></div>
+                <div class="dark-green-description-bold"><?= $question['questionText'] ?></div>
 
                 <?php if ($question["questionType"] == "mcq") : ?>
                     <div class="selection-group">
@@ -93,16 +86,10 @@ if (isset($_POST['submitBtn'])) {
                         <?php endforeach; ?>
                     </div>
                 <?php else: ?>
-                    <textarea class="white-area" name="answer" placeholder="Enter your answer..."></textarea>
+                    <textarea class="white-area" name="answer" placeholder="Enter your answer..." required></textarea>
                 <?php endif ?>
                 
                 <button type="submit" name="submitBtn" class="green-button"><?= $isLastQuestion ? 'Finish' : 'Next' ?></button>
-
-                <?php if (!empty($message)): ?>
-                    <div class="error-message">
-                        <?php echo $message; ?>
-                    </div>
-                <?php endif; ?>
             </form>
         </div>
     </div>
