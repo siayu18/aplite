@@ -35,12 +35,63 @@ if(!password_verify($inputPassword, $user['password'])) {
     exit;
 } 
 
+// Update streak & lastLogin
+date_default_timezone_set('Asia/Kuala_Lumpur');
+$currentDate = new DateTime();
+$lastLoginDate = new DateTime($user['lastLogin']);
+$diffDays = (int)$lastLoginDate->diff($currentDate)->format('%a');
+
+if ($diffDays === 0) {
+    $streak = $user['streak']; 
+} elseif ($diffDays === 1) {
+    $streak = $user['streak'] + 1;
+} else {
+    $streak = 1;
+}
+
+$updatesql = "
+    UDATE user 
+    SET lastLogin = NOW(), streak = ?
+    WHERE userID = ?
+    ";
+$updateStmt = $con->prepare($updatesql);
+$updateStmt->bind_param('ii', $streak, $user['userID']);
+$updateStmt->execute();
+
 // starting a session after verification
 session_start();
 
 $_SESSION['user_id'] = $user['userID'];
 $_SESSION['name'] = $user['name'];
 $_SESSION['role'] = $user['role'];
+
+// remember me with hashed tokens
+if(isset($_POST['remember'])) {
+
+    $token = bin2hex(random_bytes(32));
+    $hashedToken = hash('sha256', $token);
+
+    $sql = "
+        UPDATE user
+        SET rememberToken = ?
+        WHERE userID = ?
+    ";
+
+    $stmt_update = $con->prepare($sql);
+    $stmt_update->bind_param('si', $hashedToken, $user['userID']);
+    $stmt_update->execute();
+
+    // cookie expires in 30 days
+    setcookie(
+        "remember_me",
+        $token,
+        time() + (86400 * 30),
+        "/",
+        "",
+        false,
+        true
+    );
+}
 
 switch ($user['role']) {
     case 'admin':

@@ -34,7 +34,7 @@
 
                     <div class="remember">
                         <label class="checkbox-container">
-                            <input class="custom-checkbox" type="checkbox">
+                            <input class="custom-checkbox" type="checkbox" name="remember">
                             <span class="checkmark"></span>
                         </label>
                         <span>Remember Me</span>

@@ -2,7 +2,7 @@
 require_once "session.php";
 
 if ($_SESSION['role'] !== 'admin') {
-    header("Location: unauthorized.php");
+    header("Location: /aplite/backend/auth/unauthorized.php");
     exit;
 }
 ?>

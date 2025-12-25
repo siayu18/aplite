@@ -1,3 +1,6 @@
+<?php
+require_once "../../../backend/auth/session.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,12 +74,12 @@
                     <span class="dark-green-description">Points</span>
                     <span class="results">454 pts</span>
                </div>
-                <button class="red-border-button">
+                <a href="../../../backend/auth/logout.php" class="red-border-button">
                     <div class="icon-text">
                         <img src="../../image/sign-out.svg" alt="sign-out">
                         <span>Sign Out</span>
                     </div>
-                </button>
+                </a>
            </div>
        </div>
     </div>
