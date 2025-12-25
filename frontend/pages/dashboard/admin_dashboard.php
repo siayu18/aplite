@@ -1,6 +1,6 @@
 <?php
-require_once "../../../backend/auth/session_admin.php";
 include("../../../backend/conn.php");
+require_once "../../../backend/auth/session_admin.php";
 
 // Total Users
 $userResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM user");

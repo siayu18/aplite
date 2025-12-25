@@ -1,3 +1,7 @@
+<?php
+require_once "../../../backend/auth/session_admin.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
