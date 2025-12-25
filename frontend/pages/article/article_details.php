@@ -14,18 +14,20 @@ if (!$article) {
 }
 
 // Article Claim Points Logic
-$current_user = getDataByID("user", "userID", "3");
+$current_user = getDataByID("user", "userID", "4");
 $currentID = $current_user["userID"];
 if (!$current_user) {
     die("User Not Found");
 }
 
 if (isset($_GET['claim'])) {
+    $claimStatus = false;
     $user_article = getDataBy2ID("userArticle", "userID", "articleID", $currentID, $articleID);
 
     if ($user_article) {
         // Overlay
-        echo "<script>window.claimStatus = 'already';</script>";
+        $claimStatus = true;
+        echo "<script>window.success = 'true';</script>";
     } else {
         $user_articleID = uniqid();
         $current_date = date("Y-m-d");
@@ -40,7 +42,7 @@ if (isset($_GET['claim'])) {
         mysqli_query($con, $sql_update);
 
         // Overlay
-        echo "<script>window.claimStatus='success';</script>";
+        echo "<script>window.success='true';</script>";
     }
 }
 
@@ -99,12 +101,24 @@ mysqli_close($con);
 
     <div class="overlay"></div>
     <div class="modal">
-        <img src="" alt="Error" class="modal-img">
+        <img src="../../image/<?= $claimStatus ? 'wrong.svg' : 'verify.svg'?>" alt="<?= $claimStatus ? 'Wrong' : 'Verify'?>" class="modal-img">
         <div class="text-group">
-            <span class="medium-green-title">Error: Try Again</span>
-            <span class="green-description"> Oops, Error has Occured!</span>
+            <span class="medium-green-title">
+                <?php if ($claimStatus) : ?>
+                    Already Claimed!
+                <?php else : ?>
+                    Successfuly Claimed!
+                <?php endif; ?>
+            </span>
+            <span class="green-description">
+                <?php if ($claimStatus) : ?>
+                    Sorry, you have already claimed points for this article.
+                <?php else : ?>
+                    You have successfully claimed <strong><?= $article['pointsAwarded'] ?> points</strong>, thanks for reading.
+                <?php endif; ?>
+            </span>
         </div>
-        <a href="article_details.php?id=<?= $articleID ?>" class="green-button">Back</a>
+        <a href="choose_article.php" class="green-button">Back</a>
     </div>
 
     <?php include '../../component/footer.php'; ?>
