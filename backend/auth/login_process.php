@@ -9,7 +9,7 @@ if ($_identifier == '') {
 require_once "../conn.php";
 
 $sql = "
-    SELECT userID, name, email, password, role
+    SELECT userID, name, email, password, role, streak, lastLogin
     FROM user
     WHERE email = ? OR name = ?
     LIMIT 1
@@ -50,7 +50,7 @@ if ($diffDays === 0) {
 }
 
 $updatesql = "
-    UDATE user 
+    UPDATE user 
     SET lastLogin = NOW(), streak = ?
     WHERE userID = ?
     ";
