@@ -1,5 +1,5 @@
 <?php
-require_once "../../../backend/auth/session_student.php";
+require_once "../../../backend/auth/session.php";
 include("../../../backend/conn.php");
 include("../../../backend/fetch_data.php");
 
@@ -21,7 +21,7 @@ mysqli_close($con);
     <title>Leaderboard</title>
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class="col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Leaderboard</span>

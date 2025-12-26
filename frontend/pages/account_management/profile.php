@@ -4,7 +4,7 @@ require_once "../../../backend/conn.php";
 
 $userId = $_SESSION['user_id'];
 $sql = "
-    SELECT name, email, points, streak, lastLogin, picture
+    SELECT name, email, points, streak, lastLogin, picture, role
     FROM user
     WHERE userID = ?";
 
@@ -13,6 +13,24 @@ $stmt->bind_param('i', $userId);
 $stmt->execute();
 $result = $stmt->get_result();
 $userData = $result->fetch_assoc();
+
+$avatarFolderUrl = "/aplite/frontend/image/avatars/";
+$defaultAvatarUrl = "/aplite/frontend/image/default/Profile-2.svg";
+
+$avatarUrl = $defaultAvatarUrl; 
+
+if (!empty($userData['picture'])) {
+
+    $avatarPath = $_SERVER['DOCUMENT_ROOT'] . "/aplite/frontend/image/avatars/" . $userData['picture'];
+
+    if(file_exists($avatarPath)) { 
+        $avatarUrl = $avatarFolderUrl . $userData['picture'];
+    }
+}
+
+$points = $userData['points'];
+$streak = $userData['streak'];
+$lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLogin'])) : "Never";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +46,7 @@ $userData = $result->fetch_assoc();
     <title>Profile Management</title>
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class="content fade-in" style="padding: 2rem;">
        <div class="profile-header">
             <h1 class="green-title">Profile Settings</h1>
@@ -41,7 +59,7 @@ $userData = $result->fetch_assoc();
                     <div class="avatar-card">
 
                         <img
-                            src="data:image/*;base64,<?php echo base64_encode($userData['picture']); ?>"
+                            src="<?=  $avatarUrl ?>"
                             alt="Profile Picture"
                             class="avatar-img"
                             id="avatar-preview"
@@ -52,21 +70,17 @@ $userData = $result->fetch_assoc();
                             name="avatar"
                             id="avatar-input"
                             accept="image/*"
-                            style="display:none;"
+                            hidden
                         >
 
                         <div class="avatar-title-btn">
                             <div class="avatar-card-title">
-                                <h1 class="green-title">Change Avatar</h1>
-                                <p class="dark-green-description">Select a profile picture</p>
+                                <h1 class="green-title"><?= htmlspecialchars($userData['name']) ?></h1>
+                                <p class="dark-green-description">Current Role: <?= htmlspecialchars($userData['role']) ?></p>
                             </div>
 
                             <button type="button" class="green-button" id="select-avatar-btn">
                                 <span>Select Avatar</span>
-                            </button>
-
-                            <button type="submit" class="green-button">
-                                <span>Upload</span>
                             </button>
                         </div>
                     </div>
@@ -74,39 +88,40 @@ $userData = $result->fetch_assoc();
 
                 <div class="profile-details-card">
                         <h1 class="green-title">Personal Information</h1>
-                    <form>
+                    <form method="POST" action="../../../backend/user/update_profile.php" id="profile-form">
                         <div class="form-group">
                             <label>Username</label>
-                            <input type="text" placeholder="enter username" required>
+                            <input type="text" name="name" value="<?= htmlspecialchars($userData['name']) ?>" placeholder="enter username" required>
                         </div>
                         <div class="form-group">
                             <label>Email</label>
-                            <input type="text" placeholder="enter email" required>
+                            <input type="text" name="email" value="<?= htmlspecialchars($userData['email']) ?>" placeholder="enter email" required>
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" placeholder="enter password" required>
+                            <input type="password" name="password" placeholder="enter new password">
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="submit" class="big-green-button"><span>Save Changes</span></button>
+                            <button type="button" class="big-red-button" id="discard-btn"><span>Discard</span></button>
                         </div>
                     </form>
-                </div>
-                <div class="btn-group">
-                    <button class="big-green-button"><span>Save Changes</span></button>
-                    <button class="big-red-button"><span>Discard</span></button>
                 </div>
            </div>
            <div class="additional-info-column">
                <h1 class="green-title">Account Overview</h1>
                <div class="detail-group">
                     <span class="dark-green-description">Last login</span>
-                    <span class="results">Today</span>
+                    <span class="results"><?= $lastLogin ?></span>
                </div>
                <div class="detail-group">
                     <span class="dark-green-description">Streak</span>
-                    <span class="results">48 Days</span>
+                    <span class="results"><?= $streak ?> days</span>
                </div>
                <div class="detail-group">
                     <span class="dark-green-description">Points</span>
-                    <span class="results">454 pts</span>
+                    <span class="results"><?= $points ?> pts</span>
                </div>
                 <a href="../../../backend/auth/logout.php" class="red-border-button">
                     <div class="icon-text">
@@ -122,15 +137,32 @@ $userData = $result->fetch_assoc();
     <script src="../../scripts/animation.js"></script>
     <script>
         // Avatar selection preview
-        const selectBtn = document.getElementById('select-avatar-btn');
-        const avatarInput = document.getElementById('avatar-input');
-        const avatarPreview = document.getElementById('avatar-preview');
-
-        selectBtn.addEventListener('click', () => avatarInput.click());
-        avatarInput.addEventListener('change', () => {
-            const file = avatarInput.files[0];
-            if (file) avatarPreview.src = URL.createObjectURL(file);
+        document.getElementById('select-avatar-btn').addEventListener('click', function() {
+            document.getElementById('avatar-input').click();
         });
+
+        document.getElementById('avatar-input').addEventListener('change', function () {
+            if (this.files.length > 0) {
+                this.form.submit();
+            }
+        });
+
+        // Restore original details on discard
+        const profileForm = document.getElementById('profile-form');
+        const discardBtn = document.getElementById('discard-btn');
+
+        const originalData = {
+            name: profileForm.name.value,
+            email: profileForm.email.value,
+            password: ''
+        };
+
+        discardBtn.addEventListener('click', () => {
+            profileForm.name.value = originalData.name;
+            profileForm.email.value = originalData.email;
+            profileForm.password.value = originalData.password;
+        });
+
     </script>
 </body>
 </html>
