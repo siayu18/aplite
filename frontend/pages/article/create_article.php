@@ -1,4 +1,6 @@
 <?php
+require_once "../../../backend/auth/session_staff.php";
+
 $message = '';
 
 if (isset($_POST['submitBtn'])) {

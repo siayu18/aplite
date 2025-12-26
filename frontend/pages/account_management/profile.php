@@ -1,5 +1,18 @@
 <?php
 require_once "../../../backend/auth/session.php";
+require_once "../../../backend/conn.php";
+
+$userId = $_SESSION['user_id'];
+$sql = "
+    SELECT name, email, points, streak, lastLogin, picture
+    FROM user
+    WHERE userID = ?";
+
+$stmt = $con->prepare($sql);
+$stmt->bind_param('i', $userId);
+$stmt->execute();
+$result = $stmt->get_result();
+$userData = $result->fetch_assoc();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -23,20 +36,41 @@ require_once "../../../backend/auth/session.php";
        </div> 
        <div class="main-contents">
            <div class="settings-column">
-                <div class="avatar-card">
-                    <img src="../../image/Profile-2.svg" alt="Profile Picture" class="avatar-img">
 
-                    <div class="avatar-title-btn">
-                        <div class="avatar-card-title">
-                            <h1 class="green-title">Change Avatar</h1>
-                            <p class="dark-green-description">Select a profile picture</p>
+                <form method="POST" action="../../../backend/user/update_avatar.php" enctype="multipart/form-data">
+                    <div class="avatar-card">
+
+                        <img
+                            src="data:image/*;base64,<?php echo base64_encode($userData['picture']); ?>"
+                            alt="Profile Picture"
+                            class="avatar-img"
+                            id="avatar-preview"
+                        >
+
+                        <input
+                            type="file"
+                            name="avatar"
+                            id="avatar-input"
+                            accept="image/*"
+                            style="display:none;"
+                        >
+
+                        <div class="avatar-title-btn">
+                            <div class="avatar-card-title">
+                                <h1 class="green-title">Change Avatar</h1>
+                                <p class="dark-green-description">Select a profile picture</p>
+                            </div>
+
+                            <button type="button" class="green-button" id="select-avatar-btn">
+                                <span>Select Avatar</span>
+                            </button>
+
+                            <button type="submit" class="green-button">
+                                <span>Upload</span>
+                            </button>
                         </div>
-
-                        <button class="green-button">
-                            <span>Select Avatar</span>
-                        </button>
                     </div>
-                </div>
+                </form>
 
                 <div class="profile-details-card">
                         <h1 class="green-title">Personal Information</h1>
@@ -86,5 +120,17 @@ require_once "../../../backend/auth/session.php";
     <?php include '../../component/footer.php'; ?>
 
     <script src="../../scripts/animation.js"></script>
+    <script>
+        // Avatar selection preview
+        const selectBtn = document.getElementById('select-avatar-btn');
+        const avatarInput = document.getElementById('avatar-input');
+        const avatarPreview = document.getElementById('avatar-preview');
+
+        selectBtn.addEventListener('click', () => avatarInput.click());
+        avatarInput.addEventListener('change', () => {
+            const file = avatarInput.files[0];
+            if (file) avatarPreview.src = URL.createObjectURL(file);
+        });
+    </script>
 </body>
 </html>
