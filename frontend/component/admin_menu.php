@@ -16,7 +16,7 @@
 <body>
     <div class="menu">
         <a class="menu-text" href="../dashboard/admin_dashboard.php">Home</a>
-        <a class="menu-text" href="#">Manage Users</a>
+        <a class="menu-text" href="../account_management/acc_table.php">Manage Users</a>
         <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
         <a class="menu-text" href="#">Manage Redemptions</a>
         <a class="menu-text" href="#">Manage Rewards</a>
