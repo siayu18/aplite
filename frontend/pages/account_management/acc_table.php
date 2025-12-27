@@ -15,7 +15,7 @@ $users = getData('user');
     <link rel="stylesheet" href="../../styles/global.css">
     <link rel="stylesheet" href="../../styles/component.css">
     <link rel="stylesheet" href="../../styles/profile.css">
-    <link rel="stylesheet" href="../../styles/announcement.css">
+    <link rel="stylesheet" href="../../styles/pagination.css">
     <title>Account Table</title>
 </head>
 <body>
@@ -28,13 +28,13 @@ $users = getData('user');
 
         <div class="top-group">
             <div class="search-bar">
-                <input type="text" placeholder="Search">
+                <input type="text" id="search-input" placeholder="Search">
                 <select id="role-filter">
-                    <option>Filter roles</option>
-                    <option>Lecturer</option>
-                    <option>Admin</option>
-                    <option>Student</option>
-                    <option>Staff</option>
+                    <option value="all">All Roles</option>
+                    <option value="lecturer">Lecturer</option>
+                    <option value="admin">Admin</option>
+                    <option value="student">Student</option>
+                    <option value="staff">Staff</option>
                 </select>
             </div>
             <div class="add-user">
@@ -132,38 +132,22 @@ $users = getData('user');
                 </tbody>
             </table>
         </div>
+
+        <div class="pagination-container">
+            <button class="page-btn prev">
+                <img src="../../image/arrow-left.svg" alt="Previous" class="icon-pagination">
+            </button>
+            <div class="page-numbers">
+
+            </div>
+            <button class="page-btn next">
+                <img src="../../image/arrow-right.svg" alt="Previous" class="icon-pagination">
+            </button>
+        </div>
     </div>
 
     <?php include '../../component/footer.php'; ?>
     <script src="../../scripts/animation.js"></script>
-
-    <script>
-        // Search function
-
-        const searchInput = document.getElementById('search-input');
-        const roleFilter = document.getElementById('role-filter');
-        const tableBody = document.getElementById('user-table-body');
-        const mobileBody = document.getElementById('user-mobile-body');
-
-        function filterUsers() {
-            const query = searchInput.value.toLowerCase();
-            const role = roleFilter.value.toLowerCase();
-
-            [...tableBody.rows].forEach(row => {
-                const name = row.dataset.name.toLowerCase();
-                const rowRole = row.dataset.role.toLowerCase();
-                row.style.display = (name.includes(query) && (role === '' || role === rowRole)) ? '' : 'none';
-            });
-
-            [...mobileBody.rows].forEach(row => {
-                const name = row.dataset.name.toLowerCase();
-                const rowRole = row.dataset.role.toLowerCase();
-                row.style.display = (name.includes(query) && (role === '' || role === rowRole)) ? '' : 'none';
-            });
-        }
-
-        searchInput.addEventListener('input', filterUsers);
-        roleFilter.addEventListener('change', filterUsers);
-    </script>
+    <script src="../../scripts/account_table.js"></script>
 </body>
 </html>
