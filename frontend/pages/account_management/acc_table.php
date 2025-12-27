@@ -144,10 +144,57 @@ $users = getData('user');
                 <img src="../../image/arrow-right.svg" alt="Previous" class="icon-pagination">
             </button>
         </div>
+
+        <div id="add-user-modal" class="overlay-container">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="medium-green-title">Add User</span>
+                    <button class="close-btn" id="close-add-user">&times;</button>
+                </div>
+
+                <form id="add-user-form" method="POST" action="">
+                    <!-- Name & Password Group -->
+                    <div class="field-group">
+                        <div class="label-field">
+                            <label class="green-description">Name</label>
+                            <input type="text" name="name" placeholder="Enter full name" required />
+                        </div>
+                        <div class="label-field">
+                            <label class="green-description">Password</label>
+                            <input type="password" name="password" placeholder="Enter password" required />
+                        </div>
+                    </div>
+
+                    <!-- Email & Role Group -->
+                    <div class="field-group">
+                        <div class="label-field">
+                            <label class="green-description">Email</label>
+                            <input type="email" name="email" placeholder="Enter email address" required />
+                        </div>
+                        <div class="label-field">
+                            <label class="green-description">Role</label>
+                            <select name="role" required>
+                                <option value="admin">Admin</option>
+                                <option value="lecturer">Lecturer</option>
+                                <option value="student">Student</option>
+                                <option value="staff">Staff</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="right-button-group">
+                        <button type="button" class="white-button" id="cancel-add-user">Cancel</button>
+                        <button type="submit" class="green-button" name="submitBtn">Add User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <?php include '../../component/footer.php'; ?>
     <script src="../../scripts/animation.js"></script>
     <script src="../../scripts/account_table.js"></script>
+    <script src="../../scripts/add_user.js"></script>
 </body>
 </html>
