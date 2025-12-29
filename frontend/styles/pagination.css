@@ -4,6 +4,13 @@
     align-items: center;
     gap: 1rem;
     margin-top: 2rem;
+    flex-wrap: wrap; /* allows buttons to wrap if container is small */
+}
+
+.page-numbers {
+    display: flex;
+    gap: 0.5rem; /* spacing between page number buttons */
+    flex-wrap: wrap; /* wrap if too many pages */
 }
 
 .page-btn {
@@ -11,7 +18,7 @@
     outline: 0.1rem solid var(--border-green);
     outline-offset: -0.1rem;
     border-radius: 0.5rem;
-    padding: 0.5rem;
+    padding: 0.5rem 0.8rem;
     cursor: pointer;
     transition: background-color 0.2s ease;
     display: flex;
@@ -19,20 +26,18 @@
     align-items: center;
 }
 
-.page-btn:hover {
+.page-btn.active {
+    background-color: var(--border-green);
+    color: white;
+}
+
+.page-btn:hover:not(.active) {
     background-color: var(--light-grey);
 }
 
-.page-btn.disabled {
+.page-btn:disabled {
     opacity: 0.4;
-    pointer-events: none;
-}
-
-.icon-pagination {
-    width: 1.2rem;
-    height: auto;
-    object-fit: cover;
-    object-position: center;
+    cursor: not-allowed;
 }
 
 #add-user-modal.overlay-container {
@@ -118,3 +123,5 @@
     justify-content: flex-end;
     gap: 0.5rem;
 }
+
+

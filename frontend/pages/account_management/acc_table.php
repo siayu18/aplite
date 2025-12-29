@@ -1,8 +1,36 @@
 <?php
 require_once "../../../backend/auth/session_admin.php";
 include "../../../backend/fetch_data.php";
+require_once "../../../backend/user/add_user.php";
+require_once "../../../backend/user/delete_user.php";
+
 
 $users = getData('user');
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submitBtn'])) {
+    $result = addUser($con, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
+
+    if ($result === true) {
+        echo "<script>window.addUserSuccess = true;</script>";
+        $users = getData('user');
+    } else {
+        echo "<script>window.addUserError = " . json_encode($result) . ";</script>";
+    }
+}
+
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
+
+    $userID = $_POST['deleteUserID'];
+
+    $result = deleteUser($con, $userID);
+
+    if ($result === true) {
+        echo "<script>window.deleteUserSuccess = true;</script>";
+        $users = getData('user'); 
+    } else {
+        echo "<script>window.deleteUserError = " . json_encode($result) . ";</script>";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -73,13 +101,13 @@ $users = getData('user');
                         <td><?= htmlspecialchars($user['points']) ?></td>
                         <td>
                             <div class="btn-group">
-                                <button class="border-button edit-btn" data-userid="<?= $user['userID'] ?>">
+                                <button type="button" class="border-button edit-btn" data-userid="<?= $user['userID'] ?>">
                                     <div class="icon-text-2">
                                         <img src="../../image/pencil.svg" alt="Edit" class="icon-buttons">
                                         <span>Edit</span>
                                     </div>
                                 </button>
-                                <button class="red-border-button delete-btn" data-userid="<?= $user['userID'] ?>">
+                                <button type="button" class="red-border-button delete-btn" data-userid="<?= $user['userID'] ?>">
                                     <div class="icon-text-2">
                                         <img src="../../image/trash.svg" alt="Delete" class="icon-buttons">
                                         <span>Delete</span>
@@ -114,13 +142,13 @@ $users = getData('user');
 
                         <td>
                             <div class="btn-group">
-                                <button class="border-button edit-btn" data-userid="<?= $user['userID'] ?>">
+                                <button type="button" class="border-button edit-btn" data-userid="<?= $user['userID'] ?>">
                                     <div class="icon-text-2">
                                         <img src="../../image/pencil.svg" alt="Edit" class="icon-buttons">
                                     </div>
                                 </button>
                                 
-                                <button class="border-button delete-btn" data-userid="<?= $user['userID'] ?>">
+                                <button type="button" class="border-button delete-btn" data-userid="<?= $user['userID'] ?>">
                                     <div class="icon-text-2">
                                         <img src="../../image/trash.svg" alt="Delete" class="icon-buttons">
                                     </div>
@@ -153,7 +181,6 @@ $users = getData('user');
                 </div>
 
                 <form id="add-user-form" method="POST" action="">
-                    <!-- Name & Password Group -->
                     <div class="field-group">
                         <div class="label-field">
                             <label class="green-description">Name</label>
@@ -165,7 +192,6 @@ $users = getData('user');
                         </div>
                     </div>
 
-                    <!-- Email & Role Group -->
                     <div class="field-group">
                         <div class="label-field">
                             <label class="green-description">Email</label>
@@ -182,7 +208,6 @@ $users = getData('user');
                         </div>
                     </div>
 
-                    <!-- Buttons -->
                     <div class="right-button-group">
                         <button type="button" class="white-button" id="cancel-add-user">Cancel</button>
                         <button type="submit" class="green-button" name="submitBtn">Add User</button>
