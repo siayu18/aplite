@@ -123,6 +123,7 @@
     object-position: center;
     flex-shrink: 0;
     overflow: hidden;
+    border-radius: 50%;
 }
 
 .avatar-card-title {
