@@ -3,10 +3,10 @@ session_start();
 
 if(isset($_SESSION['role'])) {
     switch ($_SESSION['role']) { 
-        case 'admin': 
+        case 'Admin': 
             $dashboard = "../../frontend/pages/dashboard/admin_dashboard.php";
             break;
-        case 'staff':
+        case 'Staff':
             $dashboard = "../../frontend/pages/dashboard/staff_dashboard.php";
             break;
         default:
@@ -30,6 +30,6 @@ if(isset($_SESSION['role'])) {
    <h1>403 - Access Denied</h1> 
    <p>You do not have permission to access this page.</p>
    <br>
-   <a href="<?= $dashboard?>">Go back </a>
+   <a href="<?= htmlspecialchars($dashboard) ?>">Go back</a>
 </body>
 </html>

@@ -123,8 +123,8 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
                     <span class="dark-green-description">Points</span>
                     <span class="results"><?= $points ?> pts</span>
                </div>
-                <a href="../../../backend/auth/logout.php" class="red-border-button">
-                    <div class="icon-text">
+                <a href="../../../backend/auth/logout.php" class="sign-out-button">
+                    <div class="icon-text-clean">
                         <img src="../../image/sign-out.svg" alt="sign-out">
                         <span>Sign Out</span>
                     </div>

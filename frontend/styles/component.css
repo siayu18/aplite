@@ -146,6 +146,25 @@ button {
     background-color: lightgoldenrodyellow;
 }
 
+.sign-out-button {
+  display: flex;
+  justify-content: center;
+  background-color: white;
+  outline: 0.1rem solid var(--red);
+  outline-offset: -0.1rem;
+  color: var(--dark-green-font);
+  border: none;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  color: black;
+  transition: background-color 0.3s ease;
+}
+
+.sign-out-button:hover {
+    background-color: lightgoldenrodyellow;
+}
+
 .yellow-button {
   background-color: var(--light-yellow);
   color: var(--dark-green-font);

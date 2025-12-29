@@ -3,7 +3,6 @@ require_once "../../../backend/auth/session_student.php";
 include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 
-session_start();
 $quiz = $_SESSION['quiz'];
 
 if (!$quiz) {

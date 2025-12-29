@@ -3,7 +3,7 @@ require_once "../../../backend/auth/session_student.php";
 include("../../../backend/conn.php");
 include("../../../backend/fetch_data.php");
 
-$currentID = 3; // Dummy data
+$currentID = $_SESSION['user_id'];
 $quizzes = getAllQuizzes();
 ?>
 

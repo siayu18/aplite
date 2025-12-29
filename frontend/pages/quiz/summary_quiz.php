@@ -3,7 +3,6 @@ require_once "../../../backend/auth/session_student.php";
 include('../../../backend/conn.php');
 include('../../../backend/fetch_data.php');
 
-session_start();
 $quiz = $_SESSION['quiz'] ?? null;
 
 if (!$quiz || empty($quiz['answers'])) {
@@ -35,11 +34,11 @@ foreach ($quiz['answers'] as $answers) {
     }
 }
 
-$currentID = 3; //Dummy data
+$currentID = $_SESSION['user_id'];
 $requiredToPass = $quiz['correctForPoints'];
 $passed = $score >= $requiredToPass;
 $pointsEarned = $passed ? $quiz['pointsAwarded'] : 0;
-$userQuiz = getDataByID("userQuiz", "userID", $currentID);
+$userQuiz = getDataBy2ID("userQuiz", "userID", "quizID", $currentID, $quiz['quizID']);
 
 // If user completed before then 0 points 100%, if no and passed then record it, if no but no passed, ntg happens 
 if($userQuiz) {

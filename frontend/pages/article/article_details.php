@@ -16,7 +16,7 @@ if (!$article) {
 
 // Article Claim Points Logic
 $current_user = getDataByID("user", "userID", "4");
-$currentID = $current_user["userID"];
+$currentID = $_SESSION['user_id'];
 if (!$current_user) {
     die("User Not Found");
 }
