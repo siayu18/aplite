@@ -7,7 +7,7 @@ if (isset($_POST['submitBtn'])) {
     include('../../../backend/conn.php');
     
     $articleID = uniqid();
-    $staffID = "3";
+    $staffID = $_SESSION['user_id'];
     $title = mysqli_real_escape_string($con, $_POST['title']);
     $points = mysqli_real_escape_string($con, $_POST['points']);
     $content = mysqli_real_escape_string($con, $_POST['content']);
@@ -33,7 +33,6 @@ if (isset($_POST['submitBtn'])) {
     mysqli_close($con);
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">

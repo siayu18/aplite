@@ -29,27 +29,21 @@ mysqli_close($con);
 </head>
 <body>
     <?php include '../../component/stu_header.php'; ?>
-    <div class="content fade-in" style="padding: 2rem;">
-       <div class=" col-12 col-s-12 content fade-in">
+    <div class="col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Rewards Exchange</span>
             <span class="green-description">Redeem your hard-earned points for exciting rewards!</span>
-            <p style="font-size: 20px;"></p>
-            <div class="profile-card">
-                <div class="point-card">
-                    <div>
-                        <div class="green-title">Your Points</div>
-                        <p class="para"></p>
-                        <img src="../../image/badge.svg" alt="Points Badge"/>
-                        <span>100 pts</span>
-                    </div>
-                </div>
-        <p class="para" style="font-size: 30px"></p>
         </div>
-            <span class="green-description" style="font-size: 18px"><?= htmlspecialchars($count) ?> Rewards Available</span>
+        <div class="point-card">
+            <div class="icon-title">
+                <img src="../../image/badge.svg" alt="Points Badge"/>
+                <span>Your Points</span>
+            </div>
+            <span class="dark-green-description">100 pts</span>
         </div>
-
-        <div class="card-container">
+        <span class="green-description" style="text-align: center;"><?= htmlspecialchars($count) ?> Rewards Available</span>
+        
+        <div class="card-container" style="margin-top: 0;">
             <?php if (empty($rewards)): ?>
                 <div class="mid-text-group">
                     <span class="medium-green-title">No rewards available!</span>
@@ -58,19 +52,16 @@ mysqli_close($con);
             <?php else: ?>
                 <?php foreach ($rewards as $r): ?>
                     <div class="card">
-                        <div class="quiz-points">
-                            <img class="avatar-img" src="../../image/coupon.png" alt="Quiz" />
+                        <img class="card-img" src="../../image/apu-background.jpg" alt="Reward" />
+                        <div class="info-container">
                             <div class="points-container">
                                 <img src="../../image/badge.svg" alt="Points Badge"/>
                                 <span class="points-text"><?= htmlspecialchars($r['pointsRequired']) ?> pts</span>
                             </div>
+                            <div class="medium-green-title"><?= htmlspecialchars($r['title']) ?></div>
+                            <span class="green-description"><?= htmlspecialchars($r['description']) ?></span>
+                            <a href="abc.php?id=<?= $r['rewardID'] ?>" class="green-button">Redeem</a>
                         </div>
-                        <div class="medium-green-title"><?= htmlspecialchars($r['title']) ?></div>
-                        <div class="icon-text">
-                            <img src="../../image/green_book.svg" alt="Book" />
-                            <span><?= htmlspecialchars($r['description']) ?></span>
-                        </div>
-                        <a href="abc.php?id=<?= $r['rewardID'] ?>" class="green-button">Redeem</a>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>
