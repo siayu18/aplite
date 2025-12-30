@@ -1,3 +1,35 @@
+<?php
+include "../../../backend/conn.php";
+
+$userID = $_SESSION['user_id'];
+$sql = "
+    SELECT name, email, points, streak, lastLogin, picture, role
+    FROM user
+    WHERE userID = ?";
+
+$stmt = $con->prepare($sql);
+$stmt->bind_param('i', $userID);
+$stmt->execute();
+$result = $stmt->get_result();
+$userData = $result->fetch_assoc();
+
+$avatarFolder = "/aplite/frontend/image/avatars/";
+$defaultAvatar = "/aplite/frontend/image/default/Profile-4.svg";
+
+$avatar = $defaultAvatar; 
+$profileExist = false;
+
+if (!empty($userData['picture'])) {
+
+    $avatarPath = $_SERVER['DOCUMENT_ROOT'] . "/aplite/frontend/image/avatars/" . $userData['picture'];
+
+    if(file_exists($avatarPath)) { 
+        $profileExist = true;
+        $avatar = $avatarFolder . $userData['picture'];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +53,7 @@
         <a class="menu-text" href="../article/manage_article.php">Manage Articles</a>
         <a class="menu-text" href="">Broken Light Report</a>
 
-        <a href="../account_management/profile.php"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
+        <a href="../account_management/profile.php"><img src="<?= $avatar ?>" alt="Profile" class="<?= $profileExist ? 'profile-img' : 'menu-img' ?>" /></a>
         <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>
         <div id="dropdown-menu" class="dropdown-content">
             <a href="../dashboard/staff_dashboard.php">Home</a>

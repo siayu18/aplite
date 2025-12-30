@@ -4,11 +4,11 @@
 $role = $_SESSION['role'] ?? '';
 
 switch($role) {
-    case 'admin':
+    case 'Admin':
         include __DIR__ . "/admin_header.php";
         break;
 
-    case 'staff':
+    case 'Staff':
         include __DIR__ . "/staff_header.php";
         break;
     
