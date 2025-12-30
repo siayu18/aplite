@@ -157,6 +157,59 @@ document.addEventListener("DOMContentLoaded", () => {
         setupPagination();
     });
 
+const modal = document.getElementById("add-user-modal");
+    const modalTitle = document.getElementById("modal-title");
+    const submitBtn = document.getElementById("submit-user-btn");
+
+    const form = document.getElementById("add-user-form");
+
+    const userIDField = document.getElementById("edit-user-id");
+    const nameField = form.querySelector("input[name='name']");
+    const emailField = form.querySelector("input[name='email']");
+    const passField = form.querySelector("input[name='password']");
+    const roleField = form.querySelector("select[name='role']");
+
+    const addUserBtn = document.getElementById("add-user-btn");
+
+    // RESET for Add User
+    addUserBtn.addEventListener("click", () => {
+        modalTitle.textContent = "Add User";
+        submitBtn.textContent = "Add User";
+
+        userIDField.value = "";
+        nameField.value = "";
+        emailField.value = "";
+        passField.value = "";
+        roleField.value = "Admin";
+
+        passField.required = true;
+
+        modal.classList.add("active");
+        document.body.classList.add("modal-open");
+    });
+
+    // EDIT USER
+    document.querySelectorAll(".edit-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+
+            const row = btn.closest("tr");
+
+            nameField.value = row.querySelector("td:nth-child(1) span").textContent.trim();
+            emailField.value = row.querySelector("td:nth-child(2)").textContent.trim();
+            roleField.value = row.querySelector("td:nth-child(3)").textContent.trim();
+
+            userIDField.value = btn.dataset.userid;
+            passField.value = "";
+            passField.required = false;
+
+            modalTitle.textContent = "Edit User";
+            submitBtn.textContent = "Update User";
+
+            modal.classList.add("active");
+            document.body.classList.add("modal-open");
+        });
+    });
+
     displayPage();
     setupPagination();
 });

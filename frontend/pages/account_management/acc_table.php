@@ -4,19 +4,40 @@ include "../../../backend/fetch_data.php";
 require_once "../../../backend/user/add_user.php";
 require_once "../../../backend/user/delete_user.php";
 
-
 $users = getData('user');
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submitBtn'])) {
-    $result = addUser($con, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
 
-    if ($result === true) {
-        echo "<script>window.addUserSuccess = true;</script>";
-        $users = getData('user');
+    if (!empty($_POST['userID'])) {
+        require_once "../../../backend/user/update_user.php";
+
+        $result = updateUser(
+            $con,
+            $_POST['userID'],
+            $_POST['name'],
+            $_POST['email'],
+            $_POST['password'], 
+            $_POST['role']
+        );
+
+        if ($result === true) {
+            echo "<script>window.updateUserSuccess = true;</script>";
+        } else {
+            echo "<script>window.updateUserError = " . json_encode($result) . ";</script>";
+        }
+
     } else {
-        echo "<script>window.addUserError = " . json_encode($result) . ";</script>";
+        $result = addUser($con, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
+
+        if ($result === true) {
+            echo "<script>window.addUserSuccess = true;</script>";
+        } else {
+            echo "<script>window.addUserError = " . json_encode($result) . ";</script>";
+        }
     }
+
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
 
@@ -176,11 +197,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
         <div id="add-user-modal" class="overlay-container">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="medium-green-title">Add User</span>
+                    <span class="medium-green-title" id="modal-title">Add User</span>
                     <button class="close-btn" id="close-add-user">&times;</button>
                 </div>
 
                 <form id="add-user-form" method="POST" action="">
+                    <input type="hidden" name="userID" id="edit-user-id">
+
                     <div class="field-group">
                         <div class="label-field">
                             <label class="green-description">Name</label>
@@ -210,7 +233,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
 
                     <div class="right-button-group">
                         <button type="button" class="white-button" id="cancel-add-user">Cancel</button>
-                        <button type="submit" class="green-button" name="submitBtn">Add User</button>
+                        <button type="submit" class="green-button" id="submit-user-btn" name="submitBtn">Add User</button>
                     </div>
                 </form>
             </div>
