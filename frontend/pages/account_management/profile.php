@@ -136,7 +136,6 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
 
     <script src="../../scripts/animation.js"></script>
     <script>
-        // Avatar selection preview
         document.getElementById('select-avatar-btn').addEventListener('click', function() {
             document.getElementById('avatar-input').click();
         });
@@ -147,7 +146,6 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
             }
         });
 
-        // Restore original details on discard
         const profileForm = document.getElementById('profile-form');
         const discardBtn = document.getElementById('discard-btn');
 

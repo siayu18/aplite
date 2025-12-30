@@ -200,10 +200,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
                         <div class="label-field">
                             <label class="green-description">Role</label>
                             <select name="role" required>
-                                <option value="admin">Admin</option>
-                                <option value="lecturer">Lecturer</option>
-                                <option value="student">Student</option>
-                                <option value="staff">Staff</option>
+                                <option value="Admin">Admin</option>
+                                <option value="Lecturer">Lecturer</option>
+                                <option value="Student">Student</option>
+                                <option value="Staff">Staff</option>
                             </select>
                         </div>
                     </div>
