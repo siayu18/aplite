@@ -12,7 +12,7 @@ if(isset($_SESSION['role'])) {
         default:
             $dashboard = "../../frontend/pages/dashboard/dashboard.php";
             break;
-    } 
+    }
 } else {
         session_destroy();
         header("Location: ../../frontend/pages/login/login.php");

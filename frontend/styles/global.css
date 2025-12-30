@@ -115,6 +115,12 @@ a {
   width: auto;
 }
 
+.profile-img {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+}
+
 .wrapper {
   min-height: 100vh;
 }

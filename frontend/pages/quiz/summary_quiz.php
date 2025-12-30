@@ -76,8 +76,8 @@ unset($_SESSION['quiz']);
 <body>
     <?php include '../../component/stu_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
-        <div class="card-container">
-            <div class="card">
+        <div class="summary-container">
+            <div class="summary-card">
                 <?php if ($passed): ?>
                     <img src="../../image/challenge.svg" alt="Challenge" class="card-img">
                     <div class="text-group">
