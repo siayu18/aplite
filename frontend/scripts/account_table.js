@@ -3,14 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const roleFilter = document.getElementById('role-filter');
 
     const tableBodies = [
-        document.getElementById('user-table-body'),   // desktop
-        document.getElementById('user-mobile-body')  // mobile
+        document.getElementById('user-table-body'),   
+        document.getElementById('user-mobile-body')  
     ];
 
         function attachDeleteEvents() {
         tableBodies.forEach(body => {
             body.querySelectorAll(".delete-btn").forEach(btn => {
-                // Prevent duplicate listeners
                 if (!btn.dataset.listener) {
                     btn.dataset.listener = "true";
 
@@ -19,7 +18,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
                         if (!confirm("Are you sure you want to delete this user?")) return;
 
-                        // Use fetch API to submit deletion
                         fetch("", {
                             method: "POST",
                             headers: {
@@ -31,8 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         })
                         .then(response => response.text())
                         .then(data => {
-                            // Optionally, reload the page or update table without refresh
-                            window.location.reload(); // simplest approach
+                            window.location.reload(); 
                         })
                         .catch(err => {
                             alert("Failed to delete user. Try again.");
@@ -77,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function setupPagination() {
-        const filteredRows = getFilteredRows(tableBodies[0]); // use desktop as reference
+        const filteredRows = getFilteredRows(tableBodies[0]); 
         const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
 
         const container = document.querySelector(".page-numbers");
@@ -102,7 +99,6 @@ document.addEventListener("DOMContentLoaded", () => {
             return btn;
         }
 
-        // Add first page + ellipsis if needed
         if (startPage > 1) {
             container.appendChild(createButton(1));
             if (startPage > 2) {
@@ -113,12 +109,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Add middle pages
         for (let i = startPage; i <= endPage; i++) {
             container.appendChild(createButton(i));
         }
 
-        // Add last page + ellipsis if needed
         if (endPage < totalPages) {
             if (endPage < totalPages - 1) {
                 const ellipsis = document.createElement("span");
@@ -129,7 +123,6 @@ document.addEventListener("DOMContentLoaded", () => {
             container.appendChild(createButton(totalPages));
         }
 
-        // Enable/disable prev/next buttons
         document.querySelector(".prev").disabled = currentPage === 1;
         document.querySelector(".next").disabled = currentPage === totalPages || totalPages === 0;
     }
@@ -152,7 +145,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Filter listeners
     searchInput.addEventListener("input", () => {
         currentPage = 1;
         displayPage();
@@ -165,7 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
         setupPagination();
     });
 
-    // Initialize
     displayPage();
     setupPagination();
 });

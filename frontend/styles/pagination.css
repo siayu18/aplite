@@ -4,13 +4,13 @@
     align-items: center;
     gap: 1rem;
     margin-top: 2rem;
-    flex-wrap: wrap; /* allows buttons to wrap if container is small */
+    flex-wrap: wrap; 
 }
 
 .page-numbers {
     display: flex;
-    gap: 0.5rem; /* spacing between page number buttons */
-    flex-wrap: wrap; /* wrap if too many pages */
+    gap: 0.5rem; 
+    flex-wrap: wrap; 
 }
 
 .page-btn {

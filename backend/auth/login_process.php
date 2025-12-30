@@ -94,10 +94,10 @@ if(isset($_POST['remember'])) {
 }
 
 switch ($user['role']) {
-    case 'admin':
+    case 'Admin':
         header("Location: ../../frontend/pages/dashboard/admin_dashboard.php");
         break;
-    case 'staff':
+    case 'Staff':
         header("Location: ../../frontend/pages/dashboard/staff_dashboard.php");
         break;
     default:
