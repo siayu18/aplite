@@ -1,7 +1,7 @@
 <?php
 require_once "session.php";
 
-if(!in_array($_SESSION['role'], ['Staff', 'Admin'])) {
+if($_SESSION['role'] !== 'Staff') {
     header("Location: /aplite/backend/auth/unauthorized.php");
     exit;
 }
