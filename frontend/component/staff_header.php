@@ -16,7 +16,9 @@
 <body>
     <div class="col-12 col-s-12 header-container">
         <div class="top-bar">
-            <img src="../../image/logo.svg" alt="APLite Logo" class="logo" />
+            <a href="/aplite/frontend/pages/dashboard/staff_dashboard.php">
+                <img src="../../image/logo.svg" alt="APLite Logo" class="logo">
+            </a>
             <?php include("../../component/staff_menu.php") ?> 
         </div>
     </div>
