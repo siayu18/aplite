@@ -6,29 +6,57 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('user-mobile-body')
     ];
 
-    // Global click behaviors
+    const deleteModalOverlay = document.getElementById("delete-confirm-modal");
+    const deleteModalBox = deleteModalOverlay.querySelector(".modal");
+    const deleteIdInput = document.getElementById("confirm-delete-id");
+    const deleteNameSpan = document.getElementById("delete-user-name");
+
+    const closeDelete = () => {
+        deleteModalOverlay.classList.remove("active");
+        deleteModalBox.classList.remove("active");
+        document.body.classList.remove("modal-open");
+    };
+
     document.addEventListener("click", (e) => {
-        const deleteBtn = e.target.closest(".delete-btn");
-        if (deleteBtn) {
-            const userID = deleteBtn.dataset.userid;
-            if (confirm("Are you sure you want to delete this user?")) {
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.innerHTML = `<input type="hidden" name="deleteUserID" value="${userID}">`;
-                document.body.appendChild(form);
-                form.submit();
+        // 1. Handle Edit Button Click
+        const editBtn = e.target.closest(".edit-btn");
+        if (editBtn) {
+            const userId = editBtn.dataset.userid;
+            if (window.openEditUserModal) {
+                window.openEditUserModal(userId);
             }
             return;
         }
 
-        const editBtn = e.target.closest(".edit-btn");
-        if (editBtn) {
-            const userId = editBtn.dataset.userid;
-            window.openEditUserModal(userId);
-            return;
+        // 2. Handle Delete Button Click
+        const deleteBtn = e.target.closest(".delete-btn");
+        if (deleteBtn) {
+            const userId = deleteBtn.dataset.userid;
+            const row = deleteBtn.closest("tr");
+            const userName = row.dataset.name;
+
+            // Set values in the delete modal
+            document.getElementById("confirm-delete-id").value = userId;
+            document.getElementById("delete-user-name").textContent = userName;
+
+            // Open delete modal (using your overlay.css classes)
+            const deleteModal = document.getElementById("delete-confirm-modal");
+            deleteModal.classList.add("active");
+            deleteModal.querySelector(".modal").classList.add("active");
+            document.body.classList.add("modal-open");
         }
     });
 
+    // --- Close Delete Modal Logic ---
+    document.getElementById("close-delete-modal").onclick = closeDeleteModal;
+    document.getElementById("cancel-delete-btn").onclick = closeDeleteModal;
+
+    function closeDeleteModal() {
+        const deleteModal = document.getElementById("delete-confirm-modal");
+        deleteModal.classList.remove("active");
+        deleteModal.querySelector(".modal").classList.remove("active");
+        document.body.classList.remove("modal-open");
+    }
     // Search and pagination
     let currentPage = 1;
     const rowsPerPage = 5;
@@ -88,4 +116,5 @@ document.addEventListener("DOMContentLoaded", () => {
     roleFilter.onchange = () => { currentPage = 1; displayPage(); };
 
     displayPage();
+
 });

@@ -467,3 +467,43 @@ tr:nth-child(odd) {
     width: 1.4rem;
     height: auto;
 }
+
+/* Fix for the Modal Header and Close Button */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee; /* Optional: adds a clean separator */
+    margin-bottom: 1.5rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    margin-top: -10px; /* Pulls it up slightly to center with text */
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+/* Improve Delete Modal Specific Spacing */
+#delete-confirm-modal .modal-body {
+    text-align: center; /* Center text for confirmation modals */
+    padding: 1rem 0;
+}
+
+#delete-confirm-modal .right-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}

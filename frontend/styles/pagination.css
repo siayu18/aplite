@@ -94,28 +94,38 @@
     margin-bottom: 0; 
 }
 
+/* Microsoft Edge messing with my input box styles */
+#add-user-modal input:invalid,
+#add-user-modal input:required {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
 #add-user-modal input[type="text"],
 #add-user-modal input[type="email"],
 #add-user-modal input[type="password"],
 #add-user-modal select {
     width: 100%;
     padding: 0.8rem 1rem;
+    border: 1px solid var(--border-green);
+    background-color: #FFFFFF;
     border-radius: 0.8rem;
     font-size: 0.95rem;
     outline: 0.1rem solid var(--border-green);
     outline-offset: -0.1rem;
-    box-sizing: border-box;
     transition: outline-color 0.3s ease;
 }
 
 #add-user-modal input:hover,
 #add-user-modal select:hover {
-    outline-color: var(--light-green-font);
+    border: 1px solid var(--light-green-font) !important; 
+    outline: none !important;
 }
 
 #add-user-modal input:focus,
 #add-user-modal select:focus {
-    outline-color: var(--dark-green);
+    border: 1px solid var(--light-green-font) !important; 
+    outline: none !important;
 }
 
 #add-user-modal .right-button-group {
@@ -124,4 +134,44 @@
     gap: 0.5rem;
 }
 
+/* Delete Modal Specifics */
+#delete-confirm-modal .modal-content {
+    max-width: 400px;
+    text-align: center;
+    border-top: 4px solid #D32F2F; /* Red accent for danger */
+}
 
+#delete-user-name {
+    color: #D32F2F;
+    font-weight: bold;
+    display: inline-block;
+    margin-top: 5px;
+}
+
+/* Danger Button */
+.red-button {
+    background-color: #D32F2F;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.red-button:hover {
+    background-color: #B71C1C;
+}
+
+/* Success Banner styling (Used for added/updated/deleted msgs) */
+.success-banner {
+    background-color: #E8F5E9;
+    border-left: 5px solid #4CAF50;
+    color: #2E7D32;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    font-weight: 500;
+    animation: fadeIn 0.5s ease;
+}

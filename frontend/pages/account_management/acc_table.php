@@ -5,6 +5,8 @@ require_once "../../../backend/user/add_user.php";
 require_once "../../../backend/user/delete_user.php";
 require_once "../../../backend/user/update_user.php";
 
+$errorMessageCode = null;
+
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (isset($_POST['deleteUserID'])) {
         deleteUser($con, $_POST['deleteUserID']);
@@ -20,8 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             : addUser($con, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
 
         if ($result === true) {
-            $msg = (!empty($userId) ? "updated" : "added");
-            header("Location: " . $_SERVER['PHP_SELF'] . "?msg=" . $msg);
+            header("Location: " . $_SERVER['PHP_SELF'] . "?msg=" . (!empty($userId) ? "updated" : "added"));
             exit();
         } else {
             $errorMessageCode = $result; 
@@ -52,6 +53,32 @@ $users = getData('user');
         <div class="profile-header">
             <h1 class="green-title">Manage Users</h1>
             <p class="green-description">Make changes to user information with 1 click</p>
+        </div>
+
+        <div id="delete-confirm-modal" class="overlay">
+            <div class="modal" style="max-width: 400px;"> <div class="modal-header">
+                    <span class="medium-green-title">Delete User</span>
+                    <button type="button" class="close-btn" id="close-delete-modal">&times;</button>
+                </div>
+                
+                <div class="modal-body">
+                    <p class="green-description" style="margin-bottom: 0.5rem;">Are you sure you want to delete</p>
+                    <div id="delete-user-name" style="color: #D32F2F; font-weight: 700; font-size: 2rem; word-break: break-word;"></div>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 15px; line-height: 1.4;">
+                        This action is permanent and <br><strong>cannot be undone.</strong>
+                    </p>
+                </div>
+
+                <form method="POST">
+                    <input type="hidden" name="deleteUserID" id="confirm-delete-id">
+                    <div class="right-button-group">
+                        <button type="button" class="white-button" id="cancel-delete-btn" style="min-width: 100px;">Cancel</button>
+                        <button type="submit" class="red-button" style="background-color: #D32F2F; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-weight: 600; cursor: pointer;">
+                            Delete Permanently
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="top-group">
@@ -185,7 +212,13 @@ $users = getData('user');
             <div class="modal-content">
                 <div class="modal-header">
                     <span class="medium-green-title" id="modal-title">
-                        <?= isset($_GET['userID']) && !empty($_GET['userID']) ? 'Edit User' : 'Add User' ?>
+                        <?php 
+                            if (isset($errorMessageCode)) {
+                                echo (!empty($_POST['userID'])) ? 'Edit User' : 'Add User';
+                            } else {
+                                echo 'Add User'; 
+                            }
+                        ?>
                     </span>
                     <button class="close-btn" id="close-add-user">&times;</button>
                 </div>
@@ -204,15 +237,8 @@ $users = getData('user');
                         • <?= $errorMsg ?>
                     </div>
                 <?php endif; ?>
-
-                <?php if (isset($_GET['msg'])): ?>
-                    <div class="success-banner">
-                        • Action completed successfully!
-                    </div>
-                <?php endif; ?>
-
                 <form id="add-user-form" method="POST" action="">
-                    <input type="hidden" name="userID" id="edit-user-id">
+                    <input type="hidden" name="userID" id="edit-user-id" value="<?= htmlspecialchars($_POST['userID'] ?? '') ?>">
 
                     <div class="field-group">
                         <div class="label-field">
@@ -223,7 +249,12 @@ $users = getData('user');
                         </div>
                         <div class="label-field">
                             <label class="green-description">Password</label>
-                            <input type="password" name="password" placeholder="Enter password" />
+                            <div class="password-wrapper">
+                                <input type="password" name="password" id="modal-password" placeholder="Enter password" />
+                                <button type="button" class="password-toggle-btn" id="toggle-password-btn">
+                                    <img src="../../image/eye.svg" id="eye-icon" alt="Toggle Password">
+                                </button>
+                            </div>
                         </div>
                     </div>
 

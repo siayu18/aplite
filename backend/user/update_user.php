@@ -1,14 +1,16 @@
 <?php
 require_once __DIR__ . "/../conn.php";
+require_once __DIR__ . "/validation.php";
 
 function updateUser($con, $userID, $name, $email, $password, $role) {
-
-    if ($name === "" || $email === "" || $role === "") {
-        return "Missing required fields";
+    if (empty($name) || empty($email) || empty($role)) {
+        return "missing_fields";
     }
 
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return "Invalid email format";
+    $validationError = getValidationError($con, $email, $password, $userID);
+    
+    if ($validationError) {
+        return $validationError;
     }
 
     if ($password !== "") {
@@ -25,5 +27,7 @@ function updateUser($con, $userID, $name, $email, $password, $role) {
     if ($stmt->execute()) {
         return true;
     }
-    return $stmt->error;
+    
+    return "db_error";
 }
+?>

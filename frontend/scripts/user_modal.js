@@ -15,12 +15,20 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("add-user-btn").addEventListener("click", () => window.openAddUserModal());
 
     const closeModal = () => {
-        modal.classList.remove("active");
-        document.body.classList.remove("modal-open");
-        const url = new URL(window.location);
-        url.searchParams.delete('error');
-        url.searchParams.delete('msg');
-        window.history.replaceState({}, document.title, url.pathname);
+        const hasError = document.querySelector(".error-banner") !== null;
+
+        if (hasError) {
+            window.location.href = window.location.pathname;
+        } else {
+            modal.classList.remove("active");
+            document.body.classList.remove("modal-open");
+            
+            const url = new URL(window.location);
+            url.searchParams.delete('msg');
+            window.history.replaceState({}, document.title, url.pathname);
+            
+            form.reset();
+        }
     };
 
     window.openAddUserModal = () => {
@@ -59,11 +67,38 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modal.classList.contains("active")) {
         document.body.classList.add("modal-open");
         
-        const urlParams = new URLSearchParams(window.location.search);
-        if (fields.id.value !== "") {
+        if (fields.id.value && fields.id.value !== "") {
             modalTitle.textContent = "Edit User";
-            submitBtn.textContent = "Update User";
-            fields.pass.required = false;
+            submitBtn.textContent = "Update User"; 
+            fields.pass.required = false; 
+        } else {
+            modalTitle.textContent = "Add User";
+            submitBtn.textContent = "Add User";
+            fields.pass.required = true;
         }
     }
+    
+    const passwordInput = document.getElementById("modal-password");
+    const toggleBtn = document.getElementById("toggle-password-btn");
+    const eyeIcon = document.getElementById("eye-icon");
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+            const type = passwordInput.getAttribute("type") === "password" ? "text" : "password";
+            passwordInput.setAttribute("type", type);
+            
+            if (type === "text") {
+                eyeIcon.src = "../../image/eye-slash.svg"; 
+            } else {
+                eyeIcon.src = "../../image/eye.svg";
+            }
+        });
+    }
+
+    const originalCloseModal = closeModal; 
+    window.closeModal = () => {
+        passwordInput.setAttribute("type", "password");
+        eyeIcon.src = "../../image/eye.svg";
+        originalCloseModal();
+    };
 });
