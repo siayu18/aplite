@@ -31,7 +31,7 @@
         $totalkWh += $dailyKwh;
     }
 
-    
+    mysqli_close($con);
 ?>
 
 <!DOCTYPE html>

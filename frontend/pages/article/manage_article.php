@@ -35,7 +35,7 @@ mysqli_close($con);
     <title>Manage Articles</title>
 </head>
 <body>
-    <?php include '../../component/staff_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class=" col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Manage Articles</span>
