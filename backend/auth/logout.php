@@ -25,6 +25,6 @@ if (isset($_COOKIE['remember_me'])) {
     $stmt->execute();
 }
 
-header("Location: /aplite/frontend/pages/login/login.php");
+header("Location: /aplite/frontend/pages/login/login.php?logout=success");
 exit;
 ?>

@@ -3,55 +3,34 @@ require_once "../../../backend/auth/session_admin.php";
 include "../../../backend/fetch_data.php";
 require_once "../../../backend/user/add_user.php";
 require_once "../../../backend/user/delete_user.php";
+require_once "../../../backend/user/update_user.php";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['deleteUserID'])) {
+        deleteUser($con, $_POST['deleteUserID']);
+        header("Location: " . $_SERVER['PHP_SELF'] . "?msg=deleted");
+        exit();
+    }
+    
+   if (isset($_POST['submitBtn'])) {
+        $userId = $_POST['userID'] ?? null;
+        
+        $result = (!empty($userId)) 
+            ? updateUser($con, $userId, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role'])
+            : addUser($con, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
+
+        if ($result === true) {
+            $msg = (!empty($userId) ? "updated" : "added");
+            header("Location: " . $_SERVER['PHP_SELF'] . "?msg=" . $msg);
+            exit();
+        } else {
+            $errorMessageCode = $result; 
+        }
+    }
+}
 
 $users = getData('user');
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submitBtn'])) {
-
-    if (!empty($_POST['userID'])) {
-        require_once "../../../backend/user/update_user.php";
-
-        $result = updateUser(
-            $con,
-            $_POST['userID'],
-            $_POST['name'],
-            $_POST['email'],
-            $_POST['password'], 
-            $_POST['role']
-        );
-
-        if ($result === true) {
-            echo "<script>window.updateUserSuccess = true;</script>";
-        } else {
-            echo "<script>window.updateUserError = " . json_encode($result) . ";</script>";
-        }
-
-    } else {
-        $result = addUser($con, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
-
-        if ($result === true) {
-            echo "<script>window.addUserSuccess = true;</script>";
-        } else {
-            echo "<script>window.addUserError = " . json_encode($result) . ";</script>";
-        }
-    }
-
-}
-
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
-
-    $userID = $_POST['deleteUserID'];
-
-    $result = deleteUser($con, $userID);
-
-    if ($result === true) {
-        echo "<script>window.deleteUserSuccess = true;</script>";
-        $users = getData('user'); 
-    } else {
-        echo "<script>window.deleteUserError = " . json_encode($result) . ";</script>";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -109,7 +88,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
                 </thead>
                 <tbody id="user-table-body">
                     <?php foreach($users as $user): ?>
-                    <tr data-role="<?= htmlspecialchars($user['role']) ?>" data-name="<?= htmlspecialchars($user['name']) ?>">
+                    <tr data-userid="<?= htmlspecialchars($user['userID']) ?>" 
+                        data-role="<?= htmlspecialchars($user['role']) ?>" 
+                        data-name="<?= htmlspecialchars($user['name']) ?>"
+                        data-email="<?= htmlspecialchars($user['email']) ?>">
                         <td>
                             <div class="icon-text-2-left">
                                 <img src="<?= !empty($user['picture']) ? "/aplite/frontend/image/avatars/".$user['picture'] : "/aplite/frontend/image/default/Profile-2.svg" ?>"
@@ -152,7 +134,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
                 </thead>
                 <tbody id="user-mobile-body">
                     <?php foreach($users as $user): ?>
-                    <tr data-role="<?= htmlspecialchars($user['role']) ?>" data-name="<?= htmlspecialchars($user['name']) ?>">
+                    <tr 
+                        data-userid="<?= htmlspecialchars($user['userID']) ?>"
+                        data-name="<?= htmlspecialchars($user['name']) ?>"
+                        data-email="<?= htmlspecialchars($user['email']) ?>"
+                        data-role="<?= htmlspecialchars($user['role']) ?>"
+                    >
                         <td>
                             <div class="icon-text-2-left">
                                 <img src="<?= !empty($user['picture']) ? "/aplite/frontend/image/avatars/".$user['picture'] : "/aplite/frontend/image/default/Profile-2.svg" ?>"
@@ -194,12 +181,35 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
             </button>
         </div>
 
-        <div id="add-user-modal" class="overlay-container">
+        <div id="add-user-modal" class="overlay-container <?= isset($errorMessageCode) ? 'active' : '' ?>">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="medium-green-title" id="modal-title">Add User</span>
+                    <span class="medium-green-title" id="modal-title">
+                        <?= isset($_GET['userID']) && !empty($_GET['userID']) ? 'Edit User' : 'Add User' ?>
+                    </span>
                     <button class="close-btn" id="close-add-user">&times;</button>
                 </div>
+
+                <?php if (isset($errorMessageCode)): ?>
+                    <?php 
+                        $messages = [
+                            'missing_fields' => 'Please fill in all required fields.',
+                            'invalid_email'  => 'Please enter a valid email address.',
+                            'email_exists'   => 'This email is already registered.',
+                            'weak_password'  => 'Password must be 8+ chars with uppercase, number, and symbol.'
+                        ];
+                        $errorMsg = $messages[$errorMessageCode] ?? 'An unexpected error occurred.';
+                    ?>
+                    <div class="error-banner">
+                        • <?= $errorMsg ?>
+                    </div>
+                <?php endif; ?>
+
+                <?php if (isset($_GET['msg'])): ?>
+                    <div class="success-banner">
+                        • Action completed successfully!
+                    </div>
+                <?php endif; ?>
 
                 <form id="add-user-form" method="POST" action="">
                     <input type="hidden" name="userID" id="edit-user-id">
@@ -207,26 +217,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
                     <div class="field-group">
                         <div class="label-field">
                             <label class="green-description">Name</label>
-                            <input type="text" name="name" placeholder="Enter full name" required />
+                            <input type="text" name="name" 
+                                value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" 
+                                placeholder="Enter full name" required />
                         </div>
                         <div class="label-field">
                             <label class="green-description">Password</label>
-                            <input type="password" name="password" placeholder="Enter password" required />
+                            <input type="password" name="password" placeholder="Enter password" />
                         </div>
                     </div>
 
                     <div class="field-group">
                         <div class="label-field">
                             <label class="green-description">Email</label>
-                            <input type="email" name="email" placeholder="Enter email address" required />
+                            <input type="email" name="email" 
+                                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" 
+                                placeholder="Enter email address" required />
                         </div>
                         <div class="label-field">
                             <label class="green-description">Role</label>
                             <select name="role" required>
-                                <option value="Admin">Admin</option>
-                                <option value="Lecturer">Lecturer</option>
-                                <option value="Student">Student</option>
-                                <option value="Staff">Staff</option>
+                                <?php $currentRole = $_POST['role'] ?? ''; ?>
+                                <option value="Admin" <?= $currentRole == 'Admin' ? 'selected' : '' ?>>Admin</option>
+                                <option value="Lecturer" <?= $currentRole == 'Lecturer' ? 'selected' : '' ?>>Lecturer</option>
+                                <option value="Student" <?= $currentRole == 'Student' ? 'selected' : '' ?>>Student</option>
+                                <option value="Staff" <?= $currentRole == 'Staff' ? 'selected' : '' ?>>Staff</option>
                             </select>
                         </div>
                     </div>
@@ -243,6 +258,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
     <?php include '../../component/footer.php'; ?>
     <script src="../../scripts/animation.js"></script>
     <script src="../../scripts/account_table.js"></script>
-    <script src="../../scripts/add_user.js"></script>
+    <script src="../../scripts/user_modal.js"></script>
 </body>
 </html>
