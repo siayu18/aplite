@@ -88,6 +88,34 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
 
                 <div class="profile-details-card">
                         <h1 class="green-title">Personal Information</h1>
+                        <?php 
+                            if (isset($_GET['error'])) {
+                                $error_code = $_GET['error'];
+                                switch($error_code) {
+                                    case 'missing_fields': $msg = "Please fill in all required fields."; break;
+                                    case 'invalid_email':  $msg = "Please enter a valid email address."; break;
+                                    case 'email_exists':   $msg = "This email is already taken by another user."; break;
+                                    case 'weak_password':  $msg = "Password must be 8+ chars with uppercase, number, and symbol."; break;
+                                    default:               $msg = "An error occurred. Please try again."; break;
+                                }
+                                echo '<div class="error-banner"> • ' . $msg . '</div>';
+                            }
+
+                            if (isset($_GET['success'])) {
+                                echo <<<HTML
+                                <div class="overlay active"></div>
+                                <div class="modal active">
+                                    <img src="../../image/verify.svg" alt="Verify" class="modal-img">
+                                    <div class="text-group">
+                                        <span class="medium-green-title">Profile Updated!</span>
+                                        <span class="green-description">Your changes have been saved successfully.</span>
+                                    </div>
+                                    <a href="profile.php" class="green-button">Back</a>
+                                </div>
+                            HTML;
+                            }
+                        ?>
+
                     <form method="POST" action="../../../backend/user/update_profile.php" id="profile-form">
                         <div class="form-group">
                             <label>Username</label>
@@ -97,9 +125,15 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
                             <label>Email</label>
                             <input type="text" name="email" value="<?= htmlspecialchars($userData['email']) ?>" placeholder="enter email" required>
                         </div>
+                        
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" name="password" placeholder="enter new password">
+                            <div class="password-wrapper">
+                                <input type="password" name="password" id="password-field" placeholder="enter new password">
+                                <button type="button" id="togglePassword" class="password-toggle-btn">
+                                    <img src="../../image/eye.svg" id="eyeIcon" alt="Toggle Password">
+                                </button>
+                            </div>
                         </div>
 
                         <div class="btn-group">
@@ -161,6 +195,19 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
             profileForm.password.value = originalData.password;
         });
 
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordField = document.querySelector('#password-field');
+        const eyeIcon = document.querySelector('#eyeIcon');
+
+        togglePassword.addEventListener('click', function () {
+            const isPassword = passwordField.getAttribute('type') === 'password';
+            
+            passwordField.setAttribute('type', isPassword ? 'text' : 'password');
+            
+            eyeIcon.src = isPassword 
+                ? "../../image/eye-slash.svg" 
+                : "../../image/eye.svg";
+        });
     </script>
 </body>
 </html>

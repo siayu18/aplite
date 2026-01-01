@@ -375,22 +375,18 @@ tr:nth-child(odd) {
     gap: 1rem;
     flex: 0 1 1;
     flex-wrap: wrap;
-    /* flex: 1; */
 }
 
-/* Right part */
 .add-user {
     display: flex;
     flex-direction: row;
     flex: 0 1 1;
-    /* flex: 1; */
 }
 
 .add-user button {
     padding: var(--padding-small) ;
     font-size: 1rem;
     flex: 0;
-    /* width: clamp(5rem, 15vw, 15rem); */
 }
 
 .top-group {
@@ -413,3 +409,61 @@ tr:nth-child(odd) {
     flex: 1;
 }
 
+.error-banner, 
+.success-banner {
+    display: block; 
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-sizing: border-box;
+    animation: slideDown 0.4s ease forwards;
+}
+
+.error-banner {
+    background-color: #FFF0F0;
+    color: #D32F2F;
+    border: 1px solid #FFCDD2;
+}
+
+.success-banner {
+    background-color: #F1F8E9;
+    color: #388E3C;
+    border: 1px solid #C8E6C9;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 4rem; 
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+    opacity: 0.6;
+}
+
+.password-toggle-btn img {
+    width: 1.4rem;
+    height: auto;
+}

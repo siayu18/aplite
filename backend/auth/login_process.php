@@ -2,7 +2,7 @@
 $_identifier = $_POST['identifier'] ?? '';
 
 if ($_identifier == '') {
-    echo "Please enter email or username";
+    header("Location: ../../frontend/pages/login/login.php?error=infoempty");
     exit;
 }
 
@@ -23,7 +23,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if (!$user) {
-    echo "User not found";
+    header("Location: ../../frontend/pages/login/login.php?error=notfound");
     exit;
 }
 
@@ -31,7 +31,7 @@ if (!$user) {
 $inputPassword = $_POST['password'] ?? '';
 
 if(!password_verify($inputPassword, $user['password'])) {
-    echo "Incorrect password";
+    header("Location: ../../frontend/pages/login/login.php?error=wrongpass");
     exit;
 } 
 
