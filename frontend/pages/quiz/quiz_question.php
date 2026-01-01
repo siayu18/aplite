@@ -56,7 +56,7 @@ if (isset($_POST['submitBtn'])) {
     <title>Take Quiz</title>
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">

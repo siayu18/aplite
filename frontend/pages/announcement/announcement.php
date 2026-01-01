@@ -20,7 +20,7 @@ mysqli_close($con);
     <title>Announcements</title>
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class="col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Announcements</span>

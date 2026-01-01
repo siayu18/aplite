@@ -74,7 +74,7 @@ unset($_SESSION['quiz']);
     <title>Quiz Summary</title>
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="summary-container">
             <div class="summary-card">

@@ -1,33 +1,47 @@
 <?php
-    require_once "../../../backend/auth/session_admin.php";
-    include("../../../backend/conn.php");
+require_once "../../../backend/auth/session_admin.php";
+include("../../../backend/conn.php");
 
-    $sql = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
-            FROM Redemption AS redem, User AS u, Reward AS r
-            WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID AND redem.status = 0";
-    
-    $result = mysqli_query($con, $sql);
+$sql = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
+        FROM Redemption AS redem, User AS u, Reward AS r
+        WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID AND redem.status = 0";
 
-    $count = mysqli_num_rows($result);
+$result = mysqli_query($con, $sql);
 
-    $redemption = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $redemption[] = $row;
-    }
+$count = mysqli_num_rows($result);
 
-    $sql1 = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
-            FROM Redemption AS redem, User AS u, Reward AS r
-            WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID AND redem.status = 1";
-    
-    $result1 = mysqli_query($con, $sql1);
+$redemption = [];
+while ($row = mysqli_fetch_assoc($result)) {
+    $redemption[] = $row;
+}
 
-    $count1 = mysqli_num_rows($result1);
+$sql1 = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
+        FROM Redemption AS redem, User AS u, Reward AS r
+        WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID AND redem.status = 1";
 
-    $redemption1 = [];
-    while ($row1 = mysqli_fetch_assoc($result1)) {
-        $redemption1[] = $row1;
-    }
+$result1 = mysqli_query($con, $sql1);
 
+$count1 = mysqli_num_rows($result1);
+
+$redemption1 = [];
+while ($row1 = mysqli_fetch_assoc($result1)) {
+    $redemption1[] = $row1;
+}
+
+// Pending count
+$pendingSql = "SELECT COUNT(*) AS total FROM Redemption WHERE status = 0";
+$pendingResult = mysqli_query($con, $pendingSql);
+$pendingCount = mysqli_fetch_assoc($pendingResult)['total'];
+
+// Approved count
+$approvedSql = "SELECT COUNT(*) AS total FROM Redemption WHERE status = 1";
+$approvedResult = mysqli_query($con, $approvedSql);
+$approvedCount = mysqli_fetch_assoc($approvedResult)['total'];
+
+// Total
+$totalCount = $pendingCount + $approvedCount;
+
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
@@ -41,81 +55,122 @@
     <link rel="stylesheet" href="../../styles/redemptions.css">
 </head>
 <body>
-    <?php include '../../component/admin_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class="col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Manage Redemption</span>
             <span class="green-description">Oversee rewards and manage redemptions</span>
         </div>
-        <span class="green-title">Pending Redemptions</span>
-        <div class="pending-redemption">
+
+        <div class="summary-row">
+            <div class="summary-card">
+                <div class="icon-text-clean">
+                    <img src="../../image/gift.svg" alt="Gift">
+                    <span class="green-description">Total Redemptions</span>
+                </div>
+                <span class="green-description"><?= $totalCount ?></span>
+            </div>
+
+            <div class="summary-card" style="background-color: var(--pending-orange-background); border: 0.1rem solid var(--pending-orange-border);">
+                <div class="icon-text-clean">
+                    <img src="../../image/timer.svg" alt="timer">
+                    <span class="orange-description">Pending Redemptions</span>
+                </div>
+                <span class="orange-description"><?= $pendingCount ?></span>
+            </div>
+
+            <div class="summary-card" style="background-color: var(--approved-green-background); border: 0.1rem solid var(--approved-green-border);">
+                <div class="icon-text-clean">
+                    <img src="../../image/tick.svg" alt="tick">
+                    <span class="dark-green-description">Approved Redemptions</span>
+                </div>
+                <span class="dark-green-description"><?= $approvedCount ?></span>
+            </div>
+        </div>
+
+        <div class="redemption-container">
+            <span class="medium-green-title">Pending Redemptions</span>
             <div class="container">
                 <?php if (empty($redemption)): ?>
                     <div class="mid-text-group">
-                        <span class="medium-green-title">No redemptions available!</span>
-                        <span class="green-description">Sorry, but currently there is no redemption available!</span>
+                        <span class="medium-green-title">No pending redemptions available!</span>
+                        <span class="green-description">Sorry, but currently there is no pending redemption available!</span>
                     </div>
                 <?php else: ?>
                     <?php foreach ($redemption as $redemptions): ?>
-                        <a href="manage_redemption.php?id=<?= htmlspecialchars($redemptions['redemptionID']) ?>" class="card">
-                            <div class="icon-text">
-                                <img src="../../image/calendar.svg" alt="Calendar" />
+                        <form method="post" class="card">
+                            <div class="icon-title">
+                                <img src="../../image/dark-gift.svg" alt="Gift" />
                                 <span><?= htmlspecialchars($redemptions['title']) ?></span>
+                                <div class="card-icon-img-pen"><img src="../../image/timer.svg" alt="Pending"/></div>
                             </div>
-                            <span class="medium-green-title">Student</span>
-                            <p class="green-description"><?= htmlspecialchars($redemptions['name']) ?></p>
-                            <form method="post">
-                                <div class="redemption-details">
-                                    <div>
-                                        <span class="medium-green-title">Points Used</span>
-                                        <p class="green-description"><?= htmlspecialchars($redemptions['pointsRequired']) ?></p>
-                                    </div>
-                                    <div>
-                                        <span class="medium-green-title">Redemption Date</span>
-                                        <p class="green-description"><?= htmlspecialchars($redemptions['datetime']) ?></p>
-                                    </div>
-                                    <input type="hidden" name="redemption-id" value="<?= htmlspecialchars($redemptions['redemptionID']) ?>">
-                                    <button type="submit" name="pending" class="complete-btn">Mark as Completed</button>
+                            <div class="card-info">
+                                <div class="label-field">
+                                    <span class="green-description-bold">Student</span>
+                                    <span class="dark-green-description"><?= htmlspecialchars($redemptions['name']) ?></span>
                                 </div>
-                            </form>
-                        </a>
+                                <div class="label-field">
+                                    <span class="green-description-bold">Points Used</span>
+                                    <span class="dark-green-description"><?= htmlspecialchars($redemptions['pointsRequired']) ?></span>
+                                </div>
+                                <div class="label-field">
+                                    <span class="green-description-bold">Redemption Date</span>
+                                    <span class="dark-green-description"><?= htmlspecialchars($redemptions['datetime']) ?></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="redemption-id" value="<?= htmlspecialchars($redemptions['redemptionID']) ?>">
+                            <button type="submit" name="pending" class="green-button" style="width: fit-content;">
+                                <div class="icon-text-clean">
+                                    <img src="../../image/white-tick.svg" alt="Tick" />
+                                    <span>Mark as Completed</span>
+                                </div>
+                            </button>
+                        </form>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
         </div>
-        <p style="font-size: 20px"></p>
-        <span class="green-title">Completed Redemptions</span>
-        <div class="completed-redemption">
+
+        <br />
+
+        <div class="redemption-container">
+            <span class="medium-green-title">Completed Redemptions</span>
             <div class="container">
                 <?php if (empty($redemption1)): ?>
                     <div class="mid-text-group">
-                        <span class="medium-green-title">No redemptions available!</span>
-                        <span class="green-description">Sorry, but currently there is no redemption available!</span>
+                        <span class="medium-green-title">No approved redemptions available!</span>
+                        <span class="green-description">Sorry, but currently there is no approved redemption available!</span>
                     </div>
                 <?php else: ?>
                     <?php foreach ($redemption1 as $redemptions1): ?>
-                        <a href="manage_redemption.php?id=<?= htmlspecialchars($redemptions1['redemptionID']) ?>" class="card">
-                            <div class="icon-text">
-                                <img src="../../image/calendar.svg" alt="Calendar" />
+                        <form method="post" class="completed-card">
+                            <div class="icon-title">
+                                <img src="../../image/dark-gift.svg" alt="Gift" />
                                 <span><?= htmlspecialchars($redemptions1['title']) ?></span>
+                                <div class="card-icon-img-apro"><img src="../../image/tick.svg" alt="Approve"/></div>
                             </div>
-                            <span class="medium-green-title">Student</span>
-                            <p class="green-description"><?= htmlspecialchars($redemptions1['name']) ?></p>
-                            <form method="post">
-                                <div class="redemption-details">
-                                    <div>
-                                        <span class="medium-green-title">Points Used</span>
-                                        <p class="green-description"><?= htmlspecialchars($redemptions1['pointsRequired']) ?></p>
-                                    </div>
-                                    <div>
-                                        <span class="medium-green-title">Redemption Date</span>
-                                        <p class="green-description"><?= htmlspecialchars($redemptions1['datetime']) ?></p>
-                                    </div>
-                                    <input type="hidden" name="redemption-id" value="<?= htmlspecialchars($redemptions1['redemptionID']) ?>">
-                                    <button type="submit" name="cancel" class="complete-btn" id="completed">Cancel</button>
+                            <div class="card-info">
+                                <div class="label-field">
+                                    <span class="blue-green-description-bold">Student</span>
+                                    <span class="dark-green-description"><?= htmlspecialchars($redemptions1['name']) ?></span>
                                 </div>
-                            </form>
-                        </a>
+                                <div class="label-field">
+                                    <span class="blue-green-description-bold">Points Used</span>
+                                    <span class="dark-green-description"><?= htmlspecialchars($redemptions1['pointsRequired']) ?></span>
+                                </div>
+                                <div class="label-field">
+                                    <span class="blue-green-description-bold">Redemption Date</span>
+                                    <span class="dark-green-description"><?= htmlspecialchars($redemptions1['datetime']) ?></span>
+                                </div>
+                            </div>
+                            <input type="hidden" name="redemption-id" value="<?= htmlspecialchars($redemptions1['redemptionID']) ?>">
+                            <button type="submit" name="cancel" class="red-border-button" style="width: fit-content">
+                                <div class="icon-text">
+                                    <img src="../../image/red-cancel.svg" alt="Cancel" />
+                                    <span style="color: red;">Cancel</span>
+                                </div>
+                            </button>
+                        </form>
                     <?php endforeach; ?>
                 <?php endif; ?>
             </div>
@@ -130,6 +185,7 @@
             echo("<meta http-equiv='refresh' content = 0>");
         }
     ?>
+
     <?php
         if (isset($_POST['cancel'])) {
             $redemptionid = $_POST['redemption-id'];

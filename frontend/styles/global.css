@@ -25,6 +25,7 @@
   --approved-green-border: #7BF1A8;
   --rejected-red-background: #FEF2F2;
   --rejected-red-border: #FFA2A2;
+  --blue-green-font: #008236;
 }
 
 body {
@@ -187,6 +188,12 @@ a {
     font-weight: bold;
 }
 
+.orange-description {
+    color: var(--dark-orange-font);
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+}
+
 .green-description {
   color: var(--light-green-font);
   font-size: 0.9rem;
@@ -195,6 +202,13 @@ a {
 
 .green-description-bold {
   color: var(--light-green-font);
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: bold;
+}
+
+.blue-green-description-bold {
+  color: var(--blue-green-font);
   font-size: 1rem;
   line-height: 1.5rem;
   font-weight: bold;

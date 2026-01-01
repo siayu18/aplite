@@ -114,7 +114,7 @@ if(isset($_POST["submitBtn"])){
 </head>
 
 <body>
-    <?php include '../../component/staff_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class="col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">
