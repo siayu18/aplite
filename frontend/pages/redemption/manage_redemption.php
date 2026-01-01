@@ -164,6 +164,12 @@ mysqli_close($con);
                                 </div>
                             </div>
                             <input type="hidden" name="redemption-id" value="<?= htmlspecialchars($redemptions1['redemptionID']) ?>">
+                            <button type="submit" name="cancel" class="red-border-button" style="width: fit-content">
+                                <div class="icon-text">
+                                    <img src="../../image/red-cancel.svg" alt="Cancel" />
+                                    <span style="color: red;">Cancel</span>
+                                </div>
+                            </button>
                         </form>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -176,6 +182,16 @@ mysqli_close($con);
             $updatesql = "UPDATE Redemption SET status = 1 WHERE redemptionID = $redemptionid";
             $check = mysqli_query($con, $updatesql);
             echo("<script>alert('Redemption Approved')</script>");
+            echo("<meta http-equiv='refresh' content = 0>");
+        }
+    ?>
+
+    <?php
+        if (isset($_POST['cancel'])) {
+            $redemptionid = $_POST['redemption-id'];
+            $updatesql = "UPDATE Redemption SET status = 0 WHERE redemptionID = $redemptionid";
+            $check = mysqli_query($con, $updatesql);
+            echo("<script>alert('Redemption cancelled')</script>");
             echo("<meta http-equiv='refresh' content = 0>");
         }
     ?>
