@@ -28,7 +28,7 @@ mysqli_close($con);
     <link rel="stylesheet" href="../../styles/rewards.css">
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class="col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Rewards Exchange</span>

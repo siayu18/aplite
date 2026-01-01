@@ -1,5 +1,5 @@
 <?php
-    require_once "../../../backend/auth/session_admin.php";
+    require_once "../../../backend/auth/session_staff.php";
     include("../../../backend/conn.php");
 
     $sql = "SELECT BrightnessLevel FROM Brightnesslog";
@@ -45,7 +45,7 @@
     <link rel="stylesheet" href="../../styles/room_report.css">
 </head>
 <body>
-    <?php include '../../component/admin_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class="col-12 col-s-12 content fade-in">
         <div class="text-group">
             <span class="green-title">Report</span>

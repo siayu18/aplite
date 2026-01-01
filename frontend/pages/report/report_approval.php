@@ -1,5 +1,5 @@
 <?php
-require_once "../../../backend/auth/session_admin.php";
+require_once "../../../backend/auth/session_staff.php";
 include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 

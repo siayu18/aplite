@@ -48,24 +48,24 @@ if (!empty($userData['picture'])) {
 <body>
     <div class="menu">
         <a class="menu-text" href="../dashboard/dashboard.php">Home</a>
-        <a class="menu-text" href="#">Light Control</a>
+        <a class="menu-text" href="../light_management/control_lights.php">Light Control</a>
         <a class="menu-text" href="../quiz/choose_quiz.php">Quizzes</a>
         <a class="menu-text" href="../article/choose_article.php">Articles</a>
         <a class="menu-text" href="#">Redemptions</a>
         <a class="menu-text" href="#">Rewards</a>
-        <a class="menu-text" href="#">Report Issue</a>
+        <a class="menu-text" href="../report/reports_page">Report Issue</a>
         <a class="menu-text" href="../announcement/announcement.php">Announcements</a>
 
         <a href="../account_management/profile.php"><img src="<?= $avatar ?>" alt="Profile" class="<?= $profileExist ? 'profile-img' : 'menu-img' ?>" /></a>
         <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>
         <div id="dropdown-menu" class="dropdown-content">
             <a href="../dashboard/dashboard.php">Home</a>
-            <a href="#">Light Control</a>
+            <a href="../light_management/control_lights.php">Light Control</a>
             <a href="../quiz/choose_quiz.php">Quizzes</a>
             <a href="../article/choose_article.php">Articles</a>
             <a class="#" href="#">Redemptions</a>
             <a href="#">Rewards</a>
-            <a href="#">Report Issue</a>
+            <a href="../report/reports_page">Report Issue</a>
             <a href="../announcement/announcement.php">Announcements</a>
         </div>
     </div>

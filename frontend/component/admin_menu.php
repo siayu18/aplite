@@ -50,19 +50,19 @@ if (!empty($userData['picture'])) {
         <a class="menu-text" href="../dashboard/admin_dashboard.php">Home</a>
         <a class="menu-text" href="../account_management/acc_table.php">Manage Users</a>
         <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
-        <a class="menu-text" href="#">Manage Redemptions</a>
-        <a class="menu-text" href="#">Manage Rewards</a>
-        <a class="menu-text" href="#">Generate Report</a>
+        <a class="menu-text" href="../redemption/manage_redemption.php">Manage Redemptions</a>
+        <a class="menu-text" href="../reward/reward_exchange.php">Manage Rewards</a>
+        <a class="menu-text" href="../generate_report/admin_room_reports.php">Generate Report</a>
 
         <a href="../account_management/profile.php"><img src="<?= $avatar ?>" alt="Profile" class="<?= $profileExist ? 'profile-img' : 'menu-img' ?>" /></a>
         <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>
         <div id="dropdown-menu" class="dropdown-content">
             <a href="../dashboard/admin_dashboard.php">Home</a>
-            <a href="#">Manage Users</a>
+            <a href="../account_management/acc_table.php">Manage Users</a>
             <a href="../announcement/manage_announcement.php">Manage Announcements</a>
-            <a class="#" href="#">Manage Redemptions</a>
-            <a href="#">Manage Rewards</a>
-            <a href="#">Generate Report</a>
+            <a href="../redemption/manage_redemption.php">Manage Redemptions</a>
+            <a href="../reward/reward_exchange.php">Manage Rewards</a>
+            <a href="../generate_report/admin_room_reports.php">Generate Report</a>
         </div>
     </div>  
 </body>
