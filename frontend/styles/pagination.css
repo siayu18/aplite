@@ -134,11 +134,10 @@
     gap: 0.5rem;
 }
 
-/* Delete Modal Specifics */
 #delete-confirm-modal .modal-content {
     max-width: 400px;
     text-align: center;
-    border-top: 4px solid #D32F2F; /* Red accent for danger */
+    border-top: 4px solid #D32F2F; 
 }
 
 #delete-user-name {
@@ -148,7 +147,6 @@
     margin-top: 5px;
 }
 
-/* Danger Button */
 .red-button {
     background-color: #D32F2F;
     color: white;
@@ -164,7 +162,6 @@
     background-color: #B71C1C;
 }
 
-/* Success Banner styling (Used for added/updated/deleted msgs) */
 .success-banner {
     background-color: #E8F5E9;
     border-left: 5px solid #4CAF50;

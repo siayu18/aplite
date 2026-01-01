@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cancelBtn = document.getElementById("cancel-add-user");
 
     addUserBtn.addEventListener("click", function (e) {
-        e.preventDefault(); // Prevent form/button default behavior
+        e.preventDefault(); 
         addUserModal.classList.add("active");
         document.body.classList.add("modal-open");
     });

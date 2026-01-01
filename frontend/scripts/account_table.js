@@ -6,19 +6,18 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('user-mobile-body')
     ];
 
-    const deleteModalOverlay = document.getElementById("delete-confirm-modal");
-    const deleteModalBox = deleteModalOverlay.querySelector(".modal");
-    const deleteIdInput = document.getElementById("confirm-delete-id");
-    const deleteNameSpan = document.getElementById("delete-user-name");
+    // const deleteModalOverlay = document.getElementById("delete-confirm-modal");
+    // const deleteModalBox = deleteModalOverlay.querySelector(".modal");
+    // const deleteIdInput = document.getElementById("confirm-delete-id");
+    // const deleteNameSpan = document.getElementById("delete-user-name");
 
-    const closeDelete = () => {
-        deleteModalOverlay.classList.remove("active");
-        deleteModalBox.classList.remove("active");
-        document.body.classList.remove("modal-open");
-    };
+    // const closeDelete = () => {
+    //     deleteModalOverlay.classList.remove("active");
+    //     deleteModalBox.classList.remove("active");
+    //     document.body.classList.remove("modal-open");
+    // };
 
     document.addEventListener("click", (e) => {
-        // 1. Handle Edit Button Click
         const editBtn = e.target.closest(".edit-btn");
         if (editBtn) {
             const userId = editBtn.dataset.userid;
@@ -28,18 +27,15 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // 2. Handle Delete Button Click
         const deleteBtn = e.target.closest(".delete-btn");
         if (deleteBtn) {
             const userId = deleteBtn.dataset.userid;
             const row = deleteBtn.closest("tr");
             const userName = row.dataset.name;
 
-            // Set values in the delete modal
             document.getElementById("confirm-delete-id").value = userId;
             document.getElementById("delete-user-name").textContent = userName;
 
-            // Open delete modal (using your overlay.css classes)
             const deleteModal = document.getElementById("delete-confirm-modal");
             deleteModal.classList.add("active");
             deleteModal.querySelector(".modal").classList.add("active");
@@ -47,7 +43,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- Close Delete Modal Logic ---
     document.getElementById("close-delete-modal").onclick = closeDeleteModal;
     document.getElementById("cancel-delete-btn").onclick = closeDeleteModal;
 
@@ -57,6 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         deleteModal.querySelector(".modal").classList.remove("active");
         document.body.classList.remove("modal-open");
     }
+
     // Search and pagination
     let currentPage = 1;
     const rowsPerPage = 5;
