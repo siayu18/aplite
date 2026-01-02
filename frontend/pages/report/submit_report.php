@@ -8,7 +8,7 @@ $rooms = getData('room');
 if (isset($_POST['submitBtn'])) {
     
     $reportID = uniqid();
-    $studentID = 3;
+    $currentID = $_SESSION['user_id'];
     $roomID = $_POST['classroom'];
     $title = mysqli_real_escape_string($con, $_POST['report_title']);
     $description = mysqli_real_escape_string($con, $_POST['description']);
@@ -21,7 +21,7 @@ if (isset($_POST['submitBtn'])) {
     }
 
     $sql = "INSERT INTO brokenreport(brID, roomID, studentID, title, description, evidence, date, status)
-            VALUES('$reportID', '$roomID', '$studentID', '$title', '$description', '$imageData', '$current_date', '$status')";
+            VALUES('$reportID', '$roomID', '$currentID', '$title', '$description', '$imageData', '$current_date', '$status')";
 
     if (!mysqli_query($con, $sql)) {
             die("Error: " . mysqli_error($con));
