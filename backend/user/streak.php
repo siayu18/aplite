@@ -8,17 +8,22 @@ function updateUserStreak($con, $userId, $currentStreak, $lastLogin) {
     $lastDate = new DateTime($lastLogin);
     $lastDate->setTime(0, 0, 0);
 
-    $diff = $lastDate->diff($today)->days;
+    $diff = (int)$lastDate->diff($today)->format("%a");
 
     if ($diff === 0) {
-        return $currentStreak; 
-    } 
-    
-    $newStreak = ($diff === 1) ? $currentStreak + 1 : 1;
+        $newStreak = $currentStreak; 
+    } elseif ($diff === 1) {
+        $newStreak = $currentStreak + 1; 
+    } else {
+        $newStreak = 1; 
+    }
 
     $stmt = $con->prepare("UPDATE user SET lastLogin = NOW(), streak = ? WHERE userID = ?");
     $stmt->bind_param('ii', $newStreak, $userId);
-    $stmt->execute();
+    
+    if (!$stmt->execute()) {
+        error_log("Streak update failed: " . $stmt->error);
+    }
 
     return $newStreak;
 }
