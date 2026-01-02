@@ -7,6 +7,7 @@ if ($_identifier == '') {
 }
 
 require_once "../conn.php";
+require_once "../user/streak.php";
 
 $sql = "
     SELECT userID, name, email, password, role, streak, lastLogin
@@ -35,28 +36,7 @@ if(!password_verify($inputPassword, $user['password'])) {
     exit;
 } 
 
-// Update streak & lastLogin
-date_default_timezone_set('Asia/Kuala_Lumpur');
-$currentDate = new DateTime();
-$lastLoginDate = new DateTime($user['lastLogin']);
-$diffDays = (int)$lastLoginDate->diff($currentDate)->format('%a');
-
-if ($diffDays === 0) {
-    $streak = $user['streak']; 
-} elseif ($diffDays === 1) {
-    $streak = $user['streak'] + 1;
-} else {
-    $streak = 1;
-}
-
-$updatesql = "
-    UPDATE user 
-    SET lastLogin = NOW(), streak = ?
-    WHERE userID = ?
-    ";
-$updateStmt = $con->prepare($updatesql);
-$updateStmt->bind_param('ii', $streak, $user['userID']);
-$updateStmt->execute();
+updateUserStreak($con, $user['userID'], $user['streak'], $user['lastLogin']);
 
 // starting a session after verification
 session_start();
