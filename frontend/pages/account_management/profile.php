@@ -14,6 +14,17 @@ $stmt->execute();
 $result = $stmt->get_result();
 $userData = $result->fetch_assoc();
 
+$points = $userData['points'];
+$streak = (int)$userData['streak']; 
+$lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLogin'])) : "Never";
+
+$badgeList = [
+    ['name' => '5 Day Streak',   'img' => '5-days.png',   'req' => 5],
+    ['name' => '20 Day Streak',  'img' => '20-days.png',  'req' => 20],
+    ['name' => '50 Day Streak',  'img' => '50-days.png',  'req' => 50],
+    ['name' => '100 Day Streak', 'img' => '100-days.png', 'req' => 100]
+];
+
 $avatarFolderUrl = "/aplite/frontend/image/avatars/";
 $defaultAvatarUrl = "/aplite/frontend/image/default/Profile-2.svg";
 
@@ -87,6 +98,28 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
                 </form>
 
                 <div class="profile-details-card">
+                    <h1 class="green-title">Achievements</h1>
+                    <div class="badge-grid">
+                        <?php foreach ($badgeList as $badge): ?>
+                            <?php 
+                                $isEarned = ($streak >= $badge['req']); 
+                            ?>
+                            
+                            <div class="badge-item <?= $isEarned ? 'earned' : 'locked' ?>">
+                                <div class="badge-wrapper">
+                                    <img src="../../image/badges/<?= $badge['img'] ?>" alt="<?= $badge['name'] ?>">
+                                </div>
+
+                                <span class="badge-tooltip">
+                                    <?= $isEarned ? "Unlocked: " . $badge['name'] : "Keep going! Reach " . $badge['req'] . " days" ?>
+                                </span>
+                                
+                                <p class="badge-label">
+                                    <?= $isEarned ? $badge['name'] : 'Locked' ?>
+                                </p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                         <h1 class="green-title">Personal Information</h1>
                         <?php 
                             if (isset($_GET['error'])) {

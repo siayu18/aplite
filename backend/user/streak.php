@@ -27,3 +27,21 @@ function updateUserStreak($con, $userId, $currentStreak, $lastLogin) {
 
     return $newStreak;
 }
+
+function checkAndAwardBadges($con, $userId, $streak) {
+    $milestones = [
+        5   => 1, // 5 Days
+        20  => 2, // 20 Days
+        50  => 3, // 50 Days
+        100 => 4  // 100 Days
+    ];
+
+    if (array_key_exists($streak, $milestones)) {
+        $badgeID = $milestones[$streak];
+        
+        $sql = "INSERT IGNORE INTO userbadge (userID, badgeID, dateAwarded) VALUES (?, ?, NOW())";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param('ii', $userId, $badgeID);
+        $stmt->execute();
+    }
+}
