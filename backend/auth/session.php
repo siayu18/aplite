@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once __DIR__ . "/../conn.php";
+require_once __DIR__ . "/../user/streak.php";
 
 // reject when !session AND !cookie
 if (isset($_SESSION['user_id'])) {
@@ -15,7 +16,7 @@ if(!isset($_COOKIE['remember_me'])) {
 $token = $_COOKIE['remember_me'];
 $hashed = hash('sha256', $token);
 $sql = "
-    SELECT userID, name, role
+    SELECT userID, name, role, streak, lastLogin
     FROM user
     WHERE remember_token=? 
     LIMIT 1
@@ -32,6 +33,8 @@ if(!$user) {
     header("Location: /aplite/backend/auth/unauthorized.php");
     exit;
 }
+
+updateUserStreak($con, $user['userID'], $user['streak'], $user['lastLogin']);
 
 $_SESSION['user_id'] = $user['userID'];
 $_SESSION['name'] = $user['name'];
