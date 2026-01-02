@@ -4,9 +4,9 @@ include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 
 // TEMP: replace with $_SESSION later
-$studentID = 3;
+$currentID = $_SESSION['user_id'];
 
-$reports = getReportsForStudent($studentID);
+$reports = getReportsForStudent($currentID);
 
 $totalCount = 0;
 $approvedCount = 0;
