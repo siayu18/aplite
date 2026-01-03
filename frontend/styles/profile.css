@@ -305,7 +305,7 @@ tr:nth-child(odd) {
 
 .icon-name {
     width: 2.5rem;
-    height: auto;
+    height: 2.5rem;
     object-fit: cover;
     object-position: center;
     flex-shrink: 0;
