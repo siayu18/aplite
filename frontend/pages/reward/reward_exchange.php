@@ -1,10 +1,6 @@
 <?php
-<<<<<<< HEAD
+    // require_once "../../../backend/auth/session_admin.php";
     include("../../../backend/conn.php");
-=======
-require_once "../../../backend/auth/session_admin.php";
-include("../../../backend/conn.php");
->>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
 
     //hardcoded userID (remove when login fixed)
     session_start();
@@ -70,7 +66,6 @@ include("../../../backend/conn.php");
     <link rel="stylesheet" href="../../styles/rewards.css">
 </head>
 <body>
-<<<<<<< HEAD
     <?php include '../../component/stu_header.php'; ?> 
     <div class="content fade-in" style="padding: 2rem;">
         <div class=" col-12 col-s-12 content fade-in">
@@ -97,24 +92,6 @@ include("../../../backend/conn.php");
         <!-- display all available rewards -->
         <div class="card-container">
             <!-- if reward database is empty -->
-=======
-    <?php include '../../component/load_header.php'; ?>
-    <div class="col-12 col-s-12 content fade-in">
-        <div class="text-group">
-            <span class="green-title">Rewards Exchange</span>
-            <span class="green-description">Redeem your hard-earned points for exciting rewards!</span>
-        </div>
-        <div class="point-card">
-            <div class="icon-title">
-                <img src="../../image/badge.svg" alt="Points Badge"/>
-                <span>Your Points</span>
-            </div>
-            <span class="dark-green-description">100 pts</span>
-        </div>
-        <span class="green-description" style="text-align: center;"><?= htmlspecialchars($count) ?> Rewards Available</span>
-        
-        <div class="card-container" style="margin-top: 0;">
->>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
             <?php if (empty($rewards)): ?>
                 <div class="mid-text-group">
                     <span class="medium-green-title">No rewards available!</span>
@@ -124,7 +101,6 @@ include("../../../backend/conn.php");
             <?php else: ?>
                 <!-- foreach reward row generate one card -->
                 <?php foreach ($rewards as $r): ?>
-<<<<<<< HEAD
                     <form method="post">
                         <div class="card">
                             <div class="quiz-points">
@@ -146,20 +122,6 @@ include("../../../backend/conn.php");
                                 <button type="submit" name="redeem" class="green-button">Redeem</button>
                             </div>
                     </form>
-=======
-                    <div class="card">
-                        <img class="card-img" src="../../image/apu-background.jpg" alt="Reward" />
-                        <div class="info-container">
-                            <div class="points-container">
-                                <img src="../../image/badge.svg" alt="Points Badge"/>
-                                <span class="points-text"><?= htmlspecialchars($r['pointsRequired']) ?> pts</span>
-                            </div>
-                            <div class="medium-green-title"><?= htmlspecialchars($r['title']) ?></div>
-                            <span class="green-description"><?= htmlspecialchars($r['description']) ?></span>
-                            <a href="abc.php?id=<?= $r['rewardID'] ?>" class="green-button">Redeem</a>
-                        </div>
-                    </div>
->>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
