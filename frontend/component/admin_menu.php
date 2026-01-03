@@ -51,13 +51,8 @@ if (!empty($userData['picture'])) {
         <a class="menu-text" href="../account_management/acc_table.php">Manage Users</a>
         <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
         <a class="menu-text" href="../redemption/manage_redemption.php">Manage Redemptions</a>
-<<<<<<< HEAD
         <a class="menu-text" href="../reward/manage_rewards.php">Manage Rewards</a>
-        <a class="menu-text" href="../report/admin_room_reports.php">Generate Report</a>
-=======
-        <a class="menu-text" href="../reward/reward_exchange.php">Manage Rewards</a>
         <a class="menu-text" href="../generate_report/admin_room_reports.php">Generate Report</a>
->>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
 
         <a href="../account_management/profile.php"><img src="<?= $avatar ?>" alt="Profile" class="<?= $profileExist ? 'profile-img' : 'menu-img' ?>" /></a>
         <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>

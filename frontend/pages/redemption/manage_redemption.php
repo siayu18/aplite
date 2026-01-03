@@ -98,15 +98,9 @@ mysqli_close($con);
                     </div>
                 <?php else: ?>
                     <?php foreach ($redemption as $redemptions): ?>
-<<<<<<< HEAD
-                        <a href="manage_redemption.php?id=<?= htmlspecialchars($redemptions['redemptionID']) ?>" class="card">
-                            <div class="icon-text">
-                                <img src="../../image/voucher.png" alt="Voucher" />
-=======
                         <form method="post" class="card">
                             <div class="icon-title">
                                 <img src="../../image/dark-gift.svg" alt="Gift" />
->>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
                                 <span><?= htmlspecialchars($redemptions['title']) ?></span>
                                 <div class="card-icon-img-pen"><img src="../../image/timer.svg" alt="Pending"/></div>
                             </div>
@@ -149,15 +143,9 @@ mysqli_close($con);
                     </div>
                 <?php else: ?>
                     <?php foreach ($redemption1 as $redemptions1): ?>
-<<<<<<< HEAD
-                        <a href="manage_redemption.php?id=<?= htmlspecialchars($redemptions1['redemptionID']) ?>" class="card">
-                            <div class="icon-text">
-                                <img src="../../image/voucher.png" alt="Voucher"/>
-=======
                         <form method="post" class="completed-card">
                             <div class="icon-title">
                                 <img src="../../image/dark-gift.svg" alt="Gift" />
->>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
                                 <span><?= htmlspecialchars($redemptions1['title']) ?></span>
                                 <div class="card-icon-img-apro"><img src="../../image/tick.svg" alt="Approve"/></div>
                             </div>
