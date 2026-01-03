@@ -51,9 +51,15 @@ if (!empty($userData['picture'])) {
         <a class="menu-text" href="../light_management/control_lights.php">Light Control</a>
         <a class="menu-text" href="../quiz/choose_quiz.php">Quizzes</a>
         <a class="menu-text" href="../article/choose_article.php">Articles</a>
+<<<<<<< HEAD
+        <a class="menu-text" href="../redemption/redemption_history.php">Redemptions</a>
+        <a class="menu-text" href="../reward/reward_exchange.php">Rewards</a>
+        <a class="menu-text" href="#">Report Issue</a>
+=======
         <a class="menu-text" href="#">Redemptions</a>
         <a class="menu-text" href="#">Rewards</a>
         <a class="menu-text" href="../report/reports_page">Report Issue</a>
+>>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
         <a class="menu-text" href="../announcement/announcement.php">Announcements</a>
 
         <a href="../account_management/profile.php"><img src="<?= $avatar ?>" alt="Profile" class="<?= $profileExist ? 'profile-img' : 'menu-img' ?>" /></a>

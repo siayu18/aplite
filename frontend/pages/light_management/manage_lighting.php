@@ -3,8 +3,8 @@ require_once "../../../backend/auth/session_student.php";
 include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 
-$studentID = 3;
-$session = getActiveSessionByStudent($studentID);
+$currentID = $_SESSION['user_id'];
+$session = getActiveSessionByStudent($currentID);
 $checkInTimeFormatted = date("g:i:s A", strtotime($session['checkInTime']));
 $checkoutSession = null;
 $averageBrightness = null;
@@ -31,7 +31,7 @@ if (isset($_POST['checkoutBtn'])) {
     $sql1 = "UPDATE session
             SET checkOutTime = NOW(),
                 duration = TIMEDIFF(NOW(), checkInTime)
-            WHERE studentID = '$studentID'
+            WHERE studentID = '$currentID'
             AND checkOutTime IS NULL
             LIMIT 1";
 
@@ -39,7 +39,7 @@ if (isset($_POST['checkoutBtn'])) {
         $checkoutSessionSql = "SELECT s.*, r.roomName
                                FROM session s
                                INNER JOIN room r ON s.roomID = r.roomID
-                               WHERE s.studentID = '$studentID'
+                               WHERE s.studentID = '$currentID'
                                ORDER BY s.checkOutTime DESC
                                LIMIT 1";
 
@@ -51,7 +51,7 @@ if (isset($_POST['checkoutBtn'])) {
 
     $sql2 = "UPDATE user
         SET points = points + $pointsEarned
-        WHERE userID = '$studentID'";
+        WHERE userID = '$currentID'";
 
     if (!mysqli_query($con, $sql2)) {
         die(mysqli_error($con));

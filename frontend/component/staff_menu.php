@@ -49,7 +49,11 @@ if (!empty($userData['picture'])) {
     <div class="menu">
         <a class="menu-text" href="../dashboard/staff_dashboard.php">Home</a>
         <a class="menu-text" href="../quiz/manage_quiz.php">Manage Quizzes</a>
+<<<<<<< HEAD
+        <a class="menu-text" href="../report/staff_room_reports.php">Generate Report</a>
+=======
         <a class="menu-text" href="../generate_report/staff_room_reports.php">Generate Report</a>
+>>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
         <a class="menu-text" href="../article/manage_article.php">Manage Articles</a>
         <a class="menu-text" href="../report/manage_reports.php">Broken Light Report</a>
 
