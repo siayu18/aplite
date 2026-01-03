@@ -35,8 +35,14 @@
     gap: 0.5rem;
 }
 
+.input-box {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
 .input-box input{
-    min-width: 70%;
+    min-width: 100%;
     font-size: 1rem;
     outline: none;
     border: 0.1rem solid #3a5e2b3f;
@@ -278,4 +284,102 @@ button[type="submit"]:hover {
         min-height: 100vh;
         padding: clamp(1rem, 5vw, 7rem) clamp(2rem, 8vw, 5rem)
     }
+}
+
+.error-banner {
+    background-color: #ffe5e5;
+    color: #cc0000;
+    padding: 0.8rem;
+    min-width: 70%;
+    border-radius: 8px;
+    border: 1px solid #ffcccc;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+    animation: slideDown 0.3s ease-out;
+}
+
+.success-banner {
+    background-color: #e5f9e5;
+    color: #28a745;
+    padding: 0.8rem;
+    min-width: 70%;
+    border-radius: 8px;
+    border: 1px solid #c3e6cb;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.feedback-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start; 
+    margin-bottom: 2rem; 
+}
+
+.error-banner {
+    background-color: #ffe5e5;
+    color: #cc0000;
+    width: calc(70% + 3rem); 
+    padding: 0.8rem 1.5rem;
+    border-radius: 1.5rem; 
+    border: 1px solid #ffcccc;
+    font-size: 0.9rem;
+    text-align: left; 
+    box-sizing: border-box;
+    animation: slideDown 0.3s ease-out;
+}
+
+.input-area {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    margin: 0rem 0rem 1.5rem 0rem; 
+    max-width: 100%;
+}
+
+.button-area {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    padding-right: 3.5rem; 
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    padding: 5px;
+}
+
+.password-toggle-btn img {
+    width: 1.2rem;
+    height: auto;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.password-toggle-btn:hover img {
+    opacity: 1;
 }

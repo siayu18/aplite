@@ -118,7 +118,7 @@
 
 .avatar-img {
     width: clamp(5rem, 10vw, 6rem);
-    height: auto;
+    height: clamp(5rem, 10vw, 6rem);
     object-fit: cover;
     object-position: center;
     flex-shrink: 0;
@@ -375,22 +375,18 @@ tr:nth-child(odd) {
     gap: 1rem;
     flex: 0 1 1;
     flex-wrap: wrap;
-    /* flex: 1; */
 }
 
-/* Right part */
 .add-user {
     display: flex;
     flex-direction: row;
     flex: 0 1 1;
-    /* flex: 1; */
 }
 
 .add-user button {
     padding: var(--padding-small) ;
     font-size: 1rem;
     flex: 0;
-    /* width: clamp(5rem, 15vw, 15rem); */
 }
 
 .top-group {
@@ -413,3 +409,179 @@ tr:nth-child(odd) {
     flex: 1;
 }
 
+.error-banner, 
+.success-banner {
+    display: block; 
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-sizing: border-box;
+    animation: slideDown 0.4s ease forwards;
+}
+
+.error-banner {
+    background-color: #FFF0F0;
+    color: #D32F2F;
+    border: 1px solid #FFCDD2;
+}
+
+.success-banner {
+    background-color: #F1F8E9;
+    color: #388E3C;
+    border: 1px solid #C8E6C9;
+}
+
+.password-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 4rem; 
+}
+
+.password-toggle-btn {
+    position: absolute;
+    right: 1.2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.password-toggle-btn:hover {
+    opacity: 0.6;
+}
+
+.password-toggle-btn img {
+    width: 1.4rem;
+    height: auto;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee; 
+    margin-bottom: 1.5rem;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #666;
+    padding: 0;
+    margin-top: -10px; 
+    transition: color 0.2s;
+}
+
+.close-btn:hover {
+    color: #000;
+}
+
+#delete-confirm-modal .modal-body {
+    text-align: center; 
+    padding: 1rem 0;
+}
+
+#delete-confirm-modal .right-button-group {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.badge-grid {
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: wrap; 
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1rem 0;
+    margin-bottom: 2rem; 
+    width: 100%;
+}
+
+.badge-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80px; 
+    flex: 0 0 auto;
+    position: relative;
+}
+
+.badge-wrapper {
+    width: 60px; 
+    height: 60px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.badge-wrapper img {
+    width: 60px; 
+    height: 60px; 
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain; 
+    transition: transform 0.3s ease, filter 0.3s ease;
+    display: block;
+}
+
+.badge-label {
+    font-size: 0.6rem;
+    margin-top: 0.5rem;
+    text-align: center;
+    line-height: 1.2;
+    color: var(--dark-green-font);
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-item.locked img {
+    filter: grayscale(100%) opacity(0.3);
+}
+
+.badge-item.earned img {
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.badge-tooltip {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 5px 8px;
+    border-radius: 4px;
+    font-size: 0.65rem;
+    white-space: nowrap;
+    z-index: 100;
+    transition: opacity 0.2s;
+    pointer-events: none;
+}
+
+.badge-item:hover .badge-tooltip {
+    visibility: visible;
+    opacity: 1;
+}

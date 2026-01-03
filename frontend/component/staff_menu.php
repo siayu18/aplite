@@ -1,3 +1,35 @@
+<?php
+include "../../../backend/conn.php";
+
+$userID = $_SESSION['user_id'];
+$sql = "
+    SELECT name, email, points, streak, lastLogin, picture, role
+    FROM user
+    WHERE userID = ?";
+
+$stmt = $con->prepare($sql);
+$stmt->bind_param('i', $userID);
+$stmt->execute();
+$result = $stmt->get_result();
+$userData = $result->fetch_assoc();
+
+$avatarFolder = "/aplite/frontend/image/avatars/";
+$defaultAvatar = "/aplite/frontend/image/default/Profile-4.svg";
+
+$avatar = $defaultAvatar; 
+$profileExist = false;
+
+if (!empty($userData['picture'])) {
+
+    $avatarPath = $_SERVER['DOCUMENT_ROOT'] . "/aplite/frontend/image/avatars/" . $userData['picture'];
+
+    if(file_exists($avatarPath)) { 
+        $profileExist = true;
+        $avatar = $avatarFolder . $userData['picture'];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,18 +49,22 @@
     <div class="menu">
         <a class="menu-text" href="../dashboard/staff_dashboard.php">Home</a>
         <a class="menu-text" href="../quiz/manage_quiz.php">Manage Quizzes</a>
+<<<<<<< HEAD
         <a class="menu-text" href="../report/staff_room_reports.php">Generate Report</a>
+=======
+        <a class="menu-text" href="../generate_report/staff_room_reports.php">Generate Report</a>
+>>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
         <a class="menu-text" href="../article/manage_article.php">Manage Articles</a>
-        <a class="menu-text" href="">Broken Light Report</a>
+        <a class="menu-text" href="../report/manage_reports.php">Broken Light Report</a>
 
-        <a href="../account_management/profile.php"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
+        <a href="../account_management/profile.php"><img src="<?= $avatar ?>" alt="Profile" class="<?= $profileExist ? 'profile-img' : 'menu-img' ?>" /></a>
         <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>
         <div id="dropdown-menu" class="dropdown-content">
             <a href="../dashboard/staff_dashboard.php">Home</a>
             <a href="../quiz/manage_quiz.php">Manage Quizzes</a>
-            <a href="#">Generate Report</a>
+            <a href="../generate_report/staff_room_reports.php">Generate Report</a>
             <a href="../article/manage_article.php">Manage Articles</a>
-            <a href="#">Light Report</a>
+            <a href="../report/manage_reports.php">Light Report</a>
         </div>
     </div>
 </body>

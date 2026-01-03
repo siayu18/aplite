@@ -14,6 +14,17 @@ $stmt->execute();
 $result = $stmt->get_result();
 $userData = $result->fetch_assoc();
 
+$points = $userData['points'];
+$streak = (int)$userData['streak']; 
+$lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLogin'])) : "Never";
+
+$badgeList = [
+    ['name' => '5 Day Streak',   'img' => '5-days.png',   'req' => 5],
+    ['name' => '20 Day Streak',  'img' => '20-days.png',  'req' => 20],
+    ['name' => '50 Day Streak',  'img' => '50-days.png',  'req' => 50],
+    ['name' => '100 Day Streak', 'img' => '100-days.png', 'req' => 100]
+];
+
 $avatarFolderUrl = "/aplite/frontend/image/avatars/";
 $defaultAvatarUrl = "/aplite/frontend/image/default/Profile-2.svg";
 
@@ -87,7 +98,57 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
                 </form>
 
                 <div class="profile-details-card">
+                    <h1 class="green-title">Achievements</h1>
+                    <div class="badge-grid">
+                        <?php foreach ($badgeList as $badge): ?>
+                            <?php 
+                                $isEarned = ($streak >= $badge['req']); 
+                            ?>
+                            
+                            <div class="badge-item <?= $isEarned ? 'earned' : 'locked' ?>">
+                                <div class="badge-wrapper">
+                                    <img src="../../image/badges/<?= $badge['img'] ?>" alt="<?= $badge['name'] ?>">
+                                </div>
+
+                                <span class="badge-tooltip">
+                                    <?= $isEarned ? "Unlocked: " . $badge['name'] : "Keep going! Reach " . $badge['req'] . " days" ?>
+                                </span>
+                                
+                                <p class="badge-label">
+                                    <?= $isEarned ? $badge['name'] : 'Locked' ?>
+                                </p>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
                         <h1 class="green-title">Personal Information</h1>
+                        <?php 
+                            if (isset($_GET['error'])) {
+                                $error_code = $_GET['error'];
+                                switch($error_code) {
+                                    case 'missing_fields': $msg = "Please fill in all required fields."; break;
+                                    case 'invalid_email':  $msg = "Please enter a valid email address."; break;
+                                    case 'email_exists':   $msg = "This email is already taken by another user."; break;
+                                    case 'weak_password':  $msg = "Password must be 8+ chars with uppercase, number, and symbol."; break;
+                                    default:               $msg = "An error occurred. Please try again."; break;
+                                }
+                                echo '<div class="error-banner"> • ' . $msg . '</div>';
+                            }
+
+                            if (isset($_GET['success'])) {
+                                echo <<<HTML
+                                <div class="overlay active"></div>
+                                <div class="modal active">
+                                    <img src="../../image/verify.svg" alt="Verify" class="modal-img">
+                                    <div class="text-group">
+                                        <span class="medium-green-title">Profile Updated!</span>
+                                        <span class="green-description">Your changes have been saved successfully.</span>
+                                    </div>
+                                    <a href="profile.php" class="green-button">Back</a>
+                                </div>
+                            HTML;
+                            }
+                        ?>
+
                     <form method="POST" action="../../../backend/user/update_profile.php" id="profile-form">
                         <div class="form-group">
                             <label>Username</label>
@@ -97,9 +158,15 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
                             <label>Email</label>
                             <input type="text" name="email" value="<?= htmlspecialchars($userData['email']) ?>" placeholder="enter email" required>
                         </div>
+                        
                         <div class="form-group">
                             <label>Password</label>
-                            <input type="password" name="password" placeholder="enter new password">
+                            <div class="password-wrapper">
+                                <input type="password" name="password" id="password-field" placeholder="enter new password">
+                                <button type="button" id="togglePassword" class="password-toggle-btn">
+                                    <img src="../../image/eye.svg" id="eyeIcon" alt="Toggle Password">
+                                </button>
+                            </div>
                         </div>
 
                         <div class="btn-group">
@@ -161,6 +228,19 @@ $lastLogin = $userData['lastLogin'] ? date('M d, Y', strtotime($userData['lastLo
             profileForm.password.value = originalData.password;
         });
 
+        const togglePassword = document.querySelector('#togglePassword');
+        const passwordField = document.querySelector('#password-field');
+        const eyeIcon = document.querySelector('#eyeIcon');
+
+        togglePassword.addEventListener('click', function () {
+            const isPassword = passwordField.getAttribute('type') === 'password';
+            
+            passwordField.setAttribute('type', isPassword ? 'text' : 'password');
+            
+            eyeIcon.src = isPassword 
+                ? "../../image/eye-slash.svg" 
+                : "../../image/eye.svg";
+        });
     </script>
 </body>
 </html>

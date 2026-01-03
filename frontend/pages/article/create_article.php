@@ -7,7 +7,7 @@ if (isset($_POST['submitBtn'])) {
     include('../../../backend/conn.php');
     
     $articleID = uniqid();
-    $staffID = "3";
+    $staffID = $_SESSION['user_id'];
     $title = mysqli_real_escape_string($con, $_POST['title']);
     $points = mysqli_real_escape_string($con, $_POST['points']);
     $content = mysqli_real_escape_string($con, $_POST['content']);
@@ -34,7 +34,6 @@ if (isset($_POST['submitBtn'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,7 +49,7 @@ if (isset($_POST['submitBtn'])) {
 </head>
 
 <body>
-    <?php include '../../component/staff_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="main-container">
             <div class="back-wrapper">

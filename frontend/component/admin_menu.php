@@ -1,3 +1,35 @@
+<?php
+include "../../../backend/conn.php";
+
+$userID = $_SESSION['user_id'];
+$sql = "
+    SELECT name, email, points, streak, lastLogin, picture, role
+    FROM user
+    WHERE userID = ?";
+
+$stmt = $con->prepare($sql);
+$stmt->bind_param('i', $userID);
+$stmt->execute();
+$result = $stmt->get_result();
+$userData = $result->fetch_assoc();
+
+$avatarFolder = "/aplite/frontend/image/avatars/";
+$defaultAvatar = "/aplite/frontend/image/default/Profile-4.svg";
+
+$avatar = $defaultAvatar; 
+$profileExist = false;
+
+if (!empty($userData['picture'])) {
+
+    $avatarPath = $_SERVER['DOCUMENT_ROOT'] . "/aplite/frontend/image/avatars/" . $userData['picture'];
+
+    if(file_exists($avatarPath)) { 
+        $profileExist = true;
+        $avatar = $avatarFolder . $userData['picture'];
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,18 +51,23 @@
         <a class="menu-text" href="../account_management/acc_table.php">Manage Users</a>
         <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
         <a class="menu-text" href="../redemption/manage_redemption.php">Manage Redemptions</a>
+<<<<<<< HEAD
         <a class="menu-text" href="../reward/manage_rewards.php">Manage Rewards</a>
         <a class="menu-text" href="../report/admin_room_reports.php">Generate Report</a>
+=======
+        <a class="menu-text" href="../reward/reward_exchange.php">Manage Rewards</a>
+        <a class="menu-text" href="../generate_report/admin_room_reports.php">Generate Report</a>
+>>>>>>> 1d050e52a42519fd44856db86c74e7e9a015329d
 
-        <a href="../account_management/profile.php"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
+        <a href="../account_management/profile.php"><img src="<?= $avatar ?>" alt="Profile" class="<?= $profileExist ? 'profile-img' : 'menu-img' ?>" /></a>
         <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>
         <div id="dropdown-menu" class="dropdown-content">
             <a href="../dashboard/admin_dashboard.php">Home</a>
-            <a href="#">Manage Users</a>
+            <a href="../account_management/acc_table.php">Manage Users</a>
             <a href="../announcement/manage_announcement.php">Manage Announcements</a>
-            <a class="#" href="#">Manage Redemptions</a>
-            <a href="#">Manage Rewards</a>
-            <a href="#">Generate Report</a>
+            <a href="../redemption/manage_redemption.php">Manage Redemptions</a>
+            <a href="../reward/reward_exchange.php">Manage Rewards</a>
+            <a href="../generate_report/admin_room_reports.php">Generate Report</a>
         </div>
     </div>  
 </body>

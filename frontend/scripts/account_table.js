@@ -1,162 +1,116 @@
 document.addEventListener("DOMContentLoaded", () => {
     const searchInput = document.getElementById('search-input');
     const roleFilter = document.getElementById('role-filter');
-
     const tableBodies = [
-        document.getElementById('user-table-body'),   
-        document.getElementById('user-mobile-body')  
+        document.getElementById('user-table-body'),
+        document.getElementById('user-mobile-body')
     ];
 
-        function attachDeleteEvents() {
-        tableBodies.forEach(body => {
-            body.querySelectorAll(".delete-btn").forEach(btn => {
-                if (!btn.dataset.listener) {
-                    btn.dataset.listener = "true";
+    // const deleteModalOverlay = document.getElementById("delete-confirm-modal");
+    // const deleteModalBox = deleteModalOverlay.querySelector(".modal");
+    // const deleteIdInput = document.getElementById("confirm-delete-id");
+    // const deleteNameSpan = document.getElementById("delete-user-name");
 
-                    btn.addEventListener("click", function () {
-                        const userID = this.dataset.userid;
+    // const closeDelete = () => {
+    //     deleteModalOverlay.classList.remove("active");
+    //     deleteModalBox.classList.remove("active");
+    //     document.body.classList.remove("modal-open");
+    // };
 
-                        if (!confirm("Are you sure you want to delete this user?")) return;
+    document.addEventListener("click", (e) => {
+        const editBtn = e.target.closest(".edit-btn");
+        if (editBtn) {
+            const userId = editBtn.dataset.userid;
+            if (window.openEditUserModal) {
+                window.openEditUserModal(userId);
+            }
+            return;
+        }
 
-                        fetch("", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/x-www-form-urlencoded"
-                            },
-                            body: new URLSearchParams({
-                                deleteUserID: userID
-                            })
-                        })
-                        .then(response => response.text())
-                        .then(data => {
-                            window.location.reload(); 
-                        })
-                        .catch(err => {
-                            alert("Failed to delete user. Try again.");
-                            console.error(err);
-                        });
-                    });
-                }
-            });
-        });
+        const deleteBtn = e.target.closest(".delete-btn");
+        if (deleteBtn) {
+            const userId = deleteBtn.dataset.userid;
+            const row = deleteBtn.closest("tr");
+            const userName = row.dataset.name;
+
+            document.getElementById("confirm-delete-id").value = userId;
+            document.getElementById("delete-user-name").textContent = userName;
+
+            const deleteModal = document.getElementById("delete-confirm-modal");
+            deleteModal.classList.add("active");
+            deleteModal.querySelector(".modal").classList.add("active");
+            document.body.classList.add("modal-open");
+        }
+    });
+
+    document.getElementById("close-delete-modal").onclick = closeDeleteModal;
+    document.getElementById("cancel-delete-btn").onclick = closeDeleteModal;
+
+    function closeDeleteModal() {
+        const deleteModal = document.getElementById("delete-confirm-modal");
+        deleteModal.classList.remove("active");
+        deleteModal.querySelector(".modal").classList.remove("active");
+        document.body.classList.remove("modal-open");
     }
 
-    attachDeleteEvents();
-
-    const rowsPerPage = 5;
+    // Search and pagination
     let currentPage = 1;
+    const rowsPerPage = 5;
 
     function getFilteredRows(body) {
         const query = searchInput.value.toLowerCase().trim();
         const role = roleFilter.value.toLowerCase();
 
         return [...body.rows].filter(row => {
-            const name = row.dataset.name.toLowerCase();
-            const rowRole = row.dataset.role.toLowerCase();
+            const name = (row.dataset.name || "").toLowerCase();
+            const rowRole = (row.dataset.role || "").toLowerCase();
             return name.includes(query) && (role === "all" || role === rowRole);
         });
     }
 
     function displayPage() {
         tableBodies.forEach(body => {
+            if (!body) return;
             const filteredRows = getFilteredRows(body);
             const start = (currentPage - 1) * rowsPerPage;
             const end = start + rowsPerPage;
 
             [...body.rows].forEach(row => {
-                if (filteredRows.includes(row) && filteredRows.indexOf(row) >= start && filteredRows.indexOf(row) < end) {
-                    row.style.display = "";
-                } else {
-                    row.style.display = "none";
-                }
+                const index = filteredRows.indexOf(row);
+                row.style.display = (index >= start && index < end) ? "" : "none";
             });
         });
+        setupPagination();
     }
 
     function setupPagination() {
-        const filteredRows = getFilteredRows(tableBodies[0]); 
+        const filteredRows = getFilteredRows(tableBodies[0]);
         const totalPages = Math.ceil(filteredRows.length / rowsPerPage);
-
         const container = document.querySelector(".page-numbers");
+        if (!container) return;
+        
         container.innerHTML = "";
-
-        const maxButtons = 5; // max page numbers to display
-        let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
-        let endPage = Math.min(totalPages, startPage + maxButtons - 1);
-        startPage = Math.max(1, endPage - maxButtons + 1);
-
-        function createButton(page) {
+        for (let i = 1; i <= totalPages; i++) {
             const btn = document.createElement("button");
-            btn.textContent = page;
-            btn.classList.add("page-btn");
-            if (page === currentPage) btn.classList.add("active");
-
-            btn.addEventListener("click", () => {
-                currentPage = page;
-                displayPage();
-                setupPagination();
-            });
-            return btn;
-        }
-
-        if (startPage > 1) {
-            container.appendChild(createButton(1));
-            if (startPage > 2) {
-                const ellipsis = document.createElement("span");
-                ellipsis.textContent = "…";
-                ellipsis.style.padding = "0 0.5rem";
-                container.appendChild(ellipsis);
-            }
-        }
-
-        for (let i = startPage; i <= endPage; i++) {
-            container.appendChild(createButton(i));
-        }
-
-        if (endPage < totalPages) {
-            if (endPage < totalPages - 1) {
-                const ellipsis = document.createElement("span");
-                ellipsis.textContent = "…";
-                ellipsis.style.padding = "0 0.5rem";
-                container.appendChild(ellipsis);
-            }
-            container.appendChild(createButton(totalPages));
+            btn.textContent = i;
+            btn.className = `page-btn ${i === currentPage ? 'active' : ''}`;
+            btn.onclick = () => { currentPage = i; displayPage(); };
+            container.appendChild(btn);
         }
 
         document.querySelector(".prev").disabled = currentPage === 1;
         document.querySelector(".next").disabled = currentPage === totalPages || totalPages === 0;
     }
 
-    // Prev/Next
-    document.querySelector(".prev").addEventListener("click", () => {
-        if (currentPage > 1) {
-            currentPage--;
-            displayPage();
-            setupPagination();
-        }
-    });
-
-    document.querySelector(".next").addEventListener("click", () => {
+    document.querySelector(".prev").onclick = () => { if(currentPage > 1) { currentPage--; displayPage(); } };
+    document.querySelector(".next").onclick = () => { 
         const totalPages = Math.ceil(getFilteredRows(tableBodies[0]).length / rowsPerPage);
-        if (currentPage < totalPages) {
-            currentPage++;
-            displayPage();
-            setupPagination();
-        }
-    });
+        if(currentPage < totalPages) { currentPage++; displayPage(); } 
+    };
 
-    searchInput.addEventListener("input", () => {
-        currentPage = 1;
-        displayPage();
-        setupPagination();
-    });
-
-    roleFilter.addEventListener("change", () => {
-        currentPage = 1;
-        displayPage();
-        setupPagination();
-    });
+    searchInput.oninput = () => { currentPage = 1; displayPage(); };
+    roleFilter.onchange = () => { currentPage = 1; displayPage(); };
 
     displayPage();
-    setupPagination();
+
 });

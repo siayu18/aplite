@@ -3,34 +3,35 @@ require_once "../../../backend/auth/session_admin.php";
 include "../../../backend/fetch_data.php";
 require_once "../../../backend/user/add_user.php";
 require_once "../../../backend/user/delete_user.php";
+require_once "../../../backend/user/update_user.php";
 
+$errorMessageCode = null;
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST['deleteUserID'])) {
+        deleteUser($con, $_POST['deleteUserID']);
+        header("Location: " . $_SERVER['PHP_SELF'] . "?msg=deleted");
+        exit();
+    }
+    
+   if (isset($_POST['submitBtn'])) {
+        $userId = $_POST['userID'] ?? null;
+        
+        $result = (!empty($userId)) 
+            ? updateUser($con, $userId, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role'])
+            : addUser($con, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
+
+        if ($result === true) {
+            header("Location: " . $_SERVER['PHP_SELF'] . "?msg=" . (!empty($userId) ? "updated" : "added"));
+            exit();
+        } else {
+            $errorMessageCode = $result; 
+        }
+    }
+}
 
 $users = getData('user');
 
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['submitBtn'])) {
-    $result = addUser($con, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['role']);
-
-    if ($result === true) {
-        echo "<script>window.addUserSuccess = true;</script>";
-        $users = getData('user');
-    } else {
-        echo "<script>window.addUserError = " . json_encode($result) . ";</script>";
-    }
-}
-
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
-
-    $userID = $_POST['deleteUserID'];
-
-    $result = deleteUser($con, $userID);
-
-    if ($result === true) {
-        echo "<script>window.deleteUserSuccess = true;</script>";
-        $users = getData('user'); 
-    } else {
-        echo "<script>window.deleteUserError = " . json_encode($result) . ";</script>";
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -52,6 +53,32 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
         <div class="profile-header">
             <h1 class="green-title">Manage Users</h1>
             <p class="green-description">Make changes to user information with 1 click</p>
+        </div>
+
+        <div id="delete-confirm-modal" class="overlay">
+            <div class="modal" style="max-width: 400px;"> <div class="modal-header">
+                    <span class="medium-green-title">Delete User</span>
+                    <button type="button" class="close-btn" id="close-delete-modal">&times;</button>
+                </div>
+                
+                <div class="modal-body">
+                    <p class="green-description" style="margin-bottom: 0.5rem;">Are you sure you want to delete</p>
+                    <div id="delete-user-name" style="color: #D32F2F; font-weight: 700; font-size: 2rem; word-break: break-word;"></div>
+                    <p style="font-size: 0.85rem; color: #888; margin-top: 15px; line-height: 1.4;">
+                        This action is permanent and <br><strong>cannot be undone.</strong>
+                    </p>
+                </div>
+
+                <form method="POST">
+                    <input type="hidden" name="deleteUserID" id="confirm-delete-id">
+                    <div class="right-button-group">
+                        <button type="button" class="white-button" id="cancel-delete-btn" style="min-width: 100px;">Cancel</button>
+                        <button type="submit" class="red-button" style="background-color: #D32F2F; color: white; border: none; padding: 10px 24px; border-radius: 6px; font-weight: 600; cursor: pointer;">
+                            Delete Permanently
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         <div class="top-group">
@@ -88,7 +115,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
                 </thead>
                 <tbody id="user-table-body">
                     <?php foreach($users as $user): ?>
-                    <tr data-role="<?= htmlspecialchars($user['role']) ?>" data-name="<?= htmlspecialchars($user['name']) ?>">
+                    <tr data-userid="<?= htmlspecialchars($user['userID']) ?>" 
+                        data-role="<?= htmlspecialchars($user['role']) ?>" 
+                        data-name="<?= htmlspecialchars($user['name']) ?>"
+                        data-email="<?= htmlspecialchars($user['email']) ?>">
                         <td>
                             <div class="icon-text-2-left">
                                 <img src="<?= !empty($user['picture']) ? "/aplite/frontend/image/avatars/".$user['picture'] : "/aplite/frontend/image/default/Profile-2.svg" ?>"
@@ -131,7 +161,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
                 </thead>
                 <tbody id="user-mobile-body">
                     <?php foreach($users as $user): ?>
-                    <tr data-role="<?= htmlspecialchars($user['role']) ?>" data-name="<?= htmlspecialchars($user['name']) ?>">
+                    <tr 
+                        data-userid="<?= htmlspecialchars($user['userID']) ?>"
+                        data-name="<?= htmlspecialchars($user['name']) ?>"
+                        data-email="<?= htmlspecialchars($user['email']) ?>"
+                        data-role="<?= htmlspecialchars($user['role']) ?>"
+                    >
                         <td>
                             <div class="icon-text-2-left">
                                 <img src="<?= !empty($user['picture']) ? "/aplite/frontend/image/avatars/".$user['picture'] : "/aplite/frontend/image/default/Profile-2.svg" ?>"
@@ -173,44 +208,78 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
             </button>
         </div>
 
-        <div id="add-user-modal" class="overlay-container">
+        <div id="add-user-modal" class="overlay-container <?= isset($errorMessageCode) ? 'active' : '' ?>">
             <div class="modal-content">
                 <div class="modal-header">
-                    <span class="medium-green-title">Add User</span>
+                    <span class="medium-green-title" id="modal-title">
+                        <?php 
+                            if (isset($errorMessageCode)) {
+                                echo (!empty($_POST['userID'])) ? 'Edit User' : 'Add User';
+                            } else {
+                                echo 'Add User'; 
+                            }
+                        ?>
+                    </span>
                     <button class="close-btn" id="close-add-user">&times;</button>
                 </div>
 
+                <?php if (isset($errorMessageCode)): ?>
+                    <?php 
+                        $messages = [
+                            'missing_fields' => 'Please fill in all required fields.',
+                            'invalid_email'  => 'Please enter a valid email address.',
+                            'email_exists'   => 'This email is already registered.',
+                            'weak_password'  => 'Password must be 8+ chars with uppercase, number, and symbol.'
+                        ];
+                        $errorMsg = $messages[$errorMessageCode] ?? 'An unexpected error occurred.';
+                    ?>
+                    <div class="error-banner">
+                        • <?= $errorMsg ?>
+                    </div>
+                <?php endif; ?>
                 <form id="add-user-form" method="POST" action="">
+                    <input type="hidden" name="userID" id="edit-user-id" value="<?= htmlspecialchars($_POST['userID'] ?? '') ?>">
+
                     <div class="field-group">
                         <div class="label-field">
                             <label class="green-description">Name</label>
-                            <input type="text" name="name" placeholder="Enter full name" required />
+                            <input type="text" name="name" 
+                                value="<?= htmlspecialchars($_POST['name'] ?? '') ?>" 
+                                placeholder="Enter full name" required />
                         </div>
                         <div class="label-field">
                             <label class="green-description">Password</label>
-                            <input type="password" name="password" placeholder="Enter password" required />
+                            <div class="password-wrapper">
+                                <input type="password" name="password" id="modal-password" placeholder="Enter password" />
+                                <button type="button" class="password-toggle-btn" id="toggle-password-btn">
+                                    <img src="../../image/eye.svg" id="eye-icon" alt="Toggle Password">
+                                </button>
+                            </div>
                         </div>
                     </div>
 
                     <div class="field-group">
                         <div class="label-field">
                             <label class="green-description">Email</label>
-                            <input type="email" name="email" placeholder="Enter email address" required />
+                            <input type="email" name="email" 
+                                value="<?= htmlspecialchars($_POST['email'] ?? '') ?>" 
+                                placeholder="Enter email address" required />
                         </div>
                         <div class="label-field">
                             <label class="green-description">Role</label>
                             <select name="role" required>
-                                <option value="Admin">Admin</option>
-                                <option value="Lecturer">Lecturer</option>
-                                <option value="Student">Student</option>
-                                <option value="Staff">Staff</option>
+                                <?php $currentRole = $_POST['role'] ?? ''; ?>
+                                <option value="Admin" <?= $currentRole == 'Admin' ? 'selected' : '' ?>>Admin</option>
+                                <option value="Lecturer" <?= $currentRole == 'Lecturer' ? 'selected' : '' ?>>Lecturer</option>
+                                <option value="Student" <?= $currentRole == 'Student' ? 'selected' : '' ?>>Student</option>
+                                <option value="Staff" <?= $currentRole == 'Staff' ? 'selected' : '' ?>>Staff</option>
                             </select>
                         </div>
                     </div>
 
                     <div class="right-button-group">
                         <button type="button" class="white-button" id="cancel-add-user">Cancel</button>
-                        <button type="submit" class="green-button" name="submitBtn">Add User</button>
+                        <button type="submit" class="green-button" id="submit-user-btn" name="submitBtn">Add User</button>
                     </div>
                 </form>
             </div>
@@ -220,6 +289,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['deleteUserID'])) {
     <?php include '../../component/footer.php'; ?>
     <script src="../../scripts/animation.js"></script>
     <script src="../../scripts/account_table.js"></script>
-    <script src="../../scripts/add_user.js"></script>
+    <script src="../../scripts/user_modal.js"></script>
 </body>
 </html>

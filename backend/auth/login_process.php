@@ -2,11 +2,12 @@
 $_identifier = $_POST['identifier'] ?? '';
 
 if ($_identifier == '') {
-    echo "Please enter email or username";
+    header("Location: ../../frontend/pages/login/login.php?error=infoempty");
     exit;
 }
 
 require_once "../conn.php";
+require_once "../user/streak.php";
 
 $sql = "
     SELECT userID, name, email, password, role, streak, lastLogin
@@ -23,7 +24,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 
 if (!$user) {
-    echo "User not found";
+    header("Location: ../../frontend/pages/login/login.php?error=notfound");
     exit;
 }
 
@@ -31,32 +32,11 @@ if (!$user) {
 $inputPassword = $_POST['password'] ?? '';
 
 if(!password_verify($inputPassword, $user['password'])) {
-    echo "Incorrect password";
+    header("Location: ../../frontend/pages/login/login.php?error=wrongpass");
     exit;
 } 
 
-// Update streak & lastLogin
-date_default_timezone_set('Asia/Kuala_Lumpur');
-$currentDate = new DateTime();
-$lastLoginDate = new DateTime($user['lastLogin']);
-$diffDays = (int)$lastLoginDate->diff($currentDate)->format('%a');
-
-if ($diffDays === 0) {
-    $streak = $user['streak']; 
-} elseif ($diffDays === 1) {
-    $streak = $user['streak'] + 1;
-} else {
-    $streak = 1;
-}
-
-$updatesql = "
-    UPDATE user 
-    SET lastLogin = NOW(), streak = ?
-    WHERE userID = ?
-    ";
-$updateStmt = $con->prepare($updatesql);
-$updateStmt->bind_param('ii', $streak, $user['userID']);
-$updateStmt->execute();
+updateUserStreak($con, $user['userID'], $user['streak'], $user['lastLogin']);
 
 // starting a session after verification
 session_start();

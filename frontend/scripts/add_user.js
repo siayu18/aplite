@@ -4,14 +4,12 @@ document.addEventListener("DOMContentLoaded", function () {
     const closeBtn = document.getElementById("close-add-user");
     const cancelBtn = document.getElementById("cancel-add-user");
 
-    // Open modal
     addUserBtn.addEventListener("click", function (e) {
-        e.preventDefault(); // Prevent form/button default behavior
+        e.preventDefault(); 
         addUserModal.classList.add("active");
         document.body.classList.add("modal-open");
     });
 
-    // Close modal
     function closeModal() {
         addUserModal.classList.remove("active");
         document.body.classList.remove("modal-open");
@@ -20,7 +18,6 @@ document.addEventListener("DOMContentLoaded", function () {
     closeBtn.addEventListener("click", closeModal);
     cancelBtn.addEventListener("click", closeModal);
 
-    // Optional: click outside modal content closes it
     addUserModal.addEventListener("click", function (e) {
         if (e.target === addUserModal) {
             closeModal();
