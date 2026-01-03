@@ -58,7 +58,7 @@
                     <?php foreach ($redemption as $redemptions): ?>
                         <a href="manage_redemption.php?id=<?= htmlspecialchars($redemptions['redemptionID']) ?>" class="card">
                             <div class="icon-text">
-                                <img src="../../image/calendar.svg" alt="Calendar" />
+                                <img src="../../image/voucher.png" alt="Voucher" />
                                 <span><?= htmlspecialchars($redemptions['title']) ?></span>
                             </div>
                             <span class="medium-green-title">Student</span>
@@ -95,7 +95,7 @@
                     <?php foreach ($redemption1 as $redemptions1): ?>
                         <a href="manage_redemption.php?id=<?= htmlspecialchars($redemptions1['redemptionID']) ?>" class="card">
                             <div class="icon-text">
-                                <img src="../../image/calendar.svg" alt="Calendar" />
+                                <img src="../../image/voucher.png" alt="Voucher"/>
                                 <span><?= htmlspecialchars($redemptions1['title']) ?></span>
                             </div>
                             <span class="medium-green-title">Student</span>

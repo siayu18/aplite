@@ -18,9 +18,9 @@
         <a class="menu-text" href="../dashboard/admin_dashboard.php">Home</a>
         <a class="menu-text" href="../account_management/acc_table.php">Manage Users</a>
         <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
-        <a class="menu-text" href="#">Manage Redemptions</a>
-        <a class="menu-text" href="#">Manage Rewards</a>
-        <a class="menu-text" href="#">Generate Report</a>
+        <a class="menu-text" href="../redemption/manage_redemption.php">Manage Redemptions</a>
+        <a class="menu-text" href="../reward/manage_rewards.php">Manage Rewards</a>
+        <a class="menu-text" href="../report/admin_room_reports.php">Generate Report</a>
 
         <a href="../account_management/profile.php"><img src="../../image/profile.png" alt="Profile" class="menu-img" /></a>
         <button id="more-button"><img src="../../image/more.svg" alt="More" class="menu-img" /></button>

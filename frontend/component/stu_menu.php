@@ -19,8 +19,8 @@
         <a class="menu-text" href="#">Light Control</a>
         <a class="menu-text" href="../quiz/choose_quiz.php">Quizzes</a>
         <a class="menu-text" href="../article/choose_article.php">Articles</a>
-        <a class="menu-text" href="#">Redemptions</a>
-        <a class="menu-text" href="#">Rewards</a>
+        <a class="menu-text" href="../redemption/redemption_history.php">Redemptions</a>
+        <a class="menu-text" href="../reward/reward_exchange.php">Rewards</a>
         <a class="menu-text" href="#">Report Issue</a>
         <a class="menu-text" href="../announcement/announcement.php">Announcements</a>
 

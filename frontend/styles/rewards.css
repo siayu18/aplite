@@ -129,3 +129,109 @@
     flex-shrink: 0;
     overflow: hidden;
 }
+
+.form-container {
+  display: flex;
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 500px;
+  border-color: #2e7d32;
+  justify-content: center;
+  Flex-direction: column;
+  margin: 0% auto; 
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+  justify-content: center;
+  margin: 0% auto;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+input[type="text"], input[type="number"], textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
+
+input::placeholder, 
+        textarea::placeholder {
+            color: #999;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+        }
+
+        textarea { 
+            resize: vertical; 
+            height: 120px; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-size: 14px;
+            line-height: 1.5;
+            outline: none;
+        }
+
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+        
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-save {
+  flex: 2;
+  background-color: #2e7d32;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-cancel {
+  flex: 1;
+  background-color: red;
+  color: white;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+}
+
+.btn-save:hover {
+  background-color: #1b5e20;
+}
+
+.btn-cancel:hover {
+  background-color: darkred;
+}
+
+.btn-add {
+  background-color: #2e7d32;
+  color: white;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+}

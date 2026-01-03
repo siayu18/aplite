@@ -17,7 +17,7 @@
     <div class="menu">
         <a class="menu-text" href="../dashboard/staff_dashboard.php">Home</a>
         <a class="menu-text" href="../quiz/manage_quiz.php">Manage Quizzes</a>
-        <a class="menu-text" href="">Generate Report</a>
+        <a class="menu-text" href="../report/staff_room_reports.php">Generate Report</a>
         <a class="menu-text" href="../article/manage_article.php">Manage Articles</a>
         <a class="menu-text" href="">Broken Light Report</a>
 
