@@ -1,13 +1,6 @@
 <?php
-    // require_once "../../../backend/auth/session_admin.php";
+    require_once "../../../backend/auth/session_student.php";
     include("../../../backend/conn.php");
-
-    //hardcoded userID (remove when login fixed)
-    session_start();
-    $_SESSION['user_id'] = 1;
-    $_SESSION['name'] = "Student";
-    $_SESSION['role'] = "Student";
-
 
     //get all reward details
     $sql = "SELECT r.rewardID, r.title, r.description, r.pointsRequired
@@ -21,7 +14,8 @@
 
     
     //get user points from user logged in ID
-    $sql1 = "SELECT points FROM user WHERE userID = $_SESSION[user_id]";
+    $currentID = $_SESSION['user_id'];
+    $sql1 = "SELECT points FROM user WHERE userID = '$currentID'";
     $result1 = mysqli_query($con, $sql1);
     $row1 = mysqli_fetch_assoc($result1);
     $now = new DateTime();
@@ -38,7 +32,7 @@
         $pointsRequired = $row4['pointsRequired'];
         if ($pointsRequired <= $row1['points']) {
             $sql2 = "INSERT INTO Redemption (userID, rewardID, datetime, status)
-                    VALUES ('$_SESSION[user_id]', '$rewardID', '$date', '0')";
+                    VALUES ('$currentID', '$rewardID', '$date', '0')";
             $result2 = mysqli_query($con, $sql2);
             $newUserPoint = $row1['points'] - $pointsRequired;
             $sql3 = "UPDATE User SET points = $newUserPoint WHERE userID = $_SESSION[user_id]";
@@ -66,7 +60,7 @@
     <link rel="stylesheet" href="../../styles/rewards.css">
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?> 
+    <?php include '../../component/load_header.php'; ?> 
     <div class="content fade-in" style="padding: 2rem;">
         <div class=" col-12 col-s-12 content fade-in">
             <div class="text-group">
@@ -83,12 +77,10 @@
                             <span><?php echo $row1['points'] ?></span>
                         </div>
                     </div>
-                <p class="para" style="font-size: 30px"></p>
+                    <p class="para" style="font-size: 30px"></p>
                 </div>
-
-
-            <span class="green-description" style="font-size: 18px"><?= htmlspecialchars($count) ?> Rewards Available</span>
-        </div>
+                <span class="green-description" style="font-size: 18px"><?= htmlspecialchars($count) ?> Rewards Available</span>
+            </div>
         <!-- display all available rewards -->
         <div class="card-container">
             <!-- if reward database is empty -->

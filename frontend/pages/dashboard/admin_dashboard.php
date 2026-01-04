@@ -2,6 +2,8 @@
 require_once "../../../backend/auth/session_admin.php";
 include("../../../backend/conn.php");
 
+$name = $_SESSION['name'];
+
 // Total Users
 $userResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM user");
 $userCount = mysqli_fetch_assoc($userResult)['total'];
@@ -58,7 +60,7 @@ while ($row = mysqli_fetch_assoc($result)) {
             <?php include("../../component/admin_menu.php") ?> 
         </div>
         <div class="middle-content">
-            <span class="white-title">Welcome Back Admin, Sia Yu!</span>
+            <span class="white-title">Welcome Back Admin, <?= $name ?>!</span>
             <span class="yellow-description">This is the admin panel and you can below contain the analytical dashboard for you.</span>
             <div class="card-container">
                 <div class="transparent-card">

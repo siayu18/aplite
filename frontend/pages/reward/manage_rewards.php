@@ -1,4 +1,5 @@
 <?php
+    require_once "../../../backend/auth/session_admin.php";
     include("../../../backend/conn.php");
 
     $sql = "SELECT r.rewardID, r.title, r.description, r.pointsRequired
@@ -13,12 +14,11 @@
         $rewards[] = $row;
     }
 
-    if (isset($_POST['delete'])) {
-        $rewardID = $_POST['rewardID'];
+    if (isset($_GET['delete'])) {
+        $rewardID = mysqli_real_escape_string($con, $_GET['delete']);
         $sql1 = "DELETE FROM Reward WHERE rewardID = '$rewardID'";
         $result1 = mysqli_query($con, $sql1);
-        echo("<script>alert('Delete Successful!')</script>");
-        echo("<meta http-equiv='refresh' content = 0>");
+        echo("<script>alert('Delete Successful!'); window.location.href='manage_rewards.php';</script>");
     }
 
     mysqli_close($con);
@@ -35,13 +35,13 @@
     <link rel="stylesheet" href="../../styles/rewards.css">
 </head>
 <body>
-    <?php include '../../component/admin_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?>
         <div class="col-12 col-s-12 content fade-in">
             <div class="text-group">
                 <span class="green-title">Manage Rewards</span>
                 <span class="green-description">View and manage the rewards</span>
                 <br>
-                <a href="add_reward.php" class="green-button">+ Add New Reward</a>
+                <a href="add_reward.php" class="big-green-button">+ Add New Reward</a>
             </div>
 
             <div class="card-container">
@@ -65,13 +65,10 @@
                                     <img src="../../image/green_book.svg" alt="Book" />
                                     <span><?= htmlspecialchars($r['description']) ?></span>
                                 </div>
-                                <form method="POST">
-                                    <div>
-                                        <a href="edit_reward.php?id=<?php echo $r['rewardID'] ?>" class="green-button">Edit</a>
-                                        <input type="hidden" value="<?php echo $r['rewardID']?>" name="rewardID">
-                                        <input type="submit" class="red-button" onclick="return confirm('Delete this reward?')" value="Delete" name="delete">
-                                    </div>
-                                </form>
+                                <div class="near-button-column">
+                                    <a href="edit_reward.php?id=<?php echo $r['rewardID'] ?>" class="green-button">Edit</a>
+                                    <a href="manage_rewards.php?delete=<?php echo $r['rewardID'] ?>" class="red-button" onclick="return confirm('Delete this reward?')">Delete</a>
+                                </div>
                             </div>
                     <?php endforeach; ?>
                 <?php endif; ?>

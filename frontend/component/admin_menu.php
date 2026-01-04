@@ -61,7 +61,7 @@ if (!empty($userData['picture'])) {
             <a href="../account_management/acc_table.php">Manage Users</a>
             <a href="../announcement/manage_announcement.php">Manage Announcements</a>
             <a href="../redemption/manage_redemption.php">Manage Redemptions</a>
-            <a href="../reward/reward_exchange.php">Manage Rewards</a>
+            <a href="../reward/manage_rewards.php">Manage Rewards</a>
             <a href="../generate_report/admin_room_reports.php">Generate Report</a>
         </div>
     </div>  

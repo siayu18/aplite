@@ -2,6 +2,8 @@
 require_once "../../../backend/auth/session_staff.php";
 include("../../../backend/conn.php");
 
+$name = $_SESSION['name'];
+
 // Total Users
 $userResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM user");
 $userCount = mysqli_fetch_assoc($userResult)['total'];
@@ -36,7 +38,7 @@ $reportCount = mysqli_fetch_assoc($reportResult)['total'];
             <?php include("../../component/staff_menu.php") ?> 
         </div>
         <div class="middle-content">
-            <span class="white-title">Welcome Back Staff, Sia Yu!</span>
+            <span class="white-title">Welcome Back Staff, <?= $name ?>!</span>
             <span class="yellow-description">This is the staff panel and you can below contain the special dashboard for you.</span>
             <div class="card-container">
                 <div class="transparent-card">

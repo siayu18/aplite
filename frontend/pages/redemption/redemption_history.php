@@ -1,4 +1,5 @@
 <?php
+    require_once "../../../backend/auth/session_student.php";
     include("../../../backend/conn.php");
 
     $sql = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
@@ -28,7 +29,7 @@
     <link rel="stylesheet" href="../../styles/rewards.css">
 </head>
 <body>
-    <?php include '../../component/stu_header.php'; ?>
+    <?php include '../../component/load_header.php'; ?> 
     <div class="content fade-in" style="padding: 2rem;">
         <div class="col-12 col-s-12 content fade-in">
             <div class="text-group">
@@ -42,7 +43,6 @@
                     <span class="medium-green-title">No Redemption History!</span>
                     <span class="green-description">You haven't redeemed any rewards yet.</span>
                 </div>
-
             <?php else: ?>
                 <?php foreach ($history as $item): ?>
                     <div class="card">

@@ -135,18 +135,14 @@
     overflow: hidden;
 }
 
-.form-container {
-  display: flex;
-  background: white;
-  padding: 30px;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  width: 100%;
-  max-width: 500px;
-  border-color: #2e7d32;
-  justify-content: center;
-  Flex-direction: column;
-  margin: 0% auto; 
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem 0;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
 }
 
 .form-group {
@@ -161,29 +157,6 @@ label {
   font-weight: bold;
   margin-bottom: 5px;
   color: #333;
-}
-
-input[type="text"], input[type="number"], textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-size: 14px; }
-
-input::placeholder, 
-        textarea::placeholder {
-            color: #999;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 14px;
-        }
-
-        textarea { 
-            resize: vertical; 
-            height: 120px; 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            font-size: 14px;
-            line-height: 1.5;
-            outline: none;
-        }
-
-textarea {
-  resize: vertical;
-  height: 100px;
 }
         
 .button-group {
@@ -234,9 +207,4 @@ textarea {
   margin-top: 10px;
   text-decoration: none;
   display: inline-block;
-}
-
-.button-group {
-  display: flex;
-  gap: 10px;
 }

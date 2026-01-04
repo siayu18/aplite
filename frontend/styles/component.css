@@ -205,7 +205,7 @@ button {
     outline-color: var(--dark-green);
 }
 
-input[type="text"], input[type="password"] {
+input[type="text"], input[type="password"], input[type="number"] {
     background-color: white;
     outline: 0.1rem solid var(--border-green);
     outline-offset: -0.1rem;
@@ -217,11 +217,11 @@ input[type="text"], input[type="password"] {
     transition: ouline-color 0.3s ease;
 }
 
-input[type="text"]:hover, input[type="password"]:hover {
+input[type="text"]:hover, input[type="password"]:hover, input[type="number"]:hover {
     outline-color: var(--light-green-font);
 }
 
-input[type="text"]:focus, input[type="password"]:focus {
+input[type="text"]:focus, input[type="password"]:focus, input[type="number"]:focus {
     outline-color: var(--dark-green);
 }
 
