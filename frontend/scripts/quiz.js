@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
         
-        // Insert the new question at the END of all questions (before the final button group)
+        // Insert the new question at the End of all questions (before the final button group)
         const allButtonGroups = document.querySelectorAll('.right-button-group');
         const finalButtonGroup = allButtonGroups[allButtonGroups.length - 1];
         finalButtonGroup.parentNode.insertBefore(newQuestion, finalButtonGroup);

@@ -51,8 +51,8 @@ if (!empty($userData['picture'])) {
         <a class="menu-text" href="../light_management/control_lights.php">Light Control</a>
         <a class="menu-text" href="../quiz/choose_quiz.php">Quizzes</a>
         <a class="menu-text" href="../article/choose_article.php">Articles</a>
-        <a class="menu-text" href="#">Redemptions</a>
-        <a class="menu-text" href="#">Rewards</a>
+        <a class="menu-text" href="../redemption/redemption_history.php">Redemptions</a>
+        <a class="menu-text" href="../reward/reward_exchange.php">Rewards</a>
         <a class="menu-text" href="../report/reports_page">Report Issue</a>
         <a class="menu-text" href="../announcement/announcement.php">Announcements</a>
 
@@ -63,8 +63,8 @@ if (!empty($userData['picture'])) {
             <a href="../light_management/control_lights.php">Light Control</a>
             <a href="../quiz/choose_quiz.php">Quizzes</a>
             <a href="../article/choose_article.php">Articles</a>
-            <a class="#" href="#">Redemptions</a>
-            <a href="#">Rewards</a>
+            <a href="../redemption/redemption_history.php">Redemptions</a>
+            <a href="../reward/reward_exchange.php">Rewards</a>
             <a href="../report/reports_page">Report Issue</a>
             <a href="../announcement/announcement.php">Announcements</a>
         </div>

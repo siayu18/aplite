@@ -103,7 +103,7 @@ if(isset($_POST["submitBtn"])){
                 </a>
             </div>
             <form method="POST" action="create_quiz.php" class="inner-container">
-                <a class="medium-green-title" id="title">Create Quiz</a>
+                <span class="medium-green-title" id="title">Create Quiz</span>
 
                 <div class="label-field">
                     <label class="green-description">Title</label>

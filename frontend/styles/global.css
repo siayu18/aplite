@@ -166,6 +166,12 @@ a {
   text-align: center;
 }
 
+.left-text-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .mid-text-group {
   flex: 1;
   display: flex;

@@ -51,7 +51,7 @@ if (!empty($userData['picture'])) {
         <a class="menu-text" href="../account_management/acc_table.php">Manage Users</a>
         <a class="menu-text" href="../announcement/manage_announcement.php">Manage Announcements</a>
         <a class="menu-text" href="../redemption/manage_redemption.php">Manage Redemptions</a>
-        <a class="menu-text" href="../reward/reward_exchange.php">Manage Rewards</a>
+        <a class="menu-text" href="../reward/manage_rewards.php">Manage Rewards</a>
         <a class="menu-text" href="../generate_report/admin_room_reports.php">Generate Report</a>
 
         <a href="../account_management/profile.php"><img src="<?= $avatar ?>" alt="Profile" class="<?= $profileExist ? 'profile-img' : 'menu-img' ?>" /></a>
@@ -61,7 +61,7 @@ if (!empty($userData['picture'])) {
             <a href="../account_management/acc_table.php">Manage Users</a>
             <a href="../announcement/manage_announcement.php">Manage Announcements</a>
             <a href="../redemption/manage_redemption.php">Manage Redemptions</a>
-            <a href="../reward/reward_exchange.php">Manage Rewards</a>
+            <a href="../reward/manage_rewards.php">Manage Rewards</a>
             <a href="../generate_report/admin_room_reports.php">Generate Report</a>
         </div>
     </div>  
