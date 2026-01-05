@@ -1,31 +1,31 @@
 <?php
-require_once "../../../backend/auth/session_student.php";
-include ('../../../backend/conn.php');
-include ('../../../backend/fetch_data.php');
+    require_once "../../../backend/auth/session_student.php";
+    include ('../../../backend/conn.php');
+    include ('../../../backend/fetch_data.php');
 
-// TEMP: replace with $_SESSION later
-$currentID = $_SESSION['user_id'];
+    // TEMP: replace with $_SESSION later
+    $currentID = $_SESSION['user_id'];
 
-$reports = getReportsForStudent($currentID);
+    $reports = getReportsForStudent($currentID);
 
-$totalCount = 0;
-$approvedCount = 0;
-$pendingCount = 0;
-$rejectedCount = 0;
+    $totalCount = 0;
+    $approvedCount = 0;
+    $pendingCount = 0;
+    $rejectedCount = 0;
 
-foreach ($reports as $report) {
-    $totalCount++;
+    foreach ($reports as $report) {
+        $totalCount++;
 
-    if ($report['status'] === 'approved') {
-        $approvedCount++;
-    } elseif ($report['status'] === 'rejected') {
-        $rejectedCount++;
-    } else {
-        $pendingCount++; // default = pending
+        if ($report['status'] === 'approved') {
+            $approvedCount++;
+        } elseif ($report['status'] === 'rejected') {
+            $rejectedCount++;
+        } else {
+            $pendingCount++; // default = pending
+        }
     }
-}
 
-mysqli_close($con);
+    mysqli_close($con);
 ?>
 
 

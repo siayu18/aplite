@@ -47,15 +47,15 @@ $redemptionType = "";
 if (isset($_POST['pending'])) {
     $redemptionType = "approve";
     $redemptionid = $_POST['redemption-id'];
-    $updatesql = "UPDATE Redemption SET status = 1 WHERE redemptionID = $redemptionid";
-    $check = mysqli_query($con, $updatesql);
+    $updatesql = "UPDATE Redemption SET status = 1 WHERE redemptionID = '$redemptionid'";
+    $check = mysqli_query($con, query: $updatesql);
     echo("<script>window.success = true</script>");
 }
 
 if (isset($_POST['cancel'])) {
     $redemptionType = "cancel";
     $redemptionid = $_POST['redemption-id'];
-    $updatesql = "UPDATE Redemption SET status = 0 WHERE redemptionID = $redemptionid";
+    $updatesql = "UPDATE Redemption SET status = 0 WHERE redemptionID = '$redemptionid'";
     $check = mysqli_query($con, $updatesql);
     echo("<script>window.success = true</script>");
 }
