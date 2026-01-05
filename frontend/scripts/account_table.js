@@ -6,17 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById('user-mobile-body')
     ];
 
-    // const deleteModalOverlay = document.getElementById("delete-confirm-modal");
-    // const deleteModalBox = deleteModalOverlay.querySelector(".modal");
-    // const deleteIdInput = document.getElementById("confirm-delete-id");
-    // const deleteNameSpan = document.getElementById("delete-user-name");
-
-    // const closeDelete = () => {
-    //     deleteModalOverlay.classList.remove("active");
-    //     deleteModalBox.classList.remove("active");
-    //     document.body.classList.remove("modal-open");
-    // };
-
     document.addEventListener("click", (e) => {
         const editBtn = e.target.closest(".edit-btn");
         if (editBtn) {
