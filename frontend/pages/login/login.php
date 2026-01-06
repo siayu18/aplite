@@ -46,12 +46,12 @@
             <form method="POST" action="../../../backend/auth/login_process.php">
                 <div class="input-area">
                     <div class="input-box">
-                        <input type="text" name="identifier" placeholder="enter username or email" required>
+                        <input type="text" name="identifier" placeholder="Enter username or email" required>
                     </div>
 
                     <div class="input-box">
                         <div class="password-wrapper">
-                            <input type="password" name="password" id="password-field" placeholder="enter password" required>
+                            <input type="password" name="password" id="password-field" placeholder="Enter password" required>
                             <button type="button" id="togglePassword" class="password-toggle-btn">
                                 <img src="../../image/eye.svg" id="eyeIcon" alt="Toggle Password">
                             </button>
