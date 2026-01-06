@@ -9,7 +9,7 @@ $userResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM user");
 $userCount = mysqli_fetch_assoc($userResult)['total'];
 
 // Average Light Brightness
-$brightnessResult = mysqli_query($con, "SELECT ROUND(AVG(brightnessLevel), 0) AS avgBrightness FROM brightnesslog;");
+$brightnessResult = mysqli_query($con, "SELECT ROUND(AVG(brightnessLevel), 1) AS avgBrightness FROM brightnesslog;");
 $brightnessCount = mysqli_fetch_assoc($brightnessResult)['avgBrightness'];
 
 // Total Energy Saved

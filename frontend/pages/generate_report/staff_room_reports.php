@@ -5,7 +5,6 @@
     $sql = "SELECT BrightnessLevel FROM Brightnesslog";
     $result = mysqli_query($con, $sql);
     $count = mysqli_num_rows($result);
-    $row = mysqli_fetch_assoc($result);
     $totalBrightness = 0;
 
     while ($row = mysqli_fetch_assoc($result)) {
