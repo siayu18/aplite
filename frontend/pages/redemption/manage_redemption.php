@@ -1,66 +1,66 @@
 <?php
-require_once "../../../backend/auth/session_admin.php";
-include("../../../backend/conn.php");
+    require_once "../../../backend/auth/session_admin.php";
+    include("../../../backend/conn.php");
 
-$sql = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
-        FROM Redemption AS redem, User AS u, Reward AS r
-        WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID AND redem.status = 0";
+    $sql = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
+            FROM Redemption AS redem, User AS u, Reward AS r
+            WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID AND redem.status = 0";
 
-$result = mysqli_query($con, $sql);
+    $result = mysqli_query($con, $sql);
 
-$count = mysqli_num_rows($result);
+    $count = mysqli_num_rows($result);
 
-$redemption = [];
-while ($row = mysqli_fetch_assoc($result)) {
-    $redemption[] = $row;
-}
+    $redemption = [];
+    while ($row = mysqli_fetch_assoc($result)) {
+        $redemption[] = $row;
+    }
 
-$sql1 = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
-        FROM Redemption AS redem, User AS u, Reward AS r
-        WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID AND redem.status = 1";
+    $sql1 = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
+            FROM Redemption AS redem, User AS u, Reward AS r
+            WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID AND redem.status = 1";
 
-$result1 = mysqli_query($con, $sql1);
+    $result1 = mysqli_query($con, $sql1);
 
-$count1 = mysqli_num_rows($result1);
+    $count1 = mysqli_num_rows($result1);
 
-$redemption1 = [];
-while ($row1 = mysqli_fetch_assoc($result1)) {
-    $redemption1[] = $row1;
-}
+    $redemption1 = [];
+    while ($row1 = mysqli_fetch_assoc($result1)) {
+        $redemption1[] = $row1;
+    }
 
-// Pending count
-$pendingSql = "SELECT COUNT(*) AS total FROM Redemption WHERE status = 0";
-$pendingResult = mysqli_query($con, $pendingSql);
-$pendingCount = mysqli_fetch_assoc($pendingResult)['total'];
+    // Pending count
+    $pendingSql = "SELECT COUNT(*) AS total FROM Redemption WHERE status = 0";
+    $pendingResult = mysqli_query($con, $pendingSql);
+    $pendingCount = mysqli_fetch_assoc($pendingResult)['total'];
 
-// Approved count
-$approvedSql = "SELECT COUNT(*) AS total FROM Redemption WHERE status = 1";
-$approvedResult = mysqli_query($con, $approvedSql);
-$approvedCount = mysqli_fetch_assoc($approvedResult)['total'];
+    // Approved count
+    $approvedSql = "SELECT COUNT(*) AS total FROM Redemption WHERE status = 1";
+    $approvedResult = mysqli_query($con, $approvedSql);
+    $approvedCount = mysqli_fetch_assoc($approvedResult)['total'];
 
-// Total
-$totalCount = $pendingCount + $approvedCount;
+    // Total
+    $totalCount = $pendingCount + $approvedCount;
 
-// Initialize variable for overlay
-$redemptionType = "";
+    // Initialize variable for overlay
+    $redemptionType = "";
 
-if (isset($_POST['pending'])) {
-    $redemptionType = "approve";
-    $redemptionid = $_POST['redemption-id'];
-    $updatesql = "UPDATE Redemption SET status = 1 WHERE redemptionID = '$redemptionid'";
-    $check = mysqli_query($con, query: $updatesql);
-    echo("<script>window.success = true</script>");
-}
+    if (isset($_POST['pending'])) {
+        $redemptionType = "approve";
+        $redemptionid = $_POST['redemption-id'];
+        $updatesql = "UPDATE Redemption SET status = 1 WHERE redemptionID = '$redemptionid'";
+        $check = mysqli_query($con, query: $updatesql);
+        echo("<script>window.success = true</script>");
+    }
 
-if (isset($_POST['cancel'])) {
-    $redemptionType = "cancel";
-    $redemptionid = $_POST['redemption-id'];
-    $updatesql = "UPDATE Redemption SET status = 0 WHERE redemptionID = '$redemptionid'";
-    $check = mysqli_query($con, $updatesql);
-    echo("<script>window.success = true</script>");
-}
+    if (isset($_POST['cancel'])) {
+        $redemptionType = "cancel";
+        $redemptionid = $_POST['redemption-id'];
+        $updatesql = "UPDATE Redemption SET status = 0 WHERE redemptionID = '$redemptionid'";
+        $check = mysqli_query($con, $updatesql);
+        echo("<script>window.success = true</script>");
+    }
 
-mysqli_close($con);
+    mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
