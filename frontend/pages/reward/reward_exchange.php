@@ -26,8 +26,7 @@
     if (isset($_GET['id'])) {
         $rewardID = $_GET['id'];
         $redemptionID = uniqid();
-        $sql4 = "SELECT *
-                    FROM Reward WHERE rewardID = $rewardID";
+        $sql4 = "SELECT * FROM Reward WHERE rewardID = '$rewardID'";
         $result4 = mysqli_query($con, $sql4);
         $row4 = mysqli_fetch_assoc($result4);
         $pointsRequired = $row4['pointsRequired'];

@@ -10,7 +10,13 @@
     while ($row = mysqli_fetch_assoc($result)) {
         $totalBrightness += $row['BrightnessLevel'];
     }
-    $avg = ($totalBrightness / $count);
+    
+    if ($count > 0) {
+        $avg = $totalBrightness / $count;
+    } else {
+        $avg = 0;
+    }
+
 
     $sql1 = "SELECT * FROM room AS r, brightnesslog AS bl, session AS s WHERE bl.sessionID = s.sessionID AND s.roomID = r.roomID";
     $result1 = mysqli_query($con, $sql1);
