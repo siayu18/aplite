@@ -171,25 +171,23 @@ if(isset($_POST["submitBtn"])){
                             <input type="text" placeholder="Enter Text..." name="questionText<?= $index ?>" value="<?= htmlspecialchars($question['questionText']) ?>" required/>
                         </div>
 
-                        <?php
-                        $choices = getAllByID("choice", "questionID", $question['questionID']);
-                        if ($choices): ?>
-                            <div class="label-field mcq-section" style="<?= $question['questionType']=='mcq'?'':'display: none'?>">
-                                <label class="green-description">Choices</label>
-                                <div class="near-button-column">
-
-                                    <?php $count=1;
-                                    foreach($choices as $choice): ?>
-                                        <div class="near-button-row">
-                                            <input type="radio" name="question<?= $index ?>" value="choice<?= $count ?>" <?= $choice['isCorrect']?'checked':'' ?> required>
-                                            <input type="text" placeholder="Enter Choice..." name="choice<?= $count ?>_<?= $index ?>" value="<?= htmlspecialchars($choice['choiceText']) ?>"/>
-                                        </div>
-                                    <?php $count++; endforeach; ?>
-                                </div>
+                        <?php $choices = getAllByID("choice", "questionID", $question['questionID']); ?>
+                        <div class="label-field mcq-section">
+                            <label class="green-description">Choices</label>
+                            <div class="near-button-column">
+                                <?php for ($c = 1; $c <= 4; $c++): 
+                                    $choiceText = $choices[$c-1]['choiceText'] ?? '';
+                                    $isCorrect = $choices[$c-1]['isCorrect'] ?? false;
+                                ?>
+                                    <div class="near-button-row">
+                                        <input type="radio" name="question<?= $index ?>" value="choice<?= $c ?>" <?= $isCorrect?'checked':'' ?> >
+                                        <input type="text" placeholder="Enter Choice..." name="choice<?= $c ?>_<?= $index ?>" value="<?= htmlspecialchars($choiceText) ?>"/>
+                                    </div>
+                                <?php endfor; ?>
                             </div>
-                        <?php endif; ?>
+                        </div>
 
-                        <div class="label-field open-ended-section" style="<?= $question['questionType']=='open'?'':'display:none' ?>">
+                        <div class="label-field open-ended-section">
                             <label class="green-description">Correct Answer</label>
                             <input type="text" placeholder="Enter Correct Answer..." name="correctAnswer<?= $index ?>" value="<?=$question['correctAnswer'] ?>" required/>
                         </div>

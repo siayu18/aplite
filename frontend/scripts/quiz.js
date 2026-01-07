@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             <div class="label-field">
                 <label class="green-description">Question Text</label>
-                <input type="text" placeholder="Enter Text..." name="questionText${questionCount} required" />
+                <input type="text" placeholder="Enter Text..." name="questionText${questionCount}" required/>
             </div>
             
             <div class="label-field mcq-section">
