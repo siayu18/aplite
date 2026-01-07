@@ -3,7 +3,14 @@ require_once "../../../backend/auth/session_student.php";
 include ('../../../backend/conn.php');
 include ('../../../backend/fetch_data.php');
 
+$currentID = $_SESSION['user_id'];
 $rooms = getData('room');
+$activeSession = getActiveSessionByStudent($currentID);
+
+if ($activeSession) {
+    header("Location: manage_lighting.php");
+    exit();
+}
 
 if (isset($_POST['checkinBtn'])) {
 

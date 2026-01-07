@@ -106,7 +106,7 @@
                 </div>
 
                 <div class="label-field">
-                    <label class="green-description">Fitler By Status</label>
+                    <label class="green-description">Filter By Status</label>
                     <select class="dropdown-classroom-choice" name="status">
                         <option value="all">All Status</option>
                         <option value="approved">Approved</option>
