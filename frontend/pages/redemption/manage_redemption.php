@@ -41,6 +41,25 @@
     // Total
     $totalCount = $pendingCount + $approvedCount;
 
+    // Initialize variable for overlay
+    $redemptionType = "";
+
+    if (isset($_POST['pending'])) {
+        $redemptionType = "approve";
+        $redemptionid = $_POST['redemption-id'];
+        $updatesql = "UPDATE Redemption SET status = 1 WHERE redemptionID = '$redemptionid'";
+        $check = mysqli_query($con, query: $updatesql);
+        echo("<script>window.success = true</script>");
+    }
+
+    if (isset($_POST['cancel'])) {
+        $redemptionType = "cancel";
+        $redemptionid = $_POST['redemption-id'];
+        $updatesql = "UPDATE Redemption SET status = 0 WHERE redemptionID = '$redemptionid'";
+        $check = mysqli_query($con, $updatesql);
+        echo("<script>window.success = true</script>");
+    }
+
     mysqli_close($con);
 ?>
 
@@ -176,25 +195,20 @@
             </div>
         </div>
     </div>
-    <?php
-        if (isset($_POST['pending'])) {
-            $redemptionid = $_POST['redemption-id'];
-            $updatesql = "UPDATE Redemption SET status = 1 WHERE redemptionID = $redemptionid";
-            $check = mysqli_query($con, $updatesql);
-            echo("<script>alert('Redemption Approved')</script>");
-            echo("<meta http-equiv='refresh' content = 0>");
-        }
-    ?>
 
-    <?php
-        if (isset($_POST['cancel'])) {
-            $redemptionid = $_POST['redemption-id'];
-            $updatesql = "UPDATE Redemption SET status = 0 WHERE redemptionID = $redemptionid";
-            $check = mysqli_query($con, $updatesql);
-            echo("<script>alert('Redemption cancelled')</script>");
-            echo("<meta http-equiv='refresh' content = 0>");
-        }
-    ?>
+    <div class="overlay"></div>
+    <div class="modal">
+        <img src="../../image/verify.svg" alt="Verify" class="modal-img">
+        <div class="text-group">
+            <span class="medium-green-title"><?= $redemptionType == 'approve' ? 'Successfully Approved!' : 'Successfully Cancelled!' ?></span>
+            <span class="green-description">'You have successfully <?= $redemptionType == 'approve' ? 'approved': 'cancelled'?> the redemption</span>
+        </div>
+        <a href="manage_redemption.php" class="green-button">Back</a>
+    </div>
+
     <?php include '../../component/footer.php'; ?>
+
+    <script src="../../scripts/animation.js"></script>
+    <script src="../../scripts/overlay.js"></script>
 </body>
 </html>

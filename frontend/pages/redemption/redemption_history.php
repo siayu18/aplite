@@ -2,7 +2,7 @@
     require_once "../../../backend/auth/session_student.php";
     include("../../../backend/conn.php");
 
-    $sql = "SELECT redem.redemptionID, redem.userID, redem.rewardID, redem.datetime, redem.status, u.name, r.title, r.pointsRequired
+    $sql = "SELECT redem.*, u.name, r.*
             FROM Redemption AS redem, User AS u, Reward AS r
             WHERE redem.userID = u.userID AND redem.rewardID = r.rewardID ORDER BY redem.status DESC";
 
@@ -30,7 +30,6 @@
 </head>
 <body>
     <?php include '../../component/load_header.php'; ?> 
-    <div class="content fade-in" style="padding: 2rem;">
         <div class="col-12 col-s-12 content fade-in">
             <div class="text-group">
                 <span class="green-title">Redemption History</span>
@@ -46,24 +45,17 @@
             <?php else: ?>
                 <?php foreach ($history as $item): ?>
                     <div class="card">
-                        <div class="quiz-points">
-                            <img class="avatar-img" src="../../image/coupon.png" alt="Coupon" />
+                        <img class="card-img" src="data:image/jpeg;base64,<?= base64_encode($item['image']) ?>" alt="Reward" />
+                        <div class="info-container">
                             <div class="points-container">
                                 <img src="../../image/badge.svg" alt="Points Badge"/>
                                 <span class="points-text"><?= htmlspecialchars($item['pointsRequired']) ?> pts</span>
                             </div>
-                        </div>
-                        
-                        <div class="medium-green-title"><?= htmlspecialchars($item['title']) ?></div>
-                        
-                        <div class="icon-text">
-                            <img src="../../image/green_book.svg" alt="Date" />
-                            <span>Redeemed on: <b><?= date('d M Y, H:i', strtotime($item['datetime'])) ?></b></span>
-                        </div>
-
-                        <div class="icon-text">
-                            <span>Status: 
-                                <b style="color: <?= ($item['status'] == 1) ? '#28a745' : '#ffc107' ?>;">
+                            <div class="medium-green-title"><?= htmlspecialchars($item['title']) ?></div>
+                            <span class="green-description">
+                                Redeemed on: <b><?= date('d M Y, H:i', strtotime($item['datetime'])) ?></b>
+                                <br>
+                                Status: <b style="color: <?= ($item['status'] == 1) ? '#28a745' : '#ffc107' ?>;">
                                     <?= ($item['status'] == 1) ? 'Claimed' : 'Pending' ?>
                                 </b>
                             </span>
@@ -73,7 +65,6 @@
             <?php endif; ?>
             </div>
         </div>
-    </div>
     <?php include '../../component/footer.php'; ?>
 </body>
 </html>

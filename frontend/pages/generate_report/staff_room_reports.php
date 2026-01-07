@@ -5,13 +5,18 @@
     $sql = "SELECT BrightnessLevel FROM Brightnesslog";
     $result = mysqli_query($con, $sql);
     $count = mysqli_num_rows($result);
-    $row = mysqli_fetch_assoc($result);
     $totalBrightness = 0;
 
     while ($row = mysqli_fetch_assoc($result)) {
         $totalBrightness += $row['BrightnessLevel'];
     }
-    $avg = ($totalBrightness / $count);
+    
+    if ($count > 0) {
+        $avg = $totalBrightness / $count;
+    } else {
+        $avg = 0;
+    }
+
 
     $sql1 = "SELECT * FROM room AS r, brightnesslog AS bl, session AS s WHERE bl.sessionID = s.sessionID AND s.roomID = r.roomID";
     $result1 = mysqli_query($con, $sql1);
@@ -64,7 +69,7 @@
                     <img src="../../image/small_bulb.svg" alt="Light Bulb"/>
                     <span class="green-description">Avg Brightness</span>
                 </div>
-                <span class="value"><?php echo $avg?>%</span>
+                <span class="value"><?php echo number_format($avg, 2)?>%</span>
             </div>
         </div>
 
@@ -75,17 +80,20 @@
                     <span class="medium-green-title" style="white-space: wrap;">Light Consumption Report</span>
                 </div>
                 <?php
-                    $sql = "SELECT * FROM room AS r, brightnesslog AS bl, session AS s WHERE bl.sessionID = s.sessionID AND s.roomID = r.roomID LIMIT 1";
-                    $result = mysqli_query($con, $sql);
-                    $roomID = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                    foreach ($roomID as $r) {
-                        $selectedRoom = $r['roomName'];
-                    }
-
+                    $selectedRoom = "Please Select A Room";
+                    $roomName = null;
+                    $bulbs = null;
+                    $wattage = null;
+                    $operatingHours = null;
+                    $brightness = null;
+                    $timestamp = null;
+                    $roomID = null;
                     if (isset($_POST['select_room'])) {
                         $selectedRoom = $_POST['select_room'];
+                        $selectedRoomSQL = "SELECT * FROM room WHERE roomID = $selectedRoom";
+                        $selectedRoomResult = mysqli_query($con, $selectedRoomSQL);
+                        $selectedRoomArray = mysqli_fetch_all($selectedRoomResult, MYSQLI_ASSOC);
                         $sql = "SELECT * FROM room AS r, brightnesslog AS bl, session AS s WHERE bl.sessionID = s.sessionID AND s.roomID = r.roomID AND r.roomID = $selectedRoom";
-                        
                         $result = mysqli_query($con, $sql);
                         $roomID = mysqli_fetch_all($result, MYSQLI_ASSOC);
                     }
@@ -96,39 +104,37 @@
                     
                         $result2 = mysqli_query($con, $sql2);
                         $roomID2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
-                        $selectedValue = isset($_POST['select_room']) ? $_POST['select_room'] : '';
                     ?>
                     <div class="label-field">
                         <span class="green-description">Select Room</span>
                         <select style="width: 100%" name="select_room" onchange="this.form.submit()">
-                            <?php foreach($roomID as $r){
-                                $roomName = $r['roomName'];
-                                $selectedRoom = $roomName;
-                                }?>
-                            <option value="" disabled selected hidden><?php echo $selectedRoom ?></option>
-                            
+                            <?php if(!empty($selectedRoomArray[0]['roomName'])){ ?>
+                                <option value="" disabled selected hidden><?php echo $selectedRoomArray[0]['roomName'] ?></option>
+                            <?php }else{ ?>
+                                <option value="" disabled selected hidden><?php echo $selectedRoom?></option>
+                            <?php } ?>
                                 <?php foreach ($roomID2 as $r2){ ?>
                                     <option value="<?php echo $r2['roomID']; ?>">
-                                        <?php if ($selectedValue == $r2['roomName']) ?>
                                     <?= $r2['roomName']; ?>
                             </option>
                             <?php }?>
                         </select>
                     </div>
                 </form>
-                <div class="details-box">
-                    <div class="details-header">
-                        <?php foreach ($roomID as $r){
+                <?php if (isset($_POST['select_room'])){
+                    if(!empty($roomID)){
+                    foreach ($roomID as $r){
                             $roomName = $r['roomName'];
                             $bulbs = $r['numberOfBulbs'];
                             $wattage = $r['bulbWattage'];
                             $operatingHours = $r['operatingHours'];
                             $brightness = $r['brightnessLevel'];
-                            $timestamp = $r['timestamp']
+                            $timestamp = $r['timestamp'];
                         ?>
-
+                <div class="details-box">
+                    <div class="details-header">
                         <div class="header-text">
-                            <span class="value">Room: <?php echo $roomName; ?></span>
+                            <div class="value">Room: <?php echo $selectedRoomArray[0]['roomName']; ?></div>
                             <?php
                                 list($h, $m, $s) = explode(':', $operatingHours);
                                 $seconds = ($h * 3600) + ($m * 60) + $s;
@@ -142,7 +148,6 @@
                                     $dailyCost = $dailyKwh * 0.27;
                                 }
                             ?>
-                            <?php }?>
                             <span class="green-description">Date: <?php echo $timestamp; ?></span>
                         </div>
                     </div>
@@ -185,6 +190,7 @@
                         </div>
                     </div>
                 </div>
+                <?php }}}?>
             </div>
         </div>
     </div>
