@@ -42,9 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         document.body.classList.remove("modal-open");
     }
 
-    // Search and pagination
-    let currentPage = 1;
-    const rowsPerPage = 5;
+
 
     function getFilteredRows(body) {
         const query = searchInput.value.toLowerCase().trim();
@@ -56,6 +54,10 @@ document.addEventListener("DOMContentLoaded", () => {
             return name.includes(query) && (role === "all" || role === rowRole);
         });
     }
+
+    // Pagination
+    let currentPage = 1;
+    const rowsPerPage = 5;
 
     function displayPage() {
         tableBodies.forEach(body => {
