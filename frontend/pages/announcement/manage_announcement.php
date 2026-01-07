@@ -73,7 +73,7 @@ mysqli_close($con);
                             </div>
                         </div>
                         <div class="medium-green-title"><?= htmlspecialchars($announcement['title']) ?></div>
-                        <div class="green-description"><?= htmlspecialchars($announcement['content']) ?></div>
+                        <p class="green-description"><?= htmlspecialchars($announcement['content']) ?></p>
                     </div>
                 <?php endforeach; ?>
             <?php endif; ?>

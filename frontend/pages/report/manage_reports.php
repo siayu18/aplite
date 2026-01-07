@@ -40,7 +40,7 @@ mysqli_close($con);
 </head>
 
 <body>
-    <?php include '../../component/admin_header.php'; ?>
+    <?php include '../../component/staff_header.php'; ?>
     <div class=" col-12 col-s-12 content-mid fade-in">
         <div class="reports-page-container">
                 <div class="header-text">
@@ -139,7 +139,7 @@ mysqli_close($con);
                                     </span>
                                 </div>
 
-                                <span class="green-description report-desc" >
+                                <span class="green-description report-desc">
                                     <?= nl2br(htmlspecialchars($report['description'])) ?>
                                 </span>
 
