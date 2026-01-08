@@ -9,12 +9,13 @@ if(isset($_POST["submitBtn"])){
     $pointsAwarded = $_POST["pointsAwarded"];
     $correctForPoints = $_POST["correctForPoints"];
     $questionIndex = 1; // Index Because the structure is like 1,2,3, choice is 1_1, 2_1, 3_1, 4_1
-    $questionCount = 0;
 
     // Validation
     while (isset($_POST["questionType$questionIndex"])) {
-        $questionCount++;
+        $questionIndex++;
     }
+
+    $questionCount = $questionIndex - 1;
 
     if ($correctForPoints > $questionCount) {
         $message = "Correct answers for points cannot be more than question count.";
@@ -30,6 +31,10 @@ if(isset($_POST["submitBtn"])){
 
     // Insert to DB
     if (empty($message)) {
+
+        // Reset questionIndex for insertion
+        $questionIndex = 1;
+
         $sql = "INSERT INTO Quiz (quizID, title, pointsAwarded, correctForPoints)
             VALUES ('$quizID','$title','$pointsAwarded','$correctForPoints')";
 
