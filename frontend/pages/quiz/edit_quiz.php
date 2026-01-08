@@ -18,20 +18,23 @@ if(isset($_POST["submitBtn"])){
     $pointsAwarded = $_POST["pointsAwarded"];
     $correctForPoints = $_POST["correctForPoints"];
     $questionIndex = 1; // Index Because the structure is like 1,2,3, choice is 1_1, 2_1, 3_1, 4_1
-    $hasQuestion = false;
+    $questionCount = 0;
 
     // Validation
+    while (isset($_POST["questionType$questionIndex"])) {
+        $questionCount++;
+    }
+
+    if ($correctForPoints > $questionCount) {
+        $message = "Correct answers for points cannot be more than question count.";
+    }
+
+    if ($questionCount == 0) {
+        $message = "You must add at least one question before creating the quiz.";
+    }
+
     if (!ctype_digit($pointsAwarded) || !ctype_digit($correctForPoints) ) {
         $message = "Points must be an integer.";
-    }
-
-    while (isset($_POST["questionType$questionIndex"])) {
-        $hasQuestion = true;
-        break;
-    }
-
-    if (!$hasQuestion) {
-        $message = "You must add at least one question before creating the quiz.";
     }
 
     // Update to DB
