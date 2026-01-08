@@ -61,7 +61,7 @@ mysqli_close($con);
                                 <img src="../../image/badge.svg" alt="Points Badge"/>
                                 <span class="points-text"><?= htmlspecialchars($article['pointsAwarded']) ?> pts</span>
                             </div>
-                            <div class="medium-green-title"><?= htmlspecialchars($article['title']) ?></div>
+                            <span class="card-title"><?= htmlspecialchars($article['title']) ?></span>
                             <div class="icon-text">
                                 <img src="../../image/people_head.svg" alt="Author" />
                                 <span><?= htmlspecialchars($article['name']) ?></span>
