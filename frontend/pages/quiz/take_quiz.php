@@ -25,6 +25,8 @@ $_SESSION['quiz'] = [
     'current' => 0
 ];
 
+mysqli_close($con);
+
 header("Location: quiz_question.php");
 exit;
-?>gi
+?>
