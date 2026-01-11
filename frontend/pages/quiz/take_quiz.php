@@ -27,4 +27,4 @@ $_SESSION['quiz'] = [
 
 header("Location: quiz_question.php");
 exit;
-?>
+?>gi
