@@ -22,8 +22,7 @@ $_SESSION['quiz'] = [
     'pointsAwarded' => $quiz['pointsAwarded'],
     'questions' => $questions,
     'answers' => [],
-    'current' => 0,
-    'score' => 0
+    'current' => 0
 ];
 
 header("Location: quiz_question.php");
