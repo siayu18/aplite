@@ -86,7 +86,7 @@ mysqli_close($con);
                             <span class="points-text"><?= htmlspecialchars($article['pointsAwarded']) ?> pts</span>
                         </div>
                     </div>
-                    <p class="article-content"><?= htmlspecialchars($article['content']) ?></p>
+                    <p class="article-content"><?= nl2br(htmlspecialchars($article['content'])) ?></p>
                     <div class="claim-container">
                         <img src="../../image/big_badge.svg" alt="Points Badge" />
                         <div class="text-group">
