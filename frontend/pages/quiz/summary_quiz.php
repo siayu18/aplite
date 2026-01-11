@@ -157,6 +157,7 @@ unset($_SESSION['quiz']);
             </div>
         </div>
     </div>
+    <?php mysqli_close($con); ?>
 
     <?php include '../../component/footer.php'; ?>
 

@@ -40,6 +40,8 @@ if (isset($_POST['submitBtn'])) {
         exit;
     }
 }
+
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>

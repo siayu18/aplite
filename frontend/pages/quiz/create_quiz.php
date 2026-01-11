@@ -82,6 +82,8 @@ if(isset($_POST["submitBtn"])){
         echo "<script>window.success = true;</script>";
     }
 }
+
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>

@@ -15,6 +15,8 @@ $quizCount = mysqli_fetch_assoc($quizResult)['total'];
 // Total Reports
 $reportResult = mysqli_query($con, "SELECT COUNT(*) AS total FROM brokenreport");
 $reportCount = mysqli_fetch_assoc($reportResult)['total'];
+
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>

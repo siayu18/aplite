@@ -225,6 +225,7 @@ if(isset($_POST["submitBtn"])){
         </div>
         <a href="manage_quiz.php" class="green-button">Back</a>
     </div>
+    <?php mysqli_close($con); ?>
 
     <?php include '../../component/footer.php'; ?>
 

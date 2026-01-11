@@ -36,6 +36,8 @@ while ($row = mysqli_fetch_assoc($result)) {
     $labels[] = $row['date'];
     $data[] = $row['avgBrightness'];
 }
+
+mysqli_close($con);
 ?>
 
 <!DOCTYPE html>
